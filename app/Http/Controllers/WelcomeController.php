@@ -1,6 +1,6 @@
 <?php
 
-// Autor: Isabella Cadavid Posada
+// Author: Isabella Cadavid Posada
 
 namespace App\Http\Controllers;
 

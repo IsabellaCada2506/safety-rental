@@ -1,5 +1,7 @@
 <?php
 
+// Author: Isabella Cadavid Posada
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -17,8 +19,9 @@ class LoginController extends Controller
         return view('auth.login.index');
     }
 
-    public function authenticate(LoginRequest $request): RedirectResponse
-    {
+    public function authenticate(
+        LoginRequest $request
+    ): RedirectResponse {
         $request->authenticate();
         $request->session()->regenerate();
 
