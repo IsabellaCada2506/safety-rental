@@ -1,29 +1,64 @@
 <?php
 
+// Author: Isabella Cadavid Posada
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ResetsPasswords;
+use App\Http\Requests\Auth\ResetPasswordRequest;
+use App\Models\User;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
 
 class ResetPasswordController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Password Reset Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller is responsible for handling password reset requests
-    | and uses a simple trait to include this behavior. You're free to
-    | explore this trait and override any methods you wish to tweak.
-    |
-    */
+    public function index(Request $request, string $token): View
+    {
+        $viewData = [
+            'title' => __('authentication.reset_password'),
+            'token' => $token,
+            'email' => (string) $request->query('email', ''),
+        ];
 
-    use ResetsPasswords;
+        return view('auth.passwords.reset')
+            ->with('viewData', $viewData);
+    }
 
-    /**
-     * Where to redirect users after resetting their password.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
+    public function update(
+        ResetPasswordRequest $request
+    ): RedirectResponse {
+        $status = Password::reset(
+            [
+                'email' => $request->getEmail(),
+                'password' => $request->getPassword(),
+                'password_confirmation' => $request->getPassword(),
+                'token' => $request->getToken(),
+            ],
+            function (User $user, string $password): void {
+                $user->setPassword($password);
+                $user->setRememberTokenValue(Str::random(60));
+                $user->save();
+
+                event(new PasswordReset($user));
+            }
+        );
+
+        if ($status === Password::PASSWORD_RESET) {
+            return redirect()
+                ->route('login')
+                ->with('status', __($status));
+        }
+
+        return back()
+            ->withInput([
+                'email' => $request->getEmail(),
+            ])
+            ->withErrors([
+                'email' => __($status),
+            ]);
+    }
 }

@@ -16,23 +16,23 @@
                             xmlns="http://www.w3.org/2000/svg"
                         >
                             <path
-                                d="M16 2 L29 7V17C29 25 23.5 31 16 34C8.5 31 3 25 3 17V7Z"
+                                d="M16 2L29 7V17C29 25 23.5 31 16 34C8.5 31 3 25 3 17V7Z"
                                 fill="currentColor"
                             />
+
                             <path
-                                d="M9 20 L11.5 14.5C12 13.4 13 12.7 14.2 12.7H17.8C19 12.7 20 13.4 20.5 14.5L23 20"
+                                d="M9 20L11.5 14.5C12 13.4 13 12.7 14.2 12.7H17.8C19 12.7 20 13.4 20.5 14.5L23 20"
                                 stroke="var(--sr-gold)"
                                 stroke-width="1.8"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                fill="none"
                             />
+
                             <path
                                 d="M8 20H24V23C24 23.6 23.6 24 23 24H21.5C20.9 24 20.5 23.6 20.5 23V22H11.5V23C11.5 23.6 11.1 24 10.5 24H9C8.4 24 8 23.6 8 23V20Z"
                                 stroke="var(--sr-gold)"
                                 stroke-width="1.8"
                                 stroke-linejoin="round"
-                                fill="none"
                             />
                         </svg>
                     </span>
@@ -62,6 +62,7 @@
                                 stroke="currentColor"
                                 stroke-width="1.8"
                             />
+
                             <path
                                 d="M12 12H21M17 12V15M20 12V14"
                                 stroke="currentColor"
@@ -78,6 +79,12 @@
                     <p class="authentication-description">
                         {{ __('authentication.login_description') }}
                     </p>
+
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
                     <form
                         method="POST"
@@ -129,19 +136,31 @@
                             @enderror
                         </div>
 
-                        <div class="form-check mb-4">
-                            <input
-                                id="remember"
-                                class="form-check-input"
-                                name="remember"
-                                type="checkbox"
-                                value="1"
-                                {{ old('remember') ? 'checked' : '' }}
-                            >
+                        <div class="login-options mb-4">
+                            <div class="form-check">
+                                <input
+                                    id="remember"
+                                    class="form-check-input"
+                                    name="remember"
+                                    type="checkbox"
+                                    value="1"
+                                    {{ old('remember') ? 'checked' : '' }}
+                                >
 
-                            <label class="form-check-label" for="remember">
-                                {{ __('authentication.remember_me') }}
-                            </label>
+                                <label
+                                    class="form-check-label"
+                                    for="remember"
+                                >
+                                    {{ __('authentication.remember_me') }}
+                                </label>
+                            </div>
+
+                            <a
+                                class="authentication-link"
+                                href="{{ route('password.request') }}"
+                            >
+                                {{ __('authentication.forgot_password_question') }}
+                            </a>
                         </div>
 
                         <button
