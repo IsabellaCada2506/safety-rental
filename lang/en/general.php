@@ -21,5 +21,5 @@ return [
     'error_message' => 'Something went wrong. Please try again.',
 
     'footer_rights' => 'All rights reserved.',
-    
+
 ];
