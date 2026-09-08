@@ -1,6 +1,11 @@
 <?php
 
-// Autor: Isabella Cadavid Posada
+/**
+ * Author: Isabella Cadavid Posada
+ * Contributor: Alejandro
+ * Date: 07/09/2026
+ * Description: Administrator dashboard controller.
+ */
 
 namespace App\Http\Controllers\Admin;
 
@@ -16,7 +21,7 @@ class DashboardController extends Controller
         $user = $request->user();
 
         $viewData = [
-            'title' => __('authentication.admin_dashboard'),
+            'title' => __('admin.dashboard_title'),
             'userName' => $user instanceof User ? $user->getName() : '',
         ];
 

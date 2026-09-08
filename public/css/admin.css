@@ -1,0 +1,23 @@
+/* Author: Alejandro */
+/* Date: 07/09/2026 */
+/* Description: Styles for the administrator layout and navigation. */
+
+.admin-layout .admin-navbar .container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.admin-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.6rem;
+}
+
+.admin-layout .safety-footer {
+    margin-top: 0;
+}

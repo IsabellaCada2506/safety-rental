@@ -1,9 +1,15 @@
 <?php
 
-// Autor: Isabella Cadavid Posada
+/**
+ * Author: Isabella Cadavid Posada
+ * Contributor: Alejandro
+ * Date: 07/09/2026
+ * Description: Default application data including reservation states.
+ */
 
 namespace Database\Seeders;
 
+use App\Models\State;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -51,5 +57,26 @@ class DatabaseSeeder extends Seeder
         $customer->setPassword('password');
         $customer->setEmailVerifiedAt(Carbon::now());
         $customer->save();
+
+        $this->seedReservationStates();
+    }
+
+    private function seedReservationStates(): void
+    {
+        $stateNames = [
+            State::NAME_PENDING,
+            State::NAME_CONFIRMED,
+            State::NAME_CANCELLED,
+            State::NAME_COMPLETED,
+        ];
+
+        foreach ($stateNames as $stateName) {
+            $state = State::query()
+                ->where('name', $stateName)
+                ->first() ?? new State;
+
+            $state->setName($stateName);
+            $state->save();
+        }
     }
 }
