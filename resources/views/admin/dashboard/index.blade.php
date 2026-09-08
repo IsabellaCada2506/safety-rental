@@ -1,6 +1,11 @@
-{{-- Author: Isabella Cadavid Posada --}}
+{{--
+    Author: Isabella Cadavid Posada
+    Contributor: Alejandro
+    Date: 07/09/2026
+    Description: Administrator dashboard view using the admin layout.
+--}}
 
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
     <section class="dash-hero dash-hero-admin">
@@ -8,7 +13,7 @@
 
         <div class="container dash-hero-inner">
             <span class="dash-label dash-label-admin">
-                {{ __('authentication.administration_area') }}
+                {{ __('admin.administration_area') }}
             </span>
 
             <h1>
@@ -16,7 +21,7 @@
             </h1>
 
             <p class="dash-hero-text">
-                {{ __('authentication.admin_message') }}
+                {{ __('admin.admin_message') }}
             </p>
 
             <div class="dash-user">
@@ -35,11 +40,14 @@
     <section class="fleet-section">
         <div class="container">
             <h2 class="fleet-heading">
-                {{ __('authentication.management_panel') }}
+                {{ __('admin.management_panel') }}
             </h2>
 
             <div class="admin-grid">
-                <div class="admin-card">
+                <div
+                    id="admin-vehicles"
+                    class="admin-card"
+                >
                     <span class="admin-icon" aria-hidden="true">
                         <svg
                             viewBox="0 0 64 32"
@@ -70,19 +78,22 @@
                     </span>
 
                     <h3>
-                        {{ __('authentication.vehicles') }}
+                        {{ __('admin.vehicles') }}
                     </h3>
 
                     <p>
-                        {{ __('authentication.vehicles_description') }}
+                        {{ __('admin.vehicles_description') }}
                     </p>
 
                     <span class="admin-soon">
-                        {{ __('authentication.coming_soon') }}
+                        {{ __('admin.coming_soon') }}
                     </span>
                 </div>
 
-                <div class="admin-card">
+                <div
+                    id="admin-reservations"
+                    class="admin-card"
+                >
                     <span class="admin-icon" aria-hidden="true">
                         <svg
                             viewBox="0 0 32 32"
@@ -113,19 +124,22 @@
                     </span>
 
                     <h3>
-                        {{ __('authentication.reservations') }}
+                        {{ __('admin.reservations') }}
                     </h3>
 
                     <p>
-                        {{ __('authentication.reservations_description') }}
+                        {{ __('admin.reservations_description') }}
                     </p>
 
                     <span class="admin-soon">
-                        {{ __('authentication.coming_soon') }}
+                        {{ __('admin.coming_soon') }}
                     </span>
                 </div>
 
-                <div class="admin-card">
+                <div
+                    id="admin-locations"
+                    class="admin-card"
+                >
                     <span class="admin-icon" aria-hidden="true">
                         <svg
                             viewBox="0 0 32 32"
@@ -149,15 +163,32 @@
                     </span>
 
                     <h3>
-                        {{ __('authentication.users') }}
+                        {{ __('admin.locations') }}
                     </h3>
 
                     <p>
-                        {{ __('authentication.users_description') }}
+                        {{ __('admin.locations_description') }}
                     </p>
 
                     <span class="admin-soon">
-                        {{ __('authentication.coming_soon') }}
+                        {{ __('admin.coming_soon') }}
+                    </span>
+                </div>
+
+                <div
+                    id="admin-metrics"
+                    class="admin-card"
+                >
+                    <h3>
+                        {{ __('admin.metrics') }}
+                    </h3>
+
+                    <p>
+                        {{ __('admin.metrics_description') }}
+                    </p>
+
+                    <span class="admin-soon">
+                        {{ __('admin.coming_soon') }}
                     </span>
                 </div>
             </div>

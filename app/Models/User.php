@@ -1,12 +1,19 @@
 <?php
 
-// Autor: Isabella Cadavid Posada
+/**
+ * Author: Isabella Cadavid Posada
+ * Contributor: Alejandro
+ * Date: 07/09/2026
+ * Description: User model, represents an authenticated customer or administrator.
+ */
 
 namespace App\Models;
 
 use Carbon\Carbon;
 use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -254,5 +261,15 @@ class User extends Authenticatable
     public function calculateAge(): ?int
     {
         return $this->getBirthDate()?->age;
+    }
+
+    public function reserves(): HasMany
+    {
+        return $this->hasMany(Reserve::class);
+    }
+
+    public function getReserves(): Collection
+    {
+        return $this->reserves;
     }
 }
