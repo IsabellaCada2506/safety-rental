@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Author: Wendy Atehortua
  * Date: 09/09/2026
@@ -7,8 +8,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Car;
+use Illuminate\Database\Seeder;
 
 class CarSeeder extends Seeder
 {
@@ -124,11 +125,11 @@ class CarSeeder extends Seeder
                 'image' => 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&q=80&w=800',
                 'description' => 'Volkswagen Jetta. Automatic, spacious trunk.',
                 'status' => 'Active',
-            ]
+            ],
         ];
 
         foreach ($carsData as $data) {
-            $car = new Car();
+            $car = new Car;
             $car->setPlate($data['plate']);
             $car->setColor($data['color']);
             $car->setSoat($data['soat']);

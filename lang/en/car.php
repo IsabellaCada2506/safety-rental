@@ -72,7 +72,6 @@ return [
     'confirm_status_change' => 'Are you sure you want to change the car status?',
     'deactivate_error_reservations' => 'Cannot deactivate car with active reservations.',
 
-
     // Validation
     'plate_regex_error' => 'The plate format is invalid for Colombia. It must be 3 letters followed by 3 numbers (e.g., ABC-123 or ABC123).',
     'price_min_error' => 'The rental price per day must be at least $50,000 COP.',

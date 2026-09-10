@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Author: Isabella Cadavid Posada
  * Date: 06/09/2026
@@ -7,9 +8,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
@@ -17,7 +18,7 @@ class UserSeeder extends Seeder
     {
         $adminOne = User::query()
             ->where('email', 'admin@safetyrental.com')
-            ->first() ?? new User();
+            ->first() ?? new User;
 
         $adminOne->setName('Admin');
         $adminOne->setLastName('User');
@@ -36,7 +37,7 @@ class UserSeeder extends Seeder
 
         $adminTwo = User::query()
             ->where('email', 'admin@safetyrental.test')
-            ->first() ?? new User();
+            ->first() ?? new User;
 
         $adminTwo->setRole(User::ROLE_ADMIN);
         $adminTwo->setName('Safety Rental');
@@ -56,7 +57,7 @@ class UserSeeder extends Seeder
 
         $customer = User::query()
             ->where('email', 'customer@safetyrental.test')
-            ->first() ?? new User();
+            ->first() ?? new User;
 
         $customer->setRole(User::ROLE_CUSTOMER);
         $customer->setName('Safety Rental');

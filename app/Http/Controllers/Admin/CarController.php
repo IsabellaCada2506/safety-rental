@@ -38,7 +38,7 @@ class CarController extends Controller
 
     public function store(StoreCarRequest $request): RedirectResponse
     {
-        $car = new Car();
+        $car = new Car;
         $car->setPlate((string) $request->input('plate'));
         $car->setColor((string) $request->input('color'));
         $car->setSoat((string) $request->input('soat'));

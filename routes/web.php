@@ -6,6 +6,7 @@
  * Description: Web routes for the Safety Rental application, including authentication, profile management, and admin dashboard access.
  */
 
+use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
@@ -16,7 +17,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\CarController;
 
 $basePath = '';
 
