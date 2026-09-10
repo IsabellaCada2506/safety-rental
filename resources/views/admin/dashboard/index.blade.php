@@ -39,6 +39,7 @@
             </h2>
 
             <div class="admin-grid">
+                {{-- Vehicles Management Card --}}
                 <div class="admin-card">
                     <span class="admin-icon" aria-hidden="true">
                         <svg
@@ -77,11 +78,12 @@
                         {{ __('authentication.vehicles_description') }}
                     </p>
 
-                    <span class="admin-soon">
-                        {{ __('authentication.coming_soon') }}
-                    </span>
+                    <a href="{{ route('admin.car.index') }}" class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center" style="background-color: #ffb037; font-size: 0.85rem; transition: opacity 0.2s;">
+                        <span class="me-1"></span> {{ __('car.heading_management') }}
+                    </a>
                 </div>
 
+                {{-- Reservations Card --}}
                 <div class="admin-card">
                     <span class="admin-icon" aria-hidden="true">
                         <svg
@@ -125,6 +127,7 @@
                     </span>
                 </div>
 
+                {{-- Users Card --}}
                 <div class="admin-card">
                     <span class="admin-icon" aria-hidden="true">
                         <svg
