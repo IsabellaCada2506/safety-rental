@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * Author: Wendy Atehortua
+ * Date: 2026-09-10
+ * Description: Request validation for storing a new car in the inventory.
+ */
+
+namespace App\Http\Requests\Admin;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreCarRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    public function rules(): array
+    {
+        return [
+            'plate' => ['required', 'string', 'max:20', 'unique:cars,plate'],
+            'color' => ['required', 'string', 'max:50'],
+            'soat' => ['required', 'string', 'max:50'],
+            'price' => ['required', 'integer', 'min:50000'],
+            'transit_license' => ['required', 'string', 'max:50'],
+            'description' => ['nullable', 'string', 'max:1000'],
+            'mileage' => ['required', 'integer', 'min:0'],
+            'image' => ['nullable', 'url', 'max:255'],
+            'category_id' => ['required', 'exists:categories,id'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'price.min' => __('car.price_min_error'),
+        ];
+    }
+}
