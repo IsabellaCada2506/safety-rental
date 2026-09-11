@@ -1,7 +1,12 @@
 <?php
 
-// Author: Isabella Cadavid Posada
+/**
+ * Author: Isabella Cadavid
+ * Date: 06/09/2026
+ * Description: Web routes for the Safety Rental application, including authentication, profile management, and admin dashboard access.
+ */
 
+use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
@@ -29,8 +34,7 @@ $profileEditPath = $profilePath.'/edit';
 $emailPath = $basePath.'/email';
 $emailVerificationPath = $emailPath.'/verify';
 $emailVerificationHandlerPath = $emailVerificationPath.'/{id}/{hash}';
-$emailVerificationNotificationPath =
-    $emailPath.'/verification-notification';
+$emailVerificationNotificationPath = $emailPath.'/verification-notification';
 
 $passwordPath = $basePath.'/password';
 $passwordRequestPath = $passwordPath.'/request';
@@ -40,6 +44,13 @@ $passwordUpdatePath = $passwordPath.'/reset';
 
 $adminPath = $basePath.'/admin';
 $adminDashboardPath = $adminPath.'/dashboard';
+
+$adminCarPath = $adminPath.'/cars';
+$adminCarCreatePath = $adminCarPath.'/create';
+$adminCarStorePath = $adminCarPath.'/store';
+$adminCarEditPath = $adminCarPath.'/{id}/edit';
+$adminCarUpdatePath = $adminCarPath.'/{id}/update';
+$adminCarDeactivatePath = $adminCarPath.'/{id}/deactivate';
 
 Route::get(
     $welcomePath,
@@ -106,7 +117,13 @@ Route::middleware('auth')->group(
         $emailVerificationPath,
         $emailVerificationHandlerPath,
         $emailVerificationNotificationPath,
-        $adminDashboardPath
+        $adminDashboardPath,
+        $adminCarPath,
+        $adminCarCreatePath,
+        $adminCarStorePath,
+        $adminCarEditPath,
+        $adminCarUpdatePath,
+        $adminCarDeactivatePath
     ): void {
         Route::post(
             $logoutPath,
@@ -172,5 +189,47 @@ Route::middleware('auth')->group(
                 'admin',
             ])
             ->name('admin.dashboard.index');
+
+        Route::get(
+            $adminCarPath,
+            [CarController::class, 'index']
+        )
+            ->middleware('admin')
+            ->name('admin.car.index');
+
+        Route::get(
+            $adminCarCreatePath,
+            [CarController::class, 'create']
+        )
+            ->middleware('admin')
+            ->name('admin.car.create');
+
+        Route::post(
+            $adminCarStorePath,
+            [CarController::class, 'store']
+        )
+            ->middleware('admin')
+            ->name('admin.car.store');
+
+        Route::get(
+            $adminCarEditPath,
+            [CarController::class, 'edit']
+        )
+            ->middleware('admin')
+            ->name('admin.car.edit');
+
+        Route::put(
+            $adminCarUpdatePath,
+            [CarController::class, 'update']
+        )
+            ->middleware('admin')
+            ->name('admin.car.update');
+
+        Route::patch(
+            $adminCarDeactivatePath,
+            [CarController::class, 'deactivate']
+        )
+            ->middleware('admin')
+            ->name('admin.car.deactivate');
     }
 );
