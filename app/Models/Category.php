@@ -14,16 +14,20 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * @property int $id
- * @property string $model
- * @property string $brand
- * @property string $type
- * @property int $passenger_capacity
- * @property int $luggage_capacity
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property Car[] $cars
+ * CATEGORY ATTRIBUTES
+ * $this->attributes['id']                  - int           - contains the category primary key (id)
+ * $this->attributes['model']               - string        - contains the category model name
+ * $this->attributes['brand']               - string        - contains the category brand name
+ * $this->attributes['type']                - string        - contains the category vehicle type
+ * $this->attributes['passenger_capacity']  - int           - contains the passenger capacity
+ * $this->attributes['luggage_capacity']    - int           - contains the luggage capacity
+ * $this->attributes['created_at']          - string|null   - contains the creation timestamp
+ * $this->attributes['updated_at']          - string|null   - contains the update timestamp
+ *
+ * RELATIONSHIPS
+ * $this->cars - Car[] - the cars belonging to this category
  */
+
 class Category extends Model
 {
     public $timestamps = true;

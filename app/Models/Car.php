@@ -10,6 +10,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Carbon\Carbon;
 
 /**
  * CAR ATTRIBUTES
@@ -160,14 +161,18 @@ class Car extends Model
         $this->attributes['category_id'] = $categoryId;
     }
 
-    public function getCreatedAt(): string
+    public function getCreatedAt(): ?Carbon
     {
-        return $this->attributes['created_at'];
+        return isset($this->attributes['created_at'])
+            ? Carbon::parse($this->attributes['created_at'])
+            : null;
     }
 
-    public function getUpdatedAt(): string
+    public function getUpdatedAt(): ?Carbon
     {
-        return $this->attributes['updated_at'];
+        return isset($this->attributes['updated_at'])
+            ? Carbon::parse($this->attributes['updated_at'])
+            : null;
     }
 
     public function category(): BelongsTo

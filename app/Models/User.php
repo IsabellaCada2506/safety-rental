@@ -16,27 +16,27 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 
 /**
- * Database attributes:
- *
- * @property int $id
- * @property string $role
- * @property string $name
- * @property string|null $last_name
- * @property Carbon|null $birth_date
- * @property string|null $address
- * @property int|null $license_number
- * @property int|null $emergency_contact
- * @property int|null $identification_number
- * @property string|null $emergency_contact_name
- * @property string|null $emergency_contact_last_name
- * @property string|null $eps
- * @property string $email
- * @property Carbon|null $email_verified_at
- * @property string $password
- * @property string|null $remember_token
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * USER ATTRIBUTES
+ * $this->attributes['id']                          - int           - contains the user primary key (id)
+ * $this->attributes['role']                        - string        - contains the user role
+ * $this->attributes['name']                        - string        - contains the user first name
+ * $this->attributes['last_name']                   - string|null   - contains the user last name
+ * $this->attributes['birth_date']                  - string|null   - contains the birth date
+ * $this->attributes['address']                     - string|null   - contains the physical address
+ * $this->attributes['license_number']              - int|null      - contains the driving license number
+ * $this->attributes['emergency_contact']           - int|null      - contains the emergency contact phone
+ * $this->attributes['identification_number']       - int|null      - contains the national ID number
+ * $this->attributes['emergency_contact_name']      - string|null   - contains the emergency contact name
+ * $this->attributes['emergency_contact_last_name'] - string|null   - contains the emergency contact last name
+ * $this->attributes['eps']                         - string|null   - contains the healthcare provider (EPS)
+ * $this->attributes['email']                       - string        - contains the email address
+ * $this->attributes['email_verified_at']           - string|null   - contains the email verification timestamp
+ * $this->attributes['password']                    - string        - contains the hashed password
+ * $this->attributes['remember_token']              - string|null   - contains the remember session token
+ * $this->attributes['created_at']                  - string|null   - contains the creation timestamp
+ * $this->attributes['updated_at']                  - string|null   - contains the update timestamp
  */
+
 class User extends Authenticatable
 {
     use HasFactory;
