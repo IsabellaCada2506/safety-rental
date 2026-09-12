@@ -204,9 +204,9 @@
                         {{ __('authentication.users_description') }}
                     </p>
 
-                    <span class="admin-soon">
-                        {{ __('authentication.coming_soon') }}
-                    </span>
+                    <a href="{{ route('admin.user.index') }}" class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link">
+                        {{ __('user.manage_users') }}
+                    </a>
                 </div>
             </div>
         </div>

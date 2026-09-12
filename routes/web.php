@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\LocationController as AdminLocationController;
 use App\Http\Controllers\Admin\MetricsController;
 use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
 use App\Http\Controllers\Admin\ReservationController as AdminReservationController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -95,6 +96,11 @@ $adminPaymentRefundPath = $adminPaymentShowPath.'/refund';
 $catalogPath = $basePath.'/catalog';
 $catalogShowPath = $catalogPath.'/{id}';
 
+$adminUserPath = $adminPath.'/users';
+$adminUserEditPath = $adminUserPath.'/{id}/edit';
+$adminUserUpdatePath = $adminUserPath.'/{id}/update';
+$adminUserDeletePath = $adminUserPath.'/{id}/delete';
+
 $adminLocationPath = $adminPath.'/locations';
 $adminLocationCreatePath = $adminLocationPath.'/create';
 $adminLocationStorePath = $adminLocationPath.'/store';
@@ -174,3 +180,7 @@ Route::get($adminPaymentPath, [AdminPaymentController::class, 'index'])->middlew
 Route::get($adminPaymentShowPath, [AdminPaymentController::class, 'show'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.payment.show');
 Route::patch($adminPaymentRefundPath, [AdminPaymentController::class, 'refund'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.payment.refund');
 Route::get($adminMetricsPath, [MetricsController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.metrics.index');
+Route::get($adminUserPath, [AdminUserController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.user.index');
+Route::get($adminUserEditPath, [AdminUserController::class, 'edit'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.user.edit');
+Route::put($adminUserUpdatePath, [AdminUserController::class, 'update'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.user.update');
+Route::delete($adminUserDeletePath, [AdminUserController::class, 'delete'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.user.delete');

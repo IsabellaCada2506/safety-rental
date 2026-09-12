@@ -2,7 +2,8 @@
 
 /**
  * Author: Isabella Cadavid Posada
- * Date: 2026-09-11
+ * Author: Alejandro Correa Marin
+ * Date: 2026-09-12
  * Description: User model representing registered application users (customers and admins).
  */
 
@@ -48,6 +49,23 @@ class User extends Authenticatable
     public const ROLE_CUSTOMER = 'customer';
 
     public $timestamps = true;
+
+    protected $fillable = [
+        'role',
+        'name',
+        'last_name',
+        'birth_date',
+        'address',
+        'license_number',
+        'emergency_contact',
+        'identification_number',
+        'emergency_contact_name',
+        'emergency_contact_last_name',
+        'eps',
+        'email',
+        'email_verified_at',
+        'password',
+    ];
 
     protected $guarded = [
         'id',
@@ -264,5 +282,15 @@ class User extends Authenticatable
     public function getReservations(): Collection
     {
         return $this->reservations;
+    }
+
+    public function setReservations(Collection $reservations): void
+    {
+        $this->setRelation('reservations', $reservations);
+    }
+
+    public function getReservationsCount(): int
+    {
+        return (int) ($this->attributes['reservations_count'] ?? 0);
     }
 }
