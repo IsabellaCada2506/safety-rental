@@ -170,6 +170,13 @@
                     >
                         {{ __('ranking.manage_ranking') }}
                     </a>
+
+                    <a
+                        class="btn-pill-ghost text-decoration-none"
+                        href="{{ route('admin.metrics.index') }}"
+                    >
+                        {{ __('metrics.manage_metrics') }}
+                    </a>
                 @endif
 
                 <form

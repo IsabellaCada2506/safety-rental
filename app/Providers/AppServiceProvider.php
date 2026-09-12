@@ -9,6 +9,7 @@
 
 namespace App\Providers;
 
+use App\Interfaces\AdminMetricsServiceInterface;
 use App\Interfaces\CarRankingServiceInterface;
 use App\Interfaces\CarServiceInterface;
 use App\Interfaces\CategoryServiceInterface;
@@ -20,6 +21,7 @@ use App\Interfaces\ReservationCodeGeneratorInterface;
 use App\Interfaces\ReservationPricingInterface;
 use App\Interfaces\ReservationServiceInterface;
 use App\Interfaces\UserServiceInterface;
+use App\Services\AdminMetricsService;
 use App\Services\CarRankingService;
 use App\Services\CarService;
 use App\Services\CategoryService;
@@ -42,6 +44,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->bind(AdminMetricsServiceInterface::class, AdminMetricsService::class);
         $this->app->bind(CarRankingServiceInterface::class, CarRankingService::class);
         $this->app->bind(CarServiceInterface::class, CarService::class);
         $this->app->bind(CategoryServiceInterface::class, CategoryService::class);

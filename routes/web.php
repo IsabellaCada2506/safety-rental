@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\CarRankingController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LocationController as AdminLocationController;
+use App\Http\Controllers\Admin\MetricsController;
 use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
 use App\Http\Controllers\Admin\ReservationController as AdminReservationController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
@@ -65,6 +66,7 @@ $adminCarEditPath = $adminCarPath.'/{id}/edit';
 $adminCarUpdatePath = $adminCarPath.'/{id}/update';
 $adminCarDeactivatePath = $adminCarPath.'/{id}/deactivate';
 $adminRankingPath = $adminPath.'/car-ranking';
+$adminMetricsPath = $adminPath.'/metrics';
 
 $adminCategoryPath = $adminPath.'/categories';
 $adminCategoryCreatePath = $adminCategoryPath.'/create';
@@ -171,3 +173,4 @@ Route::patch($adminReservationCancelPath, [AdminReservationController::class, 'c
 Route::get($adminPaymentPath, [AdminPaymentController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.payment.index');
 Route::get($adminPaymentShowPath, [AdminPaymentController::class, 'show'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.payment.show');
 Route::patch($adminPaymentRefundPath, [AdminPaymentController::class, 'refund'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.payment.refund');
+Route::get($adminMetricsPath, [MetricsController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.metrics.index');

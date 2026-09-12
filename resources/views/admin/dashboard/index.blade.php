@@ -131,6 +131,9 @@
                     <a href="{{ route('admin.reservation.index') }}" class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link">
                         <span class="me-1"></span> {{ __('reservation.admin_title_index') }}
                     </a>
+                    <a href="{{ route('admin.metrics.index') }}" class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link mt-2">
+                        {{ __('metrics.manage_metrics') }}
+                    </a>
                 </div>
 
                 {{-- Locations Card --}}
