@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Author: Isabella Ocampo
+ * Author: Isabella Ocampo S
  * Date: 2026-09-11
  * Description: Reservation model representing a car rental booking between a customer and a vehicle.
  */
