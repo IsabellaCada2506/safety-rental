@@ -2,8 +2,8 @@
 
 /**
  * Author: Wendy Atehortua
- * Date: 2026-09-10
- * Description: Request validation for storing a new car in the inventory.
+ * Date: 2026-09-11
+ * Description: Request validation for storing a new car in the inventory with branch location.
  */
 
 namespace App\Http\Requests\Admin;
@@ -29,6 +29,7 @@ class StoreCarRequest extends FormRequest
             'mileage' => ['required', 'integer', 'min:0'],
             'image' => ['nullable', 'url', 'max:255'],
             'category_id' => ['required', 'exists:categories,id'],
+            'location_id' => ['required', 'exists:locations,id'],
         ];
     }
 

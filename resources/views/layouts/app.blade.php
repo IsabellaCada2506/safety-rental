@@ -1,6 +1,6 @@
 {{--
     Author: Isabella Cadavid Posada
-    Date: 2026-09-06
+    Date: 2026-09-11
     Description: Master application layout providing the base HTML structure, navigation, and footer.
 --}}
 
@@ -59,7 +59,7 @@
     >
 
     <link
-        href="{{ asset('css/catalog.css') }}?v=1"
+        href="{{ asset('css/catalog.css') }}?v=2"
         rel="stylesheet"
     >
     @stack('styles')

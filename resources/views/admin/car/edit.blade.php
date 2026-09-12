@@ -1,7 +1,7 @@
 {{--
     Author: Wendy Atehortua
-    Date: 2026-09-10
-    Description: Admin view for editing an existing car in the inventory.
+    Date: 2026-09-11
+    Description: Admin view for editing an existing vehicle with category and branch location associations.
 --}}
 
 @extends('layouts.app')
@@ -206,6 +206,40 @@
                                     {{ old('category_id', $viewData['car']->getCategoryId()) == $category->getId() ? 'selected' : '' }}
                                 >
                                     {{ $category->getBrand() }} {{ $category->getModel() }} ({{ $category->getType() }})
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="admin-form-field-full">
+                        <label
+                            class="form-label"
+                            for="car-location"
+                        >
+                            {{ __('car.location_label') }}
+                            <span class="admin-form-required">*</span>
+                        </label>
+
+                        <select
+                            class="form-select"
+                            id="car-location"
+                            name="location_id"
+                            required
+                        >
+                            <option
+                                value=""
+                                disabled
+                                {{ old('location_id', $viewData['car']->getLocationId()) ? '' : 'selected' }}
+                            >
+                                {{ __('car.location_placeholder') }}
+                            </option>
+
+                            @foreach ($viewData['locations'] as $location)
+                                <option
+                                    value="{{ $location->getId() }}"
+                                    {{ old('location_id', $viewData['car']->getLocationId()) == $location->getId() ? 'selected' : '' }}
+                                >
+                                    {{ $location->getName() }} - {{ $location->getCity() }} ({{ $location->getHeadquarters() }})
                                 </option>
                             @endforeach
                         </select>

@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * Author: Wendy Atehortua
+ * Date: 2026-09-11
  * Description: English language strings for the car management module.
  */
 
@@ -25,11 +27,12 @@ return [
     'price' => 'Price / Day',
     'mileage' => 'Mileage',
     'status' => 'Status',
+    'branch' => 'Branch',
     'actions' => 'Actions',
 
     // Badges & Status
     'status_active' => 'Active',
-    'status_deactivated' => 'Deactivated',
+    'status_deactivated' => 'Desactivated',
 
     // Form Labels
     'plate_label' => 'License Plate',
@@ -42,6 +45,8 @@ return [
     'description_label' => 'Description / Observations',
     'category_label' => 'Category',
     'category_placeholder' => 'Select a category',
+    'location_label' => 'Branch Location',
+    'location_placeholder' => 'Select a branch location',
     'image_alt' => 'Car image',
 
     // Placeholders
@@ -59,7 +64,7 @@ return [
     'btn_edit' => 'Edit',
     'btn_update' => 'Update Vehicle',
     'btn_cancel' => 'Cancel',
-    'btn_deactivate' => 'Deactivate',
+    'btn_deactivate' => 'Desactivate',
     'btn_activate' => 'Activate',
 
     // Placeholders (continued)
@@ -69,10 +74,10 @@ return [
     'no_cars_found' => 'No cars found in inventory. Click "+ Register New Car" to add one.',
     'created_success' => 'Car created successfully.',
     'updated_success' => 'Car updated successfully.',
-    'deactivated_success' => 'Car deactivated successfully.',
+    'deactivated_success' => 'Car desactivated successfully.',
     'activated_success' => 'Car activated successfully.',
     'confirm_status_change' => 'Are you sure you want to change the car status?',
-    'deactivate_error_reservations' => 'Cannot deactivate car with active reservations.',
+    'deactivate_error_reservations' => 'Cannot desactivate car with active reservations.',
 
     // Validation
     'plate_regex_error' => 'The plate format is invalid for Colombia. It must be 3 letters followed by 3 numbers (e.g., ABC-123 or ABC123).',

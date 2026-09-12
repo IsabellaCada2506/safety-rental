@@ -2,7 +2,7 @@
 
 /**
  * Author: Wendy Atehortua
- * Date: 2026-09-10
+ * Date: 2026-09-11
  * Description: Seeder for populating the database with initial car data.
  */
 
@@ -10,6 +10,7 @@ namespace Database\Seeders;
 
 use App\Models\Car;
 use App\Models\Category;
+use App\Models\Location;
 use Illuminate\Database\Seeder;
 
 class CarSeeder extends Seeder
@@ -18,125 +19,156 @@ class CarSeeder extends Seeder
     {
         $carsData = [
             [
+                'brand' => 'Toyota',
+                'model' => 'Corolla',
                 'plate' => 'BKV-091',
-                'color' => 'Midnight Black',
+                'color' => 'Pearl White',
                 'soat' => 'SOAT-748392018',
                 'transit_license' => 'TL-849302',
                 'price' => 95000,
-                'mileage' => 24500,
-                'image' => 'https://images.unsplash.com/photo-1550426735-c33c7ec32a0c?auto=format&fit=crop&q=80&w=800',
-                'description' => 'Toyota Corolla 2023. Automatic transmission, hybrid engine.',
+                'mileage' => 18500,
+                'image' => 'https://http2.mlstatic.com/D_NQ_NP_2X_723032-MCO112948209774_072026-F.webp',
+                'description' => 'Toyota Corolla 2023 Sedan. Hybrid engine, automatic transmission, 5 seats.',
                 'status' => 'Active',
+                'location_name' => 'Sede El Poblado',
             ],
             [
+                'brand' => 'Mazda',
+                'model' => 'CX-5',
                 'plate' => 'FTJ-482',
-                'color' => 'Graphite Grey',
+                'color' => 'Soul Red',
                 'soat' => 'SOAT-192837465',
                 'transit_license' => 'TL-573829',
-                'price' => 135000,
-                'mileage' => 12300,
-                'image' => 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800',
-                'description' => 'Mazda CX-5. SUV with AWD, leather interior, and sunroof.',
+                'price' => 140000,
+                'mileage' => 22400,
+                'image' => 'https://http2.mlstatic.com/D_NQ_NP_2X_766846-MCO109557663136_042026-F.webp',
+                'description' => 'Mazda CX-5 SUV. AWD, leather interior, sunroof, and automatic transmission.',
                 'status' => 'Active',
+                'location_name' => 'Sede Laureles',
             ],
             [
+                'brand' => 'BMW',
+                'model' => '3 Series',
                 'plate' => 'MZN-773',
-                'color' => 'Ruby Red',
+                'color' => 'Mineral Grey',
                 'soat' => 'SOAT-998877665',
                 'transit_license' => 'TL-112233',
-                'price' => 75000,
-                'mileage' => 48000,
-                'image' => 'https://images.unsplash.com/photo-1609521263047-f8f205293f24?auto=format&fit=crop&q=80&w=800',
-                'description' => 'Chevrolet Spark GT. Manual transmission, highly economical.',
+                'price' => 210000,
+                'mileage' => 12000,
+                'image' => 'https://http2.mlstatic.com/D_NQ_NP_2X_861091-MCO115752059123_082026-F.webp',
+                'description' => 'BMW 3 Series Sports Sedan. Turbocharged engine, sport seats, premium sound.',
                 'status' => 'Active',
+                'location_name' => 'Sede Laureles',
             ],
             [
+                'brand' => 'Toyota',
+                'model' => 'Hilux',
                 'plate' => 'LPR-205',
-                'color' => 'Alpine White',
+                'color' => 'Metallic Silver',
                 'soat' => 'SOAT-556644332',
                 'transit_license' => 'TL-998877',
-                'price' => 110000,
-                'mileage' => 31000,
-                'image' => 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=800',
-                'description' => 'Kia Sportage. Spacious trunk, automatic transmission.',
+                'price' => 160000,
+                'mileage' => 35200,
+                'image' => 'https://http2.mlstatic.com/D_NQ_NP_2X_637693-MCO113837874462_072026-F.webp',
+                'description' => 'Toyota Hilux Double Cab Pickup. 4x4 turbo diesel, high payload capacity.',
                 'status' => 'Active',
+                'location_name' => 'Sede Aeropuerto JMC',
             ],
             [
+                'brand' => 'Chevrolet',
+                'model' => 'Spark GT',
                 'plate' => 'GHT-910',
-                'color' => 'Silver Metallic',
+                'color' => 'Flame Red',
                 'soat' => 'SOAT-102938475',
                 'transit_license' => 'TL-564738',
-                'price' => 85000,
-                'mileage' => 28500,
-                'image' => 'https://images.unsplash.com/photo-1518987048-93e29699e79a?auto=format&fit=crop&q=80&w=800',
-                'description' => 'Renault Logan. Family sedan, manual transmission.',
+                'price' => 70000,
+                'mileage' => 29100,
+                'image' => 'https://http2.mlstatic.com/D_NQ_NP_2X_790998-MCO117093433001_092026-F.webp',
+                'description' => 'Chevrolet Spark GT Compact Hatchback. Highly economical, manual transmission.',
                 'status' => 'Active',
+                'location_name' => 'Sede El Poblado',
             ],
             [
+                'brand' => 'BMW',
+                'model' => 'X5',
                 'plate' => 'XYZ-112',
-                'color' => 'Electric Blue',
+                'color' => 'Black Sapphire',
                 'soat' => 'SOAT-564738291',
                 'transit_license' => 'TL-342516',
-                'price' => 180000,
-                'mileage' => 8500,
-                'image' => 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&q=80&w=800',
-                'description' => 'BMW 3 Series. Premium sedan, sports package.',
-                'status' => 'Deactivated',
+                'price' => 260000,
+                'mileage' => 15300,
+                'image' => 'https://http2.mlstatic.com/D_NQ_NP_2X_833504-MCO117255572947_092026-F.webp',
+                'description' => 'BMW X5 Luxury SUV. Panoramic roof, executive package, 4x4 all-wheel drive.',
+                'status' => 'Active',
+                'location_name' => 'Sede Aeropuerto JMC',
             ],
             [
+                'brand' => 'Toyota',
+                'model' => 'Corolla',
                 'plate' => 'KJW-845',
-                'color' => 'Desert Sand',
+                'color' => 'Midnight Black',
                 'soat' => 'SOAT-657483920',
                 'transit_license' => 'TL-748392',
-                'price' => 155000,
-                'mileage' => 62000,
-                'image' => 'https://images.unsplash.com/photo-1520050206274-a1ae44613e6d?auto=format&fit=crop&q=80&w=800',
-                'description' => 'Toyota Hilux Double Cab. 4x4 diesel engine.',
+                'price' => 95000,
+                'mileage' => 21000,
+                'image' => 'https://http2.mlstatic.com/D_NQ_NP_2X_788762-MCO113954999470_072026-F.webp',
+                'description' => 'Toyota Corolla Sedan. Reliable city vehicle with comfortable interior.',
                 'status' => 'Active',
+                'location_name' => 'Sede Laureles',
             ],
             [
+                'brand' => 'Mazda',
+                'model' => 'CX-5',
                 'plate' => 'PQR-339',
-                'color' => 'Sunset Orange',
+                'color' => 'Deep Crystal Blue',
                 'soat' => 'SOAT-883377221',
                 'transit_license' => 'TL-223344',
-                'price' => 65000,
-                'mileage' => 54000,
-                'image' => 'https://images.unsplash.com/photo-1567818735868-e71b99932e29?auto=format&fit=crop&q=80&w=800',
-                'description' => 'Suzuki Swift. Compact hatchback, great city maneuverability.',
+                'price' => 140000,
+                'mileage' => 16800,
+                'image' => 'https://http2.mlstatic.com/D_NQ_NP_2X_856759-MCO116029301425_082026-F.webp',
+                'description' => 'Mazda CX-5 SUV. Spacious luggage area, automatic safety package.',
                 'status' => 'Active',
+                'location_name' => 'Sede Aeropuerto JMC',
             ],
             [
+                'brand' => 'Toyota',
+                'model' => 'Hilux',
                 'plate' => 'DFG-567',
-                'color' => 'Ocean Blue',
+                'color' => 'Alpine White',
                 'soat' => 'SOAT-445566778',
                 'transit_license' => 'TL-556677',
-                'price' => 125000,
-                'mileage' => 19000,
-                'image' => 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=800',
-                'description' => 'Ford Escape. Hybrid SUV, Apple CarPlay.',
+                'price' => 160000,
+                'mileage' => 41500,
+                'image' => 'https://http2.mlstatic.com/D_NQ_NP_2X_808459-MCO117426139975_092026-F.webp',
+                'description' => 'Toyota Hilux 4x4. Excellent performance for rugged terrain and heavy loads.',
                 'status' => 'Active',
+                'location_name' => 'Sede El Poblado',
             ],
             [
+                'brand' => 'Chevrolet',
+                'model' => 'Spark GT',
                 'plate' => 'TYU-789',
-                'color' => 'Classic Black',
+                'color' => 'Silver Ice',
                 'soat' => 'SOAT-991188227',
                 'transit_license' => 'TL-889900',
-                'price' => 90000,
-                'mileage' => 41000,
-                'image' => 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&q=80&w=800',
-                'description' => 'Volkswagen Jetta. Automatic, spacious trunk.',
+                'price' => 70000,
+                'mileage' => 38200,
+                'image' => 'https://http2.mlstatic.com/D_NQ_NP_2X_701089-MCO115698502774_092026-F.webp',
+                'description' => 'Chevrolet Spark GT Compact. Easy parking, fuel efficient city commuter.',
                 'status' => 'Active',
+                'location_name' => 'Sede Laureles',
             ],
         ];
 
-        $categories = Category::all();
+        foreach ($carsData as $carData) {
+            $category = Category::query()
+                ->where('brand', $carData['brand'])
+                ->where('model', $carData['model'])
+                ->first();
 
-        if ($categories->isEmpty()) {
-            return;
-        }
-
-        foreach ($carsData as $index => $carData) {
-            $category = $categories[$index % $categories->count()];
+            $location = Location::query()
+                ->where('name', $carData['location_name'])
+                ->first();
 
             $car = new Car;
             $car->setPlate($carData['plate']);
@@ -148,7 +180,15 @@ class CarSeeder extends Seeder
             $car->setImage($carData['image']);
             $car->setDescription($carData['description']);
             $car->setStatus($carData['status']);
-            $car->setCategoryId($category->getId());
+
+            if ($category) {
+                $car->setCategoryId($category->getId());
+            }
+
+            if ($location) {
+                $car->setLocationId($location->getId());
+            }
+
             $car->save();
         }
     }

@@ -9,14 +9,21 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Profile\UpdateProfileRequest;
+use App\Interfaces\UserServiceInterface;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
+    private readonly UserServiceInterface $userService;
+
+    public function __construct(UserServiceInterface $userService)
+    {
+        $this->userService = $userService;
+    }
+
     public function index(Request $request): View
     {
         /** @var User $user */
@@ -51,28 +58,7 @@ class ProfileController extends Controller
         /** @var User $user */
         $user = $request->user();
 
-        $user->setName($request->getName());
-        $user->setLastName($request->getLastName());
-        $user->setBirthDate(
-            Carbon::parse($request->getBirthDate())
-        );
-        $user->setAddress($request->getAddress());
-        $user->setLicenseNumber($request->getLicenseNumber());
-        $user->setEmergencyContact(
-            $request->getEmergencyContact()
-        );
-        $user->setIdentificationNumber(
-            $request->getIdentificationNumber()
-        );
-        $user->setEmergencyContactName(
-            $request->getEmergencyContactName()
-        );
-        $user->setEmergencyContactLastName(
-            $request->getEmergencyContactLastName()
-        );
-        $user->setEps($request->getEps());
-        $user->setEmail($request->getEmail());
-        $user->save();
+        $this->userService->updateFromValidated($user, $request->validated());
 
         return redirect()
             ->route('profile.index')

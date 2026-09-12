@@ -2,15 +2,17 @@
 
 /**
  * Author: Wendy Atehortua
- * Date: 2026-09-09
+ * Date: 2026-09-11
  * Description: Car model representing the rentable vehicles in inventory.
  */
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * CAR ATTRIBUTES
@@ -25,11 +27,32 @@ use Carbon\Carbon;
  * $this->attributes['image']           - string|null - contains the car photo URL or path
  * $this->attributes['status']          - string      - contains the car availability status
  * $this->attributes['category_id']     - int|null    - foreign key referencing the category
+ * $this->attributes['location_id']     - int|null    - foreign key referencing the branch location
  * $this->attributes['created_at']      - string      - contains the creation timestamp
  * $this->attributes['updated_at']      - string      - contains the update timestamp
  *
  * RELATIONSHIPS
  * $this->category - Category|null - the classification category this car belongs to
+ * $this->location - Location|null - the branch location this car belongs to
+ * $this->reservations - Collection<int, Reservation> - the reservations for this car
+ *
+ * @property int $id
+ * @property string $plate
+ * @property string $color
+ * @property string $soat
+ * @property int $price
+ * @property string $transit_license
+ * @property string|null $description
+ * @property int $mileage
+ * @property string|null $image
+ * @property string $status
+ * @property int|null $category_id
+ * @property int|null $location_id
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Category|null $category
+ * @property Location|null $location
+ * @property Collection<int, Reservation> $reservations
  */
 class Car extends Model
 {
@@ -182,11 +205,46 @@ class Car extends Model
 
     public function getCategory(): ?Category
     {
-        return $this->getRelation('category');
+        return $this->relationLoaded('category') ? $this->getRelation('category') : $this->category;
     }
 
     public function setCategory(?Category $category): void
     {
         $this->setRelation('category', $category);
+    }
+
+    public function getLocationId(): ?int
+    {
+        return isset($this->attributes['location_id']) ? (int) $this->attributes['location_id'] : null;
+    }
+
+    public function setLocationId(?int $locationId): void
+    {
+        $this->attributes['location_id'] = $locationId;
+    }
+
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(Location::class);
+    }
+
+    public function getLocation(): ?Location
+    {
+        return $this->relationLoaded('location') ? $this->getRelation('location') : $this->location;
+    }
+
+    public function setLocation(?Location $location): void
+    {
+        $this->setRelation('location', $location);
+    }
+
+    public function reservations(): HasMany
+    {
+        return $this->hasMany(Reservation::class);
+    }
+
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
     }
 }

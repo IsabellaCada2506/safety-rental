@@ -27,7 +27,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * RELATIONSHIPS
  * $this->cars - Car[] - the cars belonging to this category
  */
-
 class Category extends Model
 {
     public $timestamps = true;
@@ -131,5 +130,10 @@ class Category extends Model
     public function getCarsCount(): int
     {
         return (int) ($this->attributes['cars_count'] ?? $this->cars()->count());
+    }
+
+    public function getName(): string
+    {
+        return trim($this->getBrand().' '.$this->getModel().' ('.$this->getType().')');
     }
 }

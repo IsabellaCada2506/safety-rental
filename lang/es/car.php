@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * Author: Wendy Atehortua
+ * Date: 2026-09-11
  * Description: Spanish language strings for the car management module.
  */
 
@@ -24,6 +26,7 @@ return [
     'price' => 'Precio / Día',
     'mileage' => 'Kilometraje',
     'status' => 'Estado',
+    'branch' => 'Sede',
     'actions' => 'Acciones',
 
     'status_active' => 'Activo',
@@ -39,6 +42,8 @@ return [
     'description_label' => 'Descripción / Observaciones',
     'category_label' => 'Categoría',
     'category_placeholder' => 'Selecciona una categoría',
+    'location_label' => 'Sede de Ubicación',
+    'location_placeholder' => 'Selecciona una sede',
     'image_alt' => 'Imagen del coche',
 
     'plate_placeholder' => 'Ej: ABC-123 o ABC123',

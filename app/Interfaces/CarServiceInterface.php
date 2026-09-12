@@ -6,7 +6,7 @@
  * Description: Contract defining the business operations available for car inventory management.
  */
 
-namespace App\Services\Contracts;
+namespace App\Interfaces;
 
 use App\Models\Car;
 use Illuminate\Database\Eloquent\Collection;
@@ -20,6 +20,12 @@ interface CarServiceInterface
     public function getActiveCarsWithCategory(): Collection;
 
     public function findActiveWithCategoryOrFail(int $id): Car;
+
+    /**
+     * @param  array<string, mixed>  $filters
+     * @return Collection<int, Car>
+     */
+    public function searchAndFilter(array $filters): Collection;
 
     public function createFromValidated(array $validatedData): Car;
 

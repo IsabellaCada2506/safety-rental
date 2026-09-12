@@ -1,15 +1,13 @@
 {{--
     Author: Isabella Cadavid Posada
-    Date: 2026-09-06
-    Description: Admin dashboard view.
+    Date: 2026-09-11
+    Description: Admin dashboard view with active reservations link.
 --}}
 
 @extends('layouts.app')
 
 @section('content')
     <section class="dash-hero dash-hero-admin">
-        <div class="road-line" aria-hidden="true"></div>
-
         <div class="container dash-hero-inner">
             <span class="dash-label dash-label-admin">
                 {{ __('authentication.administration_area') }}
@@ -126,9 +124,45 @@
                         {{ __('authentication.reservations_description') }}
                     </p>
 
-                    <span class="admin-soon">
-                        {{ __('authentication.coming_soon') }}
+                    <a href="{{ route('admin.reservation.index') }}" class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link">
+                        <span class="me-1"></span> {{ __('reservation.admin_title_index') }}
+                    </a>
+                </div>
+
+                {{-- Locations Card --}}
+                <div class="admin-card">
+                    <span class="admin-icon" aria-hidden="true">
+                        <svg
+                            viewBox="0 0 32 32"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M16 4C11.5 4 8 7.5 8 12C8 18 16 28 16 28C16 28 24 18 24 12C24 7.5 20.5 4 16 4Z"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            />
+                            <circle
+                                cx="16"
+                                cy="12"
+                                r="3"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            />
+                        </svg>
                     </span>
+
+                    <h3>
+                        {{ __('location.heading_management') }}
+                    </h3>
+
+                    <p>
+                        {{ __('location.registered_locations') }}
+                    </p>
+
+                    <a href="{{ route('admin.location.index') }}" class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link">
+                        <span class="me-1"></span> {{ __('location.manage_locations') }}
+                    </a>
                 </div>
 
                 {{-- Users Card --}}

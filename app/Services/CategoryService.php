@@ -8,15 +8,15 @@
 
 namespace App\Services;
 
+use App\Interfaces\CategoryServiceInterface;
 use App\Models\Category;
-use App\Services\Contracts\CategoryServiceInterface;
 use Illuminate\Database\Eloquent\Collection;
 
 class CategoryService implements CategoryServiceInterface
 {
     public function getAll(): Collection
     {
-        return Category::all();
+        return Category::query()->orderBy('brand')->orderBy('model')->get();
     }
 
     public function getAllWithCarsCount(): Collection

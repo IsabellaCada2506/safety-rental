@@ -1,7 +1,7 @@
 {{--
     Author: Wendy Atehortua
-    Date: 2026-09-10
-    Description: Admin view for listing and managing vehicles in the inventory.
+    Date: 2026-09-11
+    Description: Admin view for listing, managing, and toggling status of vehicles in the inventory with branch location.
 --}}
 
 @extends('layouts.app')
@@ -62,6 +62,7 @@
                         <th>{{ __('car.soat') }}</th>
                         <th>{{ __('car.price') }}</th>
                         <th>{{ __('car.mileage') }}</th>
+                        <th>{{ __('car.branch') }}</th>
                         <th>{{ __('car.status') }}</th>
                         <th class="text-center">{{ __('car.actions') }}</th>
                     </tr>
@@ -75,6 +76,7 @@
                             <td>{{ $car->getSoat() }}</td>
                             <td>${{ number_format($car->getPrice(), 0, ',', '.') }}</td>
                             <td>{{ number_format($car->getMileage(), 0, ',', '.') }} km</td>
+                            <td>{{ $car->getLocation() ? $car->getLocation()->getName() : '-' }}</td>
                             <td>
                                 <span class="admin-index-status-badge">{{ $car->isActive() ? __('car.status_active') : __('car.status_deactivated') }}</span>
                             </td>

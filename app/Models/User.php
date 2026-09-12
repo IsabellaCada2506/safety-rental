@@ -2,7 +2,7 @@
 
 /**
  * Author: Isabella Cadavid Posada
- * Date: 2026-09-06
+ * Date: 2026-09-11
  * Description: User model representing registered application users (customers and admins).
  */
 
@@ -10,7 +10,9 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
@@ -36,7 +38,6 @@ use Illuminate\Support\Facades\Hash;
  * $this->attributes['created_at']                  - string|null   - contains the creation timestamp
  * $this->attributes['updated_at']                  - string|null   - contains the update timestamp
  */
-
 class User extends Authenticatable
 {
     use HasFactory;
@@ -47,22 +48,6 @@ class User extends Authenticatable
     public const ROLE_CUSTOMER = 'customer';
 
     public $timestamps = true;
-
-    protected $fillable = [
-        'role',
-        'name',
-        'last_name',
-        'birth_date',
-        'address',
-        'license_number',
-        'emergency_contact',
-        'identification_number',
-        'emergency_contact_name',
-        'emergency_contact_last_name',
-        'eps',
-        'email',
-        'password',
-    ];
 
     protected $guarded = [
         'id',
@@ -269,5 +254,15 @@ class User extends Authenticatable
     public function calculateAge(): ?int
     {
         return $this->getBirthDate()?->age;
+    }
+
+    public function reservations(): HasMany
+    {
+        return $this->hasMany(Reservation::class);
+    }
+
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
     }
 }

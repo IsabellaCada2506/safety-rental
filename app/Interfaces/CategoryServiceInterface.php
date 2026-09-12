@@ -6,7 +6,7 @@
  * Description: Contract defining the business operations available for vehicle category management.
  */
 
-namespace App\Services\Contracts;
+namespace App\Interfaces;
 
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Collection;

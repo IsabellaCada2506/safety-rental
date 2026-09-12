@@ -1,6 +1,6 @@
 {{--
     Author: Isabella Cadavid Posada
-    Date: 2026-09-06
+    Date: 2026-09-11
     Description: Navigation bar for authenticated users and guests in the Safety Rental application.
 --}}
 
@@ -77,6 +77,20 @@
                     </a>
 
                     <a
+                        class="btn-pill-ghost text-decoration-none"
+                        href="{{ route('locations.index') }}"
+                    >
+                        {{ __('location.manage_locations') }}
+                    </a>
+
+                    <a
+                        class="btn-pill-ghost text-decoration-none"
+                        href="{{ route('reservations.index') }}"
+                    >
+                        {{ __('general.nav_reservations') }}
+                    </a>
+
+                    <a
                         class="btn-pill-solid profile-navigation-button"
                         href="{{ route('profile.index') }}"
                         aria-label="{{ __('authentication.profile') }}"
@@ -127,6 +141,20 @@
                     >
                         {{ __('category.manage_categories') }}
                     </a>
+
+                    <a
+                        class="btn-pill-ghost text-decoration-none"
+                        href="{{ route('admin.location.index') }}"
+                    >
+                        {{ __('location.manage_locations') }}
+                    </a>
+
+                    <a
+                        class="btn-pill-ghost text-decoration-none"
+                        href="{{ route('admin.reservation.index') }}"
+                    >
+                        {{ __('authentication.reservations') }}
+                    </a>
                 @endif
 
                 <form
@@ -151,12 +179,23 @@
                 </a>
 
                 <a
-                    class="btn-pill-solid"
+                    class="btn-pill-solid text-dark"
+                    style="color: #111827 !important;"
                     href="{{ route('register') }}"
                 >
                     {{ __('authentication.create_account') }}
                 </a>
             </div>
         @endauth
+
+        <div class="ms-2 d-flex align-items-center">
+            <a
+                class="btn-lang-toggle"
+                href="{{ route('locale.switch', app()->getLocale() === 'es' ? 'en' : 'es') }}"
+                title="{{ app()->getLocale() === 'es' ? 'Switch to English' : 'Cambiar a Español' }}"
+            >
+                🌐 {{ app()->getLocale() === 'es' ? 'EN' : 'ES' }}
+            </a>
+        </div>
     </div>
 </nav>

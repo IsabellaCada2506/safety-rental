@@ -2,8 +2,8 @@
 
 /**
  * Author: Wendy Atehortua
- * Date: 2026-09-10
- * Description: Request validation for updating an existing car.
+ * Date: 2026-09-11
+ * Description: Request validation for updating an existing car with branch location.
  */
 
 namespace App\Http\Requests\Admin;
@@ -32,6 +32,7 @@ class UpdateCarRequest extends FormRequest
             'mileage' => ['required', 'integer', 'min:0'],
             'image' => ['nullable', 'url', 'max:255'],
             'category_id' => ['required', 'exists:categories,id'],
+            'location_id' => ['required', 'exists:locations,id'],
         ];
     }
 

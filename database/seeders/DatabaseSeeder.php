@@ -2,7 +2,7 @@
 
 /**
  * Author: Isabella Cadavid Posada
- * Date: 2026-09-06
+ * Date: 2026-09-11
  * Description: Root seeder orchestrating the database seeding order.
  */
 
@@ -17,7 +17,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             CategorySeeder::class,
+            LocationSeeder::class,
             CarSeeder::class,
+            ReservationSeeder::class,
         ]);
     }
 }

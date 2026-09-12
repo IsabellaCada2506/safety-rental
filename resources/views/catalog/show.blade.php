@@ -1,7 +1,7 @@
 {{--
     Author: Wendy Atehortua
-    Date: 2026-09-10
-    Description: Detail view for a single active vehicle in the rental catalog.
+    Date: 2026-09-11
+    Description: Detail view for a single active vehicle in the rental catalog, including reservation flow.
 --}}
 
 @extends('layouts.app')
@@ -39,6 +39,9 @@
                     </p>
 
                     <div class="mb-3 p-3 bg-light rounded-3">
+                        @if($viewData['car']->getLocation())
+                            <p class="small mb-1"><strong>{{ __('catalog.location_filter') }}:</strong> {{ $viewData['car']->getLocation()->getName() }} ({{ $viewData['car']->getLocation()->getCity() }})</p>
+                        @endif
                         <p class="small mb-1"><strong>{{ __('catalog.passengers_label') }}:</strong> {{ optional($viewData['car']->getCategory())->getPassengerCapacity() }}</p>
                         <p class="small mb-1"><strong>{{ __('catalog.luggage_label') }}:</strong> {{ optional($viewData['car']->getCategory())->getLuggageCapacity() }} {{ __('catalog.units') }}</p>
                         @if($viewData['car']->getDescription())
@@ -54,9 +57,18 @@
                     </div>
 
                     <div class="d-grid gap-2 mb-4">
-                        <button class="btn btn-primary fw-semibold py-2 shadow-sm">
-                            {{ __('catalog.rent_now') }}
-                        </button>
+                        @if ($viewData['car']->isActive())
+                            <a
+                                href="{{ route('reservations.create', ['car_id' => $viewData['car']->getId()]) }}"
+                                class="btn btn-dark fw-semibold py-2 rounded-pill shadow-sm text-center text-decoration-none"
+                            >
+                                {{ __('catalog.rent_now') }} &rarr;
+                            </a>
+                        @else
+                            <button class="btn btn-secondary fw-semibold py-2 rounded-pill shadow-sm" disabled>
+                                {{ __('catalog.status_deactivated') }}
+                            </button>
+                        @endif
                     </div>
                 </div>
 

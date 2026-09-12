@@ -1,6 +1,6 @@
 {{--
     Author: Isabella Cadavid Posada
-    Date: 2026-09-06
+    Date: 2026-09-11
     Description: Public welcome landing page view.
 --}}
 
@@ -8,8 +8,6 @@
 
 @section('content')
     <section class="welcome-hero">
-        <div class="road-line" aria-hidden="true"></div>
-
         <div class="container">
             <div class="welcome-hero-inner">
                 <span class="logo-badge" aria-hidden="true">

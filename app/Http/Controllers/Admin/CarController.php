@@ -2,8 +2,8 @@
 
 /**
  * Author: Wendy Atehortua
- * Date: 2026-09-10
- * Description: Admin controller for managing cars in the inventory.
+ * Date: 2026-09-11
+ * Description: Admin controller for managing cars in the inventory with category and branch location associations.
  */
 
 namespace App\Http\Controllers\Admin;
@@ -11,8 +11,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreCarRequest;
 use App\Http\Requests\Admin\UpdateCarRequest;
-use App\Services\Contracts\CarServiceInterface;
-use App\Services\Contracts\CategoryServiceInterface;
+use App\Interfaces\CarServiceInterface;
+use App\Interfaces\CategoryServiceInterface;
+use App\Interfaces\LocationServiceInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -22,10 +23,16 @@ class CarController extends Controller
 
     private readonly CategoryServiceInterface $categoryService;
 
-    public function __construct(CarServiceInterface $carService, CategoryServiceInterface $categoryService)
-    {
+    private readonly LocationServiceInterface $locationService;
+
+    public function __construct(
+        CarServiceInterface $carService,
+        CategoryServiceInterface $categoryService,
+        LocationServiceInterface $locationService
+    ) {
         $this->carService = $carService;
         $this->categoryService = $categoryService;
+        $this->locationService = $locationService;
     }
 
     public function index(): View
@@ -42,6 +49,7 @@ class CarController extends Controller
         $viewData = [];
         $viewData['title'] = __('car.title_create');
         $viewData['categories'] = $this->categoryService->getAll();
+        $viewData['locations'] = $this->locationService->getAll();
 
         return view('admin.car.create')->with('viewData', $viewData);
     }
@@ -63,6 +71,7 @@ class CarController extends Controller
         $viewData['title'] = __('car.title_edit');
         $viewData['car'] = $car;
         $viewData['categories'] = $this->categoryService->getAll();
+        $viewData['locations'] = $this->locationService->getAll();
 
         return view('admin.car.edit')->with('viewData', $viewData);
     }

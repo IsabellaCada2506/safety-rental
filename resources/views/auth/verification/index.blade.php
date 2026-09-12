@@ -1,6 +1,6 @@
 {{--
     Author: Isabella Cadavid Posada
-    Date: 2026-09-06
+    Date: 2026-09-11
     Description: View prompting the user to verify their email address.
 --}}
 
@@ -8,8 +8,6 @@
 
 @section('content')
     <section class="simple-page">
-        <div class="road-line" aria-hidden="true"></div>
-
         <div class="simple-card">
             <div class="card-header">
                 {{ __('authentication.verify_email') }}

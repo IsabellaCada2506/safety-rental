@@ -9,7 +9,8 @@
  */
 
 .catalog-page {
-    margin-top: 60px;
+    margin-top: 105px !important;
+    padding-top: 1rem;
 }
 
 .catalog-card-image {
