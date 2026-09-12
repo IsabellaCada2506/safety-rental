@@ -2,7 +2,8 @@
 
 /**
  * Author: Isabella Ocampo
- * Date: 2026-09-11
+ * Author: Alejandro Correa Marin
+ * Date: 2026-09-12
  * Description: Web routes for the Safety Rental application, mapping HTTP requests to controller actions without closures.
  */
 
@@ -10,6 +11,7 @@ use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LocationController as AdminLocationController;
+use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
 use App\Http\Controllers\Admin\ReservationController as AdminReservationController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
@@ -20,6 +22,7 @@ use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\WelcomeController;
@@ -77,6 +80,11 @@ $reservationCreatePath = $reservationPath.'/create';
 $reservationStorePath = $reservationPath;
 $reservationShowPath = $reservationPath.'/{id}';
 $reservationCancelPath = $reservationPath.'/{id}/cancel';
+$reservationPaymentPath = $reservationShowPath.'/payment';
+
+$adminPaymentPath = $adminPath.'/payments';
+$adminPaymentShowPath = $adminPaymentPath.'/{id}';
+$adminPaymentRefundPath = $adminPaymentShowPath.'/refund';
 
 $catalogPath = $basePath.'/catalog';
 $catalogShowPath = $catalogPath.'/{id}';
@@ -124,6 +132,8 @@ Route::get($reservationCreatePath, [ReservationController::class, 'create'])->mi
 Route::post($reservationStorePath, [ReservationController::class, 'store'])->middleware(['auth', 'verified', 'customer'])->name('reservations.store');
 Route::get($reservationShowPath, [ReservationController::class, 'show'])->middleware(['auth', 'verified', 'customer'])->whereNumber('id')->name('reservations.show');
 Route::patch($reservationCancelPath, [ReservationController::class, 'cancel'])->middleware(['auth', 'verified', 'customer'])->whereNumber('id')->name('reservations.cancel');
+Route::get($reservationPaymentPath, [PaymentController::class, 'create'])->middleware(['auth', 'verified', 'customer'])->whereNumber('id')->name('payments.create');
+Route::post($reservationPaymentPath, [PaymentController::class, 'store'])->middleware(['auth', 'verified', 'customer'])->whereNumber('id')->name('payments.store');
 
 Route::get($adminDashboardPath, [DashboardController::class, 'index'])->middleware(['auth', 'verified', 'admin'])->name('admin.dashboard.index');
 Route::get($adminCarPath, [CarController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.car.index');
@@ -151,3 +161,7 @@ Route::get($adminReservationPath, [AdminReservationController::class, 'index'])-
 Route::get($adminReservationShowPath, [AdminReservationController::class, 'show'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.reservation.show');
 Route::patch($adminReservationConfirmPath, [AdminReservationController::class, 'confirm'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.reservation.confirm');
 Route::patch($adminReservationCancelPath, [AdminReservationController::class, 'cancel'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.reservation.cancel');
+
+Route::get($adminPaymentPath, [AdminPaymentController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.payment.index');
+Route::get($adminPaymentShowPath, [AdminPaymentController::class, 'show'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.payment.show');
+Route::patch($adminPaymentRefundPath, [AdminPaymentController::class, 'refund'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.payment.refund');

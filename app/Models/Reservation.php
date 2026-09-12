@@ -2,7 +2,8 @@
 
 /**
  * Author: Isabella Ocampo S
- * Date: 2026-09-11
+ * Author: Alejandro Correa Marin
+ * Date: 2026-09-12
  * Description: Reservation model representing a car rental booking between a customer and a vehicle.
  */
 
@@ -10,26 +11,32 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Database\Factories\ReservationFactory;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * @property int $id
- * @property int $code
- * @property string $state
- * @property Carbon|null $start_date
- * @property Carbon|null $end_date
- * @property int $user_id
- * @property int $car_id
- * @property int $location_id
- * @property int|null $payment_id
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property User|null $user
- * @property Car|null $car
- * @property Location|null $location
- * @property Payment|null $payment
+ * RESERVATION ATTRIBUTES
+ * $this->attributes['id']           - int         - contains the reservation primary key
+ * $this->attributes['code']         - int         - contains the unique reservation code
+ * $this->attributes['state']        - string      - contains the reservation state
+ * $this->attributes['start_date']   - string|null - contains the rental start date
+ * $this->attributes['end_date']     - string|null - contains the rental end date
+ * $this->attributes['user_id']      - int         - contains the customer user id
+ * $this->attributes['car_id']       - int         - contains the rented car id
+ * $this->attributes['location_id']  - int         - contains the pickup location id
+ * $this->attributes['payment_id']   - int|null    - contains the successful payment id
+ * $this->attributes['created_at']   - string|null - contains the creation timestamp
+ * $this->attributes['updated_at']   - string|null - contains the update timestamp
+ *
+ * RELATIONSHIPS
+ * $this->user - User|null - the customer who created the reservation
+ * $this->car - Car|null - the rented vehicle
+ * $this->location - Location|null - the pickup location
+ * $this->payment - Payment|null - the successful payment
+ * $this->payments - Collection<int, Payment> - all payment attempts for this reservation
  */
 class Reservation extends Model
 {
@@ -45,6 +52,17 @@ class Reservation extends Model
     public const STATE_COMPLETED = 'completed';
 
     public $timestamps = true;
+
+    protected $fillable = [
+        'code',
+        'state',
+        'start_date',
+        'end_date',
+        'user_id',
+        'car_id',
+        'location_id',
+        'payment_id',
+    ];
 
     protected $guarded = [
         'id',
@@ -234,6 +252,11 @@ class Reservation extends Model
         return $this->user;
     }
 
+    public function setUser(?User $user): void
+    {
+        $this->setRelation('user', $user);
+    }
+
     public function car(): BelongsTo
     {
         return $this->belongsTo(Car::class);
@@ -242,6 +265,11 @@ class Reservation extends Model
     public function getCar(): ?Car
     {
         return $this->car;
+    }
+
+    public function setCar(?Car $car): void
+    {
+        $this->setRelation('car', $car);
     }
 
     public function location(): BelongsTo
@@ -254,6 +282,25 @@ class Reservation extends Model
         return $this->location;
     }
 
+    public function setLocation(?Location $location): void
+    {
+        $this->setRelation('location', $location);
+    }
+
+    public function hasSuccessfulPayment(): bool
+    {
+        $payment = $this->getPayment();
+
+        return $payment !== null && $payment->isCompleted();
+    }
+
+    public function isPayable(): bool
+    {
+        return ! $this->isCancelled()
+            && ! $this->isCompleted()
+            && ! $this->hasSuccessfulPayment();
+    }
+
     public function payment(): BelongsTo
     {
         return $this->belongsTo(Payment::class);
@@ -262,5 +309,25 @@ class Reservation extends Model
     public function getPayment(): ?Payment
     {
         return $this->payment;
+    }
+
+    public function setPayment(?Payment $payment): void
+    {
+        $this->setRelation('payment', $payment);
+    }
+
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function getPayments(): Collection
+    {
+        return $this->payments;
+    }
+
+    public function setPayments(Collection $payments): void
+    {
+        $this->setRelation('payments', $payments);
     }
 }

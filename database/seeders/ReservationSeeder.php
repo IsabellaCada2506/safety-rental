@@ -2,7 +2,8 @@
 
 /**
  * Author: Isabella Ocampo
- * Date: 2026-09-11
+ * Author: Alejandro Correa Marin
+ * Date: 2026-09-12
  * Description: Seeder for populating realistic test reservations across customers.
  */
 
@@ -54,7 +55,7 @@ class ReservationSeeder extends Seeder
                 ]
             );
 
-            Reservation::firstOrCreate(
+            $reservation1 = Reservation::firstOrCreate(
                 ['code' => 84920184],
                 [
                     'state' => Reservation::STATE_CONFIRMED,
@@ -66,6 +67,9 @@ class ReservationSeeder extends Seeder
                     'payment_id' => $payment1->getId(),
                 ]
             );
+
+            $payment1->setReservationId($reservation1->getId());
+            $payment1->save();
 
             if ($cars->count() > 1) {
                 $car2 = $cars->get(1);
@@ -102,7 +106,7 @@ class ReservationSeeder extends Seeder
                 ]
             );
 
-            Reservation::firstOrCreate(
+            $reservation3 = Reservation::firstOrCreate(
                 ['code' => 73910245],
                 [
                     'state' => Reservation::STATE_CONFIRMED,
@@ -114,6 +118,9 @@ class ReservationSeeder extends Seeder
                     'payment_id' => $payment3->getId(),
                 ]
             );
+
+            $payment3->setReservationId($reservation3->getId());
+            $payment3->save();
 
             if ($cars->count() > 3) {
                 $car4 = $cars->get(3);
@@ -150,7 +157,7 @@ class ReservationSeeder extends Seeder
                 ]
             );
 
-            Reservation::firstOrCreate(
+            $reservation5 = Reservation::firstOrCreate(
                 ['code' => 19283746],
                 [
                     'state' => Reservation::STATE_CONFIRMED,
@@ -162,6 +169,9 @@ class ReservationSeeder extends Seeder
                     'payment_id' => $payment5->getId(),
                 ]
             );
+
+            $payment5->setReservationId($reservation5->getId());
+            $payment5->save();
 
             if ($cars->count() > 5) {
                 $car6 = $cars->get(5);

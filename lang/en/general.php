@@ -1,6 +1,9 @@
 <?php
 
 /**
+ * Author: Isabella Cadavid Posada
+ * Author: Alejandro Correa Marin
+ * Date: 2026-09-12
  * Description: General English language strings shared across the Safety Rental application.
  */
 
@@ -10,6 +13,7 @@ return [
     'nav_cars' => 'Cars',
     'nav_locations' => 'Locations',
     'nav_reservations' => 'My Reservations',
+    'nav_payments' => 'Payments',
     'nav_profile' => 'Profile',
     'nav_logout' => 'Log out',
 

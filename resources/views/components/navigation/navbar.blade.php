@@ -1,6 +1,7 @@
 {{--
     Author: Isabella Cadavid Posada
-    Date: 2026-09-11
+    Author: Alejandro Correa Marin
+    Date: 2026-09-12
     Description: Navigation bar for authenticated users and guests in the Safety Rental application.
 --}}
 
@@ -154,6 +155,13 @@
                         href="{{ route('admin.reservation.index') }}"
                     >
                         {{ __('authentication.reservations') }}
+                    </a>
+
+                    <a
+                        class="btn-pill-ghost text-decoration-none"
+                        href="{{ route('admin.payment.index') }}"
+                    >
+                        {{ __('payment.manage_payments') }}
                     </a>
                 @endif
 

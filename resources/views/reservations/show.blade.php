@@ -1,7 +1,8 @@
 {{--
     Author: Isabella Ocampo
-    Date: 2026-09-11
-    Description: Reservation details view for customers with cancellation action.
+    Author: Alejandro Correa Marin
+    Date: 2026-09-12
+    Description: Reservation details view for customers with payment and cancellation actions.
 --}}
 
 @extends('layouts.app')
@@ -104,25 +105,61 @@
                                     <span class="fw-bold text-primary fs-4">${{ number_format($viewData['reservation']->getTotalPrice(), 0, ',', '.') }}</span>
                                 </div>
                             </div>
+
+                            <div class="p-3 border rounded-4 mt-3">
+                                <h6 class="fw-bold text-dark mb-3">{{ __('payment.heading') }}</h6>
+                                @if ($viewData['reservation']->getPayment())
+                                    <div class="d-flex justify-content-between small text-muted mb-1">
+                                        <span>{{ __('payment.status') }}:</span>
+                                        <span class="badge {{ $viewData['reservation']->getPayment()->getStatusBadgeClass() }} px-2 py-1 rounded-pill">
+                                            {{ __('payment.status_' . $viewData['reservation']->getPayment()->getStatus()) }}
+                                        </span>
+                                    </div>
+                                    <div class="d-flex justify-content-between small text-muted mb-1">
+                                        <span>{{ __('payment.method') }}:</span>
+                                        <span class="fw-semibold text-dark">{{ $viewData['reservation']->getPayment()->getMethodLabel() }}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between small text-muted mb-1">
+                                        <span>{{ __('payment.transaction_code') }}:</span>
+                                        <span class="fw-semibold text-dark">{{ $viewData['reservation']->getPayment()->getTransactionCode() }}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between small text-muted">
+                                        <span>{{ __('payment.amount') }}:</span>
+                                        <span class="fw-semibold text-dark">${{ number_format($viewData['reservation']->getPayment()->getAmount(), 0, ',', '.') }}</span>
+                                    </div>
+                                @else
+                                    <p class="text-muted small mb-0">{{ __('payment.unpaid') }}</p>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                {{-- Card Footer with Actions --}}
-                @if ($viewData['reservation']->isCancellable())
-                    <div class="card-footer bg-white border-top py-3 px-4 d-flex justify-content-end align-items-center">
-                        <form
-                            action="{{ route('reservations.cancel', ['id' => $viewData['reservation']->getId()]) }}"
-                            method="POST"
-                            onsubmit="return confirm('{{ __('reservation.cancellation_confirm') }}');"
-                            class="m-0"
-                        >
-                            @csrf
-                            @method('PATCH')
-                            <button type="submit" class="btn btn-outline-danger btn-sm rounded-pill px-4 fw-semibold shadow-sm">
-                                {{ __('reservation.cancel_reservation') }}
-                            </button>
-                        </form>
+                @if ($viewData['reservation']->isPayable() || $viewData['reservation']->isCancellable())
+                    <div class="card-footer bg-white border-top py-3 px-4 d-flex justify-content-end align-items-center gap-2">
+                        @if ($viewData['reservation']->isPayable())
+                            <a
+                                href="{{ route('payments.create', ['id' => $viewData['reservation']->getId()]) }}"
+                                class="btn btn-dark btn-sm rounded-pill px-4 fw-semibold shadow-sm"
+                            >
+                                {{ __('payment.pay_now') }}
+                            </a>
+                        @endif
+
+                        @if ($viewData['reservation']->isCancellable())
+                            <form
+                                action="{{ route('reservations.cancel', ['id' => $viewData['reservation']->getId()]) }}"
+                                method="POST"
+                                onsubmit="return confirm('{{ __('reservation.cancellation_confirm') }}');"
+                                class="m-0"
+                            >
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="btn btn-outline-danger btn-sm rounded-pill px-4 fw-semibold shadow-sm">
+                                    {{ __('reservation.cancel_reservation') }}
+                                </button>
+                            </form>
+                        @endif
                     </div>
                 @endif
             </div>
