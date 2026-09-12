@@ -8,6 +8,7 @@
  */
 
 use App\Http\Controllers\Admin\CarController;
+use App\Http\Controllers\Admin\CarRankingController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LocationController as AdminLocationController;
@@ -63,6 +64,7 @@ $adminCarStorePath = $adminCarPath.'/store';
 $adminCarEditPath = $adminCarPath.'/{id}/edit';
 $adminCarUpdatePath = $adminCarPath.'/{id}/update';
 $adminCarDeactivatePath = $adminCarPath.'/{id}/deactivate';
+$adminRankingPath = $adminPath.'/car-ranking';
 
 $adminCategoryPath = $adminPath.'/categories';
 $adminCategoryCreatePath = $adminCategoryPath.'/create';
@@ -145,6 +147,7 @@ Route::post($adminCarStorePath, [CarController::class, 'store'])->middleware(['a
 Route::get($adminCarEditPath, [CarController::class, 'edit'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.car.edit');
 Route::put($adminCarUpdatePath, [CarController::class, 'update'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.car.update');
 Route::patch($adminCarDeactivatePath, [CarController::class, 'deactivate'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.car.deactivate');
+Route::get($adminRankingPath, [CarRankingController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.ranking.index');
 
 Route::get($adminCategoryPath, [CategoryController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.category.index');
 Route::get($adminCategoryCreatePath, [CategoryController::class, 'create'])->middleware(['auth', 'admin'])->name('admin.category.create');

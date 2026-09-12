@@ -2,7 +2,8 @@
 
 /**
  * Author: Wendy Atehortua
- * Date: 2026-09-11
+ * Author: Alejandro Correa Marin
+ * Date: 2026-09-12
  * Description: Car model representing the rentable vehicles in inventory.
  */
 
@@ -246,5 +247,15 @@ class Car extends Model
     public function getReservations(): Collection
     {
         return $this->reservations;
+    }
+
+    public function setReservations(Collection $reservations): void
+    {
+        $this->setRelation('reservations', $reservations);
+    }
+
+    public function getRentalCount(): int
+    {
+        return (int) ($this->attributes['rental_count'] ?? 0);
     }
 }

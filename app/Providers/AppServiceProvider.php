@@ -9,6 +9,7 @@
 
 namespace App\Providers;
 
+use App\Interfaces\CarRankingServiceInterface;
 use App\Interfaces\CarServiceInterface;
 use App\Interfaces\CategoryServiceInterface;
 use App\Interfaces\LocationReferenceCheckerInterface;
@@ -19,6 +20,7 @@ use App\Interfaces\ReservationCodeGeneratorInterface;
 use App\Interfaces\ReservationPricingInterface;
 use App\Interfaces\ReservationServiceInterface;
 use App\Interfaces\UserServiceInterface;
+use App\Services\CarRankingService;
 use App\Services\CarService;
 use App\Services\CategoryService;
 use App\Services\LocationService;
@@ -40,6 +42,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->bind(CarRankingServiceInterface::class, CarRankingService::class);
         $this->app->bind(CarServiceInterface::class, CarService::class);
         $this->app->bind(CategoryServiceInterface::class, CategoryService::class);
         $this->app->bind(LocationReferenceCheckerInterface::class, LocationReferenceChecker::class);

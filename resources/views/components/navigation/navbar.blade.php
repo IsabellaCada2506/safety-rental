@@ -163,6 +163,13 @@
                     >
                         {{ __('payment.manage_payments') }}
                     </a>
+
+                    <a
+                        class="btn-pill-ghost text-decoration-none"
+                        href="{{ route('admin.ranking.index') }}"
+                    >
+                        {{ __('ranking.manage_ranking') }}
+                    </a>
                 @endif
 
                 <form

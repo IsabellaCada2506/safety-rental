@@ -1,6 +1,7 @@
 {{--
     Author: Isabella Cadavid Posada
-    Date: 2026-09-11
+    Author: Alejandro Correa Marin
+    Date: 2026-09-12
     Description: Admin dashboard view with active reservations link.
 --}}
 
@@ -82,6 +83,9 @@
 
                     <a href="{{ route('admin.car.index') }}" class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link">
                         <span class="me-1"></span> {{ __('car.heading_management') }}
+                    </a>
+                    <a href="{{ route('admin.ranking.index') }}" class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link mt-2">
+                        {{ __('ranking.manage_ranking') }}
                     </a>
                 </div>
 
