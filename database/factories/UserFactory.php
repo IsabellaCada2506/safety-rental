@@ -1,11 +1,5 @@
 <?php
 
-/**
- * Author: Isabella Cadavid Posada
- * Date: 2026-09-06
- * Description: Factory for generating User model instances for testing and seeding.
- */
-
 namespace Database\Factories;
 
 use App\Models\User;
@@ -13,27 +7,25 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-/** @extends Factory<User> */
+/**
+ * @extends Factory<User>
+ */
 class UserFactory extends Factory
 {
-    protected $model = User::class;
-
+    /**
+     * The current password being used by the factory.
+     */
     protected static ?string $password;
 
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
     public function definition(): array
     {
         return [
-            'role' => User::ROLE_CUSTOMER,
-            'name' => fake()->firstName(),
-            'last_name' => fake()->lastName(),
-            'birth_date' => fake()->dateTimeBetween('-70 years', '-18 years'),
-            'address' => fake()->address(),
-            'license_number' => fake()->unique()->numberBetween(10000000, 99999999),
-            'emergency_contact' => fake()->numberBetween(3000000000, 3999999999),
-            'identification_number' => fake()->unique()->numberBetween(1000000000, 1999999999),
-            'emergency_contact_name' => fake()->firstName(),
-            'emergency_contact_last_name' => fake()->lastName(),
-            'eps' => fake()->randomElement(['Sura', 'Sanitas', 'Nueva EPS']),
+            'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
@@ -41,17 +33,13 @@ class UserFactory extends Factory
         ];
     }
 
+    /**
+     * Indicate that the model's email address should be unverified.
+     */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes): array => [
+        return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
-        ]);
-    }
-
-    public function admin(): static
-    {
-        return $this->state(fn (array $attributes): array => [
-            'role' => User::ROLE_ADMIN,
         ]);
     }
 }
