@@ -24,6 +24,7 @@ use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
@@ -81,6 +82,7 @@ $reservationStorePath = $reservationPath;
 $reservationShowPath = $reservationPath.'/{id}';
 $reservationCancelPath = $reservationPath.'/{id}/cancel';
 $reservationPaymentPath = $reservationShowPath.'/payment';
+$reservationReceiptPath = $reservationShowPath.'/receipt';
 
 $adminPaymentPath = $adminPath.'/payments';
 $adminPaymentShowPath = $adminPaymentPath.'/{id}';
@@ -134,6 +136,7 @@ Route::get($reservationShowPath, [ReservationController::class, 'show'])->middle
 Route::patch($reservationCancelPath, [ReservationController::class, 'cancel'])->middleware(['auth', 'verified', 'customer'])->whereNumber('id')->name('reservations.cancel');
 Route::get($reservationPaymentPath, [PaymentController::class, 'create'])->middleware(['auth', 'verified', 'customer'])->whereNumber('id')->name('payments.create');
 Route::post($reservationPaymentPath, [PaymentController::class, 'store'])->middleware(['auth', 'verified', 'customer'])->whereNumber('id')->name('payments.store');
+Route::get($reservationReceiptPath, [ReceiptController::class, 'download'])->middleware(['auth', 'verified', 'customer'])->whereNumber('id')->name('receipts.download');
 
 Route::get($adminDashboardPath, [DashboardController::class, 'index'])->middleware(['auth', 'verified', 'admin'])->name('admin.dashboard.index');
 Route::get($adminCarPath, [CarController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.car.index');

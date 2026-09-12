@@ -2,7 +2,8 @@
 
 /**
  * Author: Isabella Ocampo
- * Date: 2026-09-11
+ * Author: Alejandro Correa Marin
+ * Date: 2026-09-12
  * Description: Authorization policy governing reservation views, updates, and cancellations.
  */
 
@@ -33,5 +34,10 @@ class ReservationPolicy
     public function update(User $user, Reservation $reservation): bool
     {
         return $user->isAdmin();
+    }
+
+    public function downloadReceipt(User $user, Reservation $reservation): bool
+    {
+        return $reservation->getUserId() === $user->getId();
     }
 }

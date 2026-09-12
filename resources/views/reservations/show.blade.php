@@ -135,8 +135,17 @@
                     </div>
                 </div>
 
-                @if ($viewData['reservation']->isPayable() || $viewData['reservation']->isCancellable())
+                @if ($viewData['reservation']->isPayable() || $viewData['reservation']->isCancellable() || $viewData['reservation']->hasSuccessfulPayment())
                     <div class="card-footer bg-white border-top py-3 px-4 d-flex justify-content-end align-items-center gap-2">
+                        @if ($viewData['reservation']->hasSuccessfulPayment())
+                            <a
+                                href="{{ route('receipts.download', ['id' => $viewData['reservation']->getId()]) }}"
+                                class="btn btn-outline-dark btn-sm rounded-pill px-4 fw-semibold shadow-sm"
+                            >
+                                {{ __('payment.download_receipt') }}
+                            </a>
+                        @endif
+
                         @if ($viewData['reservation']->isPayable())
                             <a
                                 href="{{ route('payments.create', ['id' => $viewData['reservation']->getId()]) }}"

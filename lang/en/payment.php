@@ -16,6 +16,9 @@ return [
     'subtitle' => 'Complete a demonstration payment using the approved reservation total.',
     'receipt_label' => 'Rental payment receipt',
     'not_an_invoice' => 'This document is a rental payment receipt, not a tax invoice.',
+    'download_receipt' => 'Download receipt',
+    'currency' => 'COP',
+    'receipt_not_paid' => 'A paid receipt is available only after a successful payment.',
 
     'payment_code' => 'Payment code',
     'transaction_code' => 'Transaction reference',

@@ -16,6 +16,9 @@ return [
     'subtitle' => 'Completa un pago de demostración con el total aprobado de la reserva.',
     'receipt_label' => 'Recibo de pago de alquiler',
     'not_an_invoice' => 'Este documento es un recibo de pago de alquiler, no una factura tributaria.',
+    'download_receipt' => 'Descargar recibo',
+    'currency' => 'COP',
+    'receipt_not_paid' => 'El recibo de pago solo está disponible después de un pago exitoso.',
 
     'payment_code' => 'Código de pago',
     'transaction_code' => 'Referencia de transacción',
