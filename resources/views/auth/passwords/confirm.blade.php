@@ -1,3 +1,9 @@
+{{--
+    Author: Isabella Cadavid Posada
+    Date: 2026-09-06
+    Description: View for confirming the authenticated user's password before sensitive actions.
+--}}
+
 @extends('layouts.app')
 
 @section('content')

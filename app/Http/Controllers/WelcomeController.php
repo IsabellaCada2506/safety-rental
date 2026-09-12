@@ -1,6 +1,10 @@
 <?php
 
-// Author: Isabella Cadavid Posada
+/**
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-09-06
+ * Description: Controller for the public welcome landing page.
+ */
 
 namespace App\Http\Controllers;
 

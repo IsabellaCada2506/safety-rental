@@ -1,11 +1,13 @@
-{{-- Author: Isabella Cadavid Posada --}}
+{{--
+    Author: Isabella Cadavid Posada
+    Date: 2026-09-11
+    Description: View for requesting a password reset link by email.
+--}}
 
 @extends('layouts.app')
 
 @section('content')
     <section class="simple-page">
-        <div class="road-line" aria-hidden="true"></div>
-
         <div class="simple-card">
             <div class="card-header">
                 {{ __('authentication.forgot_password') }}

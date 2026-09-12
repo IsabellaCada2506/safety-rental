@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Author: Wendy Atehortua
- * Date: 09/09/2026
- * Description: Seeder for populating the database with initial data, including users and cars.
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-09-11
+ * Description: Root seeder orchestrating the database seeding order.
  */
 
 namespace Database\Seeders;
@@ -16,7 +16,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
+            CategorySeeder::class,
+            LocationSeeder::class,
             CarSeeder::class,
+            ReservationSeeder::class,
         ]);
     }
 }

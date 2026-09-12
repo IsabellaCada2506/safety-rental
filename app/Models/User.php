@@ -1,36 +1,42 @@
 <?php
 
-// Autor: Isabella Cadavid Posada
+/**
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-09-11
+ * Description: User model representing registered application users (customers and admins).
+ */
 
 namespace App\Models;
 
 use Carbon\Carbon;
 use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 
 /**
- * Database attributes:
- *
- * @property int $id
- * @property string $role
- * @property string $name
- * @property string|null $last_name
- * @property Carbon|null $birth_date
- * @property string|null $address
- * @property int|null $license_number
- * @property int|null $emergency_contact
- * @property int|null $identification_number
- * @property string|null $emergency_contact_name
- * @property string|null $emergency_contact_last_name
- * @property string|null $eps
- * @property string $email
- * @property Carbon|null $email_verified_at
- * @property string $password
- * @property string|null $remember_token
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * USER ATTRIBUTES
+ * $this->attributes['id']                          - int           - contains the user primary key (id)
+ * $this->attributes['role']                        - string        - contains the user role
+ * $this->attributes['name']                        - string        - contains the user first name
+ * $this->attributes['last_name']                   - string|null   - contains the user last name
+ * $this->attributes['birth_date']                  - string|null   - contains the birth date
+ * $this->attributes['address']                     - string|null   - contains the physical address
+ * $this->attributes['license_number']              - int|null      - contains the driving license number
+ * $this->attributes['emergency_contact']           - int|null      - contains the emergency contact phone
+ * $this->attributes['identification_number']       - int|null      - contains the national ID number
+ * $this->attributes['emergency_contact_name']      - string|null   - contains the emergency contact name
+ * $this->attributes['emergency_contact_last_name'] - string|null   - contains the emergency contact last name
+ * $this->attributes['eps']                         - string|null   - contains the healthcare provider (EPS)
+ * $this->attributes['email']                       - string        - contains the email address
+ * $this->attributes['email_verified_at']           - string|null   - contains the email verification timestamp
+ * $this->attributes['password']                    - string        - contains the hashed password
+ * $this->attributes['remember_token']              - string|null   - contains the remember session token
+ * $this->attributes['created_at']                  - string|null   - contains the creation timestamp
+ * $this->attributes['updated_at']                  - string|null   - contains the update timestamp
  */
 class User extends Authenticatable
 {
@@ -42,22 +48,6 @@ class User extends Authenticatable
     public const ROLE_CUSTOMER = 'customer';
 
     public $timestamps = true;
-
-    protected $fillable = [
-        'role',
-        'name',
-        'last_name',
-        'birth_date',
-        'address',
-        'license_number',
-        'emergency_contact',
-        'identification_number',
-        'emergency_contact_name',
-        'emergency_contact_last_name',
-        'eps',
-        'email',
-        'password',
-    ];
 
     protected $guarded = [
         'id',
@@ -86,164 +76,174 @@ class User extends Authenticatable
 
     public function getId(): ?int
     {
-        return $this->id;
+        return isset($this->attributes['id']) ? (int) $this->attributes['id'] : null;
     }
 
     public function getRole(): string
     {
-        return $this->role;
+        return $this->attributes['role'];
     }
 
     public function setRole(string $role): void
     {
-        $this->role = $role;
+        $this->attributes['role'] = $role;
     }
 
     public function getName(): string
     {
-        return $this->name;
+        return $this->attributes['name'];
     }
 
     public function setName(string $name): void
     {
-        $this->name = $name;
+        $this->attributes['name'] = $name;
     }
 
     public function getLastName(): ?string
     {
-        return $this->last_name;
+        return $this->attributes['last_name'] ?? null;
     }
 
     public function setLastName(?string $lastName): void
     {
-        $this->last_name = $lastName;
+        $this->attributes['last_name'] = $lastName;
     }
 
     public function getBirthDate(): ?Carbon
     {
-        return $this->birth_date;
+        return isset($this->attributes['birth_date'])
+            ? Carbon::parse($this->attributes['birth_date'])
+            : null;
     }
 
     public function setBirthDate(?Carbon $birthDate): void
     {
-        $this->birth_date = $birthDate;
+        $this->attributes['birth_date'] = $birthDate?->toDateString();
     }
 
     public function getAddress(): ?string
     {
-        return $this->address;
+        return $this->attributes['address'] ?? null;
     }
 
     public function setAddress(?string $address): void
     {
-        $this->address = $address;
+        $this->attributes['address'] = $address;
     }
 
     public function getLicenseNumber(): ?int
     {
-        return $this->license_number;
+        return isset($this->attributes['license_number']) ? (int) $this->attributes['license_number'] : null;
     }
 
     public function setLicenseNumber(?int $licenseNumber): void
     {
-        $this->license_number = $licenseNumber;
+        $this->attributes['license_number'] = $licenseNumber;
     }
 
     public function getEmergencyContact(): ?int
     {
-        return $this->emergency_contact;
+        return isset($this->attributes['emergency_contact']) ? (int) $this->attributes['emergency_contact'] : null;
     }
 
     public function setEmergencyContact(?int $emergencyContact): void
     {
-        $this->emergency_contact = $emergencyContact;
+        $this->attributes['emergency_contact'] = $emergencyContact;
     }
 
     public function getIdentificationNumber(): ?int
     {
-        return $this->identification_number;
+        return isset($this->attributes['identification_number']) ? (int) $this->attributes['identification_number'] : null;
     }
 
     public function setIdentificationNumber(?int $identificationNumber): void
     {
-        $this->identification_number = $identificationNumber;
+        $this->attributes['identification_number'] = $identificationNumber;
     }
 
     public function getEmergencyContactName(): ?string
     {
-        return $this->emergency_contact_name;
+        return $this->attributes['emergency_contact_name'] ?? null;
     }
 
     public function setEmergencyContactName(
         ?string $emergencyContactName
     ): void {
-        $this->emergency_contact_name = $emergencyContactName;
+        $this->attributes['emergency_contact_name'] = $emergencyContactName;
     }
 
     public function getEmergencyContactLastName(): ?string
     {
-        return $this->emergency_contact_last_name;
+        return $this->attributes['emergency_contact_last_name'] ?? null;
     }
 
     public function setEmergencyContactLastName(
         ?string $emergencyContactLastName
     ): void {
-        $this->emergency_contact_last_name = $emergencyContactLastName;
+        $this->attributes['emergency_contact_last_name'] = $emergencyContactLastName;
     }
 
     public function getEps(): ?string
     {
-        return $this->eps;
+        return $this->attributes['eps'] ?? null;
     }
 
     public function setEps(?string $eps): void
     {
-        $this->eps = $eps;
+        $this->attributes['eps'] = $eps;
     }
 
     public function getEmail(): string
     {
-        return $this->email;
+        return $this->attributes['email'];
     }
 
     public function setEmail(string $email): void
     {
-        $this->email = $email;
+        $this->attributes['email'] = $email;
     }
 
     public function setPassword(string $password): void
     {
-        $this->password = $password;
+        $this->attributes['password'] = Hash::isHashed($password)
+            ? $password
+            : Hash::make($password);
     }
 
     public function getEmailVerifiedAt(): ?Carbon
     {
-        return $this->email_verified_at;
+        return isset($this->attributes['email_verified_at'])
+            ? Carbon::parse($this->attributes['email_verified_at'])
+            : null;
     }
 
     public function setEmailVerifiedAt(?Carbon $emailVerifiedAt): void
     {
-        $this->email_verified_at = $emailVerifiedAt;
+        $this->attributes['email_verified_at'] = $emailVerifiedAt?->toDateTimeString();
     }
 
     public function getRememberTokenValue(): ?string
     {
-        return $this->remember_token;
+        return $this->attributes['remember_token'] ?? null;
     }
 
     public function setRememberTokenValue(?string $rememberToken): void
     {
-        $this->remember_token = $rememberToken;
+        $this->attributes['remember_token'] = $rememberToken;
     }
 
     public function getCreatedAt(): ?Carbon
     {
-        return $this->created_at;
+        return isset($this->attributes['created_at'])
+            ? Carbon::parse($this->attributes['created_at'])
+            : null;
     }
 
     public function getUpdatedAt(): ?Carbon
     {
-        return $this->updated_at;
+        return isset($this->attributes['updated_at'])
+            ? Carbon::parse($this->attributes['updated_at'])
+            : null;
     }
 
     public function isAdmin(): bool
@@ -254,5 +254,15 @@ class User extends Authenticatable
     public function calculateAge(): ?int
     {
         return $this->getBirthDate()?->age;
+    }
+
+    public function reservations(): HasMany
+    {
+        return $this->hasMany(Reservation::class);
+    }
+
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
     }
 }

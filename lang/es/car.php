@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Author: Wendy
- * Date: 09/09/2026
+ * Author: Wendy Atehortua
+ * Date: 2026-09-11
  * Description: Spanish language strings for the car management module.
  */
 
@@ -11,6 +11,7 @@ return [
     'title_create' => 'Registrar Coche - Admin Safety Rental',
     'title_edit' => 'Editar Coche - Admin Safety Rental',
 
+    'admin_area' => 'Área de Administración',
     'heading_management' => 'Gestión del Inventario de Vehículos',
     'registered_vehicles' => 'Vehículos Registrados',
     'register_new_car' => 'Registrar Nuevo Vehículo',
@@ -22,9 +23,10 @@ return [
     'plate' => 'Placa',
     'color' => 'Color',
     'soat' => 'SOAT',
-    'price_per_day' => 'Precio / Día',
+    'price' => 'Precio / Día',
     'mileage' => 'Kilometraje',
     'status' => 'Estado',
+    'branch' => 'Sede',
     'actions' => 'Acciones',
 
     'status_active' => 'Activo',
@@ -38,6 +40,11 @@ return [
     'mileage_label' => 'Kilometraje Actual (km)',
     'image_label' => 'URL de Imagen',
     'description_label' => 'Descripción / Observaciones',
+    'category_label' => 'Categoría',
+    'category_placeholder' => 'Selecciona una categoría',
+    'location_label' => 'Sede de Ubicación',
+    'location_placeholder' => 'Selecciona una sede',
+    'image_alt' => 'Imagen del coche',
 
     'plate_placeholder' => 'Ej: ABC-123 o ABC123',
     'color_placeholder' => 'Ej: Azul Metálico',
@@ -54,6 +61,8 @@ return [
     'btn_cancel' => 'Cancelar',
     'btn_deactivate' => 'Desactivar',
     'btn_activate' => 'Activar',
+
+    'price_placeholder' => 'Ej: 80000',
 
     'no_cars_found' => 'No se encontraron coches en el inventario. Haz clic en "+ Registrar Nuevo Coche" para agregar uno.',
     'confirm_status_change' => '¿Confirmas el cambio de estado del coche?',

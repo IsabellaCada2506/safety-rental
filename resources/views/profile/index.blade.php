@@ -1,4 +1,8 @@
-{{-- Author: Isabella Cadavid Posada --}}
+{{--
+    Author: Isabella Cadavid Posada
+    Date: 2026-09-06
+    Description: Customer profile view displaying personal, driving, and emergency contact information.
+--}}
 
 @extends('layouts.app')
 

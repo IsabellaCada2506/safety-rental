@@ -1,4 +1,8 @@
-{{-- Author: Isabella Cadavid Posada --}}
+{{--
+    Author: Isabella Cadavid Posada
+    Date: 2026-09-11
+    Description: Navigation bar for authenticated users and guests in the Safety Rental application.
+--}}
 
 <nav class="navbar navbar-expand-lg safety-navbar">
     <div class="container">
@@ -56,13 +60,34 @@
         </a>
 
         @auth
-            <div class="nav-authenticated">
+            <div class="nav-authenticated d-flex align-items-center gap-3">
                 @if (! auth()->user()->isAdmin())
                     <a
-                        class="btn-pill-ghost"
+                        class="btn-pill-ghost text-decoration-none"
                         href="{{ route('home.index') }}"
                     >
                         {{ __('authentication.home') }}
+                    </a>
+
+                    <a
+                        class="btn-pill-ghost text-decoration-none"
+                        href="{{ route('catalog.index') }}"
+                    >
+                        {{ __('catalog.title') }}
+                    </a>
+
+                    <a
+                        class="btn-pill-ghost text-decoration-none"
+                        href="{{ route('locations.index') }}"
+                    >
+                        {{ __('location.manage_locations') }}
+                    </a>
+
+                    <a
+                        class="btn-pill-ghost text-decoration-none"
+                        href="{{ route('reservations.index') }}"
+                    >
+                        {{ __('general.nav_reservations') }}
                     </a>
 
                     <a
@@ -95,10 +120,45 @@
                             />
                         </svg>
                     </a>
+                @else
+                    <a
+                        class="btn-pill-ghost text-decoration-none"
+                        href="{{ route('admin.dashboard.index') }}"
+                    >
+                        {{ __('authentication.dashboard') }}
+                    </a>
+
+                    <a
+                        class="btn-pill-ghost text-decoration-none"
+                        href="{{ route('admin.car.index') }}"
+                    >
+                        {{ __('car.manage_cars') }}
+                    </a>
+
+                    <a
+                        class="btn-pill-ghost text-decoration-none"
+                        href="{{ route('admin.category.index') }}"
+                    >
+                        {{ __('category.manage_categories') }}
+                    </a>
+
+                    <a
+                        class="btn-pill-ghost text-decoration-none"
+                        href="{{ route('admin.location.index') }}"
+                    >
+                        {{ __('location.manage_locations') }}
+                    </a>
+
+                    <a
+                        class="btn-pill-ghost text-decoration-none"
+                        href="{{ route('admin.reservation.index') }}"
+                    >
+                        {{ __('authentication.reservations') }}
+                    </a>
                 @endif
 
                 <form
-                    class="logout-form"
+                    class="logout-form m-0"
                     method="POST"
                     action="{{ route('auth.logout') }}"
                 >
@@ -119,12 +179,23 @@
                 </a>
 
                 <a
-                    class="btn-pill-solid"
+                    class="btn-pill-solid text-dark"
+                    style="color: #111827 !important;"
                     href="{{ route('register') }}"
                 >
                     {{ __('authentication.create_account') }}
                 </a>
             </div>
         @endauth
+
+        <div class="ms-2 d-flex align-items-center">
+            <a
+                class="btn-lang-toggle"
+                href="{{ route('locale.switch', app()->getLocale() === 'es' ? 'en' : 'es') }}"
+                title="{{ app()->getLocale() === 'es' ? 'Switch to English' : 'Cambiar a Español' }}"
+            >
+                🌐 {{ app()->getLocale() === 'es' ? 'EN' : 'ES' }}
+            </a>
+        </div>
     </div>
 </nav>

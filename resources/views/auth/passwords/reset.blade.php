@@ -1,11 +1,13 @@
-{{-- Author: Isabella Cadavid Posada --}}
+{{--
+    Author: Isabella Cadavid Posada
+    Date: 2026-09-11
+    Description: View for submitting a new password using a reset token.
+--}}
 
 @extends('layouts.app')
 
 @section('content')
     <section class="simple-page">
-        <div class="road-line" aria-hidden="true"></div>
-
         <div class="simple-card">
             <div class="card-header">
                 {{ __('authentication.reset_password') }}

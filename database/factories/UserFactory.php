@@ -1,6 +1,10 @@
 <?php
 
-// Author: Isabella Cadavid Posada
+/**
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-09-06
+ * Description: Factory for generating User model instances for testing and seeding.
+ */
 
 namespace Database\Factories;
 

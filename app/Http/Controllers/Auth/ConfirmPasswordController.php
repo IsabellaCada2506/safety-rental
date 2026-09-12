@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-09-06
+ * Description: Controller for confirming the authenticated user's password before sensitive actions.
+ */
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;

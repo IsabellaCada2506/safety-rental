@@ -1,6 +1,10 @@
 <?php
 
-// Autor: Isabella Cadavid Posada
+/**
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-09-05
+ * Description: Migration to create the sessions table used for authentication.
+ */
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;

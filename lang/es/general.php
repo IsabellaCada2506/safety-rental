@@ -1,6 +1,8 @@
 <?php
 
-// Autor: Isabella Ocampo Sánchez
+/**
+ * Description: General Spanish language strings shared across the Safety Rental application.
+ */
 
 return [
     'app_name' => 'Safety Rental',
@@ -15,6 +17,7 @@ return [
     'cancel_button' => 'Cancelar',
     'edit_button' => 'Editar',
     'delete_button' => 'Eliminar',
+    'close' => 'Cerrar',
     'search_placeholder' => 'Buscar...',
 
     'success_message' => 'Operación completada con éxito.',

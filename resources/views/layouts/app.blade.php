@@ -1,4 +1,8 @@
-{{-- Author: Isabella Cadavid Posada --}}
+{{--
+    Author: Isabella Cadavid Posada
+    Date: 2026-09-11
+    Description: Master application layout providing the base HTML structure, navigation, and footer.
+--}}
 
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -14,7 +18,6 @@
         name="csrf-token"
         content="{{ csrf_token() }}"
     >
-
     <title>
         {{ $viewData['title'] ?? __('authentication.application_name') }}
     </title>
@@ -41,15 +44,24 @@
     >
 
     <link
-        href="{{ asset('css/authentication.css') }}?v=6"
+        href="{{ asset('css/authentication.css') }}?v=7"
         rel="stylesheet"
     >
 
     <link
-        href="{{ asset('css/components/navigation.css') }}?v=6"
+        href="{{ asset('css/components/navigation.css') }}?v=7"
         rel="stylesheet"
     >
 
+    <link
+        href="{{ asset('css/admin.css') }}?v=7"
+        rel="stylesheet"
+    >
+
+    <link
+        href="{{ asset('css/catalog.css') }}?v=2"
+        rel="stylesheet"
+    >
     @stack('styles')
 </head>
 

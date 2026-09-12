@@ -1,6 +1,10 @@
 <?php
 
-// Author: Isabella Cadavid Posada
+/**
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-09-06
+ * Description: Form request for validating the forgot password email submission.
+ */
 
 namespace App\Http\Requests\Auth;
 

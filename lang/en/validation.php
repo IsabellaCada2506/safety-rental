@@ -1,6 +1,10 @@
 <?php
 
-// Author: Isabella Cadavid Posada
+/**
+ * Author: Isabella Cadavid
+ * Date: 06/09/2026
+ * Description: Custom error messages for form validation.
+ */
 
 return [
     'required' => 'The :attribute field is required.',

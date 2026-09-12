@@ -1,6 +1,10 @@
 <?php
 
-// Author: Isabella Cadavid Posada
+/**
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-09-06
+ * Description: Middleware that restricts access to admin-only routes.
+ */
 
 namespace App\Http\Middleware;
 

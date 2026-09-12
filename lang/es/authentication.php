@@ -1,6 +1,10 @@
 <?php
 
-// Autor: Isabella Cadavid Posada
+/**
+ * Author: Isabella Cadavid
+ * Date: 06/09/2026
+ * Description: Spanish language strings for authentication, registration, profile, and home pages.
+ */
 
 return [
     'application_name' => 'Safety Rental',
@@ -72,6 +76,9 @@ return [
     'users_description' => 'Administra las cuentas de clientes y empleados.',
     'coming_soon' => 'Próximamente',
     'profile' => 'Mi perfil',
+
+    'admin_area' => 'Área de administración',
+    'dashboard' => 'Panel de control',
 
     'edit_profile' => 'Editar perfil',
     'profile_updated' => 'Tu perfil fue actualizado correctamente.',

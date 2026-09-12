@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Author: Wendy
- * Date: 09/09/2026
- * Description: Request validation for storing a new car in the inventory.
+ * Author: Wendy Atehortua
+ * Date: 2026-09-11
+ * Description: Request validation for storing a new car in the inventory with branch location.
  */
 
 namespace App\Http\Requests\Admin;
@@ -20,14 +20,23 @@ class StoreCarRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'plate' => ['required', 'string', 'unique:cars,plate'],
+            'plate' => ['required', 'string', 'max:20', 'unique:cars,plate'],
             'color' => ['required', 'string', 'max:50'],
             'soat' => ['required', 'string', 'max:50'],
-            'price' => ['required', 'numeric', 'min:0'],
+            'price' => ['required', 'integer', 'min:50000'],
             'transit_license' => ['required', 'string', 'max:50'],
             'description' => ['nullable', 'string', 'max:1000'],
-            'mileage' => ['required', 'numeric', 'min:0'],
-            'image' => ['nullable', 'string', 'max:255'],
+            'mileage' => ['required', 'integer', 'min:0'],
+            'image' => ['nullable', 'url', 'max:255'],
+            'category_id' => ['required', 'exists:categories,id'],
+            'location_id' => ['required', 'exists:locations,id'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'price.min' => __('car.price_min_error'),
         ];
     }
 }

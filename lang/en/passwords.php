@@ -1,6 +1,10 @@
 <?php
 
-// Author: Isabella Cadavid Posada
+/**
+ * Author: Isabella Cadavid
+ * Date: 06/09/2026
+ * Description: English language strings for password reset functionality.
+ */
 
 return [
     'reset' => 'Your password has been reset.',

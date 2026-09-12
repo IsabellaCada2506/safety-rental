@@ -1,6 +1,10 @@
 <?php
 
-// Author: Isabella Cadavid Posada
+/**
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-09-06
+ * Description: Controller handling user login, authentication, and logout.
+ */
 
 namespace App\Http\Controllers\Auth;
 

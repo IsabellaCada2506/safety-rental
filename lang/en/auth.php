@@ -1,7 +1,5 @@
 <?php
 
-// Autor: Isabella Cadavid Posada
-
 return [
     'failed' => 'The provided credentials do not match our records.',
     'password' => 'The provided password is incorrect.',

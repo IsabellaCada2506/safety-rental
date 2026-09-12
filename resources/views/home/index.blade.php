@@ -1,11 +1,13 @@
-{{-- Author: Isabella Cadavid Posada --}}
+{{--
+    Author: Isabella Cadavid Posada
+    Date: 2026-09-11
+    Description: Customer home dashboard view.
+--}}
 
 @extends('layouts.app')
 
 @section('content')
     <section class="dash-hero dash-hero-customer">
-        <div class="road-line" aria-hidden="true"></div>
-
         <div class="container dash-hero-inner">
             <span class="dash-label">
                 {{ __('authentication.customer_area') }}

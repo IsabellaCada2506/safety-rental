@@ -1,4 +1,8 @@
-{{-- Author: Isabella Cadavid Posada --}}
+{{--
+    Author: Isabella Cadavid Posada
+    Date: 2026-09-06
+    Description: Partial form used to edit the authenticated user's profile information.
+--}}
 
 <div class="profile-edit-sections">
     <section class="profile-edit-card">

@@ -1,11 +1,13 @@
-{{-- Author: Isabella Cadavid Posada --}}
+{{--
+    Author: Isabella Cadavid Posada
+    Date: 2026-09-11
+    Description: Registration form view for new users.
+--}}
 
 @extends('layouts.app')
 
 @section('content')
     <section class="simple-page">
-        <div class="road-line" aria-hidden="true"></div>
-
         <div class="simple-card registration-card">
             <div class="card-header">
                 {{ __('authentication.create_account') }}

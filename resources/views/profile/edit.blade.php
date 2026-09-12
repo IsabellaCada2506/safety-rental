@@ -1,4 +1,8 @@
-{{-- Author: Isabella Cadavid Posada --}}
+{{--
+    Author: Isabella Cadavid Posada
+    Date: 2026-09-06
+    Description: View for editing the authenticated user's profile.
+--}}
 
 @extends('layouts.app')
 

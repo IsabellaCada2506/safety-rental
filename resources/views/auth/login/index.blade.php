@@ -1,4 +1,8 @@
-{{-- Author: Isabella Cadavid Posada --}}
+{{--
+    Author: Isabella Cadavid Posada
+    Date: 2026-09-11
+    Description: Login form view for existing users.
+--}}
 
 @extends('layouts.app')
 
@@ -6,8 +10,6 @@
     <section class="ignition-page">
         <div class="ignition-grid">
             <div class="ignition-hero">
-                <div class="road-line" aria-hidden="true"></div>
-
                 <div class="ignition-hero-content">
                     <span class="logo-badge" aria-hidden="true">
                         <svg
