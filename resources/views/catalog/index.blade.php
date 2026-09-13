@@ -6,6 +6,8 @@
 
 @extends('layouts.app')
 
+@section('title', $viewData['title'])
+
 @section('content')
 <div class="container py-5 catalog-page">
     {{-- Header --}}
@@ -30,6 +32,7 @@
     {{-- Filter and Search Bar --}}
     <div class="card shadow-sm border-0 rounded-4 p-4 mb-4 bg-white">
         <form method="GET" action="{{ route('catalog.index') }}" class="row g-3 align-items-end">
+            @csrf
             {{-- Search input --}}
             <div class="col-12 col-lg-4">
                 <label for="search" class="form-label fw-semibold text-muted small mb-1">{{ __('catalog.search_label') }}</label>

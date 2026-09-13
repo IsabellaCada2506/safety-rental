@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Author: Isabella Cadavid
- * Date: 06/09/2026
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-09-06
  * Description: English language strings for password reset functionality.
  */
 

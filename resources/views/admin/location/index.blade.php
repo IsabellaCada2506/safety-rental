@@ -6,6 +6,8 @@
 
 @extends('layouts.app')
 
+@section('title', $viewData['title'])
+
 @section('content')
 <section class="admin-page">
     <div
@@ -88,10 +90,10 @@
                             <td>{{ $location->getTelephone() }}</td>
                             <td>{{ $location->getCity() }}</td>
                             <td class="text-center">
-                                <span class="admin-index-status-badge">{{ $location->cars_count ?? $location->getCars()->count() }}</span>
+                                <span class="admin-index-status-badge">{{ $location->getCarsCount() }}</span>
                             </td>
                             <td class="text-center">
-                                <span class="admin-index-status-badge">{{ $location->reservations_count ?? $location->getReservations()->count() }}</span>
+                                <span class="admin-index-status-badge">{{ $location->getReservationsCount() }}</span>
                             </td>
                             <td class="text-center">
                                 <a

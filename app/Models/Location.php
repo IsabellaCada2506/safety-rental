@@ -16,16 +16,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * @property int $id
- * @property string $name
- * @property string $address
- * @property string $headquarters
- * @property string $telephone
- * @property string $city
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property Collection<int, Reservation> $reservations
- * @property Collection<int, Car> $cars
+ * LOCATION ATTRIBUTES
+ * $this->attributes['id']           - int         - contains the location primary key (id)
+ * $this->attributes['name']         - string      - contains the branch name
+ * $this->attributes['address']      - string      - contains the branch physical address
+ * $this->attributes['headquarters'] - string      - contains the headquarters identifier
+ * $this->attributes['telephone']    - string      - contains the contact telephone number
+ * $this->attributes['city']         - string      - contains the city where the branch is located
+ * $this->attributes['created_at']   - string|null - contains the creation timestamp
+ * $this->attributes['updated_at']   - string|null - contains the update timestamp
+ *
+ * RELATIONSHIPS
+ * $this->reservations - Collection<int, Reservation> - the reservations associated with this location
+ * $this->cars - Collection<int, Car> - the cars stationed at this location
  */
 class Location extends Model
 {
@@ -34,8 +37,12 @@ class Location extends Model
 
     public $timestamps = true;
 
-    protected $guarded = [
-        'id',
+    protected $fillable = [
+        'name',
+        'address',
+        'headquarters',
+        'telephone',
+        'city',
     ];
 
     protected function casts(): array
@@ -122,7 +129,12 @@ class Location extends Model
 
     public function getReservations(): Collection
     {
-        return $this->reservations;
+        return $this->relationLoaded('reservations') ? $this->getRelation('reservations') : new Collection;
+    }
+
+    public function setReservations(Collection $reservations): void
+    {
+        $this->setRelation('reservations', $reservations);
     }
 
     public function cars(): HasMany
@@ -132,6 +144,21 @@ class Location extends Model
 
     public function getCars(): Collection
     {
-        return $this->cars;
+        return $this->relationLoaded('cars') ? $this->getRelation('cars') : new Collection;
+    }
+
+    public function setCars(Collection $cars): void
+    {
+        $this->setRelation('cars', $cars);
+    }
+
+    public function getCarsCount(): int
+    {
+        return (int) ($this->attributes['cars_count'] ?? 0);
+    }
+
+    public function getReservationsCount(): int
+    {
+        return (int) ($this->attributes['reservations_count'] ?? 0);
     }
 }

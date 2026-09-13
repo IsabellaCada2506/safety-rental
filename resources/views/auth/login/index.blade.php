@@ -6,6 +6,8 @@
 
 @extends('layouts.app')
 
+@section('title', $viewData['title'])
+
 @section('content')
     <section class="ignition-page">
         <div class="ignition-grid">

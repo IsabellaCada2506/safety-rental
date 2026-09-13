@@ -9,14 +9,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateReservationRequest;
 use App\Http\Requests\StoreReservationRequest;
 use App\Interfaces\CarServiceInterface;
+use App\Interfaces\LocationServiceInterface;
 use App\Interfaces\ReservationServiceInterface;
-use App\Models\Location;
 use App\Models\User;
 use DomainException;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ReservationController extends Controller
@@ -25,12 +25,16 @@ class ReservationController extends Controller
 
     private readonly CarServiceInterface $carService;
 
+    private readonly LocationServiceInterface $locationService;
+
     public function __construct(
         ReservationServiceInterface $reservationService,
-        CarServiceInterface $carService
+        CarServiceInterface $carService,
+        LocationServiceInterface $locationService
     ) {
         $this->reservationService = $reservationService;
         $this->carService = $carService;
+        $this->locationService = $locationService;
     }
 
     public function index(): View
@@ -39,28 +43,29 @@ class ReservationController extends Controller
         $viewData['title'] = __('reservation.title_my_reservations');
         $viewData['reservations'] = $this->reservationService->getByUserId((int) auth()->id());
 
-        return view('reservations.index')->with('viewData', $viewData);
+        return view('reservation.index')->with('viewData', $viewData);
     }
 
-    public function create(Request $request): View
+    public function create(CreateReservationRequest $request): View
     {
-        $carId = (int) $request->query('car_id');
+        $validatedData = $request->validated();
+        $carId = (int) $validatedData['car_id'];
         $car = $this->carService->findActiveWithCategoryOrFail($carId);
-        $locations = Location::all();
+        $locations = $this->locationService->getAll();
 
         $viewData = [];
         $viewData['title'] = __('reservation.title_create');
         $viewData['car'] = $car;
         $viewData['locations'] = $locations;
 
-        return view('reservations.create')->with('viewData', $viewData);
+        return view('reservation.create')->with('viewData', $viewData);
     }
 
     public function store(StoreReservationRequest $request): RedirectResponse
     {
         $validatedData = $request->validated();
         $car = $this->carService->findOrFail((int) $validatedData['car_id']);
-        $location = Location::findOrFail((int) $validatedData['location_id']);
+        $location = $this->locationService->findOrFail((int) $validatedData['location_id']);
 
         /** @var User $user */
         $user = $request->user();
@@ -93,7 +98,7 @@ class ReservationController extends Controller
         $viewData['title'] = __('reservation.title_show', ['code' => $reservation->getCode()]);
         $viewData['reservation'] = $reservation;
 
-        return view('reservations.show')->with('viewData', $viewData);
+        return view('reservation.show')->with('viewData', $viewData);
     }
 
     public function cancel(int $id): RedirectResponse

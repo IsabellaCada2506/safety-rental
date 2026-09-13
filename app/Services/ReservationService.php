@@ -2,7 +2,8 @@
 
 /**
  * Author: Isabella Ocampo
- * Date: 2026-09-11
+ * Author: Wendy
+ * Date: 2026-09-13
  * Description: Business logic service orchestrating reservations, overlap verification,
  *              pricing calculation, and lifecycle state transitions.
  */
@@ -14,6 +15,7 @@ use App\Interfaces\ReservationPricingInterface;
 use App\Interfaces\ReservationServiceInterface;
 use App\Models\Car;
 use App\Models\Location;
+use App\Models\Payment;
 use App\Models\Reservation;
 use App\Models\User;
 use Carbon\Carbon;
@@ -147,7 +149,7 @@ class ReservationService implements ReservationServiceInterface
 
     public function cancelReservation(Reservation $reservation): Reservation
     {
-        if (! $reservation->isCancellable()) {
+        if (! $this->isCancellable($reservation)) {
             throw new DomainException(__('reservation.cancellation_not_allowed'));
         }
 
@@ -155,5 +157,74 @@ class ReservationService implements ReservationServiceInterface
         $reservation->save();
 
         return $reservation;
+    }
+
+    public function isPending(Reservation $reservation): bool
+    {
+        return $reservation->getState() === Reservation::STATE_PENDING;
+    }
+
+    public function isConfirmed(Reservation $reservation): bool
+    {
+        return $reservation->getState() === Reservation::STATE_CONFIRMED;
+    }
+
+    public function isCancelled(Reservation $reservation): bool
+    {
+        return $reservation->getState() === Reservation::STATE_CANCELLED;
+    }
+
+    public function isCompleted(Reservation $reservation): bool
+    {
+        return $reservation->getState() === Reservation::STATE_COMPLETED;
+    }
+
+    public function isCancellable(Reservation $reservation): bool
+    {
+        return in_array($reservation->getState(), [Reservation::STATE_PENDING, Reservation::STATE_CONFIRMED], true);
+    }
+
+    public function getStateBadgeClass(Reservation $reservation): string
+    {
+        return match ($reservation->getState()) {
+            Reservation::STATE_CONFIRMED => 'bg-success text-white',
+            Reservation::STATE_CANCELLED => 'bg-danger text-white',
+            Reservation::STATE_COMPLETED => 'bg-secondary text-white',
+            default => 'bg-warning text-dark',
+        };
+    }
+
+    public function getDays(Reservation $reservation): int
+    {
+        $start = $reservation->getStartDate();
+        $end = $reservation->getEndDate();
+
+        if (! $start || ! $end) {
+            return 1;
+        }
+
+        return max(1, (int) $start->diffInDays($end));
+    }
+
+    public function getTotalPrice(Reservation $reservation): int
+    {
+        $car = $reservation->getCar();
+        $carPrice = $car ? $car->getPrice() : 0;
+
+        return $this->getDays($reservation) * $carPrice;
+    }
+
+    public function hasSuccessfulPayment(Reservation $reservation): bool
+    {
+        $payment = $reservation->getPayment();
+
+        return $payment !== null && $payment->getStatus() === Payment::STATUS_COMPLETED;
+    }
+
+    public function isPayable(Reservation $reservation): bool
+    {
+        return ! $this->isCancelled($reservation)
+            && ! $this->isCompleted($reservation)
+            && ! $this->hasSuccessfulPayment($reservation);
     }
 }

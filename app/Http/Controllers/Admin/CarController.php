@@ -2,7 +2,7 @@
 
 /**
  * Author: Wendy Atehortua
- * Date: 2026-09-11
+ * Date: 2026-09-13
  * Description: Admin controller for managing cars in the inventory with category and branch location associations.
  */
 
@@ -57,7 +57,6 @@ class CarController extends Controller
     public function store(StoreCarRequest $request): RedirectResponse
     {
         $validatedData = $request->validated();
-
         $this->carService->createFromValidated($validatedData);
 
         return redirect()->route('admin.car.index')->with('success', __('car.created_success'));
@@ -92,7 +91,7 @@ class CarController extends Controller
 
         $updatedCar = $this->carService->toggleStatus($car);
 
-        $successMessage = $updatedCar->isActive()
+        $successMessage = $this->carService->isActive($updatedCar)
             ? __('car.activated_success')
             : __('car.deactivated_success');
 

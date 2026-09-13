@@ -2,7 +2,9 @@
 
 /**
  * Author: Isabella Ocampo
- * Date: 2026-09-11
+ * Author: Alejandro Correa Marin
+ * Author: Wendy Atehortua
+ * Date: 2026-09-13
  * Description: Payment model representing rental transaction records.
  */
 
@@ -12,19 +14,23 @@ use Carbon\Carbon;
 use Database\Factories\PaymentFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @property int $id
- * @property int $code
- * @property float $amount
- * @property string $method
- * @property int $transaction_code
- * @property string $status
- * @property Carbon|null $date
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property Reservation|null $reservation
+ * PAYMENT ATTRIBUTES
+ * $this->attributes['id']                - int           - contains the payment primary key
+ * $this->attributes['reservation_id']    - int|null      - contains the related reservation id
+ * $this->attributes['code']              - int           - contains the unique payment code
+ * $this->attributes['amount']            - float         - contains the approved payment amount
+ * $this->attributes['method']            - string        - contains the payment method
+ * $this->attributes['transaction_code']  - int           - contains the transaction reference
+ * $this->attributes['status']            - string        - contains the payment status
+ * $this->attributes['date']              - string|null   - contains the payment date
+ * $this->attributes['created_at']        - string|null   - contains the creation timestamp
+ * $this->attributes['updated_at']        - string|null   - contains the update timestamp
+ *
+ * RELATIONSHIPS
+ * $this->reservation - Reservation|null - the reservation linked to this payment
  */
 class Payment extends Model
 {
@@ -37,10 +43,30 @@ class Payment extends Model
 
     public const STATUS_REFUNDED = 'refunded';
 
+    public const STATUS_FAILED = 'failed';
+
+    public const METHOD_CREDIT_CARD = 'Credit Card';
+
+    public const METHOD_DEBIT_CARD = 'Debit Card';
+
+    public const METHOD_BANK_TRANSFER = 'Bank Transfer';
+
+    public const METHOD_PSE_DEBIT = 'PSE Debit';
+
+    public const SIMULATED_RESULT_SUCCESS = 'success';
+
+    public const SIMULATED_RESULT_FAILURE = 'failure';
+
     public $timestamps = true;
 
-    protected $guarded = [
-        'id',
+    protected $fillable = [
+        'reservation_id',
+        'code',
+        'amount',
+        'method',
+        'transaction_code',
+        'status',
+        'date',
     ];
 
     protected function casts(): array
@@ -56,6 +82,18 @@ class Payment extends Model
     public function getId(): int
     {
         return (int) $this->attributes['id'];
+    }
+
+    public function getReservationId(): ?int
+    {
+        return isset($this->attributes['reservation_id'])
+            ? (int) $this->attributes['reservation_id']
+            : null;
+    }
+
+    public function setReservationId(?int $reservationId): void
+    {
+        $this->attributes['reservation_id'] = $reservationId;
     }
 
     public function getCode(): int
@@ -134,13 +172,18 @@ class Payment extends Model
             : null;
     }
 
-    public function reservation(): HasOne
+    public function reservation(): BelongsTo
     {
-        return $this->hasOne(Reservation::class);
+        return $this->belongsTo(Reservation::class);
     }
 
     public function getReservation(): ?Reservation
     {
-        return $this->reservation;
+        return $this->relationLoaded('reservation') ? $this->getRelation('reservation') : null;
+    }
+
+    public function setReservation(?Reservation $reservation): void
+    {
+        $this->setRelation('reservation', $reservation);
     }
 }

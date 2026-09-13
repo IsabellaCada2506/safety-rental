@@ -6,6 +6,8 @@
 
 @extends('layouts.app')
 
+@section('title', $viewData['title'])
+
 @section('content')
 <div class="container py-5 catalog-page">
     <div class="row mb-5 text-center">
@@ -28,7 +30,7 @@
                                 <i class="bi bi-building me-1"></i>{{ $location->getCity() }}
                             </span>
                             <span class="badge bg-light text-muted border rounded-pill px-3 py-1 small">
-                                {{ $location->cars_count ?? $location->getCars()->count() }} {{ __('location.cars_count') }}
+                                {{ $location->getCarsCount() }} {{ __('location.cars_count') }}
                             </span>
                         </div>
 

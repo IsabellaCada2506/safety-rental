@@ -1,9 +1,23 @@
 {{--
     Author: Isabella Cadavid Posada
-    Date: 2026-09-11
+    Author: Alejandro Correa Marin
+    Date: 2026-09-12
     Description: Master application layout providing the base HTML structure, navigation, and footer.
 --}}
 
+@if (isset($viewData) && ! empty($viewData['isPrintableDocument']))
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <title>{{ $viewData['title'] ?? __('authentication.application_name') }}</title>
+    @stack('styles')
+</head>
+<body>
+    @yield('content')
+</body>
+</html>
+@else
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -140,3 +154,4 @@
     @stack('scripts')
 </body>
 </html>
+@endif

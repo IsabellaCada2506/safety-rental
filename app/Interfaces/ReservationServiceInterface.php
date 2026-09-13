@@ -2,7 +2,8 @@
 
 /**
  * Author: Isabella Ocampo
- * Date: 2026-09-11
+ * Author: Wendy
+ * Date: 2026-09-13
  * Description: Contract defining business operations for reservation lifecycle,
  *              availability verification, pricing calculation, and customer bookings.
  */
@@ -56,4 +57,24 @@ interface ReservationServiceInterface
     public function confirmReservation(Reservation $reservation): Reservation;
 
     public function cancelReservation(Reservation $reservation): Reservation;
+
+    public function isPending(Reservation $reservation): bool;
+
+    public function isConfirmed(Reservation $reservation): bool;
+
+    public function isCancelled(Reservation $reservation): bool;
+
+    public function isCompleted(Reservation $reservation): bool;
+
+    public function isCancellable(Reservation $reservation): bool;
+
+    public function getStateBadgeClass(Reservation $reservation): string;
+
+    public function getDays(Reservation $reservation): int;
+
+    public function getTotalPrice(Reservation $reservation): int;
+
+    public function hasSuccessfulPayment(Reservation $reservation): bool;
+
+    public function isPayable(Reservation $reservation): bool;
 }

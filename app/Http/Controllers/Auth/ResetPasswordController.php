@@ -10,23 +10,24 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ResetPasswordRequest;
+use App\Http\Requests\Auth\ShowResetPasswordRequest;
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 
 class ResetPasswordController extends Controller
 {
-    public function index(Request $request, string $token): View
+    public function index(ShowResetPasswordRequest $request, string $token): View
     {
-        $viewData = [
-            'title' => __('authentication.reset_password'),
-            'token' => $token,
-            'email' => (string) $request->query('email', ''),
-        ];
+        $validatedData = $request->validated();
+
+        $viewData = [];
+        $viewData['title'] = __('authentication.reset_password');
+        $viewData['token'] = $token;
+        $viewData['email'] = (string) ($validatedData['email'] ?? '');
 
         return view('auth.passwords.reset')
             ->with('viewData', $viewData);
@@ -35,6 +36,8 @@ class ResetPasswordController extends Controller
     public function update(
         ResetPasswordRequest $request
     ): RedirectResponse {
+        $request->validated();
+
         $status = Password::reset(
             [
                 'email' => $request->getEmail(),

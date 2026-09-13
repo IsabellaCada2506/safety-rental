@@ -6,6 +6,8 @@
 
 @extends('layouts.app')
 
+@section('title', $viewData['title'])
+
 @section('content')
     <section class="dash-hero dash-hero-customer">
         <div class="container dash-hero-inner">

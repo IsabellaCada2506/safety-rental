@@ -6,6 +6,10 @@
 
 @extends('layouts.app')
 
+@inject('reservationService', 'App\Interfaces\ReservationServiceInterface')
+
+@section('title', $viewData['title'])
+
 @section('content')
 <section class="admin-page">
     <div class="admin-page-shape admin-page-shape-left" aria-hidden="true"></div>
@@ -116,19 +120,19 @@
                                 </td>
                                 <td>
                                     {{ $reservation->getStartDate()?->format('d/m/Y') }} - {{ $reservation->getEndDate()?->format('d/m/Y') }}
-                                    <div class="text-muted small">({{ $reservation->getDays() }} {{ __('reservation.days_unit') }})</div>
+                                    <div class="text-muted small">({{ $reservationService->getDays($reservation) }} {{ __('reservation.days_unit') }})</div>
                                 </td>
                                 <td>
-                                    <strong>${{ number_format($reservation->getTotalPrice(), 0, ',', '.') }}</strong>
+                                    <strong>${{ number_format($reservationService->getTotalPrice($reservation), 0, ',', '.') }}</strong>
                                 </td>
                                 <td>
-                                    <span class="badge {{ $reservation->getStateBadgeClass() }} px-2 py-1 rounded-pill">
+                                    <span class="badge {{ $reservationService->getStateBadgeClass($reservation) }} px-2 py-1 rounded-pill">
                                         {{ __('reservation.state_' . $reservation->getState()) }}
                                     </span>
                                 </td>
                                 <td class="text-end">
                                     <div class="d-inline-flex gap-1 align-items-center">
-                                        @if ($reservation->isPending())
+                                        @if ($reservationService->isPending($reservation))
                                             <form action="{{ route('admin.reservation.confirm', ['id' => $reservation->getId()]) }}" method="POST" class="m-0">
                                                 @csrf
                                                 @method('PATCH')
@@ -138,7 +142,7 @@
                                             </form>
                                         @endif
 
-                                        @if ($reservation->isCancellable())
+                                        @if ($reservationService->isCancellable($reservation))
                                             <form
                                                 action="{{ route('admin.reservation.cancel', ['id' => $reservation->getId()]) }}"
                                                 method="POST"

@@ -6,6 +6,8 @@
 
 @extends('layouts.app')
 
+@section('title', $viewData['title'])
+
 @push('styles')
     <link
         href="{{ asset('css/pages/profile-edit.css') }}?v=4"

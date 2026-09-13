@@ -2,7 +2,7 @@
 
 /**
  * Author: Wendy Atehortua
- * Date: 2026-09-11
+ * Date: 2026-09-13
  * Description: Contract defining the business operations available for car inventory management.
  */
 
@@ -32,4 +32,6 @@ interface CarServiceInterface
     public function updateFromValidated(Car $car, array $validatedData): Car;
 
     public function toggleStatus(Car $car): Car;
+
+    public function isActive(Car $car): bool;
 }

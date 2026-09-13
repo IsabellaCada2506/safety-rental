@@ -2,7 +2,7 @@
 
 /**
  * Author: Wendy Atehortua
- * Date: 2026-09-11
+ * Date: 2026-09-13
  * Description: Business logic for car inventory management and catalog search/filter.
  */
 
@@ -17,24 +17,29 @@ class CarService implements CarServiceInterface
 {
     public function getAll(): Collection
     {
-        return Car::query()->with(['category', 'location'])->get();
+        return Car::with(['category', 'location'])
+            ->orderBy('id', 'desc')
+            ->get();
     }
 
     public function findOrFail(int $id): Car
     {
-        return Car::findOrFail($id);
+        return Car::with(['category', 'location'])->findOrFail($id);
     }
 
     public function getActiveCarsWithCategory(): Collection
     {
-        return Car::with(['category', 'location'])
+        return Car::query()
+            ->with(['category', 'location'])
             ->where('status', Car::STATUS_ACTIVE)
+            ->orderBy('id', 'desc')
             ->get();
     }
 
     public function findActiveWithCategoryOrFail(int $id): Car
     {
-        return Car::with(['category', 'location'])
+        return Car::query()
+            ->with(['category', 'location'])
             ->where('status', Car::STATUS_ACTIVE)
             ->findOrFail($id);
     }
@@ -50,15 +55,18 @@ class CarService implements CarServiceInterface
             ->where('status', Car::STATUS_ACTIVE);
 
         if (! empty($filters['search'])) {
-            $term = '%'.trim((string) $filters['search']).'%';
-            $query->where(function ($q) use ($term): void {
-                $q->where('plate', 'like', $term)
-                    ->orWhere('description', 'like', $term)
-                    ->orWhere('color', 'like', $term)
-                    ->orWhereHas('category', function ($cq) use ($term): void {
-                        $cq->where('brand', 'like', $term)
-                            ->orWhere('model', 'like', $term)
-                            ->orWhere('type', 'like', $term);
+            $searchTerm = '%'.strtolower((string) $filters['search']).'%';
+            $query->where(function ($subQuery) use ($searchTerm): void {
+                $subQuery->whereRaw('LOWER(plate) LIKE ?', [$searchTerm])
+                    ->orWhereRaw('LOWER(color) LIKE ?', [$searchTerm])
+                    ->orWhereHas('category', function ($categoryQuery) use ($searchTerm): void {
+                        $categoryQuery->whereRaw('LOWER(brand) LIKE ?', [$searchTerm])
+                            ->orWhereRaw('LOWER(model) LIKE ?', [$searchTerm])
+                            ->orWhereRaw('LOWER(type) LIKE ?', [$searchTerm]);
+                    })
+                    ->orWhereHas('location', function ($locationQuery) use ($searchTerm): void {
+                        $locationQuery->whereRaw('LOWER(name) LIKE ?', [$searchTerm])
+                            ->orWhereRaw('LOWER(city) LIKE ?', [$searchTerm]);
                     });
             });
         }
@@ -75,24 +83,17 @@ class CarService implements CarServiceInterface
             $startDate = (string) $filters['start_date'];
             $endDate = (string) $filters['end_date'];
 
-            $query->whereDoesntHave('reservations', function ($rq) use ($startDate, $endDate): void {
-                $rq->whereIn('state', [Reservation::STATE_PENDING, Reservation::STATE_CONFIRMED])
-                    ->where(function ($sub) use ($startDate, $endDate): void {
-                        $sub->where('start_date', '<=', $endDate)
+            $query->whereDoesntHave('reservations', function ($reservationQuery) use ($startDate, $endDate): void {
+                $reservationQuery
+                    ->whereIn('state', [Reservation::STATE_PENDING, Reservation::STATE_CONFIRMED])
+                    ->where(function ($subQuery) use ($startDate, $endDate): void {
+                        $subQuery->where('start_date', '<=', $endDate)
                             ->where('end_date', '>=', $startDate);
                     });
             });
-        } elseif (! empty($filters['start_date'])) {
-            $startDate = (string) $filters['start_date'];
-
-            $query->whereDoesntHave('reservations', function ($rq) use ($startDate): void {
-                $rq->whereIn('state', [Reservation::STATE_PENDING, Reservation::STATE_CONFIRMED])
-                    ->where('start_date', '<=', $startDate)
-                    ->where('end_date', '>=', $startDate);
-            });
         }
 
-        return $query->orderBy('price', 'asc')->get();
+        return $query->orderBy('id', 'desc')->get();
     }
 
     public function createFromValidated(array $validatedData): Car
@@ -100,8 +101,12 @@ class CarService implements CarServiceInterface
         $car = new Car;
         $car->setPlate((string) $validatedData['plate']);
         $car->setColor((string) $validatedData['color']);
-        $car->setSoat((string) $validatedData['soat']);
-        $car->setTransitLicense((string) $validatedData['transit_license']);
+        if (isset($validatedData['soat'])) {
+            $car->setSoat((string) $validatedData['soat']);
+        }
+        if (isset($validatedData['transit_license'])) {
+            $car->setTransitLicense((string) $validatedData['transit_license']);
+        }
         $car->setPrice((int) $validatedData['price']);
         $car->setMileage((int) $validatedData['mileage']);
         $car->setImage($validatedData['image'] ?? null);
@@ -120,8 +125,12 @@ class CarService implements CarServiceInterface
     {
         $car->setPlate((string) $validatedData['plate']);
         $car->setColor((string) $validatedData['color']);
-        $car->setSoat((string) $validatedData['soat']);
-        $car->setTransitLicense((string) $validatedData['transit_license']);
+        if (isset($validatedData['soat'])) {
+            $car->setSoat((string) $validatedData['soat']);
+        }
+        if (isset($validatedData['transit_license'])) {
+            $car->setTransitLicense((string) $validatedData['transit_license']);
+        }
         $car->setPrice((int) $validatedData['price']);
         $car->setMileage((int) $validatedData['mileage']);
         $car->setImage($validatedData['image'] ?? null);
@@ -138,10 +147,15 @@ class CarService implements CarServiceInterface
     public function toggleStatus(Car $car): Car
     {
         $car->setStatus(
-            $car->isActive() ? Car::STATUS_DEACTIVATED : Car::STATUS_ACTIVE
+            $this->isActive($car) ? Car::STATUS_DEACTIVATED : Car::STATUS_ACTIVE
         );
         $car->save();
 
         return $car;
+    }
+
+    public function isActive(Car $car): bool
+    {
+        return $car->getStatus() === Car::STATUS_ACTIVE;
     }
 }

@@ -9,10 +9,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\FilterReservationRequest;
 use App\Interfaces\ReservationServiceInterface;
 use DomainException;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ReservationController extends Controller
@@ -24,16 +24,17 @@ class ReservationController extends Controller
         $this->reservationService = $reservationService;
     }
 
-    public function index(Request $request): View
+    public function index(FilterReservationRequest $request): View
     {
-        $stateFilter = $request->query('state');
+        $validatedData = $request->validated();
+        $stateFilter = $validatedData['state'] ?? null;
 
         $viewData = [];
         $viewData['title'] = __('reservation.admin_title_index');
         $viewData['reservations'] = $this->reservationService->getFiltered($stateFilter);
         $viewData['currentState'] = $stateFilter;
 
-        return view('admin.reservations.index')->with('viewData', $viewData);
+        return view('admin.reservation.index')->with('viewData', $viewData);
     }
 
     public function show(int $id): View
@@ -44,7 +45,7 @@ class ReservationController extends Controller
         $viewData['title'] = __('reservation.admin_title_show', ['code' => $reservation->getCode()]);
         $viewData['reservation'] = $reservation;
 
-        return view('admin.reservations.show')->with('viewData', $viewData);
+        return view('admin.reservation.show')->with('viewData', $viewData);
     }
 
     public function confirm(int $id): RedirectResponse

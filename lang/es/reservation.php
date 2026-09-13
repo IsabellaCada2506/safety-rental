@@ -1,7 +1,9 @@
 <?php
 
 /**
- * Spanish localization strings for the Reservations module.
+ * Author: Isabella Ocampo
+ * Date: 2026-09-11
+ * Description: Spanish localization strings for the Reservations module.
  */
 
 return [

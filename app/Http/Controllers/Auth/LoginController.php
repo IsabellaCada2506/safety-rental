@@ -2,7 +2,8 @@
 
 /**
  * Author: Isabella Cadavid Posada
- * Date: 2026-09-06
+ * Author: Wendy Atehortua
+ * Date: 2026-09-13
  * Description: Controller handling user login, authentication, and logout.
  */
 
@@ -10,6 +11,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Interfaces\UserServiceInterface;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -18,9 +20,16 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+    public function __construct(
+        private readonly UserServiceInterface $userService
+    ) {}
+
     public function index(): View
     {
-        return view('auth.login.index');
+        $viewData = [];
+        $viewData['title'] = __('authentication.login');
+
+        return view('auth.login.index')->with('viewData', $viewData);
     }
 
     public function authenticate(
@@ -31,7 +40,7 @@ class LoginController extends Controller
 
         $user = $request->user();
 
-        if ($user instanceof User && $user->isAdmin()) {
+        if ($user instanceof User && $this->userService->isAdmin($user)) {
             return redirect()->route('admin.dashboard.index');
         }
 

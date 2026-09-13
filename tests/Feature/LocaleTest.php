@@ -14,7 +14,7 @@ class LocaleTest extends TestCase
 {
     public function test_user_can_switch_locale_to_spanish(): void
     {
-        $response = $this->get(route('locale.switch', 'es'));
+        $response = $this->post(route('locale.switch', 'es'));
 
         $response->assertSessionHas('locale', 'es');
         $response->assertRedirect();
@@ -22,7 +22,7 @@ class LocaleTest extends TestCase
 
     public function test_user_can_switch_locale_to_english(): void
     {
-        $response = $this->get(route('locale.switch', 'en'));
+        $response = $this->post(route('locale.switch', 'en'));
 
         $response->assertSessionHas('locale', 'en');
         $response->assertRedirect();

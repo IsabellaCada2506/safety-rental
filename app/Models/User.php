@@ -2,7 +2,9 @@
 
 /**
  * Author: Isabella Cadavid Posada
- * Date: 2026-09-11
+ * Author: Alejandro Correa Marin
+ * Author: Wendy Atehortua
+ * Date: 2026-09-13
  * Description: User model representing registered application users (customers and admins).
  */
 
@@ -49,8 +51,21 @@ class User extends Authenticatable
 
     public $timestamps = true;
 
-    protected $guarded = [
-        'id',
+    protected $fillable = [
+        'role',
+        'name',
+        'last_name',
+        'birth_date',
+        'address',
+        'license_number',
+        'emergency_contact',
+        'identification_number',
+        'emergency_contact_name',
+        'emergency_contact_last_name',
+        'eps',
+        'email',
+        'email_verified_at',
+        'password',
     ];
 
     protected $hidden = [
@@ -246,16 +261,6 @@ class User extends Authenticatable
             : null;
     }
 
-    public function isAdmin(): bool
-    {
-        return $this->getRole() === self::ROLE_ADMIN;
-    }
-
-    public function calculateAge(): ?int
-    {
-        return $this->getBirthDate()?->age;
-    }
-
     public function reservations(): HasMany
     {
         return $this->hasMany(Reservation::class);
@@ -263,6 +268,16 @@ class User extends Authenticatable
 
     public function getReservations(): Collection
     {
-        return $this->reservations;
+        return $this->relationLoaded('reservations') ? $this->getRelation('reservations') : new Collection;
+    }
+
+    public function setReservations(Collection $reservations): void
+    {
+        $this->setRelation('reservations', $reservations);
+    }
+
+    public function getReservationsCount(): int
+    {
+        return (int) ($this->attributes['reservations_count'] ?? 0);
     }
 }
