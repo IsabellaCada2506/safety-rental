@@ -6,6 +6,8 @@
 
 @extends('layouts.app')
 
+@section('title', $viewData['title'])
+
 @section('content')
 <div class="container py-5 catalog-page">
     <div class="row g-4">

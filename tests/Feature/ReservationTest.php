@@ -165,6 +165,7 @@ class ReservationTest extends TestCase
         $res->setEndDate($end);
         $res->setUserId($this->customer->getId());
         $res->setCarId($this->car->getId());
+        $res->setCar($this->car);
         $res->setLocationId($this->location->getId());
         $res->save();
 

@@ -7,6 +7,8 @@
 
 @extends('layouts.app')
 
+@section('title', $viewData['title'])
+
 @section('content')
 <section class="admin-page">
     <div class="admin-page-shape admin-page-shape-left" aria-hidden="true"></div>

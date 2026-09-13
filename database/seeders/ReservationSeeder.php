@@ -21,8 +21,8 @@ class ReservationSeeder extends Seeder
 {
     public function run(): void
     {
-        $cars = Car::all();
-        $locations = Location::all();
+        $cars = Car::query()->orderBy('id')->get();
+        $locations = Location::query()->orderBy('id')->get();
 
         if ($cars->isEmpty() || $locations->isEmpty()) {
             return;

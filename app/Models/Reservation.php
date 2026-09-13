@@ -64,10 +64,6 @@ class Reservation extends Model
         'payment_id',
     ];
 
-    protected $guarded = [
-        'id',
-    ];
-
     protected function casts(): array
     {
         return [
@@ -249,7 +245,7 @@ class Reservation extends Model
 
     public function getUser(): ?User
     {
-        return $this->user;
+        return $this->relationLoaded('user') ? $this->getRelation('user') : null;
     }
 
     public function setUser(?User $user): void
@@ -264,7 +260,7 @@ class Reservation extends Model
 
     public function getCar(): ?Car
     {
-        return $this->car;
+        return $this->relationLoaded('car') ? $this->getRelation('car') : null;
     }
 
     public function setCar(?Car $car): void
@@ -279,7 +275,7 @@ class Reservation extends Model
 
     public function getLocation(): ?Location
     {
-        return $this->location;
+        return $this->relationLoaded('location') ? $this->getRelation('location') : null;
     }
 
     public function setLocation(?Location $location): void
@@ -308,7 +304,7 @@ class Reservation extends Model
 
     public function getPayment(): ?Payment
     {
-        return $this->payment;
+        return $this->relationLoaded('payment') ? $this->getRelation('payment') : null;
     }
 
     public function setPayment(?Payment $payment): void
@@ -323,7 +319,7 @@ class Reservation extends Model
 
     public function getPayments(): Collection
     {
-        return $this->payments;
+        return $this->relationLoaded('payments') ? $this->getRelation('payments') : new Collection;
     }
 
     public function setPayments(Collection $payments): void

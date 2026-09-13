@@ -170,8 +170,7 @@ class CarSeeder extends Seeder
                 ->where('name', $carData['location_name'])
                 ->first();
 
-            $car = new Car;
-            $car->setPlate($carData['plate']);
+            $car = Car::firstOrNew(['plate' => $carData['plate']]);
             $car->setColor($carData['color']);
             $car->setSoat($carData['soat']);
             $car->setTransitLicense($carData['transit_license']);

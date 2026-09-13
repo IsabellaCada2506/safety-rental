@@ -10,7 +10,9 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Database\Factories\CarFactory;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -57,14 +59,27 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Car extends Model
 {
+    /** @use HasFactory<CarFactory> */
+    use HasFactory;
+
     public const STATUS_ACTIVE = 'Active';
 
     public const STATUS_DEACTIVATED = 'Deactivated';
 
     public $timestamps = true;
 
-    protected $guarded = [
-        'id',
+    protected $fillable = [
+        'plate',
+        'color',
+        'soat',
+        'price',
+        'transit_license',
+        'description',
+        'mileage',
+        'image',
+        'status',
+        'category_id',
+        'location_id',
     ];
 
     protected function casts(): array
@@ -206,7 +221,7 @@ class Car extends Model
 
     public function getCategory(): ?Category
     {
-        return $this->relationLoaded('category') ? $this->getRelation('category') : $this->category;
+        return $this->relationLoaded('category') ? $this->getRelation('category') : null;
     }
 
     public function setCategory(?Category $category): void
@@ -231,7 +246,7 @@ class Car extends Model
 
     public function getLocation(): ?Location
     {
-        return $this->relationLoaded('location') ? $this->getRelation('location') : $this->location;
+        return $this->relationLoaded('location') ? $this->getRelation('location') : null;
     }
 
     public function setLocation(?Location $location): void
@@ -246,7 +261,7 @@ class Car extends Model
 
     public function getReservations(): Collection
     {
-        return $this->reservations;
+        return $this->relationLoaded('reservations') ? $this->getRelation('reservations') : new Collection;
     }
 
     public function setReservations(Collection $reservations): void

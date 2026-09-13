@@ -112,7 +112,7 @@ $locationPath = $basePath.'/locations';
 $locationShowPath = $locationPath.'/{id}';
 
 Route::get($welcomePath, [WelcomeController::class, 'index'])->name('welcome.index');
-Route::get($localePath, [LocaleController::class, 'switch'])->name('locale.switch');
+Route::match(['get', 'post'], $localePath, [LocaleController::class, 'switch'])->name('locale.switch');
 
 Route::get($loginPath, [LoginController::class, 'index'])->middleware('guest')->name('login');
 Route::post($loginPath, [LoginController::class, 'authenticate'])->middleware('guest')->name('auth.login.authenticate');

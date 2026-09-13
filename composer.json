@@ -48,6 +48,14 @@
             "@php artisan config:clear --ansi @no_additional_args",
             "@php artisan test"
         ],
+        "pint": [
+            "vendor/bin/pint"
+        ],
+        "verify": [
+            "vendor/bin/pint --test",
+            "@php artisan test",
+            "@php artisan migrate:fresh --seed"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

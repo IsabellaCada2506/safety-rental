@@ -106,7 +106,7 @@ class PaymentTest extends TestCase
             'simulated_result' => Payment::SIMULATED_RESULT_SUCCESS,
         ]);
 
-        $payment = Payment::query()->where('reservation_id', $reservation->getId())->first();
+        $payment = Payment::query()->with('reservation')->where('reservation_id', $reservation->getId())->first();
 
         $this->assertNotNull($payment);
         $this->assertSame($reservation->getId(), $payment->getReservation()?->getId());

@@ -68,10 +68,6 @@ class Payment extends Model
         'date',
     ];
 
-    protected $guarded = [
-        'id',
-    ];
-
     protected function casts(): array
     {
         return [
@@ -236,7 +232,7 @@ class Payment extends Model
 
     public function getReservation(): ?Reservation
     {
-        return $this->reservation;
+        return $this->relationLoaded('reservation') ? $this->getRelation('reservation') : null;
     }
 
     public function setReservation(?Reservation $reservation): void

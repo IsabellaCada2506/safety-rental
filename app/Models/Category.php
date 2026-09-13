@@ -31,8 +31,12 @@ class Category extends Model
 {
     public $timestamps = true;
 
-    protected $guarded = [
-        'id',
+    protected $fillable = [
+        'model',
+        'brand',
+        'type',
+        'passenger_capacity',
+        'luggage_capacity',
     ];
 
     protected function casts(): array
@@ -119,7 +123,7 @@ class Category extends Model
 
     public function getCars(): Collection
     {
-        return $this->getRelation('cars');
+        return $this->relationLoaded('cars') ? $this->getRelation('cars') : new Collection;
     }
 
     public function setCars(Collection $cars): void
@@ -129,7 +133,7 @@ class Category extends Model
 
     public function getCarsCount(): int
     {
-        return (int) ($this->attributes['cars_count'] ?? $this->cars()->count());
+        return (int) ($this->attributes['cars_count'] ?? 0);
     }
 
     public function getName(): string

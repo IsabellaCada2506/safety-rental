@@ -67,10 +67,6 @@ class User extends Authenticatable
         'password',
     ];
 
-    protected $guarded = [
-        'id',
-    ];
-
     protected $hidden = [
         'password',
         'remember_token',
@@ -281,7 +277,7 @@ class User extends Authenticatable
 
     public function getReservations(): Collection
     {
-        return $this->reservations;
+        return $this->relationLoaded('reservations') ? $this->getRelation('reservations') : new Collection;
     }
 
     public function setReservations(Collection $reservations): void

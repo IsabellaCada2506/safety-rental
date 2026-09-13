@@ -8,7 +8,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -22,16 +21,6 @@ return new class extends Migration
                 ->constrained('reservations')
                 ->nullOnDelete();
         });
-
-        $linkedReservations = DB::table('reservations')
-            ->whereNotNull('payment_id')
-            ->get();
-
-        foreach ($linkedReservations as $reservation) {
-            DB::table('payments')
-                ->where('id', $reservation->payment_id)
-                ->update(['reservation_id' => $reservation->id]);
-        }
     }
 
     public function down(): void
