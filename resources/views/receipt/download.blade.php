@@ -6,6 +6,8 @@
 
 @extends('layouts.app')
 
+@section('title', $viewData['title'])
+
 @push('styles')
     <style>
         body {

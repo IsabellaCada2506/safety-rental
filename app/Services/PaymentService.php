@@ -2,13 +2,15 @@
 
 /**
  * Author: Alejandro Correa Marin
- * Date: 2026-09-12
+ * Author: Wendy Atehortua
+ * Date: 2026-09-13
  * Description: Business logic for simulated reservation payments, amount integrity, and refunds.
  */
 
 namespace App\Services;
 
 use App\Interfaces\PaymentServiceInterface;
+use App\Interfaces\ReservationServiceInterface;
 use App\Models\Payment;
 use App\Models\Reservation;
 use Carbon\Carbon;
@@ -17,6 +19,10 @@ use Illuminate\Database\Eloquent\Collection;
 
 class PaymentService implements PaymentServiceInterface
 {
+    public function __construct(
+        private readonly ReservationServiceInterface $reservationService
+    ) {}
+
     public function getAllWithReservation(): Collection
     {
         return Payment::query()
@@ -34,11 +40,11 @@ class PaymentService implements PaymentServiceInterface
 
     public function processSimulatedPayment(Reservation $reservation, array $data): Payment
     {
-        if (! $reservation->isPayable()) {
+        if (! $this->reservationService->isPayable($reservation)) {
             throw new DomainException(__('payment.not_payable'));
         }
 
-        $approvedAmount = (float) $reservation->getTotalPrice();
+        $approvedAmount = (float) $this->reservationService->getTotalPrice($reservation);
 
         if (array_key_exists('amount', $data) && $data['amount'] !== null) {
             $submittedAmount = (float) $data['amount'];
@@ -71,7 +77,7 @@ class PaymentService implements PaymentServiceInterface
 
     public function refundPayment(Payment $payment): Payment
     {
-        if (! $payment->isCompleted()) {
+        if (! $this->isCompleted($payment)) {
             throw new DomainException(__('payment.refund_not_allowed'));
         }
 
@@ -79,6 +85,60 @@ class PaymentService implements PaymentServiceInterface
         $payment->save();
 
         return $payment;
+    }
+
+    public function isCompleted(Payment $payment): bool
+    {
+        return $payment->getStatus() === Payment::STATUS_COMPLETED;
+    }
+
+    public function isFailed(Payment $payment): bool
+    {
+        return $payment->getStatus() === Payment::STATUS_FAILED;
+    }
+
+    public function isRefunded(Payment $payment): bool
+    {
+        return $payment->getStatus() === Payment::STATUS_REFUNDED;
+    }
+
+    public function getStatusBadgeClass(Payment $payment): string
+    {
+        return match ($payment->getStatus()) {
+            Payment::STATUS_COMPLETED => 'bg-success text-white',
+            Payment::STATUS_FAILED => 'bg-danger text-white',
+            Payment::STATUS_REFUNDED => 'bg-secondary text-white',
+            default => 'bg-warning text-dark',
+        };
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function availableMethods(): array
+    {
+        return [
+            Payment::METHOD_CREDIT_CARD,
+            Payment::METHOD_DEBIT_CARD,
+            Payment::METHOD_BANK_TRANSFER,
+            Payment::METHOD_PSE_DEBIT,
+        ];
+    }
+
+    public function methodLabel(string $method): string
+    {
+        return match ($method) {
+            Payment::METHOD_CREDIT_CARD => __('payment.method_credit_card'),
+            Payment::METHOD_DEBIT_CARD => __('payment.method_debit_card'),
+            Payment::METHOD_BANK_TRANSFER => __('payment.method_bank_transfer'),
+            Payment::METHOD_PSE_DEBIT => __('payment.method_pse_debit'),
+            default => $method,
+        };
+    }
+
+    public function getMethodLabel(Payment $payment): string
+    {
+        return $this->methodLabel($payment->getMethod());
     }
 
     private function generateUniqueCode(): int

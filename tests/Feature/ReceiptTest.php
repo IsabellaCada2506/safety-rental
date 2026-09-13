@@ -8,6 +8,8 @@
 
 namespace Tests\Feature;
 
+use App\Interfaces\PaymentServiceInterface;
+use App\Interfaces\ReservationServiceInterface;
 use App\Models\Car;
 use App\Models\Location;
 use App\Models\Payment;
@@ -29,11 +31,18 @@ class ReceiptTest extends TestCase
 
     private Location $location;
 
+    private PaymentServiceInterface $paymentService;
+
+    private ReservationServiceInterface $reservationService;
+
     protected function setUp(): void
     {
         parent::setUp();
 
         $this->seed();
+
+        $this->paymentService = app(PaymentServiceInterface::class);
+        $this->reservationService = app(ReservationServiceInterface::class);
 
         $this->customer = User::query()->where('email', 'customer@safetyrental.test')->first();
         $this->car = Car::first();
@@ -104,7 +113,7 @@ class ReceiptTest extends TestCase
         $viewData['currency'] = __('payment.currency');
         $viewData['transactionCode'] = $payment?->getTransactionCode();
         $viewData['paymentStatus'] = __('payment.status_'.$payment->getStatus());
-        $viewData['paymentMethod'] = $payment?->getMethodLabel() ?? '';
+        $viewData['paymentMethod'] = $payment ? $this->paymentService->getMethodLabel($payment) : '';
         $viewData['paymentDate'] = $payment?->getDate()?->format('d/m/Y') ?? '';
         $viewData['isPrintableDocument'] = true;
 
@@ -140,6 +149,6 @@ class ReceiptTest extends TestCase
 
         $response->assertRedirect(route('reservations.show', ['id' => $reservation->getId()]));
         $response->assertSessionHasErrors('error');
-        $this->assertFalse($reservation->fresh(['payment'])->hasSuccessfulPayment());
+        $this->assertFalse($this->reservationService->hasSuccessfulPayment($reservation->fresh(['payment'])));
     }
 }

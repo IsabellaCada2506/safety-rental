@@ -3,7 +3,8 @@
 /**
  * Author: Isabella Cadavid Posada
  * Author: Alejandro Correa Marin
- * Date: 2026-09-12
+ * Author: Wendy Atehortua
+ * Date: 2026-09-13
  * Description: User model representing registered application users (customers and admins).
  */
 
@@ -258,16 +259,6 @@ class User extends Authenticatable
         return isset($this->attributes['updated_at'])
             ? Carbon::parse($this->attributes['updated_at'])
             : null;
-    }
-
-    public function isAdmin(): bool
-    {
-        return $this->getRole() === self::ROLE_ADMIN;
-    }
-
-    public function calculateAge(): ?int
-    {
-        return $this->getBirthDate()?->age;
     }
 
     public function reservations(): HasMany

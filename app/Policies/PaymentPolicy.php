@@ -2,28 +2,38 @@
 
 /**
  * Author: Alejandro Correa Marin
- * Date: 2026-09-12
+ * Author: Wendy Atehortua
+ * Date: 2026-09-13
  * Description: Authorization policy for simulated payments and administrator refunds.
  */
 
 namespace App\Policies;
 
+use App\Interfaces\PaymentServiceInterface;
+use App\Interfaces\ReservationServiceInterface;
+use App\Interfaces\UserServiceInterface;
 use App\Models\Payment;
 use App\Models\Reservation;
 use App\Models\User;
 
 class PaymentPolicy
 {
+    public function __construct(
+        private readonly UserServiceInterface $userService,
+        private readonly ReservationServiceInterface $reservationService,
+        private readonly PaymentServiceInterface $paymentService
+    ) {}
+
     public function create(User $user, Reservation $reservation): bool
     {
-        return ! $user->isAdmin()
+        return ! $this->userService->isAdmin($user)
             && $reservation->getUserId() === $user->getId()
-            && $reservation->isPayable();
+            && $this->reservationService->isPayable($reservation);
     }
 
     public function view(User $user, Payment $payment): bool
     {
-        if ($user->isAdmin()) {
+        if ($this->userService->isAdmin($user)) {
             return true;
         }
 
@@ -34,6 +44,6 @@ class PaymentPolicy
 
     public function refund(User $user, Payment $payment): bool
     {
-        return $user->isAdmin() && $payment->isCompleted();
+        return $this->userService->isAdmin($user) && $this->paymentService->isCompleted($payment);
     }
 }

@@ -8,6 +8,8 @@
 
 namespace Tests\Feature;
 
+use App\Interfaces\PaymentServiceInterface;
+use App\Interfaces\ReservationServiceInterface;
 use App\Models\Car;
 use App\Models\Location;
 use App\Models\Payment;
@@ -31,11 +33,18 @@ class PaymentTest extends TestCase
 
     private Location $location;
 
+    private PaymentServiceInterface $paymentService;
+
+    private ReservationServiceInterface $reservationService;
+
     protected function setUp(): void
     {
         parent::setUp();
 
         $this->seed();
+
+        $this->paymentService = app(PaymentServiceInterface::class);
+        $this->reservationService = app(ReservationServiceInterface::class);
 
         $this->customer = User::query()->where('email', 'customer@safetyrental.test')->first();
         $this->admin = User::query()->where('role', User::ROLE_ADMIN)->first();
@@ -88,11 +97,11 @@ class PaymentTest extends TestCase
         $payment = $reservation->getPayment();
 
         $this->assertNotNull($payment);
-        $this->assertSame((float) $reservation->getTotalPrice(), $payment->getAmount());
+        $this->assertSame((float) $this->reservationService->getTotalPrice($reservation), $payment->getAmount());
         $this->assertSame(Payment::METHOD_CREDIT_CARD, $payment->getMethod());
         $this->assertNotNull($payment->getTransactionCode());
         $this->assertNotNull($payment->getDate());
-        $this->assertTrue($payment->isCompleted());
+        $this->assertTrue($this->paymentService->isCompleted($payment));
         $this->assertSame($reservation->getId(), $payment->getReservationId());
         $response->assertRedirect(route('reservations.show', ['id' => $reservation->getId()]));
     }
@@ -119,7 +128,7 @@ class PaymentTest extends TestCase
         $response = $this->actingAs($this->customer)->post(route('payments.store', ['id' => $reservation->getId()]), [
             'method' => Payment::METHOD_CREDIT_CARD,
             'simulated_result' => Payment::SIMULATED_RESULT_SUCCESS,
-            'amount' => $reservation->getTotalPrice() + 50000,
+            'amount' => $this->reservationService->getTotalPrice($reservation) + 50000,
         ]);
 
         $response->assertSessionHasErrors('error');
@@ -157,9 +166,9 @@ class PaymentTest extends TestCase
         $failedPayment = Payment::query()->where('reservation_id', $reservation->getId())->first();
 
         $this->assertNotNull($failedPayment);
-        $this->assertTrue($failedPayment->isFailed());
+        $this->assertTrue($this->paymentService->isFailed($failedPayment));
         $this->assertNull($reservation->getPaymentId());
-        $this->assertFalse($reservation->hasSuccessfulPayment());
+        $this->assertFalse($this->reservationService->hasSuccessfulPayment($reservation));
         $response->assertSessionHasErrors('error');
     }
 
@@ -178,7 +187,7 @@ class PaymentTest extends TestCase
         $indexResponse->assertOk();
         $indexResponse->assertSee((string) $reservation->getCode());
         $indexResponse->assertSee((string) $payment->getTransactionCode());
-        $indexResponse->assertSee(Payment::methodLabel(Payment::METHOD_PSE_DEBIT));
+        $indexResponse->assertSee($this->paymentService->methodLabel(Payment::METHOD_PSE_DEBIT));
 
         $showResponse = $this->actingAs($this->admin)->get(route('admin.payment.show', ['id' => $payment->getId()]));
         $showResponse->assertOk();
@@ -198,12 +207,12 @@ class PaymentTest extends TestCase
 
         $customerRefund = $this->actingAs($this->customer)->patch(route('admin.payment.refund', ['id' => $payment->getId()]));
         $customerRefund->assertForbidden();
-        $this->assertTrue($payment->fresh()->isCompleted());
+        $this->assertTrue($this->paymentService->isCompleted($payment->fresh()));
 
         $adminRefund = $this->actingAs($this->admin)->patch(route('admin.payment.refund', ['id' => $payment->getId()]));
         $adminRefund->assertRedirect(route('admin.payment.show', ['id' => $payment->getId()]));
-        $this->assertTrue($payment->fresh()->isRefunded());
-        $this->assertFalse($reservation->fresh(['payment'])->hasSuccessfulPayment());
+        $this->assertTrue($this->paymentService->isRefunded($payment->fresh()));
+        $this->assertFalse($this->reservationService->hasSuccessfulPayment($reservation->fresh(['payment'])));
     }
 
     public function test_customer_cannot_pay_another_customers_reservation(): void

@@ -2,18 +2,24 @@
 
 /**
  * Author: Alejandro Correa Marin
- * Date: 2026-09-12
+ * Author: Wendy Atehortua
+ * Date: 2026-09-13
  * Description: Calculates reservation counts by state and payment totals for the admin metrics page.
  */
 
 namespace App\Services;
 
 use App\Interfaces\AdminMetricsServiceInterface;
+use App\Interfaces\PaymentServiceInterface;
 use App\Models\Payment;
 use App\Models\Reservation;
 
 class AdminMetricsService implements AdminMetricsServiceInterface
 {
+    public function __construct(
+        private readonly PaymentServiceInterface $paymentService
+    ) {}
+
     /**
      * @return array{
      *     reservationCounts: array<string, int>,
@@ -70,15 +76,15 @@ class AdminMetricsService implements AdminMetricsServiceInterface
         $refundedAmount = 0.0;
 
         foreach ($payments as $payment) {
-            if ($payment->isCompleted()) {
+            if ($this->paymentService->isCompleted($payment)) {
                 $completedAmount += $payment->getAmount();
             }
 
-            if ($payment->isFailed()) {
+            if ($this->paymentService->isFailed($payment)) {
                 $failedAmount += $payment->getAmount();
             }
 
-            if ($payment->isRefunded()) {
+            if ($this->paymentService->isRefunded($payment)) {
                 $refundedAmount += $payment->getAmount();
             }
         }

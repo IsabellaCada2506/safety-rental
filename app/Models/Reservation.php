@@ -3,7 +3,8 @@
 /**
  * Author: Isabella Ocampo S
  * Author: Alejandro Correa Marin
- * Date: 2026-09-12
+ * Author: Wendy
+ * Date: 2026-09-13
  * Description: Reservation model representing a car rental booking between a customer and a vehicle.
  */
 
@@ -183,61 +184,6 @@ class Reservation extends Model
             : null;
     }
 
-    public function isPending(): bool
-    {
-        return $this->getState() === self::STATE_PENDING;
-    }
-
-    public function isConfirmed(): bool
-    {
-        return $this->getState() === self::STATE_CONFIRMED;
-    }
-
-    public function isCancelled(): bool
-    {
-        return $this->getState() === self::STATE_CANCELLED;
-    }
-
-    public function isCompleted(): bool
-    {
-        return $this->getState() === self::STATE_COMPLETED;
-    }
-
-    public function isCancellable(): bool
-    {
-        return in_array($this->getState(), [self::STATE_PENDING, self::STATE_CONFIRMED], true);
-    }
-
-    public function getStateBadgeClass(): string
-    {
-        return match ($this->getState()) {
-            self::STATE_CONFIRMED => 'bg-success text-white',
-            self::STATE_CANCELLED => 'bg-danger text-white',
-            self::STATE_COMPLETED => 'bg-secondary text-white',
-            default => 'bg-warning text-dark',
-        };
-    }
-
-    public function getDays(): int
-    {
-        $start = $this->getStartDate();
-        $end = $this->getEndDate();
-
-        if (! $start || ! $end) {
-            return 1;
-        }
-
-        return max(1, (int) $start->diffInDays($end));
-    }
-
-    public function getTotalPrice(): int
-    {
-        $car = $this->getCar();
-        $carPrice = $car ? $car->getPrice() : 0;
-
-        return $this->getDays() * $carPrice;
-    }
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -281,20 +227,6 @@ class Reservation extends Model
     public function setLocation(?Location $location): void
     {
         $this->setRelation('location', $location);
-    }
-
-    public function hasSuccessfulPayment(): bool
-    {
-        $payment = $this->getPayment();
-
-        return $payment !== null && $payment->isCompleted();
-    }
-
-    public function isPayable(): bool
-    {
-        return ! $this->isCancelled()
-            && ! $this->isCompleted()
-            && ! $this->hasSuccessfulPayment();
     }
 
     public function payment(): BelongsTo

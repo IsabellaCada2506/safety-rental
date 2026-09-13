@@ -26,7 +26,7 @@ class LocationController extends Controller
         $viewData['title'] = __('location.customer_title_index');
         $viewData['locations'] = $this->locationService->getAllWithCounts();
 
-        return view('locations.index')->with('viewData', $viewData);
+        return view('location.index')->with('viewData', $viewData);
     }
 
     public function show(int $id): View
@@ -37,6 +37,6 @@ class LocationController extends Controller
         $viewData['title'] = $location->getName().' - '.__('location.customer_title_show');
         $viewData['location'] = $location;
 
-        return view('locations.show')->with('viewData', $viewData);
+        return view('location.show')->with('viewData', $viewData);
     }
 }

@@ -43,7 +43,7 @@ class ReservationController extends Controller
         $viewData['title'] = __('reservation.title_my_reservations');
         $viewData['reservations'] = $this->reservationService->getByUserId((int) auth()->id());
 
-        return view('reservations.index')->with('viewData', $viewData);
+        return view('reservation.index')->with('viewData', $viewData);
     }
 
     public function create(CreateReservationRequest $request): View
@@ -58,7 +58,7 @@ class ReservationController extends Controller
         $viewData['car'] = $car;
         $viewData['locations'] = $locations;
 
-        return view('reservations.create')->with('viewData', $viewData);
+        return view('reservation.create')->with('viewData', $viewData);
     }
 
     public function store(StoreReservationRequest $request): RedirectResponse
@@ -98,7 +98,7 @@ class ReservationController extends Controller
         $viewData['title'] = __('reservation.title_show', ['code' => $reservation->getCode()]);
         $viewData['reservation'] = $reservation;
 
-        return view('reservations.show')->with('viewData', $viewData);
+        return view('reservation.show')->with('viewData', $viewData);
     }
 
     public function cancel(int $id): RedirectResponse

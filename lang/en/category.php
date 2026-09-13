@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Author: Wendy
- * Date: 09/09/2026
+ * Author: Wendy Atehortua
+ * Date: 2026-09-09
  * Description: English language strings for the category management module.
  */
 

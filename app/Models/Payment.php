@@ -3,7 +3,8 @@
 /**
  * Author: Isabella Ocampo
  * Author: Alejandro Correa Marin
- * Date: 2026-09-12
+ * Author: Wendy Atehortua
+ * Date: 2026-09-13
  * Description: Payment model representing rental transaction records.
  */
 
@@ -169,60 +170,6 @@ class Payment extends Model
         return isset($this->attributes['updated_at'])
             ? Carbon::parse($this->attributes['updated_at'])
             : null;
-    }
-
-    public function isCompleted(): bool
-    {
-        return $this->getStatus() === self::STATUS_COMPLETED;
-    }
-
-    public function isFailed(): bool
-    {
-        return $this->getStatus() === self::STATUS_FAILED;
-    }
-
-    public function isRefunded(): bool
-    {
-        return $this->getStatus() === self::STATUS_REFUNDED;
-    }
-
-    public function getStatusBadgeClass(): string
-    {
-        return match ($this->getStatus()) {
-            self::STATUS_COMPLETED => 'bg-success text-white',
-            self::STATUS_FAILED => 'bg-danger text-white',
-            self::STATUS_REFUNDED => 'bg-secondary text-white',
-            default => 'bg-warning text-dark',
-        };
-    }
-
-    /**
-     * @return list<string>
-     */
-    public static function availableMethods(): array
-    {
-        return [
-            self::METHOD_CREDIT_CARD,
-            self::METHOD_DEBIT_CARD,
-            self::METHOD_BANK_TRANSFER,
-            self::METHOD_PSE_DEBIT,
-        ];
-    }
-
-    public static function methodLabel(string $method): string
-    {
-        return match ($method) {
-            self::METHOD_CREDIT_CARD => __('payment.method_credit_card'),
-            self::METHOD_DEBIT_CARD => __('payment.method_debit_card'),
-            self::METHOD_BANK_TRANSFER => __('payment.method_bank_transfer'),
-            self::METHOD_PSE_DEBIT => __('payment.method_pse_debit'),
-            default => $method,
-        };
-    }
-
-    public function getMethodLabel(): string
-    {
-        return self::methodLabel($this->getMethod());
     }
 
     public function reservation(): BelongsTo

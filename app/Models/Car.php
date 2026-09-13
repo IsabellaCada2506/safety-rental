@@ -3,7 +3,7 @@
 /**
  * Author: Wendy Atehortua
  * Author: Alejandro Correa Marin
- * Date: 2026-09-12
+ * Date: 2026-09-13
  * Description: Car model representing the rentable vehicles in inventory.
  */
 
@@ -183,11 +183,6 @@ class Car extends Model
     public function setStatus(string $status): void
     {
         $this->attributes['status'] = $status;
-    }
-
-    public function isActive(): bool
-    {
-        return $this->getStatus() === self::STATUS_ACTIVE;
     }
 
     public function getCategoryId(): ?int

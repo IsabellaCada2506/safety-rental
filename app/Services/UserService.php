@@ -3,7 +3,8 @@
 /**
  * Author: Isabella Cadavid Posada
  * Author: Alejandro Correa Marin
- * Date: 2026-09-12
+ * Author: Wendy Atehortua
+ * Date: 2026-09-13
  * Description: Business logic service handling user profile updates and account operations.
  */
 
@@ -87,7 +88,7 @@ class UserService implements UserServiceInterface
 
     public function roleChangeDenialReason(User $user, string $newRole): string
     {
-        if ($user->isAdmin() && $newRole === User::ROLE_CUSTOMER && $this->adminCount() <= 1) {
+        if ($this->isAdmin($user) && $newRole === User::ROLE_CUSTOMER && $this->adminCount() <= 1) {
             return __('user.update_error_last_admin');
         }
 
@@ -105,7 +106,7 @@ class UserService implements UserServiceInterface
             return __('user.delete_error_self');
         }
 
-        if ($user->isAdmin() && $this->adminCount() <= 1) {
+        if ($this->isAdmin($user) && $this->adminCount() <= 1) {
             return __('user.delete_error_last_admin');
         }
 
@@ -119,6 +120,16 @@ class UserService implements UserServiceInterface
     public function delete(User $user): void
     {
         $user->delete();
+    }
+
+    public function isAdmin(User $user): bool
+    {
+        return $user->getRole() === User::ROLE_ADMIN;
+    }
+
+    public function calculateAge(User $user): ?int
+    {
+        return $user->getBirthDate()?->age;
     }
 
     private function adminCount(): int

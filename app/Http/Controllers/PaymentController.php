@@ -2,7 +2,8 @@
 
 /**
  * Author: Alejandro Correa Marin
- * Date: 2026-09-12
+ * Author: Wendy Atehortua
+ * Date: 2026-09-13
  * Description: Customer controller for creating simulated reservation payments.
  */
 
@@ -40,10 +41,10 @@ class PaymentController extends Controller
         $viewData['title'] = __('payment.title_create', ['code' => $reservation->getCode()]);
         $viewData['reservation'] = $reservation;
         $viewData['methodOptions'] = [];
-        foreach (Payment::availableMethods() as $method) {
-            $viewData['methodOptions'][$method] = Payment::methodLabel($method);
+        foreach ($this->paymentService->availableMethods() as $method) {
+            $viewData['methodOptions'][$method] = $this->paymentService->methodLabel($method);
         }
-        $viewData['approvedAmount'] = $reservation->getTotalPrice();
+        $viewData['approvedAmount'] = $this->reservationService->getTotalPrice($reservation);
 
         return view('payment.create')->with('viewData', $viewData);
     }
@@ -58,7 +59,7 @@ class PaymentController extends Controller
         try {
             $payment = $this->paymentService->processSimulatedPayment($reservation, $validatedData);
 
-            if ($payment->isFailed()) {
+            if ($this->paymentService->isFailed($payment)) {
                 return redirect()
                     ->route('reservations.show', ['id' => $reservation->getId()])
                     ->withErrors(['error' => __('payment.failed_reported')]);

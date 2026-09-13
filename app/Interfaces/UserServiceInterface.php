@@ -3,7 +3,8 @@
 /**
  * Author: Isabella Cadavid Posada
  * Author: Alejandro Correa Marin
- * Date: 2026-09-12
+ * Author: Wendy Atehortua
+ * Date: 2026-09-13
  * Description: Contract defining business operations for user profile and account management.
  */
 
@@ -37,4 +38,8 @@ interface UserServiceInterface
     public function deleteDenialReason(User $user, User $actor): string;
 
     public function delete(User $user): void;
+
+    public function isAdmin(User $user): bool;
+
+    public function calculateAge(User $user): ?int;
 }

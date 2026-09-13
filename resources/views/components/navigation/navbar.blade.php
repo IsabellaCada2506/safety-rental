@@ -60,9 +60,11 @@
             {{ __('authentication.application_name') }}
         </a>
 
+@inject('userService', 'App\Interfaces\UserServiceInterface')
+
         @auth
             <div class="nav-authenticated d-flex align-items-center gap-3">
-                @if (! auth()->user()->isAdmin())
+                @if (! $userService->isAdmin(auth()->user()))
                     <a
                         class="btn-pill-ghost text-decoration-none"
                         href="{{ route('home.index') }}"
@@ -197,13 +199,17 @@
         @endauth
 
         <div class="ms-2 d-flex align-items-center">
-            <a
-                class="btn-lang-toggle"
-                href="{{ route('locale.switch', app()->getLocale() === 'es' ? 'en' : 'es') }}"
-                title="{{ app()->getLocale() === 'es' ? 'Switch to English' : 'Cambiar a Español' }}"
-            >
-                🌐 {{ app()->getLocale() === 'es' ? 'EN' : 'ES' }}
-            </a>
+            <form action="{{ route('locale.switch', app()->getLocale() === 'es' ? 'en' : 'es') }}" method="POST" class="d-inline m-0 p-0">
+                @csrf
+                <button
+                    type="submit"
+                    class="btn-lang-toggle"
+                    style="cursor: pointer;"
+                    title="{{ app()->getLocale() === 'es' ? 'Switch to English' : 'Cambiar a Español' }}"
+                >
+                    🌐 {{ app()->getLocale() === 'es' ? 'EN' : 'ES' }}
+                </button>
+            </form>
         </div>
     </div>
 </nav>

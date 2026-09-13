@@ -1,6 +1,10 @@
 <?php
 
-// Author: Isabella Cadavid Posada
+/**
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-09-06
+ * Description: Spanish language strings for form validation error messages.
+ */
 
 return [
     'required' => 'El campo :attribute es obligatorio.',

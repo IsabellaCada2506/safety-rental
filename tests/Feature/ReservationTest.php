@@ -8,6 +8,7 @@
 
 namespace Tests\Feature;
 
+use App\Interfaces\ReservationServiceInterface;
 use App\Models\Car;
 use App\Models\Location;
 use App\Models\Reservation;
@@ -30,11 +31,15 @@ class ReservationTest extends TestCase
 
     private Location $location;
 
+    private ReservationServiceInterface $reservationService;
+
     protected function setUp(): void
     {
         parent::setUp();
 
         $this->seed();
+
+        $this->reservationService = app(ReservationServiceInterface::class);
 
         $this->customer = User::query()->where('role', User::ROLE_CUSTOMER)->first();
         $this->admin = User::query()->where('role', User::ROLE_ADMIN)->first();
@@ -59,10 +64,9 @@ class ReservationTest extends TestCase
         $this->otherCustomer->save();
     }
 
-    /** AC 1: Valid Reservation */
     public function test_customer_can_create_valid_reservation(): void
     {
-        // Delete seeded reservations for this car to guarantee availability
+
         Reservation::where('car_id', $this->car->getId())->delete();
 
         $startDate = Carbon::now()->addDays(20)->toDateString();
@@ -119,7 +123,6 @@ class ReservationTest extends TestCase
         $response->assertSessionHasErrors('end_date');
     }
 
-    /** AC 3: Unavailable Car Overlap Check */
     public function test_overlapping_reservation_is_rejected(): void
     {
         Reservation::where('car_id', $this->car->getId())->delete();
@@ -138,7 +141,6 @@ class ReservationTest extends TestCase
         $blocking->setLocationId($this->location->getId());
         $blocking->save();
 
-        // Conflicting request (overlapping dates)
         $conflictingStart = Carbon::now()->addDays(17)->toDateString();
         $conflictingEnd = Carbon::now()->addDays(22)->toDateString();
 
@@ -152,7 +154,6 @@ class ReservationTest extends TestCase
         $response->assertSessionHasErrors('conflict');
     }
 
-    /** AC 4: Rental Total Calculation */
     public function test_rental_total_calculation(): void
     {
         $start = Carbon::now()->addDays(30);
@@ -169,11 +170,10 @@ class ReservationTest extends TestCase
         $res->setLocationId($this->location->getId());
         $res->save();
 
-        $this->assertSame(3, $res->getDays());
-        $this->assertSame(3 * $this->car->getPrice(), $res->getTotalPrice());
+        $this->assertSame(3, $this->reservationService->getDays($res));
+        $this->assertSame(3 * $this->car->getPrice(), $this->reservationService->getTotalPrice($res));
     }
 
-    /** AC 5: Reservation Ownership Access Control */
     public function test_customer_cannot_view_another_customers_reservation(): void
     {
         $reservation = new Reservation;

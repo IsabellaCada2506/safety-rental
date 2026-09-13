@@ -2,12 +2,14 @@
 
 /**
  * Author: Alejandro Correa Marin
- * Date: 2026-09-12
+ * Author: Wendy Atehortua
+ * Date: 2026-09-13
  * Description: Request validation for recording a simulated reservation payment.
  */
 
 namespace App\Http\Requests;
 
+use App\Interfaces\PaymentServiceInterface;
 use App\Models\Payment;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -25,7 +27,7 @@ class StorePaymentRequest extends FormRequest
             'method' => [
                 'required',
                 'string',
-                Rule::in(Payment::availableMethods()),
+                Rule::in(app(PaymentServiceInterface::class)->availableMethods()),
             ],
             'simulated_result' => [
                 'required',

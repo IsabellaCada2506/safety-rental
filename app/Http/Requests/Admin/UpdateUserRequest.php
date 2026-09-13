@@ -2,12 +2,14 @@
 
 /**
  * Author: Alejandro Correa Marin
- * Date: 2026-09-12
+ * Author: Wendy Atehortua
+ * Date: 2026-09-13
  * Description: Request validation for administrator updates to an existing user account.
  */
 
 namespace App\Http\Requests\Admin;
 
+use App\Interfaces\UserServiceInterface;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -17,7 +19,9 @@ class UpdateUserRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return $this->user()?->isAdmin() ?? false;
+        $user = $this->user();
+
+        return $user instanceof User && app(UserServiceInterface::class)->isAdmin($user);
     }
 
     public function rules(): array

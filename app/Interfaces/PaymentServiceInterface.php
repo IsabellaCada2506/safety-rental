@@ -2,7 +2,8 @@
 
 /**
  * Author: Alejandro Correa Marin
- * Date: 2026-09-12
+ * Author: Wendy Atehortua
+ * Date: 2026-09-13
  * Description: Contract defining simulated payment processing, refunds, and payment queries.
  */
 
@@ -27,4 +28,21 @@ interface PaymentServiceInterface
     public function processSimulatedPayment(Reservation $reservation, array $data): Payment;
 
     public function refundPayment(Payment $payment): Payment;
+
+    public function isCompleted(Payment $payment): bool;
+
+    public function isFailed(Payment $payment): bool;
+
+    public function isRefunded(Payment $payment): bool;
+
+    public function getStatusBadgeClass(Payment $payment): string;
+
+    /**
+     * @return list<string>
+     */
+    public function availableMethods(): array;
+
+    public function methodLabel(string $method): string;
+
+    public function getMethodLabel(Payment $payment): string;
 }

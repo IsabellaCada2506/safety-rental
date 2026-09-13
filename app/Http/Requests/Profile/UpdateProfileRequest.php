@@ -2,12 +2,14 @@
 
 /**
  * Author: Isabella Cadavid Posada
- * Date: 2026-09-06
+ * Author: Wendy Atehortua
+ * Date: 2026-09-13
  * Description: Form request for validating user profile update data.
  */
 
 namespace App\Http\Requests\Profile;
 
+use App\Interfaces\UserServiceInterface;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -18,7 +20,7 @@ class UpdateProfileRequest extends FormRequest
     {
         $user = $this->user();
 
-        return $user instanceof User && ! $user->isAdmin();
+        return $user instanceof User && ! app(UserServiceInterface::class)->isAdmin($user);
     }
 
     public function rules(): array

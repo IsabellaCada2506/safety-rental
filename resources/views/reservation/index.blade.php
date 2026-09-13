@@ -1,10 +1,13 @@
 {{--
     Author: Isabella Ocampo
-    Date: 2026-09-11
+    Author: Wendy
+    Date: 2026-09-13
     Description: View listing authenticated customer's reservations.
 --}}
 
 @extends('layouts.app')
+
+@inject('reservationService', 'App\Interfaces\ReservationServiceInterface')
 
 @section('title', $viewData['title'])
 
@@ -65,7 +68,7 @@
                                 class="card-img-top object-fit-cover"
                                 style="height: 190px;"
                             />
-                            <span class="badge {{ $reservation->getStateBadgeClass() }} position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill shadow-sm">
+                            <span class="badge {{ $reservationService->getStateBadgeClass($reservation) }} position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill shadow-sm">
                                 {{ __('reservation.state_' . $reservation->getState()) }}
                             </span>
                         </div>
@@ -96,7 +99,7 @@
                                     </div>
                                     <div class="d-flex justify-content-between small text-muted">
                                         <span>{{ __('reservation.rental_days') }}:</span>
-                                        <span class="fw-semibold text-dark">{{ $reservation->getDays() }} {{ __('reservation.days_unit') }}</span>
+                                        <span class="fw-semibold text-dark">{{ $reservationService->getDays($reservation) }} {{ __('reservation.days_unit') }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +107,7 @@
                             <div class="pt-2 border-top d-flex justify-content-between align-items-center">
                                 <div>
                                     <span class="text-muted small d-block">{{ __('reservation.total_price') }}</span>
-                                    <span class="fw-bold text-dark fs-5">${{ number_format($reservation->getTotalPrice(), 0, ',', '.') }}</span>
+                                    <span class="fw-bold text-dark fs-5">${{ number_format($reservationService->getTotalPrice($reservation), 0, ',', '.') }}</span>
                                 </div>
                                 <a href="{{ route('reservations.show', ['id' => $reservation->getId()]) }}" class="btn btn-outline-primary btn-sm rounded-pill fw-semibold px-3">
                                     {{ __('reservation.view_details') }} &rarr;

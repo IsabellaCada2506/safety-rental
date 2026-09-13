@@ -34,7 +34,7 @@ class ReservationController extends Controller
         $viewData['reservations'] = $this->reservationService->getFiltered($stateFilter);
         $viewData['currentState'] = $stateFilter;
 
-        return view('admin.reservations.index')->with('viewData', $viewData);
+        return view('admin.reservation.index')->with('viewData', $viewData);
     }
 
     public function show(int $id): View
@@ -45,7 +45,7 @@ class ReservationController extends Controller
         $viewData['title'] = __('reservation.admin_title_show', ['code' => $reservation->getCode()]);
         $viewData['reservation'] = $reservation;
 
-        return view('admin.reservations.show')->with('viewData', $viewData);
+        return view('admin.reservation.show')->with('viewData', $viewData);
     }
 
     public function confirm(int $id): RedirectResponse

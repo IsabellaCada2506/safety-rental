@@ -1,8 +1,11 @@
 {{--
     Author: Alejandro Correa Marin
-    Date: 2026-09-12
+    Author: Wendy Atehortua
+    Date: 2026-09-13
     Description: Admin index listing registered users with edit and delete actions.
 --}}
+
+@inject('userService', 'App\Interfaces\UserServiceInterface')
 
 @extends('layouts.app')
 
@@ -68,7 +71,7 @@
                             <td>{{ $user->getEmail() }}</td>
                             <td>
                                 <span class="admin-index-type-badge">
-                                    {{ $user->isAdmin() ? __('user.role_admin') : __('user.role_customer') }}
+                                    {{ $userService->isAdmin($user) ? __('user.role_admin') : __('user.role_customer') }}
                                 </span>
                             </td>
                             <td>

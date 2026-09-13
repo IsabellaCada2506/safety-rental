@@ -2,13 +2,16 @@
 
 /**
  * Author: Alejandro Correa Marin
- * Date: 2026-09-12
+ * Author: Wendy Atehortua
+ * Date: 2026-09-13
  * Description: Builds a rental payment receipt PDF for successfully paid reservations.
  */
 
 namespace App\Services;
 
+use App\Interfaces\PaymentServiceInterface;
 use App\Interfaces\ReceiptServiceInterface;
+use App\Interfaces\ReservationServiceInterface;
 use App\Models\Reservation;
 use Barryvdh\DomPDF\PDF;
 use DomainException;
@@ -18,14 +21,23 @@ class ReceiptService implements ReceiptServiceInterface
 {
     private readonly PDF $pdf;
 
-    public function __construct(PDF $pdf)
-    {
+    private readonly ReservationServiceInterface $reservationService;
+
+    private readonly PaymentServiceInterface $paymentService;
+
+    public function __construct(
+        PDF $pdf,
+        ReservationServiceInterface $reservationService,
+        PaymentServiceInterface $paymentService
+    ) {
         $this->pdf = $pdf;
+        $this->reservationService = $reservationService;
+        $this->paymentService = $paymentService;
     }
 
     public function downloadPaidReceipt(Reservation $reservation): Response
     {
-        if (! $reservation->hasSuccessfulPayment()) {
+        if (! $this->reservationService->hasSuccessfulPayment($reservation)) {
             throw new DomainException(__('payment.receipt_not_paid'));
         }
 
@@ -46,7 +58,7 @@ class ReceiptService implements ReceiptServiceInterface
         $viewData['currency'] = __('payment.currency');
         $viewData['transactionCode'] = $payment?->getTransactionCode();
         $viewData['paymentStatus'] = $payment ? __('payment.status_'.$payment->getStatus()) : __('payment.unpaid');
-        $viewData['paymentMethod'] = $payment?->getMethodLabel() ?? '';
+        $viewData['paymentMethod'] = $payment ? $this->paymentService->getMethodLabel($payment) : '';
         $viewData['paymentDate'] = $payment?->getDate()?->format('d/m/Y') ?? '';
         $viewData['isPrintableDocument'] = true;
 

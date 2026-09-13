@@ -1,8 +1,10 @@
 {{--
     Author: Wendy Atehortua
-    Date: 2026-09-11
+    Date: 2026-09-13
     Description: Detail view for a single active vehicle in the rental catalog, including reservation flow.
 --}}
+
+@inject('carService', 'App\Interfaces\CarServiceInterface')
 
 @extends('layouts.app')
 
@@ -25,8 +27,8 @@
                 <div>
                     <p class="text-muted small mb-2">
                         {{ number_format($viewData['car']->getMileage(), 0, ',', '.') }} {{ __('catalog.km_unit') }}
-                        <span class="float-end fw-semibold {{ $viewData['car']->isActive() ? 'text-success' : 'text-danger' }}">
-                            {{ $viewData['car']->isActive() ? __('catalog.available') : __('catalog.status_deactivated') }}
+                        <span class="float-end fw-semibold {{ $carService->isActive($viewData['car']) ? 'text-success' : 'text-danger' }}">
+                            {{ $carService->isActive($viewData['car']) ? __('catalog.available') : __('catalog.status_deactivated') }}
                         </span>
                     </p>
 
@@ -59,7 +61,7 @@
                     </div>
 
                     <div class="d-grid gap-2 mb-4">
-                        @if ($viewData['car']->isActive())
+                        @if ($carService->isActive($viewData['car']))
                             <a
                                 href="{{ route('reservations.create', ['car_id' => $viewData['car']->getId()]) }}"
                                 class="btn btn-dark fw-semibold py-2 rounded-pill shadow-sm text-center text-decoration-none"

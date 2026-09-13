@@ -1,8 +1,12 @@
 {{--
     Author: Alejandro Correa Marin
-    Date: 2026-09-12
+    Author: Wendy Atehortua
+    Date: 2026-09-13
     Description: Admin detail view for a payment record with optional refund action.
 --}}
+
+@inject('paymentService', 'App\Interfaces\PaymentServiceInterface')
+@inject('reservationService', 'App\Interfaces\ReservationServiceInterface')
 
 @extends('layouts.app')
 
@@ -56,7 +60,7 @@
                         </div>
                         <div class="col-sm-6">
                             <span class="text-muted d-block">{{ __('payment.status') }}</span>
-                            <span class="badge {{ $viewData['payment']->getStatusBadgeClass() }} px-2 py-1 rounded-pill">
+                            <span class="badge {{ $paymentService->getStatusBadgeClass($viewData['payment']) }} px-2 py-1 rounded-pill">
                                 {{ __('payment.status_' . $viewData['payment']->getStatus()) }}
                             </span>
                         </div>
@@ -66,7 +70,7 @@
                         </div>
                         <div class="col-sm-6">
                             <span class="text-muted d-block">{{ __('payment.method') }}</span>
-                            <strong class="text-dark">{{ $viewData['payment']->getMethodLabel() }}</strong>
+                            <strong class="text-dark">{{ $paymentService->getMethodLabel($viewData['payment']) }}</strong>
                         </div>
                         <div class="col-sm-6">
                             <span class="text-muted d-block">{{ __('payment.transaction_code') }}</span>
@@ -103,7 +107,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <span class="text-muted d-block">{{ __('reservation.total_price') }}</span>
-                                <strong class="text-dark">${{ number_format($viewData['reservation']->getTotalPrice(), 0, ',', '.') }}</strong>
+                                <strong class="text-dark">${{ number_format($reservationService->getTotalPrice($viewData['reservation']), 0, ',', '.') }}</strong>
                             </div>
                         </div>
                     </div>
@@ -113,7 +117,7 @@
             <div class="col-lg-4">
                 <div class="card shadow-sm border-0 rounded-4 bg-white p-4">
                     <h5 class="fw-bold text-dark mb-3">{{ __('payment.actions') }}</h5>
-                    @if ($viewData['payment']->isCompleted())
+                    @if ($paymentService->isCompleted($viewData['payment']))
                         <form
                             action="{{ route('admin.payment.refund', ['id' => $viewData['payment']->getId()]) }}"
                             method="POST"
