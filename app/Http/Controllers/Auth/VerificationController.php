@@ -17,7 +17,7 @@ use Illuminate\View\View;
 
 class VerificationController extends Controller
 {
-    protected $redirectTo = '/home';
+    private string $redirectTo = '/home';
 
     public function __construct()
     {
@@ -28,22 +28,33 @@ class VerificationController extends Controller
 
     public function index(Request $request): View|RedirectResponse
     {
-        return $request->user()->hasVerifiedEmail()
-            ? redirect()->intended($this->redirectTo)
-            : view('auth.verification.index');
+        if ($request->user()->hasVerifiedEmail()) {
+            return redirect()->intended($this->redirectTo);
+        }
+
+        $viewData = [];
+        $viewData['title'] = __('authentication.verify_email');
+
+        return view('auth.verification.index')
+            ->with('viewData', $viewData);
     }
 
-    public function verify(EmailVerificationRequest $request): RedirectResponse
-    {
+    public function verify(
+        EmailVerificationRequest $request
+    ): RedirectResponse {
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended($this->redirectTo.'?verified=1');
+            return redirect()->intended(
+                $this->redirectTo.'?verified=1'
+            );
         }
 
         if ($request->user()->markEmailAsVerified()) {
             event(new Verified($request->user()));
         }
 
-        return redirect()->intended($this->redirectTo.'?verified=1');
+        return redirect()->intended(
+            $this->redirectTo.'?verified=1'
+        );
     }
 
     public function resend(Request $request): RedirectResponse

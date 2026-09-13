@@ -6,6 +6,8 @@
 
 @extends('layouts.app')
 
+@section('title', $viewData['title'])
+
 @section('content')
     <section class="welcome-hero">
         <div class="container">

@@ -7,6 +7,8 @@
 
 @extends('layouts.app')
 
+@section('title', $viewData['title'])
+
 @section('content')
     <section class="dash-hero dash-hero-admin">
         <div class="container dash-hero-inner">
@@ -56,6 +58,7 @@
                                 stroke-width="2"
                                 fill="none"
                             />
+
                             <circle
                                 cx="18"
                                 cy="27"
@@ -63,6 +66,7 @@
                                 stroke="currentColor"
                                 stroke-width="2"
                             />
+
                             <circle
                                 cx="46"
                                 cy="27"
@@ -81,15 +85,23 @@
                         {{ __('authentication.vehicles_description') }}
                     </p>
 
-                    <a href="{{ route('admin.car.index') }}" class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link">
-                        <span class="me-1"></span> {{ __('car.heading_management') }}
+                    <a
+                        href="{{ route('admin.car.index') }}"
+                        class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link"
+                    >
+                        <span class="me-1"></span>
+                        {{ __('car.heading_management') }}
                     </a>
-                    <a href="{{ route('admin.ranking.index') }}" class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link mt-2">
+
+                    <a
+                        href="{{ route('admin.ranking.index') }}"
+                        class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link mt-2"
+                    >
                         {{ __('ranking.manage_ranking') }}
                     </a>
                 </div>
 
-                {{-- Reservations Card --}}
+                {{-- Reservations Management Card --}}
                 <div class="admin-card">
                     <span class="admin-icon" aria-hidden="true">
                         <svg
@@ -106,11 +118,13 @@
                                 stroke="currentColor"
                                 stroke-width="2"
                             />
+
                             <path
                                 d="M6 13H26"
                                 stroke="currentColor"
                                 stroke-width="2"
                             />
+
                             <path
                                 d="M11 5V10M21 5V10"
                                 stroke="currentColor"
@@ -128,15 +142,23 @@
                         {{ __('authentication.reservations_description') }}
                     </p>
 
-                    <a href="{{ route('admin.reservation.index') }}" class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link">
-                        <span class="me-1"></span> {{ __('reservation.admin_title_index') }}
+                    <a
+                        href="{{ route('admin.reservation.index') }}"
+                        class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link"
+                    >
+                        <span class="me-1"></span>
+                        {{ __('reservation.admin_title_index') }}
                     </a>
-                    <a href="{{ route('admin.metrics.index') }}" class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link mt-2">
+
+                    <a
+                        href="{{ route('admin.metrics.index') }}"
+                        class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link mt-2"
+                    >
                         {{ __('metrics.manage_metrics') }}
                     </a>
                 </div>
 
-                {{-- Locations Card --}}
+                {{-- Locations Management Card --}}
                 <div class="admin-card">
                     <span class="admin-icon" aria-hidden="true">
                         <svg
@@ -149,6 +171,7 @@
                                 stroke="currentColor"
                                 stroke-width="2"
                             />
+
                             <circle
                                 cx="16"
                                 cy="12"
@@ -167,12 +190,16 @@
                         {{ __('location.registered_locations') }}
                     </p>
 
-                    <a href="{{ route('admin.location.index') }}" class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link">
-                        <span class="me-1"></span> {{ __('location.manage_locations') }}
+                    <a
+                        href="{{ route('admin.location.index') }}"
+                        class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link"
+                    >
+                        <span class="me-1"></span>
+                        {{ __('location.manage_locations') }}
                     </a>
                 </div>
 
-                {{-- Users Card --}}
+                {{-- Users Management Card --}}
                 <div class="admin-card">
                     <span class="admin-icon" aria-hidden="true">
                         <svg
@@ -187,6 +214,7 @@
                                 stroke="currentColor"
                                 stroke-width="2"
                             />
+
                             <path
                                 d="M6 26C6 20.5 10.5 17 16 17C21.5 17 26 20.5 26 26"
                                 stroke="currentColor"
@@ -204,7 +232,10 @@
                         {{ __('authentication.users_description') }}
                     </p>
 
-                    <a href="{{ route('admin.user.index') }}" class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link">
+                    <a
+                        href="{{ route('admin.user.index') }}"
+                        class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link"
+                    >
                         {{ __('user.manage_users') }}
                     </a>
                 </div>

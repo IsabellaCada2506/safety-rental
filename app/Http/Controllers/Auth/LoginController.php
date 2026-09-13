@@ -20,7 +20,10 @@ class LoginController extends Controller
 {
     public function index(): View
     {
-        return view('auth.login.index');
+        $viewData = [];
+        $viewData['title'] = __('authentication.login');
+
+        return view('auth.login.index')->with('viewData', $viewData);
     }
 
     public function authenticate(

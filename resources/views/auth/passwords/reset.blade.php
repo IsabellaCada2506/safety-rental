@@ -6,6 +6,8 @@
 
 @extends('layouts.app')
 
+@section('title', $viewData['title'])
+
 @section('content')
     <section class="simple-page">
         <div class="simple-card">
@@ -17,7 +19,11 @@
                 <form method="POST" action="{{ route('password.update') }}">
                     @csrf
 
-                    <input name="token" type="hidden" value="{{ $viewData['token'] }}">
+                    <input
+                        name="token"
+                        type="hidden"
+                        value="{{ $viewData['token'] }}"
+                    >
 
                     <div class="mb-4">
                         <label class="form-label" for="email">
@@ -70,15 +76,24 @@
 
                         <input
                             id="password_confirmation"
-                            class="form-control"
+                            class="form-control @error('password_confirmation') is-invalid @enderror"
                             name="password_confirmation"
                             type="password"
                             autocomplete="new-password"
                             required
                         >
+
+                        @error('password_confirmation')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
-                    <button class="btn authentication-button w-100" type="submit">
+                    <button
+                        class="btn authentication-button w-100"
+                        type="submit"
+                    >
                         {{ __('authentication.reset_password') }}
                     </button>
                 </form>

@@ -22,11 +22,10 @@ class ResetPasswordController extends Controller
 {
     public function index(Request $request, string $token): View
     {
-        $viewData = [
-            'title' => __('authentication.reset_password'),
-            'token' => $token,
-            'email' => (string) $request->query('email', ''),
-        ];
+        $viewData = [];
+        $viewData['title'] = __('authentication.reset_password');
+        $viewData['token'] = $token;
+        $viewData['email'] = (string) $request->query('email', '');
 
         return view('auth.passwords.reset')
             ->with('viewData', $viewData);
@@ -35,6 +34,8 @@ class ResetPasswordController extends Controller
     public function update(
         ResetPasswordRequest $request
     ): RedirectResponse {
+        $request->validated();
+
         $status = Password::reset(
             [
                 'email' => $request->getEmail(),
