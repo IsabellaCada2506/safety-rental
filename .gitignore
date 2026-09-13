@@ -1,27 +1,61 @@
-*.log
-.DS_Store
+# Laravel
+/vendor/
+/node_modules/
+
+# Environment files
 .env
-.env.backup
-.env.production
-.phpactor.json
+.env.*
+!.env.example
+
+# IDE / Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Laravel storage
+/storage/app/*
+!/storage/app/.gitignore
+
+/storage/framework/cache/*
+!/storage/framework/cache/.gitignore
+
+/storage/framework/sessions/*
+!/storage/framework/sessions/.gitignore
+
+/storage/framework/testing/*
+!/storage/framework/testing/.gitignore
+
+/storage/framework/views/*
+!/storage/framework/views/.gitignore
+
+/storage/logs/*
+!/storage/logs/.gitignore
+
+# Laravel generated files
+/bootstrap/cache/*
+!/bootstrap/cache/.gitignore
+
+# PHPUnit
 .phpunit.result.cache
-/.codex
-/.cursor/
-/.idea
-/.nova
-/.phpunit.cache
-/.vscode
-/.zed
-/auth.json
-/node_modules
-/public/build
-/public/fonts-manifest.dev.json
-/public/hot
-/public/storage
-/storage/*.key
-/storage/pail
-/vendor
-_ide_helper.php
+
+# Coverage
+/coverage/
+
+# Local development
 Homestead.json
 Homestead.yaml
-Thumbs.db
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Build files
+/public/build/
+/public/hot
+
+# Temporary files
+*.log

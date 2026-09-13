@@ -1,0 +1,22 @@
+/* Author: Wendy Atehortua */
+
+/*
+ * Catalog module stylesheet.
+ * Covers the public vehicle catalog: the listing grid
+ * (catalog/index) and the vehicle detail page (catalog/show).
+ * Bootstrap utility classes are used for layout in these views on
+ * purpose; only the pieces Bootstrap can't express live here.
+ */
+
+.catalog-page {
+    margin-top: 105px !important;
+    padding-top: 1rem;
+}
+
+.catalog-card-image {
+    height: 220px;
+}
+
+.catalog-detail-image {
+    height: 480px;
+}
