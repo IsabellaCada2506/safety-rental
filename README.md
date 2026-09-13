@@ -1,58 +1,420 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# **Safety Rental**
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Safety Rental is a vehicle rental web application built with Laravel. This guide contains the steps required to download, configure, initialize, and run the project locally.
 
-## About Laravel
+## **1. Table of Contents**
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- [2. Team Members](#2-team-members)
+- [3. Requirements](#3-requirements)
+- [4. Clone the Repository](#4-clone-the-repository)
+- [5. Install Dependencies](#5-install-dependencies)
+- [6. Configure the Environment](#6-configure-the-environment)
+- [7. Configure the Database](#7-configure-the-database)
+- [8. Run Migrations and Seeders](#8-run-migrations-and-seeders)
+- [9. Run the Application](#9-run-the-application)
+- [10. Application Access](#10-application-access)
+- [11. Seeded Users](#11-seeded-users)
+- [12. Local Email Verification and Password Reset](#12-local-email-verification-and-password-reset)
+- [13. Verification Commands](#13-verification-commands)
+- [14. Common Problems](#14-common-problems)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## **2. Team Members**
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Isabella Cadavid Posada
+- Isabella Ocampo S.
+- Wendy Atehortua
+- Alejandro Correa Marin
 
-## Learning Laravel
+## **3. Requirements**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Install the following tools before starting:
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP 8.3 or later
+- Composer
+- MySQL
+- Git
+- A local server package such as MAMP or XAMPP, if preferred
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Verify the installations:
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+php --version
+composer --version
+git --version
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## **4. Clone the Repository**
 
-## Contributing
+Clone the repository:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+git clone https://github.com/IsabellaCada2506/safety-rental.git
+cd safety-rental
+```
 
-## Code of Conduct
+Switch to the main branch and download its latest changes:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+git switch main
+git pull origin main
+```
 
-## Security Vulnerabilities
+## **5. Install Dependencies**
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Install the PHP dependencies:
 
-## License
+```bash
+composer install
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Regenerate Composer's autoload files:
+
+```bash
+composer dump-autoload
+```
+
+## **6. Configure the Environment**
+
+Create the local environment file:
+
+```bash
+cp .env.example .env
+```
+
+On Windows Command Prompt, use:
+
+```bat
+copy .env.example .env
+```
+
+Generate the application key:
+
+```bash
+php artisan key:generate
+```
+
+Set the main application values in `.env`:
+
+```dotenv
+APP_NAME="Safety Rental"
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://127.0.0.1:8000
+
+APP_LOCALE=es
+APP_FALLBACK_LOCALE=en
+```
+
+## **7. Configure the Database**
+
+Start MySQL and create an empty database named:
+
+```text
+safety_rental
+```
+
+### **7.1. Standard MySQL Configuration**
+
+For a standard local MySQL installation, set the following values in `.env`:
+
+```dotenv
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=safety_rental
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### **7.2. MAMP Configuration on macOS**
+
+For a default MAMP installation on macOS, the common configuration is:
+
+```dotenv
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=8889
+DB_DATABASE=safety_rental
+DB_USERNAME=root
+DB_PASSWORD=root
+```
+
+If MAMP uses a different port or password, use the values displayed in its MySQL settings.
+
+### **7.3. Clear the Configuration Cache**
+
+After editing `.env`, run:
+
+```bash
+php artisan optimize:clear
+```
+
+## **8. Run Migrations and Seeders**
+
+### **8.1. First Installation**
+
+For the first local installation, create all tables and insert the sample data:
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+> **Warning:** `migrate:fresh` deletes all existing tables and information in the configured database. Use it only for a new installation or when the current information can be discarded.
+
+### **8.2. Existing Database**
+
+If the database already contains information that must be preserved, use:
+
+```bash
+php artisan migrate
+php artisan db:seed
+```
+our 
+
+```bash
+php artisan migrate:refresh --seed
+```
+
+## **9. Run the Application**
+
+Start the Laravel development server:
+
+```bash
+php artisan serve
+```
+
+Open the application at:
+
+- Home: <http://127.0.0.1:8000>
+- Login: <http://127.0.0.1:8000/login>
+- Registration: <http://127.0.0.1:8000/register>
+
+Stop the server with:
+
+```text
+Control + C
+```
+
+## **10. Application Access**
+
+| Area | URL | Access |
+|---|---|---|
+| Public home | <http://127.0.0.1:8000> | Everyone |
+| Login | <http://127.0.0.1:8000/login> | Everyone |
+| Registration | <http://127.0.0.1:8000/register> | Guests |
+| Customer home | <http://127.0.0.1:8000/home> | Verified customers |
+| Profile | <http://127.0.0.1:8000/profile> | Authenticated customers |
+| Catalog | <http://127.0.0.1:8000/catalog> | Verified customers |
+| Reservations | <http://127.0.0.1:8000/reservations> | Verified customers |
+| Administration | <http://127.0.0.1:8000/admin/dashboard> | Verified administrators |
+
+## **11. Seeded Users**
+
+The following accounts are created by either of these commands:
+
+```bash
+php artisan db:seed
+```
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+| Name | Role | Email | Password | Email status |
+|---|---|---|---|---|
+| Safety Rental Administrator | Administrator | `admin@safetyrental.test` | `password` | Verified |
+| Admin User | Administrator | `admin@safetyrental.com` | `admin12345` | Not marked as verified by the seeder |
+| Isabella Ocampo | Customer | `isa@gmail.com` | `b12345678` | Verified |
+| Carlos Rueda | Customer | `carlos@gmail.com` | `c12345678` | Verified |
+| Safety Rental Customer | Customer | `customer@safetyrental.test` | `password` | Verified |
+
+### **11.1. Recommended Administrator Account**
+
+Use this account for immediate access to all administrator features:
+
+```text
+Email: admin@safetyrental.test
+Password: password
+```
+
+### **11.2. Recommended Customer Account**
+
+Use this account for immediate customer access:
+
+```text
+Email: customer@safetyrental.test
+Password: password
+```
+
+> **Important:** Seeded credentials are intended only for local development and testing. Change or remove them before deploying the application.
+
+## **12. Local Email Verification and Password Reset**
+
+### **12.1. Configure Local Email Logging**
+
+Keep the following value in `.env` while testing locally:
+
+```dotenv
+MAIL_MAILER=log
+```
+
+Verification and password-reset messages will be written to:
+
+```text
+storage/logs/laravel.log
+```
+
+### **12.2. Request a Password Reset**
+
+Open the password recovery page:
+
+```text
+http://127.0.0.1:8000/password/request
+```
+
+Enter the email address of an existing user and submit the form.
+
+### **12.3. Obtain the Password Reset Link**
+
+After requesting the password reset, run the following command in the project terminal:
+
+```bash
+grep -oE 'http\://[^ ]+/password/reset/[^ ]+' storage/logs/laravel.log | tail -1
+```
+
+The terminal will display the most recent password-reset URL.
+
+Copy the complete URL, paste it into the browser, and enter the new password.
+
+### **12.4. Open the Log Manually**
+
+You can also open the following file:
+
+```text
+storage/logs/laravel.log
+```
+
+Find the most recent verification or password-reset link and copy it into the browser.
+
+## **13. Verification Commands**
+
+Run these commands before submitting changes:
+
+```bash
+composer dump-autoload
+php artisan optimize:clear
+php artisan route:list
+php artisan test
+./vendor/bin/pint --test
+```
+
+If Pint reports formatting problems, apply its automatic corrections:
+
+```bash
+./vendor/bin/pint
+```
+
+Run the verification again:
+
+```bash
+./vendor/bin/pint --test
+php artisan test
+```
+
+## **14. Common Problems**
+
+### **14.1. Database Connection Error**
+
+- Confirm that MySQL is running.
+- Confirm the database name in `.env`.
+- Confirm the database port, username, and password.
+- Run `php artisan optimize:clear` after changing `.env`.
+
+For MAMP, verify that the MySQL port is normally:
+
+```dotenv
+DB_PORT=8889
+```
+
+### **14.2. Application Key Is Missing**
+
+Run:
+
+```bash
+php artisan key:generate
+```
+
+Then clear the cached configuration:
+
+```bash
+php artisan optimize:clear
+```
+
+### **14.3. Classes, Routes, or Recent Changes Are Not Recognized**
+
+Run:
+
+```bash
+composer dump-autoload
+php artisan optimize:clear
+```
+
+If dependencies have not been installed, run:
+
+```bash
+composer install
+composer dump-autoload
+php artisan optimize:clear
+```
+
+### **14.4. Seed Data Was Not Created**
+
+Run:
+
+```bash
+php artisan db:seed
+```
+
+To recreate the complete local database and seed all sample information, run:
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+> **Warning:** This command deletes the existing tables and information.
+
+### **14.5. Port 8000 Is Already in Use**
+
+Run the application using another port:
+
+```bash
+php artisan serve --port=8001
+```
+
+Then open:
+
+```text
+http://127.0.0.1:8001
+```
+
+### **14.6. Password Reset Link Is Not Displayed**
+
+Confirm that `.env` contains:
+
+```dotenv
+MAIL_MAILER=log
+```
+
+Clear the cached configuration:
+
+```bash
+php artisan optimize:clear
+```
+
+Request the password reset again and run:
+
+```bash
+grep -oE 'http\://[^ ]+/password/reset/[^ ]+' storage/logs/laravel.log | tail -1
+```
+
+Copy the URL printed in the terminal and paste it into the browser.
