@@ -8,11 +8,10 @@
 
 namespace App\Utils;
 
-use App\Interfaces\ReservationPricingInterface;
 use App\Models\Car;
 use Carbon\Carbon;
 
-class ReservationPricingUtil implements ReservationPricingInterface
+class ReservationPricingUtil
 {
     public function calculateDays(Carbon|string $startDate, Carbon|string $endDate): int
     {

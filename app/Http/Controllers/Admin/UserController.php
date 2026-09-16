@@ -11,32 +11,33 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\DeleteUserRequest;
 use App\Http\Requests\Admin\UpdateUserRequest;
-use App\Interfaces\UserServiceInterface;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    private readonly UserServiceInterface $userService;
-
-    public function __construct(UserServiceInterface $userService)
-    {
-        $this->userService = $userService;
-    }
-
     public function index(): View
     {
+        $users = User::query()
+            ->withCount('reservations')
+            ->orderBy('name')
+            ->orderBy('id')
+            ->get();
+
         $viewData = [];
         $viewData['title'] = __('user.admin_title_index');
-        $viewData['users'] = $this->userService->getAll();
+        $viewData['users'] = $users;
 
         return view('admin.user.index')->with('viewData', $viewData);
     }
 
     public function edit(int $id): View
     {
-        $user = $this->userService->findOrFail($id);
+        $user = User::query()
+            ->withCount('reservations')
+            ->findOrFail($id);
 
         $viewData = [];
         $viewData['title'] = __('user.admin_title_edit');
@@ -52,40 +53,59 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, int $id): RedirectResponse
     {
         $validatedData = $request->validated();
-        $user = $this->userService->findOrFail($id);
+        $user = User::query()->findOrFail($id);
         $newRole = (string) $validatedData['role'];
 
-        if (! $this->userService->canChangeRole($user, $newRole)) {
+        $adminCount = User::query()->where('role', User::ROLE_ADMIN)->count();
+        if ($user->isAdmin() && $newRole === User::ROLE_CUSTOMER && $adminCount <= 1) {
             return back()
                 ->withInput()
-                ->withErrors(['error' => $this->userService->roleChangeDenialReason($user, $newRole)]);
+                ->withErrors(['role' => __('user.update_error_last_admin')]);
         }
 
-        $this->userService->updateByAdmin($user, $validatedData);
+        $user->setName((string) $validatedData['name']);
+        $user->setLastName((string) $validatedData['last_name']);
+        $user->setBirthDate(Carbon::parse((string) $validatedData['birth_date']));
+        $user->setAddress((string) $validatedData['address']);
+        $user->setLicenseNumber((int) $validatedData['license_number']);
+        $user->setEmergencyContact((int) $validatedData['emergency_contact']);
+        $user->setIdentificationNumber((int) $validatedData['identification_number']);
+        $user->setEmergencyContactName((string) $validatedData['emergency_contact_name']);
+        $user->setEmergencyContactLastName((string) $validatedData['emergency_contact_last_name']);
+        $user->setEps((string) $validatedData['eps']);
+        $user->setEmail((string) $validatedData['email']);
+        $user->setRole($newRole);
 
-        return redirect()
-            ->route('admin.user.index')
-            ->with('success', __('user.updated_success'));
+        if (! empty($validatedData['password'])) {
+            $user->setPassword((string) $validatedData['password']);
+        }
+
+        $user->save();
+
+        return redirect()->route('admin.user.index')->with('success', __('user.updated_success'));
     }
 
     public function delete(DeleteUserRequest $request, int $id): RedirectResponse
     {
-        $validatedData = $request->validated();
-        $user = $this->userService->findOrFail($id);
+        $request->validated();
+        $user = User::query()->withCount('reservations')->findOrFail($id);
         $actor = $request->user();
 
-        if (! $actor instanceof User || ! $this->userService->canBeDeleted($user, $actor)) {
-            return back()->withErrors([
-                'error' => $actor instanceof User
-                    ? $this->userService->deleteDenialReason($user, $actor)
-                    : __('user.delete_error_forbidden'),
-            ]);
+        if ($user->getId() === $actor?->getId()) {
+            return back()->with('error', __('user.delete_error_self'));
         }
 
-        $this->userService->delete($user);
+        $adminCount = User::query()->where('role', User::ROLE_ADMIN)->count();
+        if ($user->isAdmin() && $adminCount <= 1) {
+            return back()->with('error', __('user.delete_error_last_admin'));
+        }
 
-        return redirect()
-            ->route('admin.user.index')
-            ->with('success', __('user.deleted_success'));
+        if ($user->getReservationsCount() > 0) {
+            return back()->with('error', __('user.delete_error_reservations'));
+        }
+
+        $user->delete();
+
+        return redirect()->route('admin.user.index')->with('success', __('user.deleted_success'));
     }
 }

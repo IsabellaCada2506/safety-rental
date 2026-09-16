@@ -12,7 +12,6 @@ use App\Models\Car;
 use App\Models\Location;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/** @extends Factory<Car> */
 class CarFactory extends Factory
 {
     protected $model = Car::class;
