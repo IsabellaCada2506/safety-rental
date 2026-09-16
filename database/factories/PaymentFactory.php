@@ -10,11 +10,9 @@
 
 namespace Database\Factories;
 
-use App\Interfaces\PaymentServiceInterface;
 use App\Models\Payment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/** @extends Factory<Payment> */
 class PaymentFactory extends Factory
 {
     protected $model = Payment::class;
@@ -25,7 +23,7 @@ class PaymentFactory extends Factory
             'reservation_id' => null,
             'code' => fake()->unique()->numberBetween(10000000, 99999999),
             'amount' => fake()->randomFloat(2, 50000, 500000),
-            'method' => fake()->randomElement(app(PaymentServiceInterface::class)->availableMethods()),
+            'method' => fake()->randomElement(Payment::availableMethods()),
             'transaction_code' => fake()->numberBetween(10000000, 99999999),
             'status' => Payment::STATUS_COMPLETED,
             'date' => fake()->date(),

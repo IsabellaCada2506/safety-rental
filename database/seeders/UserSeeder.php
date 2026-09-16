@@ -95,24 +95,24 @@ class UserSeeder extends Seeder
         $user2->setEmailVerifiedAt(Carbon::now());
         $user2->save();
 
-        $userp = User::query()
+        $user3 = User::query()
             ->where('email', 'customer@safetyrental.test')
             ->first() ?? new User;
 
-        $userp->setRole(User::ROLE_CUSTOMER);
-        $userp->setName('Safety Rental');
-        $userp->setLastName('Customer');
-        $userp->setBirthDate(Carbon::parse('2000-01-01'));
-        $userp->setAddress('Customer Test Address');
-        $userp->setLicenseNumber(10000002);
-        $userp->setEmergencyContact(3000000002);
-        $userp->setIdentificationNumber(1000000002);
-        $userp->setEmergencyContactName('Customer Emergency');
-        $userp->setEmergencyContactLastName('Contact');
-        $userp->setEps('Test EPS');
-        $userp->setEmail('customer@safetyrental.test');
-        $userp->setPassword(bcrypt('password'));
-        $userp->setEmailVerifiedAt(Carbon::now());
-        $userp->save();
+        $user3->setRole(User::ROLE_CUSTOMER);
+        $user3->setName('Safety Rental');
+        $user3->setLastName('Customer');
+        $user3->setBirthDate(Carbon::parse('2000-01-01'));
+        $user3->setAddress('Customer Test Address');
+        $user3->setLicenseNumber(10000002);
+        $user3->setEmergencyContact(3000000002);
+        $user3->setIdentificationNumber(1000000002);
+        $user3->setEmergencyContactName('Customer Emergency');
+        $user3->setEmergencyContactLastName('Contact');
+        $user3->setEps('Test EPS');
+        $user3->setEmail('customer@safetyrental.test');
+        $user3->setPassword(bcrypt('password'));
+        $user3->setEmailVerifiedAt(Carbon::now());
+        $user3->save();
     }
 }

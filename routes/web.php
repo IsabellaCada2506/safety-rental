@@ -1,8 +1,10 @@
 <?php
 
 /**
+ * Author: Isabella Cadavid Posada
  * Author: Isabella Ocampo
  * Author: Alejandro Correa Marin
+ * Author: Wendy Atehortua
  * Date: 2026-09-12
  * Description: Web routes for the Safety Rental application, mapping HTTP requests to controller actions without closures.
  */
@@ -16,171 +18,94 @@ use App\Http\Controllers\Admin\MetricsController;
 use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
 use App\Http\Controllers\Admin\ReservationController as AdminReservationController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\Auth\VerificationController;
-use App\Http\Controllers\CatalogController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LocaleController;
-use App\Http\Controllers\LocationController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ReceiptController;
-use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\Authentication\ForgotPasswordController;
+use App\Http\Controllers\Authentication\LoginController;
+use App\Http\Controllers\Authentication\RegisterController;
+use App\Http\Controllers\Authentication\ResetPasswordController;
+use App\Http\Controllers\Authentication\VerificationController;
+use App\Http\Controllers\User\CatalogController;
+use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\LocaleController;
+use App\Http\Controllers\User\LocationController as UserLocationController;
+use App\Http\Controllers\User\PaymentController;
+use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\ReceiptController;
+use App\Http\Controllers\User\ReservationController;
+use App\Http\Controllers\User\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 $basePath = '';
 
-$welcomePath = $basePath.'/';
-$localePath = $basePath.'/locale/{lang}';
+Route::get($basePath.'/', [WelcomeController::class, 'index'])->name('welcome.index');
+Route::post($basePath.'/locale/{lang}', [LocaleController::class, 'switch'])->name('locale.switch');
 
-$loginPath = $basePath.'/login';
-$logoutPath = $basePath.'/logout';
-$registerPath = $basePath.'/register';
+Route::get($basePath.'/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
+Route::post($basePath.'/login', [LoginController::class, 'authenticate'])->middleware('guest')->name('auth.login.authenticate');
+Route::get($basePath.'/register', [RegisterController::class, 'index'])->middleware('guest')->name('register');
+Route::post($basePath.'/register', [RegisterController::class, 'store'])->middleware('guest')->name('auth.register.store');
+Route::get($basePath.'/password/request', [ForgotPasswordController::class, 'index'])->middleware('guest')->name('password.request');
+Route::post($basePath.'/password/email', [ForgotPasswordController::class, 'sendResetLink'])->middleware('guest')->name('password.email');
+Route::get($basePath.'/password/reset/{token}', [ResetPasswordController::class, 'index'])->middleware('guest')->name('password.reset');
+Route::post($basePath.'/password/reset', [ResetPasswordController::class, 'update'])->middleware('guest')->name('password.update');
 
-$homePath = $basePath.'/home';
+Route::post($basePath.'/logout', [LoginController::class, 'logout'])->middleware('auth')->name('auth.logout');
+Route::get($basePath.'/email/verify', [VerificationController::class, 'index'])->middleware('auth')->name('verification.notice');
+Route::get($basePath.'/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->middleware(['auth', 'signed'])->whereNumber('id')->name('verification.verify');
+Route::post($basePath.'/email/verification-notification', [VerificationController::class, 'resend'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
-$profilePath = $basePath.'/profile';
-$profileEditPath = $profilePath.'/edit';
+Route::get($basePath.'/home', [HomeController::class, 'index'])->middleware(['auth', 'verified', 'user'])->name('home.index');
+Route::get($basePath.'/profile', [ProfileController::class, 'index'])->middleware(['auth', 'user'])->name('profile.index');
+Route::get($basePath.'/profile/edit', [ProfileController::class, 'edit'])->middleware(['auth', 'user'])->name('profile.edit');
+Route::put($basePath.'/profile', [ProfileController::class, 'update'])->middleware(['auth', 'user'])->name('profile.update');
 
-$emailPath = $basePath.'/email';
-$emailVerificationPath = $emailPath.'/verify';
-$emailVerificationHandlerPath = $emailVerificationPath.'/{id}/{hash}';
-$emailVerificationNotificationPath = $emailPath.'/verification-notification';
+Route::get($basePath.'/catalog', [CatalogController::class, 'index'])->middleware(['auth', 'verified', 'user'])->name('catalog.index');
+Route::get($basePath.'/catalog/{id}', [CatalogController::class, 'show'])->middleware(['auth', 'verified', 'user'])->whereNumber('id')->name('catalog.show');
 
-$passwordPath = $basePath.'/password';
-$passwordRequestPath = $passwordPath.'/request';
-$passwordEmailPath = $passwordPath.'/email';
-$passwordResetPath = $passwordPath.'/reset/{token}';
-$passwordUpdatePath = $passwordPath.'/reset';
+Route::get($basePath.'/locations', [UserLocationController::class, 'index'])->middleware(['auth', 'verified', 'user'])->name('locations.index');
+Route::get($basePath.'/locations/{id}', [UserLocationController::class, 'show'])->middleware(['auth', 'verified', 'user'])->whereNumber('id')->name('locations.show');
 
-$adminPath = $basePath.'/admin';
-$adminDashboardPath = $adminPath.'/dashboard';
+Route::get($basePath.'/reservations', [ReservationController::class, 'index'])->middleware(['auth', 'verified', 'user'])->name('reservations.index');
+Route::get($basePath.'/reservations/create', [ReservationController::class, 'create'])->middleware(['auth', 'verified', 'user'])->name('reservations.create');
+Route::post($basePath.'/reservations', [ReservationController::class, 'store'])->middleware(['auth', 'verified', 'user'])->name('reservations.store');
+Route::get($basePath.'/reservations/{id}', [ReservationController::class, 'show'])->middleware(['auth', 'verified', 'user'])->whereNumber('id')->name('reservations.show');
+Route::patch($basePath.'/reservations/{id}/cancel', [ReservationController::class, 'cancel'])->middleware(['auth', 'verified', 'user'])->whereNumber('id')->name('reservations.cancel');
+Route::get($basePath.'/reservations/{id}/payment', [PaymentController::class, 'create'])->middleware(['auth', 'verified', 'user'])->whereNumber('id')->name('payments.create');
+Route::post($basePath.'/reservations/{id}/payment', [PaymentController::class, 'store'])->middleware(['auth', 'verified', 'user'])->whereNumber('id')->name('payments.store');
+Route::get($basePath.'/reservations/{id}/receipt', [ReceiptController::class, 'download'])->middleware(['auth', 'verified', 'user'])->whereNumber('id')->name('receipts.download');
 
-$adminCarPath = $adminPath.'/cars';
-$adminCarCreatePath = $adminCarPath.'/create';
-$adminCarStorePath = $adminCarPath.'/store';
-$adminCarEditPath = $adminCarPath.'/{id}/edit';
-$adminCarUpdatePath = $adminCarPath.'/{id}/update';
-$adminCarDeactivatePath = $adminCarPath.'/{id}/deactivate';
-$adminRankingPath = $adminPath.'/car-ranking';
-$adminMetricsPath = $adminPath.'/metrics';
+Route::get($basePath.'/admin/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified', 'admin'])->name('admin.dashboard.index');
+Route::get($basePath.'/admin/cars', [CarController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.car.index');
+Route::get($basePath.'/admin/cars/create', [CarController::class, 'create'])->middleware(['auth', 'admin'])->name('admin.car.create');
+Route::post($basePath.'/admin/cars/store', [CarController::class, 'store'])->middleware(['auth', 'admin'])->name('admin.car.store');
+Route::get($basePath.'/admin/cars/{id}/edit', [CarController::class, 'edit'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.car.edit');
+Route::put($basePath.'/admin/cars/{id}/update', [CarController::class, 'update'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.car.update');
+Route::patch($basePath.'/admin/cars/{id}/deactivate', [CarController::class, 'deactivate'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.car.deactivate');
+Route::get($basePath.'/admin/car-ranking', [CarRankingController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.ranking.index');
 
-$adminCategoryPath = $adminPath.'/categories';
-$adminCategoryCreatePath = $adminCategoryPath.'/create';
-$adminCategoryStorePath = $adminCategoryPath.'/store';
-$adminCategoryEditPath = $adminCategoryPath.'/{id}/edit';
-$adminCategoryUpdatePath = $adminCategoryPath.'/{id}/update';
-$adminCategoryDeletePath = $adminCategoryPath.'/{id}/delete';
+Route::get($basePath.'/admin/categories', [CategoryController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.category.index');
+Route::get($basePath.'/admin/categories/create', [CategoryController::class, 'create'])->middleware(['auth', 'admin'])->name('admin.category.create');
+Route::post($basePath.'/admin/categories/store', [CategoryController::class, 'store'])->middleware(['auth', 'admin'])->name('admin.category.store');
+Route::get($basePath.'/admin/categories/{id}/edit', [CategoryController::class, 'edit'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.category.edit');
+Route::put($basePath.'/admin/categories/{id}/update', [CategoryController::class, 'update'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.category.update');
+Route::delete($basePath.'/admin/categories/{id}/delete', [CategoryController::class, 'delete'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.category.delete');
 
-$adminReservationPath = $adminPath.'/reservations';
-$adminReservationShowPath = $adminReservationPath.'/{id}';
-$adminReservationConfirmPath = $adminReservationPath.'/{id}/confirm';
-$adminReservationCancelPath = $adminReservationPath.'/{id}/cancel';
+Route::get($basePath.'/admin/locations', [AdminLocationController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.location.index');
+Route::get($basePath.'/admin/locations/create', [AdminLocationController::class, 'create'])->middleware(['auth', 'admin'])->name('admin.location.create');
+Route::post($basePath.'/admin/locations/store', [AdminLocationController::class, 'store'])->middleware(['auth', 'admin'])->name('admin.location.store');
+Route::get($basePath.'/admin/locations/{id}/edit', [AdminLocationController::class, 'edit'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.location.edit');
+Route::put($basePath.'/admin/locations/{id}/update', [AdminLocationController::class, 'update'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.location.update');
+Route::delete($basePath.'/admin/locations/{id}/delete', [AdminLocationController::class, 'delete'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.location.delete');
 
-$reservationPath = $basePath.'/reservations';
-$reservationCreatePath = $reservationPath.'/create';
-$reservationStorePath = $reservationPath;
-$reservationShowPath = $reservationPath.'/{id}';
-$reservationCancelPath = $reservationPath.'/{id}/cancel';
-$reservationPaymentPath = $reservationShowPath.'/payment';
-$reservationReceiptPath = $reservationShowPath.'/receipt';
+Route::get($basePath.'/admin/reservations', [AdminReservationController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.reservation.index');
+Route::get($basePath.'/admin/reservations/{id}', [AdminReservationController::class, 'show'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.reservation.show');
+Route::patch($basePath.'/admin/reservations/{id}/confirm', [AdminReservationController::class, 'confirm'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.reservation.confirm');
+Route::patch($basePath.'/admin/reservations/{id}/cancel', [AdminReservationController::class, 'cancel'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.reservation.cancel');
 
-$adminPaymentPath = $adminPath.'/payments';
-$adminPaymentShowPath = $adminPaymentPath.'/{id}';
-$adminPaymentRefundPath = $adminPaymentShowPath.'/refund';
-
-$catalogPath = $basePath.'/catalog';
-$catalogShowPath = $catalogPath.'/{id}';
-
-$adminUserPath = $adminPath.'/users';
-$adminUserEditPath = $adminUserPath.'/{id}/edit';
-$adminUserUpdatePath = $adminUserPath.'/{id}/update';
-$adminUserDeletePath = $adminUserPath.'/{id}/delete';
-
-$adminLocationPath = $adminPath.'/locations';
-$adminLocationCreatePath = $adminLocationPath.'/create';
-$adminLocationStorePath = $adminLocationPath.'/store';
-$adminLocationEditPath = $adminLocationPath.'/{id}/edit';
-$adminLocationUpdatePath = $adminLocationPath.'/{id}/update';
-$adminLocationDeletePath = $adminLocationPath.'/{id}/delete';
-
-$locationPath = $basePath.'/locations';
-$locationShowPath = $locationPath.'/{id}';
-
-Route::get($welcomePath, [WelcomeController::class, 'index'])->name('welcome.index');
-Route::post($localePath, [LocaleController::class, 'switch'])->name('locale.switch');
-
-Route::get($loginPath, [LoginController::class, 'index'])->middleware('guest')->name('login');
-Route::post($loginPath, [LoginController::class, 'authenticate'])->middleware('guest')->name('auth.login.authenticate');
-Route::get($registerPath, [RegisterController::class, 'index'])->middleware('guest')->name('register');
-Route::post($registerPath, [RegisterController::class, 'store'])->middleware('guest')->name('auth.register.store');
-Route::get($passwordRequestPath, [ForgotPasswordController::class, 'index'])->middleware('guest')->name('password.request');
-Route::post($passwordEmailPath, [ForgotPasswordController::class, 'sendResetLink'])->middleware('guest')->name('password.email');
-Route::get($passwordResetPath, [ResetPasswordController::class, 'index'])->middleware('guest')->name('password.reset');
-Route::post($passwordUpdatePath, [ResetPasswordController::class, 'update'])->middleware('guest')->name('password.update');
-
-Route::post($logoutPath, [LoginController::class, 'logout'])->middleware('auth')->name('auth.logout');
-Route::get($emailVerificationPath, [VerificationController::class, 'index'])->middleware('auth')->name('verification.notice');
-Route::get($emailVerificationHandlerPath, [VerificationController::class, 'verify'])->middleware(['auth', 'signed'])->whereNumber('id')->name('verification.verify');
-Route::post($emailVerificationNotificationPath, [VerificationController::class, 'resend'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-
-Route::get($homePath, [HomeController::class, 'index'])->middleware(['auth', 'verified', 'customer'])->name('home.index');
-Route::get($profilePath, [ProfileController::class, 'index'])->middleware(['auth', 'customer'])->name('profile.index');
-Route::get($profileEditPath, [ProfileController::class, 'edit'])->middleware(['auth', 'customer'])->name('profile.edit');
-Route::put($profilePath, [ProfileController::class, 'update'])->middleware(['auth', 'customer'])->name('profile.update');
-
-Route::get($catalogPath, [CatalogController::class, 'index'])->middleware(['auth', 'verified', 'customer'])->name('catalog.index');
-Route::get($catalogShowPath, [CatalogController::class, 'show'])->middleware(['auth', 'verified', 'customer'])->whereNumber('id')->name('catalog.show');
-
-Route::get($locationPath, [LocationController::class, 'index'])->middleware(['auth', 'verified', 'customer'])->name('locations.index');
-Route::get($locationShowPath, [LocationController::class, 'show'])->middleware(['auth', 'verified', 'customer'])->whereNumber('id')->name('locations.show');
-
-Route::get($reservationPath, [ReservationController::class, 'index'])->middleware(['auth', 'verified', 'customer'])->name('reservations.index');
-Route::get($reservationCreatePath, [ReservationController::class, 'create'])->middleware(['auth', 'verified', 'customer'])->name('reservations.create');
-Route::post($reservationStorePath, [ReservationController::class, 'store'])->middleware(['auth', 'verified', 'customer'])->name('reservations.store');
-Route::get($reservationShowPath, [ReservationController::class, 'show'])->middleware(['auth', 'verified', 'customer'])->whereNumber('id')->name('reservations.show');
-Route::patch($reservationCancelPath, [ReservationController::class, 'cancel'])->middleware(['auth', 'verified', 'customer'])->whereNumber('id')->name('reservations.cancel');
-Route::get($reservationPaymentPath, [PaymentController::class, 'create'])->middleware(['auth', 'verified', 'customer'])->whereNumber('id')->name('payments.create');
-Route::post($reservationPaymentPath, [PaymentController::class, 'store'])->middleware(['auth', 'verified', 'customer'])->whereNumber('id')->name('payments.store');
-Route::get($reservationReceiptPath, [ReceiptController::class, 'download'])->middleware(['auth', 'verified', 'customer'])->whereNumber('id')->name('receipts.download');
-
-Route::get($adminDashboardPath, [DashboardController::class, 'index'])->middleware(['auth', 'verified', 'admin'])->name('admin.dashboard.index');
-Route::get($adminCarPath, [CarController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.car.index');
-Route::get($adminCarCreatePath, [CarController::class, 'create'])->middleware(['auth', 'admin'])->name('admin.car.create');
-Route::post($adminCarStorePath, [CarController::class, 'store'])->middleware(['auth', 'admin'])->name('admin.car.store');
-Route::get($adminCarEditPath, [CarController::class, 'edit'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.car.edit');
-Route::put($adminCarUpdatePath, [CarController::class, 'update'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.car.update');
-Route::patch($adminCarDeactivatePath, [CarController::class, 'deactivate'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.car.deactivate');
-Route::get($adminRankingPath, [CarRankingController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.ranking.index');
-
-Route::get($adminCategoryPath, [CategoryController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.category.index');
-Route::get($adminCategoryCreatePath, [CategoryController::class, 'create'])->middleware(['auth', 'admin'])->name('admin.category.create');
-Route::post($adminCategoryStorePath, [CategoryController::class, 'store'])->middleware(['auth', 'admin'])->name('admin.category.store');
-Route::get($adminCategoryEditPath, [CategoryController::class, 'edit'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.category.edit');
-Route::put($adminCategoryUpdatePath, [CategoryController::class, 'update'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.category.update');
-Route::delete($adminCategoryDeletePath, [CategoryController::class, 'delete'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.category.delete');
-
-Route::get($adminLocationPath, [AdminLocationController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.location.index');
-Route::get($adminLocationCreatePath, [AdminLocationController::class, 'create'])->middleware(['auth', 'admin'])->name('admin.location.create');
-Route::post($adminLocationStorePath, [AdminLocationController::class, 'store'])->middleware(['auth', 'admin'])->name('admin.location.store');
-Route::get($adminLocationEditPath, [AdminLocationController::class, 'edit'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.location.edit');
-Route::put($adminLocationUpdatePath, [AdminLocationController::class, 'update'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.location.update');
-Route::delete($adminLocationDeletePath, [AdminLocationController::class, 'delete'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.location.delete');
-
-Route::get($adminReservationPath, [AdminReservationController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.reservation.index');
-Route::get($adminReservationShowPath, [AdminReservationController::class, 'show'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.reservation.show');
-Route::patch($adminReservationConfirmPath, [AdminReservationController::class, 'confirm'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.reservation.confirm');
-Route::patch($adminReservationCancelPath, [AdminReservationController::class, 'cancel'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.reservation.cancel');
-
-Route::get($adminPaymentPath, [AdminPaymentController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.payment.index');
-Route::get($adminPaymentShowPath, [AdminPaymentController::class, 'show'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.payment.show');
-Route::patch($adminPaymentRefundPath, [AdminPaymentController::class, 'refund'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.payment.refund');
-Route::get($adminMetricsPath, [MetricsController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.metrics.index');
-Route::get($adminUserPath, [AdminUserController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.user.index');
-Route::get($adminUserEditPath, [AdminUserController::class, 'edit'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.user.edit');
-Route::put($adminUserUpdatePath, [AdminUserController::class, 'update'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.user.update');
-Route::delete($adminUserDeletePath, [AdminUserController::class, 'delete'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.user.delete');
+Route::get($basePath.'/admin/payments', [AdminPaymentController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.payment.index');
+Route::get($basePath.'/admin/payments/{id}', [AdminPaymentController::class, 'show'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.payment.show');
+Route::patch($basePath.'/admin/payments/{id}/refund', [AdminPaymentController::class, 'refund'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.payment.refund');
+Route::get($basePath.'/admin/metrics', [MetricsController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.metrics.index');
+Route::get($basePath.'/admin/users', [AdminUserController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.user.index');
+Route::get($basePath.'/admin/users/{id}/edit', [AdminUserController::class, 'edit'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.user.edit');
+Route::put($basePath.'/admin/users/{id}/update', [AdminUserController::class, 'update'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.user.update');
+Route::delete($basePath.'/admin/users/{id}/delete', [AdminUserController::class, 'delete'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.user.delete');

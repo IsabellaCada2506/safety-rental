@@ -39,6 +39,9 @@ use Illuminate\Support\Facades\Hash;
  * $this->attributes['remember_token']              - string|null   - contains the remember session token
  * $this->attributes['created_at']                  - string|null   - contains the creation timestamp
  * $this->attributes['updated_at']                  - string|null   - contains the update timestamp
+ *
+ * RELATIONSHIPS
+ * $this->reservations - Collection<int, Reservation> - the reservations created by this user
  */
 class User extends Authenticatable
 {
@@ -48,8 +51,6 @@ class User extends Authenticatable
     public const ROLE_ADMIN = 'admin';
 
     public const ROLE_CUSTOMER = 'customer';
-
-    public $timestamps = true;
 
     protected $fillable = [
         'role',
@@ -126,9 +127,7 @@ class User extends Authenticatable
 
     public function getBirthDate(): ?Carbon
     {
-        return isset($this->attributes['birth_date'])
-            ? Carbon::parse($this->attributes['birth_date'])
-            : null;
+        return $this->birth_date;
     }
 
     public function setBirthDate(?Carbon $birthDate): void
@@ -227,9 +226,7 @@ class User extends Authenticatable
 
     public function getEmailVerifiedAt(): ?Carbon
     {
-        return isset($this->attributes['email_verified_at'])
-            ? Carbon::parse($this->attributes['email_verified_at'])
-            : null;
+        return $this->email_verified_at;
     }
 
     public function setEmailVerifiedAt(?Carbon $emailVerifiedAt): void
@@ -249,16 +246,12 @@ class User extends Authenticatable
 
     public function getCreatedAt(): ?Carbon
     {
-        return isset($this->attributes['created_at'])
-            ? Carbon::parse($this->attributes['created_at'])
-            : null;
+        return $this->created_at;
     }
 
     public function getUpdatedAt(): ?Carbon
     {
-        return isset($this->attributes['updated_at'])
-            ? Carbon::parse($this->attributes['updated_at'])
-            : null;
+        return $this->updated_at;
     }
 
     public function reservations(): HasMany
@@ -279,5 +272,10 @@ class User extends Authenticatable
     public function getReservationsCount(): int
     {
         return (int) ($this->attributes['reservations_count'] ?? 0);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->getRole() === self::ROLE_ADMIN;
     }
 }

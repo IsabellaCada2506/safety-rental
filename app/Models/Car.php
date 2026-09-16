@@ -10,7 +10,6 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Database\Factories\CarFactory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -38,35 +37,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * $this->category - Category|null - the classification category this car belongs to
  * $this->location - Location|null - the branch location this car belongs to
  * $this->reservations - Collection<int, Reservation> - the reservations for this car
- *
- * @property int $id
- * @property string $plate
- * @property string $color
- * @property string $soat
- * @property int $price
- * @property string $transit_license
- * @property string|null $description
- * @property int $mileage
- * @property string|null $image
- * @property string $status
- * @property int|null $category_id
- * @property int|null $location_id
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property Category|null $category
- * @property Location|null $location
- * @property Collection<int, Reservation> $reservations
  */
 class Car extends Model
 {
-    /** @use HasFactory<CarFactory> */
     use HasFactory;
 
     public const STATUS_ACTIVE = 'Active';
 
     public const STATUS_DEACTIVATED = 'Deactivated';
-
-    public $timestamps = true;
 
     protected $fillable = [
         'plate',
@@ -197,16 +175,12 @@ class Car extends Model
 
     public function getCreatedAt(): ?Carbon
     {
-        return isset($this->attributes['created_at'])
-            ? Carbon::parse($this->attributes['created_at'])
-            : null;
+        return $this->created_at;
     }
 
     public function getUpdatedAt(): ?Carbon
     {
-        return isset($this->attributes['updated_at'])
-            ? Carbon::parse($this->attributes['updated_at'])
-            : null;
+        return $this->updated_at;
     }
 
     public function category(): BelongsTo
@@ -267,5 +241,10 @@ class Car extends Model
     public function getRentalCount(): int
     {
         return (int) ($this->attributes['rental_count'] ?? 0);
+    }
+
+    public function isActive(): bool
+    {
+        return $this->getStatus() === self::STATUS_ACTIVE;
     }
 }

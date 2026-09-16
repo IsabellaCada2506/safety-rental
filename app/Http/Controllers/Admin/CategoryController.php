@@ -11,24 +11,19 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreCategoryRequest;
 use App\Http\Requests\Admin\UpdateCategoryRequest;
-use App\Interfaces\CategoryServiceInterface;
+use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class CategoryController extends Controller
 {
-    private readonly CategoryServiceInterface $categoryService;
-
-    public function __construct(CategoryServiceInterface $categoryService)
-    {
-        $this->categoryService = $categoryService;
-    }
-
     public function index(): View
     {
+        $categories = Category::query()->withCount('cars')->get();
+
         $viewData = [];
         $viewData['title'] = __('category.title_index');
-        $viewData['categories'] = $this->categoryService->getAllWithCarsCount();
+        $viewData['categories'] = $categories;
 
         return view('admin.category.index')->with('viewData', $viewData);
     }
@@ -45,14 +40,20 @@ class CategoryController extends Controller
     {
         $validatedData = $request->validated();
 
-        $this->categoryService->createFromValidated($validatedData);
+        $category = new Category;
+        $category->setModel((string) $validatedData['model']);
+        $category->setBrand((string) $validatedData['brand']);
+        $category->setType((string) $validatedData['type']);
+        $category->setPassengerCapacity((int) $validatedData['passenger_capacity']);
+        $category->setLuggageCapacity((int) $validatedData['luggage_capacity']);
+        $category->save();
 
         return redirect()->route('admin.category.index')->with('success', __('category.created_success'));
     }
 
     public function edit(int $id): View
     {
-        $category = $this->categoryService->findOrFail($id);
+        $category = Category::query()->findOrFail($id);
 
         $viewData = [];
         $viewData['title'] = __('category.title_edit');
@@ -63,23 +64,28 @@ class CategoryController extends Controller
 
     public function update(UpdateCategoryRequest $request, int $id): RedirectResponse
     {
-        $category = $this->categoryService->findOrFail($id);
+        $category = Category::query()->findOrFail($id);
         $validatedData = $request->validated();
 
-        $this->categoryService->updateFromValidated($category, $validatedData);
+        $category->setModel((string) $validatedData['model']);
+        $category->setBrand((string) $validatedData['brand']);
+        $category->setType((string) $validatedData['type']);
+        $category->setPassengerCapacity((int) $validatedData['passenger_capacity']);
+        $category->setLuggageCapacity((int) $validatedData['luggage_capacity']);
+        $category->save();
 
         return redirect()->route('admin.category.index')->with('success', __('category.updated_success'));
     }
 
     public function delete(int $id): RedirectResponse
     {
-        $category = $this->categoryService->findWithCarsCountOrFail($id);
+        $category = Category::query()->withCount('cars')->findOrFail($id);
 
-        if (! $this->categoryService->canBeDeleted($category)) {
+        if ($category->getCarsCount() > 0) {
             return back()->with('error', __('category.delete_error_has_cars', ['count' => $category->getCarsCount()]));
         }
 
-        $this->categoryService->delete($category);
+        $category->delete();
 
         return redirect()->route('admin.category.index')->with('success', __('category.deleted_success'));
     }

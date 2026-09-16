@@ -35,11 +35,11 @@ return [
     'emergency_contact_phone' => 'Teléfono del contacto de emergencia',
 
     'signed_in_as' => 'Sesión iniciada como',
-    'customer_dashboard' => 'Panel del cliente',
+    'user_dashboard' => 'Panel de usuario',
     'admin_dashboard' => 'Panel de administración',
-    'customer_message' => 'Ahora puedes acceder a las funciones disponibles para clientes.',
+    'user_message' => 'Ahora puedes acceder a las funciones disponibles.',
     'admin_message' => 'Tienes permiso para acceder al área de administración.',
-    'customer_area' => 'Área del cliente',
+    'user_area' => 'Área de usuario',
     'administration_area' => 'Área de administración',
 
     'verify_email' => 'Verifica tu correo electrónico',

@@ -57,6 +57,6 @@ return [
     'transition_not_allowed' => 'The requested status transition is not allowed.',
 
     'summary_heading' => 'Rental Summary',
-    'customer_info' => 'Customer Information',
+    'user_info' => 'User Information',
     'vehicle_info' => 'Vehicle Information',
 ];
