@@ -57,6 +57,6 @@ return [
     'transition_not_allowed' => 'La transición de estado solicitada no está permitida.',
 
     'summary_heading' => 'Resumen del Alquiler',
-    'customer_info' => 'Información del Cliente',
+    'user_info' => 'Información del Usuario',
     'vehicle_info' => 'Información del Vehículo',
 ];

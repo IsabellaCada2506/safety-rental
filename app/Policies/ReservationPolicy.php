@@ -10,38 +10,31 @@
 
 namespace App\Policies;
 
-use App\Interfaces\ReservationServiceInterface;
-use App\Interfaces\UserServiceInterface;
 use App\Models\Reservation;
 use App\Models\User;
 
 class ReservationPolicy
 {
-    public function __construct(
-        private readonly UserServiceInterface $userService,
-        private readonly ReservationServiceInterface $reservationService
-    ) {}
-
     public function view(User $user, Reservation $reservation): bool
     {
-        return $this->userService->isAdmin($user) || $reservation->getUserId() === $user->getId();
+        return $user->isAdmin() || $reservation->getUserId() === $user->getId();
     }
 
     public function cancel(User $user, Reservation $reservation): bool
     {
-        $canAccess = $this->userService->isAdmin($user) || $reservation->getUserId() === $user->getId();
+        $canAccess = $user->isAdmin() || $reservation->getUserId() === $user->getId();
 
-        return $canAccess && $this->reservationService->isCancellable($reservation);
+        return $canAccess && $reservation->isCancellable();
     }
 
     public function confirm(User $user, Reservation $reservation): bool
     {
-        return $this->userService->isAdmin($user) && $this->reservationService->isPending($reservation);
+        return $user->isAdmin() && $reservation->isPending();
     }
 
     public function update(User $user, Reservation $reservation): bool
     {
-        return $this->userService->isAdmin($user);
+        return $user->isAdmin();
     }
 
     public function downloadReceipt(User $user, Reservation $reservation): bool

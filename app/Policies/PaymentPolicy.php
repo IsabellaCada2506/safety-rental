@@ -9,31 +9,22 @@
 
 namespace App\Policies;
 
-use App\Interfaces\PaymentServiceInterface;
-use App\Interfaces\ReservationServiceInterface;
-use App\Interfaces\UserServiceInterface;
 use App\Models\Payment;
 use App\Models\Reservation;
 use App\Models\User;
 
 class PaymentPolicy
 {
-    public function __construct(
-        private readonly UserServiceInterface $userService,
-        private readonly ReservationServiceInterface $reservationService,
-        private readonly PaymentServiceInterface $paymentService
-    ) {}
-
     public function create(User $user, Reservation $reservation): bool
     {
-        return ! $this->userService->isAdmin($user)
+        return ! $user->isAdmin()
             && $reservation->getUserId() === $user->getId()
-            && $this->reservationService->isPayable($reservation);
+            && $reservation->isPayable();
     }
 
     public function view(User $user, Payment $payment): bool
     {
-        if ($this->userService->isAdmin($user)) {
+        if ($user->isAdmin()) {
             return true;
         }
 
@@ -44,6 +35,6 @@ class PaymentPolicy
 
     public function refund(User $user, Payment $payment): bool
     {
-        return $this->userService->isAdmin($user) && $this->paymentService->isCompleted($payment);
+        return $user->isAdmin() && $payment->isCompleted();
     }
 }

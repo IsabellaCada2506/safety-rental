@@ -17,9 +17,9 @@ return [
     'register_new_location' => 'Registrar Nueva Sede',
     'manage_locations' => 'Gestionar Sedes',
 
-    // Customer Titles
-    'customer_title_index' => 'Nuestras Sedes de Alquiler - Safety Rental',
-    'customer_title_show' => 'Detalle de la Sede',
+    // User Titles
+    'user_title_index' => 'Nuestras Sedes de Alquiler - Safety Rental',
+    'user_title_show' => 'Detalle de la Sede',
     'branches_subtitle' => 'Encuentra el punto de recogida ideal para tu viaje en nuestra red exclusiva de sedes.',
     'explore_fleet' => 'Ver Flota en esta Sede',
     'available_fleet_heading' => 'Vehículos Disponibles en esta Sede',

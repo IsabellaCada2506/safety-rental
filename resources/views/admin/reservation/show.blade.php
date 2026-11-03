@@ -1,15 +1,14 @@
 {{--
     Author: Isabella Ocampo
     Author: Alejandro Correa Marin
-    Author: Wendy
+    Author: Wendy Atehortua
     Date: 2026-09-13
     Description: Admin detailed audit view for a specific reservation record.
 --}}
 
 @extends('layouts.app')
 
-@inject('reservationService', 'App\Interfaces\ReservationServiceInterface')
-@inject('paymentService', 'App\Interfaces\PaymentServiceInterface')
+
 
 @section('title', $viewData['title'])
 
@@ -56,13 +55,11 @@
         @endif
 
         <div class="row g-4">
-            {{-- Customer & Vehicle Summary --}}
             <div class="col-lg-8">
-                {{-- Reservation Overview --}}
                 <div class="card shadow-sm border-0 rounded-4 bg-white p-4 mb-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="fw-bold text-dark mb-0">{{ __('reservation.summary_heading') }}</h4>
-                        <span class="badge {{ $reservationService->getStateBadgeClass($viewData['reservation']) }} fs-6 px-3 py-2 rounded-pill">
+                        <span class="badge {{ $viewData['reservation']->getStateBadgeClass() }} fs-6 px-3 py-2 rounded-pill">
                             {{ __('reservation.state_' . $viewData['reservation']->getState()) }}
                         </span>
                     </div>
@@ -89,12 +86,12 @@
                         </div>
                         <div class="d-flex justify-content-between small text-muted mb-2">
                             <span>{{ __('reservation.rental_days') }}:</span>
-                            <span class="fw-semibold text-dark">{{ $reservationService->getDays($viewData['reservation']) }} {{ __('reservation.days_unit') }}</span>
+                            <span class="fw-semibold text-dark">{{ $viewData['reservation']->getDays() }} {{ __('reservation.days_unit') }}</span>
                         </div>
                         <hr class="my-2">
                         <div class="d-flex justify-content-between align-items-center">
                             <span class="fw-bold text-dark">{{ __('reservation.total_price') }}:</span>
-                            <span class="fw-bold text-primary fs-4">${{ number_format($reservationService->getTotalPrice($viewData['reservation']), 0, ',', '.') }}</span>
+                            <span class="fw-bold text-primary fs-4">${{ number_format($viewData['reservation']->getTotalPrice(), 0, ',', '.') }}</span>
                         </div>
                     </div>
 
@@ -103,13 +100,13 @@
                         @if ($viewData['reservation']->getPayment())
                             <div class="d-flex justify-content-between small text-muted mb-1">
                                 <span>{{ __('payment.status') }}:</span>
-                                <span class="badge {{ $paymentService->getStatusBadgeClass($viewData['reservation']->getPayment()) }} px-2 py-1 rounded-pill">
+                                <span class="badge {{ $viewData['reservation']->getPayment()->getStatusBadgeClass() }} px-2 py-1 rounded-pill">
                                     {{ __('payment.status_' . $viewData['reservation']->getPayment()->getStatus()) }}
                                 </span>
                             </div>
                             <div class="d-flex justify-content-between small text-muted mb-1">
                                 <span>{{ __('payment.method') }}:</span>
-                                <span class="fw-semibold text-dark">{{ $paymentService->getMethodLabel($viewData['reservation']->getPayment()) }}</span>
+                                <span class="fw-semibold text-dark">{{ $viewData['reservation']->getPayment()->getMethodLabel() }}</span>
                             </div>
                             <div class="d-flex justify-content-between small text-muted mb-1">
                                 <span>{{ __('payment.transaction_code') }}:</span>
@@ -125,9 +122,8 @@
                     </div>
                 </div>
 
-                {{-- Customer Information Card --}}
                 <div class="card shadow-sm border-0 rounded-4 bg-white p-4 mb-4">
-                    <h5 class="fw-bold text-dark mb-3">{{ __('reservation.customer_info') }}</h5>
+                    <h5 class="fw-bold text-dark mb-3">{{ __('reservation.user_info') }}</h5>
                     <div class="row g-3 small">
                         <div class="col-sm-6">
                             <span class="text-muted d-block">{{ __('authentication.name') }}:</span>
@@ -156,7 +152,6 @@
                     </div>
                 </div>
 
-                {{-- Vehicle Information Card --}}
                 <div class="card shadow-sm border-0 rounded-4 bg-white p-4">
                     <h5 class="fw-bold text-dark mb-3">{{ __('reservation.vehicle_info') }}</h5>
                     <div class="row g-3 small">
@@ -180,9 +175,7 @@
                 </div>
             </div>
 
-            {{-- Branch & Administrative Actions --}}
             <div class="col-lg-4">
-                {{-- Branch Card --}}
                 <div class="card shadow-sm border-0 rounded-4 bg-white p-4 mb-4">
                     <h5 class="fw-bold text-dark mb-3">{{ __('reservation.pickup_location') }}</h5>
                     <p class="mb-1 fw-semibold text-dark">{{ $viewData['reservation']->getLocation()?->getName() }}</p>
@@ -190,12 +183,11 @@
                     <p class="text-muted small mb-0">{{ $viewData['reservation']->getLocation()?->getTelephone() }}</p>
                 </div>
 
-                {{-- Actions Card --}}
                 <div class="card shadow-sm border-0 rounded-4 bg-white p-4">
                     <h5 class="fw-bold text-dark mb-3">{{ __('reservation.actions') }}</h5>
 
                     <div class="d-grid gap-2">
-                        @if ($reservationService->isPending($viewData['reservation']))
+                        @if ($viewData['reservation']->isPending())
                             <form action="{{ route('admin.reservation.confirm', ['id' => $viewData['reservation']->getId()]) }}" method="POST">
                                 @csrf
                                 @method('PATCH')
@@ -205,7 +197,7 @@
                             </form>
                         @endif
 
-                        @if ($reservationService->isCancellable($viewData['reservation']))
+                        @if ($viewData['reservation']->isCancellable())
                             <form
                                 action="{{ route('admin.reservation.cancel', ['id' => $viewData['reservation']->getId()]) }}"
                                 method="POST"

@@ -29,8 +29,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Category extends Model
 {
-    public $timestamps = true;
-
     protected $fillable = [
         'model',
         'brand',
@@ -104,16 +102,12 @@ class Category extends Model
 
     public function getCreatedAt(): ?Carbon
     {
-        return isset($this->attributes['created_at'])
-            ? Carbon::parse($this->attributes['created_at'])
-            : null;
+        return $this->created_at;
     }
 
     public function getUpdatedAt(): ?Carbon
     {
-        return isset($this->attributes['updated_at'])
-            ? Carbon::parse($this->attributes['updated_at'])
-            : null;
+        return $this->updated_at;
     }
 
     public function cars(): HasMany

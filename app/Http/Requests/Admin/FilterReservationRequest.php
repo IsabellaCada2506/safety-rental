@@ -9,7 +9,6 @@
 
 namespace App\Http\Requests\Admin;
 
-use App\Interfaces\UserServiceInterface;
 use App\Models\Reservation;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
@@ -21,12 +20,9 @@ class FilterReservationRequest extends FormRequest
     {
         $user = $this->user();
 
-        return $user instanceof User && app(UserServiceInterface::class)->isAdmin($user);
+        return $user instanceof User && $user->isAdmin();
     }
 
-    /**
-     * @return array<string, mixed>
-     */
     public function rules(): array
     {
         return [

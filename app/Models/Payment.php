@@ -1,9 +1,7 @@
 <?php
 
 /**
- * Author: Isabella Ocampo
  * Author: Alejandro Correa Marin
- * Author: Wendy Atehortua
  * Date: 2026-09-13
  * Description: Payment model representing rental transaction records.
  */
@@ -11,7 +9,6 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Database\Factories\PaymentFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -34,7 +31,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Payment extends Model
 {
-    /** @use HasFactory<PaymentFactory> */
     use HasFactory;
 
     public const STATUS_COMPLETED = 'completed';
@@ -56,8 +52,6 @@ class Payment extends Model
     public const SIMULATED_RESULT_SUCCESS = 'success';
 
     public const SIMULATED_RESULT_FAILURE = 'failure';
-
-    public $timestamps = true;
 
     protected $fillable = [
         'reservation_id',
@@ -148,9 +142,7 @@ class Payment extends Model
 
     public function getDate(): ?Carbon
     {
-        return isset($this->attributes['date'])
-            ? Carbon::parse($this->attributes['date'])
-            : null;
+        return $this->date;
     }
 
     public function setDate(Carbon|string $date): void
@@ -160,16 +152,12 @@ class Payment extends Model
 
     public function getCreatedAt(): ?Carbon
     {
-        return isset($this->attributes['created_at'])
-            ? Carbon::parse($this->attributes['created_at'])
-            : null;
+        return $this->created_at;
     }
 
     public function getUpdatedAt(): ?Carbon
     {
-        return isset($this->attributes['updated_at'])
-            ? Carbon::parse($this->attributes['updated_at'])
-            : null;
+        return $this->updated_at;
     }
 
     public function reservation(): BelongsTo
@@ -185,5 +173,56 @@ class Payment extends Model
     public function setReservation(?Reservation $reservation): void
     {
         $this->setRelation('reservation', $reservation);
+    }
+
+    public function isCompleted(): bool
+    {
+        return $this->getStatus() === self::STATUS_COMPLETED;
+    }
+
+    public function isFailed(): bool
+    {
+        return $this->getStatus() === self::STATUS_FAILED;
+    }
+
+    public function isRefunded(): bool
+    {
+        return $this->getStatus() === self::STATUS_REFUNDED;
+    }
+
+    public function getStatusBadgeClass(): string
+    {
+        return match ($this->getStatus()) {
+            self::STATUS_COMPLETED => 'bg-success text-white',
+            self::STATUS_FAILED => 'bg-danger text-white',
+            self::STATUS_REFUNDED => 'bg-secondary text-white',
+            default => 'bg-warning text-dark',
+        };
+    }
+
+    public static function availableMethods(): array
+    {
+        return [
+            self::METHOD_CREDIT_CARD,
+            self::METHOD_DEBIT_CARD,
+            self::METHOD_BANK_TRANSFER,
+            self::METHOD_PSE_DEBIT,
+        ];
+    }
+
+    public static function methodLabel(string $method): string
+    {
+        return match ($method) {
+            self::METHOD_CREDIT_CARD => __('payment.method_credit_card'),
+            self::METHOD_DEBIT_CARD => __('payment.method_debit_card'),
+            self::METHOD_BANK_TRANSFER => __('payment.method_bank_transfer'),
+            self::METHOD_PSE_DEBIT => __('payment.method_pse_debit'),
+            default => $method,
+        };
+    }
+
+    public function getMethodLabel(): string
+    {
+        return self::methodLabel($this->getMethod());
     }
 }

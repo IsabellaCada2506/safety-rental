@@ -8,10 +8,9 @@
 
 namespace App\Utils;
 
-use App\Interfaces\LocationReferenceCheckerInterface;
 use App\Models\Location;
 
-class LocationReferenceChecker implements LocationReferenceCheckerInterface
+class LocationReferenceChecker
 {
     public function hasReferences(Location $location): bool
     {

@@ -11,24 +11,22 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreLocationRequest;
 use App\Http\Requests\Admin\UpdateLocationRequest;
-use App\Interfaces\LocationServiceInterface;
+use App\Models\Location;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class LocationController extends Controller
 {
-    private readonly LocationServiceInterface $locationService;
-
-    public function __construct(LocationServiceInterface $locationService)
-    {
-        $this->locationService = $locationService;
-    }
-
     public function index(): View
     {
+        $locations = Location::query()
+            ->withCount(['cars', 'reservations'])
+            ->orderBy('name')
+            ->get();
+
         $viewData = [];
         $viewData['title'] = __('location.admin_title_index');
-        $viewData['locations'] = $this->locationService->getAllWithCounts();
+        $viewData['locations'] = $locations;
 
         return view('admin.location.index')->with('viewData', $viewData);
     }
@@ -43,7 +41,15 @@ class LocationController extends Controller
 
     public function store(StoreLocationRequest $request): RedirectResponse
     {
-        $this->locationService->createFromValidated($request->validated());
+        $validatedData = $request->validated();
+
+        $location = new Location;
+        $location->setName((string) $validatedData['name']);
+        $location->setAddress((string) $validatedData['address']);
+        $location->setHeadquarters((string) $validatedData['headquarters']);
+        $location->setTelephone((string) $validatedData['telephone']);
+        $location->setCity((string) $validatedData['city']);
+        $location->save();
 
         return redirect()->route('admin.location.index')
             ->with('success', __('location.created_success'));
@@ -51,7 +57,7 @@ class LocationController extends Controller
 
     public function edit(int $id): View
     {
-        $location = $this->locationService->findOrFail($id);
+        $location = Location::query()->findOrFail($id);
 
         $viewData = [];
         $viewData['title'] = __('location.admin_title_edit');
@@ -62,8 +68,15 @@ class LocationController extends Controller
 
     public function update(UpdateLocationRequest $request, int $id): RedirectResponse
     {
-        $location = $this->locationService->findOrFail($id);
-        $this->locationService->updateFromValidated($location, $request->validated());
+        $location = Location::query()->findOrFail($id);
+        $validatedData = $request->validated();
+
+        $location->setName((string) $validatedData['name']);
+        $location->setAddress((string) $validatedData['address']);
+        $location->setHeadquarters((string) $validatedData['headquarters']);
+        $location->setTelephone((string) $validatedData['telephone']);
+        $location->setCity((string) $validatedData['city']);
+        $location->save();
 
         return redirect()->route('admin.location.index')
             ->with('success', __('location.updated_success'));
@@ -71,13 +84,14 @@ class LocationController extends Controller
 
     public function delete(int $id): RedirectResponse
     {
-        $location = $this->locationService->findOrFail($id);
+        $location = Location::query()->findOrFail($id);
+        $hasReferences = $location->cars()->count() > 0 || $location->reservations()->count() > 0;
 
-        if (! $this->locationService->canBeDeleted($location)) {
+        if ($hasReferences) {
             return back()->with('error', __('location.delete_error_referenced'));
         }
 
-        $this->locationService->delete($location);
+        $location->delete();
 
         return redirect()->route('admin.location.index')
             ->with('success', __('location.deleted_success'));

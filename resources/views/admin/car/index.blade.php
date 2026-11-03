@@ -4,8 +4,6 @@
     Description: Admin view for listing, managing, and toggling status of vehicles in the inventory with branch location.
 --}}
 
-@inject('carService', 'App\Interfaces\CarServiceInterface')
-
 @extends('layouts.app')
 
 @section('title', $viewData['title'])
@@ -82,7 +80,7 @@
                             <td>{{ number_format($car->getMileage(), 0, ',', '.') }} km</td>
                             <td>{{ $car->getLocation() ? $car->getLocation()->getName() : '-' }}</td>
                             <td>
-                                <span class="admin-index-status-badge">{{ $carService->isActive($car) ? __('car.status_active') : __('car.status_deactivated') }}</span>
+                                <span class="admin-index-status-badge">{{ $car->isActive() ? __('car.status_active') : __('car.status_deactivated') }}</span>
                             </td>
                             <td class="text-center">
                                 <a
@@ -98,7 +96,7 @@
                                 >
                                     @csrf
                                     @method('PATCH')
-                                    @if ($carService->isActive($car))
+                                    @if ($car->isActive())
                                         <button
                                             type="submit"
                                             class="admin-index-btn admin-index-btn-danger"

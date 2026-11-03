@@ -17,9 +17,9 @@ return [
     'register_new_location' => 'Register New Location',
     'manage_locations' => 'Manage Locations',
 
-    // Customer Titles
-    'customer_title_index' => 'Our Rental Locations - Safety Rental',
-    'customer_title_show' => 'Branch Details',
+    // User Titles
+    'user_title_index' => 'Our Rental Locations - Safety Rental',
+    'user_title_show' => 'Branch Details',
     'branches_subtitle' => 'Find the perfect pickup point for your journey across our premium branch network.',
     'explore_fleet' => 'Explore Fleet at this Branch',
     'available_fleet_heading' => 'Vehicles Available at this Branch',

@@ -5,8 +5,6 @@
     Description: Admin index listing reservation payments with method, reference, and status.
 --}}
 
-@inject('paymentService', 'App\Interfaces\PaymentServiceInterface')
-
 @extends('layouts.app')
 
 @section('title', $viewData['title'])
@@ -71,10 +69,10 @@
                                 <td>
                                     <strong>${{ number_format($payment->getAmount(), 0, ',', '.') }}</strong>
                                 </td>
-                                <td>{{ $paymentService->getMethodLabel($payment) }}</td>
+                                <td>{{ $payment->getMethodLabel() }}</td>
                                 <td>{{ $payment->getTransactionCode() }}</td>
                                 <td>
-                                    <span class="badge {{ $paymentService->getStatusBadgeClass($payment) }} px-2 py-1 rounded-pill">
+                                    <span class="badge {{ $payment->getStatusBadgeClass() }} px-2 py-1 rounded-pill">
                                         {{ __('payment.status_' . $payment->getStatus()) }}
                                     </span>
                                 </td>

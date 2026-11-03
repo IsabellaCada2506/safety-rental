@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             LocationSeeder::class,
             CarSeeder::class,
             ReservationSeeder::class,
+            PaymentSeeder::class,
         ]);
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Author: Isabella Ocampo S
+ * Author: Isabella Ocampo
  * Author: Alejandro Correa Marin
- * Author: Wendy
+ * Author: Wendy Atehortua
  * Date: 2026-09-13
  * Description: Reservation model representing a car rental booking between a customer and a vehicle.
  */
@@ -11,7 +11,6 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Database\Factories\ReservationFactory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -41,7 +40,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Reservation extends Model
 {
-    /** @use HasFactory<ReservationFactory> */
     use HasFactory;
 
     public const STATE_PENDING = 'pending';
@@ -51,8 +49,6 @@ class Reservation extends Model
     public const STATE_CANCELLED = 'cancelled';
 
     public const STATE_COMPLETED = 'completed';
-
-    public $timestamps = true;
 
     protected $fillable = [
         'code',
@@ -102,9 +98,7 @@ class Reservation extends Model
 
     public function getStartDate(): ?Carbon
     {
-        return isset($this->attributes['start_date'])
-            ? Carbon::parse($this->attributes['start_date'])
-            : null;
+        return $this->start_date;
     }
 
     public function setStartDate(Carbon|string $startDate): void
@@ -116,9 +110,7 @@ class Reservation extends Model
 
     public function getEndDate(): ?Carbon
     {
-        return isset($this->attributes['end_date'])
-            ? Carbon::parse($this->attributes['end_date'])
-            : null;
+        return $this->end_date;
     }
 
     public function setEndDate(Carbon|string $endDate): void
@@ -172,16 +164,12 @@ class Reservation extends Model
 
     public function getCreatedAt(): ?Carbon
     {
-        return isset($this->attributes['created_at'])
-            ? Carbon::parse($this->attributes['created_at'])
-            : null;
+        return $this->created_at;
     }
 
     public function getUpdatedAt(): ?Carbon
     {
-        return isset($this->attributes['updated_at'])
-            ? Carbon::parse($this->attributes['updated_at'])
-            : null;
+        return $this->updated_at;
     }
 
     public function user(): BelongsTo
@@ -257,5 +245,74 @@ class Reservation extends Model
     public function setPayments(Collection $payments): void
     {
         $this->setRelation('payments', $payments);
+    }
+
+    public function isPending(): bool
+    {
+        return $this->getState() === self::STATE_PENDING;
+    }
+
+    public function isConfirmed(): bool
+    {
+        return $this->getState() === self::STATE_CONFIRMED;
+    }
+
+    public function isCancelled(): bool
+    {
+        return $this->getState() === self::STATE_CANCELLED;
+    }
+
+    public function isCompleted(): bool
+    {
+        return $this->getState() === self::STATE_COMPLETED;
+    }
+
+    public function isCancellable(): bool
+    {
+        return in_array($this->getState(), [self::STATE_PENDING, self::STATE_CONFIRMED], true);
+    }
+
+    public function getStateBadgeClass(): string
+    {
+        return match ($this->getState()) {
+            self::STATE_CONFIRMED => 'bg-success text-white',
+            self::STATE_CANCELLED => 'bg-danger text-white',
+            self::STATE_COMPLETED => 'bg-secondary text-white',
+            default => 'bg-warning text-dark',
+        };
+    }
+
+    public function getDays(): int
+    {
+        $start = $this->getStartDate();
+        $end = $this->getEndDate();
+
+        if (! $start || ! $end) {
+            return 1;
+        }
+
+        return max(1, (int) $start->diffInDays($end));
+    }
+
+    public function getTotalPrice(): int
+    {
+        $car = $this->getCar();
+        $carPrice = $car ? $car->getPrice() : 0;
+
+        return $this->getDays() * $carPrice;
+    }
+
+    public function hasSuccessfulPayment(): bool
+    {
+        $payment = $this->getPayment();
+
+        return $payment !== null && $payment->getStatus() === Payment::STATUS_COMPLETED;
+    }
+
+    public function isPayable(): bool
+    {
+        return ! $this->isCancelled()
+            && ! $this->isCompleted()
+            && ! $this->hasSuccessfulPayment();
     }
 }

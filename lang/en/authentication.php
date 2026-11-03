@@ -35,11 +35,11 @@ return [
     'emergency_contact_phone' => 'Emergency contact phone',
 
     'signed_in_as' => 'Signed in as',
-    'customer_dashboard' => 'Customer dashboard',
+    'user_dashboard' => 'User dashboard',
     'admin_dashboard' => 'Administration dashboard',
-    'customer_message' => 'You can now access the available customer features.',
+    'user_message' => 'You can now access the available features.',
     'admin_message' => 'You have permission to access the administration area.',
-    'customer_area' => 'Customer area',
+    'user_area' => 'User area',
     'administration_area' => 'Administration area',
 
     'verify_email' => 'Verify your email address',

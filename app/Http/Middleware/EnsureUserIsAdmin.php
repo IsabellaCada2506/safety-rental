@@ -9,7 +9,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Interfaces\UserServiceInterface;
 use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
@@ -17,15 +16,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class EnsureUserIsAdmin
 {
-    public function __construct(
-        private readonly UserServiceInterface $userService
-    ) {}
-
     public function handle(Request $request, Closure $next): Response
     {
         $user = $request->user();
 
-        if (! $user instanceof User || ! $this->userService->isAdmin($user)) {
+        if (! $user instanceof User || ! $user->isAdmin()) {
             abort(Response::HTTP_FORBIDDEN);
         }
 

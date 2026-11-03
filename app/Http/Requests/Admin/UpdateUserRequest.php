@@ -9,7 +9,6 @@
 
 namespace App\Http\Requests\Admin;
 
-use App\Interfaces\UserServiceInterface;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -21,7 +20,7 @@ class UpdateUserRequest extends FormRequest
     {
         $user = $this->user();
 
-        return $user instanceof User && app(UserServiceInterface::class)->isAdmin($user);
+        return $user instanceof User && $user->isAdmin();
     }
 
     public function rules(): array

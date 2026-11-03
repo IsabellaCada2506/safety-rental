@@ -44,7 +44,6 @@
             </h2>
 
             <div class="admin-grid">
-                {{-- Vehicles Management Card --}}
                 <div class="admin-card">
                     <span class="admin-icon" aria-hidden="true">
                         <svg
@@ -101,7 +100,6 @@
                     </a>
                 </div>
 
-                {{-- Reservations Management Card --}}
                 <div class="admin-card">
                     <span class="admin-icon" aria-hidden="true">
                         <svg
@@ -158,7 +156,6 @@
                     </a>
                 </div>
 
-                {{-- Locations Management Card --}}
                 <div class="admin-card">
                     <span class="admin-icon" aria-hidden="true">
                         <svg
@@ -199,7 +196,6 @@
                     </a>
                 </div>
 
-                {{-- Users Management Card --}}
                 <div class="admin-card">
                     <span class="admin-icon" aria-hidden="true">
                         <svg

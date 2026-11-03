@@ -8,10 +8,9 @@
 
 namespace App\Utils;
 
-use App\Interfaces\ReservationCodeGeneratorInterface;
 use App\Models\Reservation;
 
-class ReservationCodeGenerator implements ReservationCodeGeneratorInterface
+class ReservationCodeGenerator
 {
     public function generate(): int
     {

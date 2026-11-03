@@ -15,7 +15,6 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/** @extends Factory<Reservation> */
 class ReservationFactory extends Factory
 {
     protected $model = Reservation::class;

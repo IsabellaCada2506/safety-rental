@@ -60,11 +60,9 @@
             {{ __('authentication.application_name') }}
         </a>
 
-@inject('userService', 'App\Interfaces\UserServiceInterface')
-
         @auth
             <div class="nav-authenticated d-flex align-items-center gap-3">
-                @if (! $userService->isAdmin(auth()->user()))
+                @if (! auth()->user()->isAdmin())
                     <a
                         class="btn-pill-ghost text-decoration-none"
                         href="{{ route('home.index') }}"
