@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Complete it translations for catalog.
+ */
+
+return [
+    'title_index' => 'Catalogo veicoli - Safety Rental',
+    'title_show' => 'Dettaglio veicolo - Safety Rental',
+    'title' => 'Catalogo',
+    'subtitle' => 'Esplora la nostra flotta per un noleggio sicuro e di qualità.',
+    'no_image' => 'Nessuna immagine disponibile',
+    'brand_label' => 'Marca:',
+    'model_label' => 'Modello:',
+    'year' => 'Anno',
+    'mileage' => 'Chilometraggio',
+    'price' => 'Prezzo di noleggio',
+    'per_day' => '/ giorno',
+    'view_details' => 'Vedi dettagli',
+    'empty' => 'Nessun veicolo disponibile al momento.',
+    'available' => 'Disponibile',
+    'security_info' => 'Informazioni su sicurezza e garanzia',
+    'security_desc' => 'Questo veicolo dispone di controlli tecnici approvati, assistenza stradale e copertura assicurativa attiva.',
+    'back' => 'Torna al catalogo',
+    'rent_now' => 'Noleggia ora',
+    'unknown_vehicle' => 'Veicolo',
+    'km_unit' => 'km',
+    'passengers_label' => 'Passeggeri',
+    'luggage_label' => 'Bagagli',
+    'units' => 'unità',
+    'description_label' => 'Descrizione',
+    'no_description' => 'Nessuna nota aggiuntiva.',
+    'status_deactivated' => 'Disattivato',
+    'plate_label' => 'Targa',
+    'search_label' => 'Cerca',
+    'search_placeholder' => 'Cerca per marca, modello, descrizione...',
+    'all_categories' => 'Tutte le categorie',
+    'all_locations' => 'Tutte le sedi',
+    'category_filter' => 'Categoria',
+    'location_filter' => 'Sede di ritiro',
+    'start_date' => 'Data di ritiro',
+    'end_date' => 'Data di riconsegna',
+    'filter_button' => 'Filtra veicoli',
+    'clear_filters' => 'Rimuovi filtri',
+    'active_filters' => 'Filtri attivi',
+    'no_results_title' => 'Nessun veicolo corrisponde ai tuoi criteri',
+    'no_results_subtitle' => 'Modifica la ricerca o le date oppure rimuovi i filtri per vedere tutte le auto disponibili.',
+    'results_count' => ':count veicolo/i trovato/i',
+    'validation_end_date_after' => 'La data di riconsegna deve essere successiva alla data di ritiro.',
+    'validation_start_date_after_or_equal' => 'La data di ritiro deve essere oggi o una data futura.',
+    'validation_category_not_found' => 'La categoria selezionata non esiste.',
+    'validation_location_not_found' => 'La sede selezionata non esiste.',
+];

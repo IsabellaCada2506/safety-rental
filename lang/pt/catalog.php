@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Complete pt translations for catalog.
+ */
+
+return [
+    'title_index' => 'Catálogo de veículos - Safety Rental',
+    'title_show' => 'Detalhes do veículo - Safety Rental',
+    'title' => 'Catálogo',
+    'subtitle' => 'Explore nossa frota disponível para um aluguel seguro e de qualidade.',
+    'no_image' => 'Nenhuma imagem disponível',
+    'brand_label' => 'Marca:',
+    'model_label' => 'Modelo:',
+    'year' => 'Ano',
+    'mileage' => 'Quilometragem',
+    'price' => 'Preço do aluguel',
+    'per_day' => '/ dia',
+    'view_details' => 'Ver detalhes',
+    'empty' => 'Nenhum veículo disponível no momento.',
+    'available' => 'Disponível',
+    'security_info' => 'Informações de segurança e garantia',
+    'security_desc' => 'Este veículo conta com inspeções técnicas aprovadas, assistência na estrada e cobertura de proteção ativa.',
+    'back' => 'Voltar ao catálogo',
+    'rent_now' => 'Alugar agora',
+    'unknown_vehicle' => 'Veículo',
+    'km_unit' => 'km',
+    'passengers_label' => 'Passageiros',
+    'luggage_label' => 'Bagagem',
+    'units' => 'unidades',
+    'description_label' => 'Descrição',
+    'no_description' => 'Nenhuma observação adicional.',
+    'status_deactivated' => 'Desativado',
+    'plate_label' => 'Placa',
+    'search_label' => 'Pesquisar',
+    'search_placeholder' => 'Pesquise por marca, modelo, descrição...',
+    'all_categories' => 'Todas as categorias',
+    'all_locations' => 'Todas as unidades',
+    'category_filter' => 'Categoria',
+    'location_filter' => 'Local de retirada',
+    'start_date' => 'Data de retirada',
+    'end_date' => 'Data de devolução',
+    'filter_button' => 'Filtrar veículos',
+    'clear_filters' => 'Limpar filtros',
+    'active_filters' => 'Filtros ativos',
+    'no_results_title' => 'Nenhum veículo corresponde aos seus critérios',
+    'no_results_subtitle' => 'Ajuste a pesquisa ou as datas, ou limpe os filtros para ver todos os carros disponíveis.',
+    'results_count' => ':count veículo(s) encontrado(s)',
+    'validation_end_date_after' => 'A data de devolução deve ser posterior à data de retirada.',
+    'validation_start_date_after_or_equal' => 'A data de retirada deve ser hoje ou uma data futura.',
+    'validation_category_not_found' => 'A categoria selecionada não existe.',
+    'validation_location_not_found' => 'A unidade selecionada não existe.',
+];

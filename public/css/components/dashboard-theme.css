@@ -1,0 +1,30 @@
+.dash-hero {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    background: var(--sr-dark-gradient);
+}
+
+.dash-hero h1 {
+    color: #ffffff;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+}
+
+.dash-hero-text,
+.dash-hero .dash-user {
+    color: #d5e4fc;
+}
+
+.dash-label,
+.dash-label-admin {
+    color: #014f86;
+    background: #ffffff;
+    border: 1px solid #d5e7ef;
+}
+
+.dash-user-avatar,
+.dash-user-avatar-admin {
+    color: #014f86;
+    background: #ffffff;
+}
+

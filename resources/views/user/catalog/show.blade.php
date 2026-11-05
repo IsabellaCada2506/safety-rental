@@ -1,7 +1,8 @@
 {{--
     Author: Wendy Atehortua
-    Date: 2026-09-13
-    Description: Detail view for a single active vehicle in the rental catalog, including reservation flow.
+    Author: Isabella Cadavid Posada
+    Date: 2026-11-04
+    Description: User vehicle detail with a large photograph, specifications and existing reservation access.
 --}}
 
 @extends('layouts.app')
@@ -9,78 +10,120 @@
 @section('title', $viewData['title'])
 
 @section('content')
-<div class="container py-5 catalog-page">
-    <div class="row g-4">
-        <div class="col-lg-8">
-            <div class="card shadow-sm border-0 rounded-4 overflow-hidden bg-light">
-                <x-car-image
-                    :image="$viewData['car']->getImage()"
-                    class="img-fluid w-100 object-fit-cover catalog-detail-image"
-                />
-            </div>
+<section class="container catalog-page user-catalog">
+    <a
+        href="{{ route('catalog.index') }}"
+        class="uc-back-link"
+    >
+        <span aria-hidden="true">←</span>
+        {{ __('catalog.back') }}
+    </a>
+
+    <div class="uc-detail-grid">
+        <div class="uc-detail-media">
+            <x-car-image
+                :image="$viewData['car']->getImage()"
+                :alt="$viewData['car']->getCategory()?->getName() ?? __('car.image_alt')"
+                class="uc-detail-image"
+            />
         </div>
 
-        <div class="col-lg-4">
-            <div class="card shadow-sm border-0 rounded-4 p-4 h-100 d-flex flex-column justify-content-between bg-white">
+        <article class="uc-detail-panel">
+            <span
+                class="uc-detail-status {{ $viewData['car']->isActive() ? 'uc-status-active' : 'uc-status-inactive' }}"
+            >
+                {{ $viewData['car']->isActive() ? __('catalog.available') : __('catalog.status_deactivated') }}
+            </span>
+
+            <span class="uc-category">
+                {{ $viewData['car']->getCategory()?->getType() ?? '—' }}
+            </span>
+
+            <h1 class="uc-detail-title">
+                {{ $viewData['car']->getCategory()?->getName() ?? $viewData['car']->getPlate() }}
+            </h1>
+
+            <p class="uc-price uc-detail-price">
+                ${{ number_format($viewData['car']->getPrice(), 0, app()->getLocale() === 'es' ? ',' : '.', app()->getLocale() === 'es' ? '.' : ',') }}
+
+                <span>{{ __('catalog.per_day') }}</span>
+            </p>
+
+            <dl class="uc-specifications">
                 <div>
-                    <p class="text-muted small mb-2">
-                        {{ number_format($viewData['car']->getMileage(), 0, ',', '.') }} {{ __('catalog.km_unit') }}
-                        <span class="float-end fw-semibold {{ $viewData['car']->isActive() ? 'text-success' : 'text-danger' }}">
-                            {{ $viewData['car']->isActive() ? __('catalog.available') : __('catalog.status_deactivated') }}
-                        </span>
-                    </p>
-
-                    <h2 class="fw-bold text-dark fs-4 mb-2">
-                        {{ optional($viewData['car']->getCategory())->getBrand() }} {{ optional($viewData['car']->getCategory())->getModel() }}
-                    </h2>
-
-                    <p class="text-muted small mb-3">
-                        <span class="fw-semibold text-dark">{{ ucfirst($viewData['car']->getColor()) }}</span> |
-                        <span>{{ optional($viewData['car']->getCategory())->getType() }}</span> |
-                        <span>{{ __('catalog.plate_label') }}: <strong>{{ $viewData['car']->getPlate() }}</strong></span>
-                    </p>
-
-                    <div class="mb-3 p-3 bg-light rounded-3">
-                        @if($viewData['car']->getLocation())
-                            <p class="small mb-1"><strong>{{ __('catalog.location_filter') }}:</strong> {{ $viewData['car']->getLocation()->getName() }} ({{ $viewData['car']->getLocation()->getCity() }})</p>
-                        @endif
-                        <p class="small mb-1"><strong>{{ __('catalog.passengers_label') }}:</strong> {{ optional($viewData['car']->getCategory())->getPassengerCapacity() }}</p>
-                        <p class="small mb-1"><strong>{{ __('catalog.luggage_label') }}:</strong> {{ optional($viewData['car']->getCategory())->getLuggageCapacity() }} {{ __('catalog.units') }}</p>
-                        @if($viewData['car']->getDescription())
-                            <p class="small mb-0"><strong>{{ __('catalog.description_label') }}:</strong> {{ $viewData['car']->getDescription() }}</p>
-                        @endif
-                    </div>
-
-                    <div class="mb-4">
-                        <h3 class="text-dark fw-bold display-6 d-flex align-items-baseline gap-2">
-                            ${{ number_format($viewData['car']->getPrice(), 0, ',', '.') }}
-                            <span class="fs-6 text-muted fw-normal">{{ __('catalog.per_day') }}</span>
-                        </h3>
-                    </div>
-
-                    <div class="d-grid gap-2 mb-4">
-                        @if ($viewData['car']->isActive())
-                            <a
-                                href="{{ route('reservations.create', ['car_id' => $viewData['car']->getId()]) }}"
-                                class="btn btn-dark fw-semibold py-2 rounded-pill shadow-sm text-center text-decoration-none"
-                            >
-                                {{ __('catalog.rent_now') }} &rarr;
-                            </a>
-                        @else
-                            <button class="btn btn-secondary fw-semibold py-2 rounded-pill shadow-sm" disabled>
-                                {{ __('catalog.status_deactivated') }}
-                            </button>
-                        @endif
-                    </div>
+                    <dt>{{ __('catalog.plate_label') }}</dt>
+                    <dd>{{ $viewData['car']->getPlate() }}</dd>
                 </div>
 
-                <div class="pt-3 border-top text-center">
-                    <a href="{{ route('catalog.index') }}" class="text-decoration-none text-muted small fw-semibold">
-                        &larr; {{ __('catalog.back') }}
-                    </a>
+                <div>
+                    <dt>{{ __('car.color') }}</dt>
+                    <dd>{{ $viewData['car']->getColor() }}</dd>
                 </div>
-            </div>
-        </div>
+
+                <div>
+                    <dt>{{ __('car.mileage') }}</dt>
+                    <dd>
+                        {{ number_format($viewData['car']->getMileage(), 0, app()->getLocale() === 'es' ? ',' : '.', app()->getLocale() === 'es' ? '.' : ',') }}
+                        {{ __('catalog.km_unit') }}
+                    </dd>
+                </div>
+
+                <div>
+                    <dt>{{ __('catalog.passengers_label') }}</dt>
+                    <dd>
+                        {{ $viewData['car']->getCategory()?->getPassengerCapacity() ?? '—' }}
+                    </dd>
+                </div>
+
+                <div>
+                    <dt>{{ __('catalog.luggage_label') }}</dt>
+                    <dd>
+                        {{ $viewData['car']->getCategory()?->getLuggageCapacity() ?? '—' }}
+                        {{ __('catalog.units') }}
+                    </dd>
+                </div>
+            </dl>
+
+            @if ($viewData['car']->getLocation())
+                <div class="uc-location">
+                    <span>{{ __('catalog.location_filter') }}</span>
+
+                    <strong>
+                        {{ $viewData['car']->getLocation()->getName() }}
+                    </strong>
+
+                    <span>
+                        {{ $viewData['car']->getLocation()->getCity() }}
+                    </span>
+                </div>
+            @endif
+
+            @if ($viewData['car']->getDescription())
+                <div class="uc-description">
+                    <h2>{{ __('catalog.description_label') }}</h2>
+
+                    <p>{{ $viewData['car']->getDescription() }}</p>
+                </div>
+            @endif
+
+            @if ($viewData['car']->isActive())
+                <a
+                    href="{{ route('reservations.create', ['car_id' => $viewData['car']->getId()]) }}"
+                    class="uc-button uc-button-primary uc-card-link"
+                >
+                    {{ __('catalog.rent_now') }}
+                    <span aria-hidden="true">→</span>
+                </a>
+            @else
+                <button
+                    type="button"
+                    class="uc-button uc-button-primary uc-card-link"
+                    disabled
+                >
+                    {{ __('catalog.status_deactivated') }}
+                </button>
+            @endif
+        </article>
     </div>
-</div>
+</section>
 @endsection

@@ -93,7 +93,7 @@
                             <div class="p-3 border rounded-4">
                                 <div class="d-flex justify-content-between small text-muted mb-1">
                                     <span>{{ __('reservation.daily_rate') }}:</span>
-                                    <span class="fw-semibold text-dark">${{ number_format($viewData['reservation']->getCar()?->getPrice() ?? 0, 0, ',', '.') }}</span>
+                                    <span class="fw-semibold text-dark">${{ number_format($viewData['reservation']->getCar()?->getPrice() ?? 0, 0, app()->getLocale() === 'es' ? ',' : '.', app()->getLocale() === 'es' ? '.' : ',') }}</span>
                                 </div>
                                 <div class="d-flex justify-content-between small text-muted mb-2">
                                     <span>{{ __('reservation.rental_days') }}:</span>
@@ -102,7 +102,7 @@
                                 <hr class="my-2">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span class="fw-bold text-dark">{{ __('reservation.total_price') }}:</span>
-                                    <span class="fw-bold text-primary fs-4">${{ number_format($viewData['reservation']->getTotalPrice(), 0, ',', '.') }}</span>
+                                    <span class="fw-bold text-primary fs-4">${{ number_format($viewData['reservation']->getTotalPrice(), 0, app()->getLocale() === 'es' ? ',' : '.', app()->getLocale() === 'es' ? '.' : ',') }}</span>
                                 </div>
                             </div>
 
@@ -125,7 +125,7 @@
                                     </div>
                                     <div class="d-flex justify-content-between small text-muted">
                                         <span>{{ __('payment.amount') }}:</span>
-                                        <span class="fw-semibold text-dark">${{ number_format($viewData['reservation']->getPayment()->getAmount(), 0, ',', '.') }}</span>
+                                        <span class="fw-semibold text-dark">${{ number_format($viewData['reservation']->getPayment()->getAmount(), 0, app()->getLocale() === 'es' ? ',' : '.', app()->getLocale() === 'es' ? '.' : ',') }}</span>
                                     </div>
                                 @else
                                     <p class="text-muted small mb-0">{{ __('payment.unpaid') }}</p>
@@ -159,7 +159,7 @@
                             <form
                                 action="{{ route('reservations.cancel', ['id' => $viewData['reservation']->getId()]) }}"
                                 method="POST"
-                                onsubmit="return confirm('{{ __('reservation.cancellation_confirm') }}');"
+                                data-confirm-message="{{ __('reservation.cancellation_confirm') }}"
                                 class="m-0"
                             >
                                 @csrf

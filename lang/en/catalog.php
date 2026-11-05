@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Author: Wendy Atehortua
- * Date: 2026-09-11
- * Description: English language strings for the car rental catalog module.
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Complete en translations for catalog.
  */
 
 return [
     'title_index' => 'Vehicle Catalog - Safety Rental',
     'title_show' => 'Vehicle Detail - Safety Rental',
-    'title' => 'Vehicle Catalog',
+    'title' => 'Catalog',
     'subtitle' => 'Explore our available fleet for a safe and premium rental experience.',
     'no_image' => 'No Image Available',
     'brand_label' => 'Brand:',
@@ -25,7 +25,6 @@ return [
     'security_desc' => 'This vehicle features approved technical inspections, roadside assistance, and active protection policy.',
     'back' => 'Back to Catalog',
     'rent_now' => 'Rent Now',
-
     'unknown_vehicle' => 'Vehicle',
     'km_unit' => 'km',
     'passengers_label' => 'Passengers',
@@ -35,8 +34,6 @@ return [
     'no_description' => 'No additional notes provided.',
     'status_deactivated' => 'Deactivated',
     'plate_label' => 'Plate',
-
-    // Search and Filters
     'search_label' => 'Search',
     'search_placeholder' => 'Search by brand, model, description...',
     'all_categories' => 'All Categories',

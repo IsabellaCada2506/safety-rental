@@ -1,6 +1,7 @@
 {{--
+    Author: Isabella Cadavid Posada
     Author: Alejandro Correa Marin
-    Date: 2026-09-12
+    Date: 2026-11-05
     Description: Customer form for recording a simulated reservation payment.
 --}}
 
@@ -47,7 +48,7 @@
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                         <span class="fw-bold text-dark">{{ __('payment.approved_amount') }}</span>
-                        <span class="fw-bold text-primary fs-4">${{ number_format($viewData['approvedAmount'], 0, ',', '.') }}</span>
+                        <span class="fw-bold text-primary fs-4">${{ number_format($viewData['approvedAmount'], 0, app()->getLocale() === 'es' ? ',' : '.', app()->getLocale() === 'es' ? '.' : ',') }}</span>
                     </div>
                 </div>
             </div>
@@ -59,7 +60,7 @@
 
                     <div class="mb-3">
                         <label for="method" class="form-label fw-semibold">{{ __('payment.method') }}</label>
-                        <select id="method" name="method" class="form-select rounded-3">
+                        <select id="method" name="method" class="form-select rounded-3 @error('method') is-invalid @enderror" @error('method') aria-invalid="true" aria-describedby="method-error" @enderror>
                             <option value="">{{ __('payment.select_method') }}</option>
                             @foreach ($viewData['methodOptions'] as $method => $methodLabel)
                                 <option value="{{ $method }}" @selected(old('method') === $method)>
@@ -67,15 +68,24 @@
                                 </option>
                             @endforeach
                         </select>
+                        @error('method')
+                            <div id="method-error" class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
-                    <div class="mb-4">
-                        <span class="form-label fw-semibold d-block">{{ __('payment.simulated_result') }}</span>
+                    <fieldset class="mb-4">
+                        <legend class="form-label fw-semibold">{{ __('payment.simulated_result') }}</legend>
                         <div class="form-check">
                             <input
-                                class="form-check-input"
+                                class="form-check-input @error('simulated_result') is-invalid @enderror"
                                 type="radio"
                                 name="simulated_result"
+                                @error('simulated_result')
+                                    aria-invalid="true"
+                                    aria-describedby="simulated-result-error"
+                                @enderror
                                 id="simulated_result_success"
                                 value="success"
                                 @checked(old('simulated_result', 'success') === 'success')
@@ -86,9 +96,13 @@
                         </div>
                         <div class="form-check">
                             <input
-                                class="form-check-input"
+                                class="form-check-input @error('simulated_result') is-invalid @enderror"
                                 type="radio"
                                 name="simulated_result"
+                                @error('simulated_result')
+                                    aria-invalid="true"
+                                    aria-describedby="simulated-result-error"
+                                @enderror
                                 id="simulated_result_failure"
                                 value="failure"
                                 @checked(old('simulated_result') === 'failure')
@@ -97,7 +111,12 @@
                                 {{ __('payment.simulate_failure') }}
                             </label>
                         </div>
-                    </div>
+                        @error('simulated_result')
+                            <div id="simulated-result-error" class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </fieldset>
 
                     <button type="submit" class="btn btn-dark w-100 rounded-pill py-2 fw-semibold">
                         {{ __('payment.submit_payment') }}

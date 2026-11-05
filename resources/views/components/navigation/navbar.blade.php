@@ -1,8 +1,8 @@
 {{--
     Author: Isabella Cadavid Posada
     Author: Alejandro Correa Marin
-    Date: 2026-09-12
-    Description: Navigation bar for authenticated users and guests in the Safety Rental application.
+    Date: 2026-11-04
+    Description: Shared navigation with concise translated labels and active page indicators.
 --}}
 
 <nav class="navbar navbar-expand-lg safety-navbar">
@@ -41,19 +41,8 @@
                         stroke-linejoin="round"
                     />
 
-                    <circle
-                        cx="12"
-                        cy="22.5"
-                        r="1.3"
-                        fill="currentColor"
-                    />
-
-                    <circle
-                        cx="20"
-                        cy="22.5"
-                        r="1.3"
-                        fill="currentColor"
-                    />
+                    <circle cx="12" cy="22.5" r="1.3" fill="currentColor"/>
+                    <circle cx="20" cy="22.5" r="1.3" fill="currentColor"/>
                 </svg>
             </span>
 
@@ -66,27 +55,39 @@
                     <a
                         class="btn-pill-ghost text-decoration-none"
                         href="{{ route('home.index') }}"
+                        @if (request()->routeIs('home.index'))
+                            aria-current="page"
+                        @endif
                     >
-                        {{ __('authentication.home') }}
+                        {{ __('general.nav_home') }}
                     </a>
 
                     <a
                         class="btn-pill-ghost text-decoration-none"
                         href="{{ route('catalog.index') }}"
+                        @if (request()->routeIs('catalog.*'))
+                            aria-current="page"
+                        @endif
                     >
-                        {{ __('catalog.title') }}
+                        {{ __('general.nav_catalog') }}
                     </a>
 
                     <a
                         class="btn-pill-ghost text-decoration-none"
                         href="{{ route('locations.index') }}"
+                        @if (request()->routeIs('locations.*'))
+                            aria-current="page"
+                        @endif
                     >
-                        {{ __('location.manage_locations') }}
+                        {{ __('general.nav_locations') }}
                     </a>
 
                     <a
                         class="btn-pill-ghost text-decoration-none"
                         href="{{ route('reservations.index') }}"
+                        @if (request()->routeIs('reservations.*'))
+                            aria-current="page"
+                        @endif
                     >
                         {{ __('general.nav_reservations') }}
                     </a>
@@ -96,6 +97,9 @@
                         href="{{ route('profile.index') }}"
                         aria-label="{{ __('authentication.profile') }}"
                         title="{{ __('authentication.profile') }}"
+                        @if (request()->routeIs('profile.*'))
+                            aria-current="page"
+                        @endif
                     >
                         <svg
                             width="20"
@@ -125,34 +129,49 @@
                     <a
                         class="btn-pill-ghost text-decoration-none"
                         href="{{ route('admin.dashboard.index') }}"
+                        @if (request()->routeIs('admin.dashboard.index'))
+                            aria-current="page"
+                        @endif
                     >
-                        {{ __('authentication.dashboard') }}
+                        {{ __('authentication.home') }}
                     </a>
 
                     <a
                         class="btn-pill-ghost text-decoration-none"
                         href="{{ route('admin.car.index') }}"
+                        @if (request()->routeIs('admin.car.*'))
+                            aria-current="page"
+                        @endif
                     >
-                        {{ __('car.manage_cars') }}
+                        {{ __('general.nav_cars') }}
                     </a>
 
                     <a
                         class="btn-pill-ghost text-decoration-none"
                         href="{{ route('admin.category.index') }}"
+                        @if (request()->routeIs('admin.category.*'))
+                            aria-current="page"
+                        @endif
                     >
-                        {{ __('category.manage_categories') }}
+                        {{ __('general.nav_categories') }}
                     </a>
 
                     <a
                         class="btn-pill-ghost text-decoration-none"
                         href="{{ route('admin.location.index') }}"
+                        @if (request()->routeIs('admin.location.*'))
+                            aria-current="page"
+                        @endif
                     >
-                        {{ __('location.manage_locations') }}
+                        {{ __('general.nav_locations') }}
                     </a>
 
                     <a
                         class="btn-pill-ghost text-decoration-none"
                         href="{{ route('admin.reservation.index') }}"
+                        @if (request()->routeIs('admin.reservation.*'))
+                            aria-current="page"
+                        @endif
                     >
                         {{ __('authentication.reservations') }}
                     </a>
@@ -160,8 +179,21 @@
                     <a
                         class="btn-pill-ghost text-decoration-none"
                         href="{{ route('admin.payment.index') }}"
+                        @if (request()->routeIs('admin.payment.*'))
+                            aria-current="page"
+                        @endif
                     >
-                        {{ __('payment.manage_payments') }}
+                        {{ __('general.nav_payments') }}
+                    </a>
+
+                    <a
+                        class="btn-pill-ghost text-decoration-none"
+                        href="{{ route('admin.user.index') }}"
+                        @if (request()->routeIs('admin.user.*'))
+                            aria-current="page"
+                        @endif
+                    >
+                        {{ __('general.nav_users') }}
                     </a>
                 @endif
 
@@ -172,42 +204,35 @@
                 >
                     @csrf
 
-                    <button
-                        class="btn-logout"
-                        type="submit"
-                    >
+                    <button class="btn-logout" type="submit">
                         {{ __('authentication.logout') }}
                     </button>
                 </form>
             </div>
         @else
             <div class="nav-guest">
-                <a href="{{ route('login') }}">
+                <a
+                    class="guest-navigation-link"
+                    href="{{ route('login') }}"
+                    @if (request()->routeIs('login'))
+                        aria-current="page"
+                    @endif
+                >
                     {{ __('authentication.login') }}
                 </a>
 
                 <a
-                    class="btn-pill-solid text-dark"
-                    style="color: #111827 !important;"
+                    class="guest-navigation-link"
                     href="{{ route('register') }}"
+                    @if (request()->routeIs('register'))
+                        aria-current="page"
+                    @endif
                 >
                     {{ __('authentication.create_account') }}
                 </a>
             </div>
         @endauth
 
-        <div class="ms-2 d-flex align-items-center">
-            <form action="{{ route('locale.switch', app()->getLocale() === 'es' ? 'en' : 'es') }}" method="POST" class="d-inline m-0 p-0">
-                @csrf
-                <button
-                    type="submit"
-                    class="btn-lang-toggle"
-                    style="cursor: pointer;"
-                    title="{{ app()->getLocale() === 'es' ? 'Switch to English' : 'Cambiar a Español' }}"
-                >
-                    🌐 {{ app()->getLocale() === 'es' ? 'EN' : 'ES' }}
-                </button>
-            </form>
-        </div>
+        @include('components.navigation.language-selector')
     </div>
 </nav>

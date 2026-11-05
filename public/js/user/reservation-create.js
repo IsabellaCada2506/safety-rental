@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
     }
 
+    const numberLocale = document.documentElement.lang.startsWith('es') ? 'es-CO' : 'en-US';
     const daysUnit = previewDays.getAttribute('data-unit') || previewDays.textContent.replace(/^\d+\s*/, '').trim();
     const rawPrice = previewTotal.getAttribute('data-price') || previewTotal.textContent.replace(/[^0-9]/g, '');
     const dailyPrice = parseInt(rawPrice, 10) || 0;
@@ -31,10 +32,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (diffDays > 0) {
                 previewDays.textContent = diffDays + (daysUnit ? ' ' + daysUnit : '');
                 const total = diffDays * dailyPrice;
-                previewTotal.textContent = '$' + total.toLocaleString('es-CO');
+                previewTotal.textContent = '$' + total.toLocaleString(numberLocale);
             } else {
                 previewDays.textContent = '1' + (daysUnit ? ' ' + daysUnit : '');
-                previewTotal.textContent = '$' + dailyPrice.toLocaleString('es-CO');
+                previewTotal.textContent = '$' + dailyPrice.toLocaleString(numberLocale);
             }
         }
     }

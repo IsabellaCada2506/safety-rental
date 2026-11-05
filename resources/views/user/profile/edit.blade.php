@@ -8,13 +8,6 @@
 
 @section('title', $viewData['title'])
 
-@push('styles')
-    <link
-        href="{{ asset('css/pages/profile-edit.css') }}?v=4"
-        rel="stylesheet"
-    >
-@endpush
-
 @section('content')
     <section class="profile-edit-page">
         <div

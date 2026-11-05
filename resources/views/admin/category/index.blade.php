@@ -1,7 +1,8 @@
 {{--
     Author: Wendy Atehortua
-    Date: 2026-09-10
-    Description: Admin view for listing and managing vehicle categories.
+    Author: Isabella Cadavid Posada
+    Date: 2026-11-04
+    Description: Compact category comparison table with existing administrative actions.
 --}}
 
 @extends('layouts.app')
@@ -9,7 +10,7 @@
 @section('title', $viewData['title'])
 
 @section('content')
-<section class="admin-page">
+<section class="admin-page category-comparison">
     <div
         class="admin-page-shape admin-page-shape-left"
         aria-hidden="true"
@@ -102,13 +103,13 @@
                                     action="{{ route('admin.category.delete', ['id' => $category->getId()]) }}"
                                     method="POST"
                                     class="d-inline"
+                                    data-confirm-message="{{ __('category.confirm_delete') }}"
                                 >
                                     @csrf
                                     @method('DELETE')
                                     <button
                                         type="submit"
                                         class="admin-index-btn admin-index-btn-danger"
-                                        onclick="return confirm('{{ __('category.confirm_delete') }}')"
                                     >
                                         {{ __('category.btn_delete') }}
                                     </button>
@@ -129,3 +130,7 @@
 </section>
 @endsection
 
+
+@push('scripts')
+    <script src="{{ asset('js/admin/card-actions.js') }}?v=1" defer></script>
+@endpush
