@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Complete it translations for reservation.
+ */
+
+return [
+    'title_my_reservations' => 'Le mie prenotazioni',
+    'title_create' => 'Crea prenotazione',
+    'title_show' => 'Dettaglio prenotazione n. :code',
+    'admin_title_index' => 'Gestione prenotazioni',
+    'admin_title_show' => 'Verifica prenotazione n. :code',
+    'state_pending' => 'In attesa',
+    'state_confirmed' => 'Confermata',
+    'state_cancelled' => 'Annullata',
+    'state_completed' => 'Completata',
+    'reservation_code' => 'Codice prenotazione',
+    'code' => 'Codice',
+    'status' => 'Stato',
+    'dates' => 'Date del noleggio',
+    'start_date' => 'Data di inizio',
+    'end_date' => 'Data di fine',
+    'pickup_location' => 'Sede di ritiro / riconsegna',
+    'select_location' => 'Seleziona una sede',
+    'vehicle' => 'Veicolo',
+    'customer' => 'Cliente',
+    'daily_rate' => 'Tariffa giornaliera',
+    'rental_days' => 'Giorni di noleggio',
+    'total_price' => 'Totale stimato',
+    'days_unit' => 'giorno/i',
+    'actions' => 'Azioni',
+    'confirm_booking' => 'Conferma e prenota',
+    'cancel_reservation' => 'Annulla prenotazione',
+    'confirm_reservation' => 'Conferma prenotazione',
+    'view_details' => 'Vedi dettagli',
+    'back_to_list' => 'Torna alle mie prenotazioni',
+    'back_to_admin_list' => 'Torna all’elenco amministrativo',
+    'filter_all' => 'Tutte',
+    'no_reservations' => 'Nessuna prenotazione trovata.',
+    'cancellation_confirm' => 'Vuoi annullare questa prenotazione? Il veicolo tornerà disponibile per altri utenti.',
+    'created_success' => 'La prenotazione è stata creata correttamente! Stato attuale: in attesa.',
+    'confirmed_success' => 'La prenotazione è stata confermata correttamente.',
+    'cancelled_success' => 'La prenotazione è stata annullata correttamente.',
+    'car_unavailable' => 'Il veicolo selezionato non è disponibile nelle date richieste a causa di un’altra prenotazione.',
+    'start_date_past_error' => 'La data di inizio non può essere precedente a oggi.',
+    'end_date_order_error' => 'La data di fine deve essere successiva alla data di inizio.',
+    'car_not_found' => 'Il veicolo selezionato non è valido.',
+    'location_not_found' => 'La sede selezionata non è valida.',
+    'cancellation_not_allowed' => 'Questa prenotazione non può più essere annullata.',
+    'transition_not_allowed' => 'Il cambio di stato richiesto non è consentito.',
+    'summary_heading' => 'Riepilogo del noleggio',
+    'user_info' => 'Informazioni utente',
+    'vehicle_info' => 'Informazioni sul veicolo',
+];

@@ -1,6 +1,7 @@
 {{--
+    Author: Isabella Cadavid Posada
     Author: Wendy Atehortua
-    Date: 2026-09-11
+    Date: 2026-11-05
     Description: Admin view for editing an existing vehicle with category and branch location associations.
 --}}
 
@@ -70,13 +71,19 @@
 
                         <input
                             type="text"
-                            class="form-control"
+                            class="form-control @error('plate') is-invalid @enderror"
                             id="car-plate"
                             name="plate"
                             value="{{ old('plate', $viewData['car']->getPlate()) }}"
                             placeholder="{{ __('car.plate_placeholder') }}"
                             required
+                            @error('plate') aria-invalid="true" aria-describedby="car-plate-error" @enderror
                         >
+                        @error('plate')
+                            <div id="car-plate-error" class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div>
@@ -90,13 +97,19 @@
 
                         <input
                             type="text"
-                            class="form-control"
+                            class="form-control @error('color') is-invalid @enderror"
                             id="car-color"
                             name="color"
                             value="{{ old('color', $viewData['car']->getColor()) }}"
                             placeholder="{{ __('car.color_placeholder') }}"
                             required
+                            @error('color') aria-invalid="true" aria-describedby="car-color-error" @enderror
                         >
+                        @error('color')
+                            <div id="car-color-error" class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div>
@@ -110,13 +123,19 @@
 
                         <input
                             type="text"
-                            class="form-control"
+                            class="form-control @error('soat') is-invalid @enderror"
                             id="car-soat"
                             name="soat"
                             value="{{ old('soat', $viewData['car']->getSoat()) }}"
                             placeholder="{{ __('car.soat_placeholder') }}"
                             required
+                            @error('soat') aria-invalid="true" aria-describedby="car-soat-error" @enderror
                         >
+                        @error('soat')
+                            <div id="car-soat-error" class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div>
@@ -130,13 +149,19 @@
 
                         <input
                             type="text"
-                            class="form-control"
+                            class="form-control @error('transit_license') is-invalid @enderror"
                             id="car-transit-license"
                             name="transit_license"
                             value="{{ old('transit_license', $viewData['car']->getTransitLicense()) }}"
                             placeholder="{{ __('car.transit_license_placeholder') }}"
                             required
+                            @error('transit_license') aria-invalid="true" aria-describedby="car-transit-license-error" @enderror
                         >
+                        @error('transit_license')
+                            <div id="car-transit-license-error" class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div>
@@ -150,13 +175,19 @@
 
                         <input
                             type="number"
-                            class="form-control"
+                            class="form-control @error('price') is-invalid @enderror"
                             id="car-price"
                             name="price"
                             value="{{ old('price', $viewData['car']->getPrice()) }}"
                             placeholder="{{ __('car.price_placeholder') }}"
                             required
+                            @error('price') aria-invalid="true" aria-describedby="car-price-error" @enderror
                         >
+                        @error('price')
+                            <div id="car-price-error" class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div>
@@ -170,13 +201,19 @@
 
                         <input
                             type="number"
-                            class="form-control"
+                            class="form-control @error('mileage') is-invalid @enderror"
                             id="car-mileage"
                             name="mileage"
                             value="{{ old('mileage', $viewData['car']->getMileage()) }}"
                             placeholder="{{ __('car.mileage_placeholder') }}"
                             required
+                            @error('mileage') aria-invalid="true" aria-describedby="car-mileage-error" @enderror
                         >
+                        @error('mileage')
+                            <div id="car-mileage-error" class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div class="admin-form-field-full">
@@ -189,10 +226,11 @@
                         </label>
 
                         <select
-                            class="form-select"
+                            class="form-select @error('category_id') is-invalid @enderror"
                             id="car-category"
                             name="category_id"
                             required
+                            @error('category_id') aria-invalid="true" aria-describedby="car-category-error" @enderror
                         >
                             <option
                                 value=""
@@ -211,6 +249,11 @@
                                 </option>
                             @endforeach
                         </select>
+                        @error('category_id')
+                            <div id="car-category-error" class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div class="admin-form-field-full">
@@ -223,10 +266,11 @@
                         </label>
 
                         <select
-                            class="form-select"
+                            class="form-select @error('location_id') is-invalid @enderror"
                             id="car-location"
                             name="location_id"
                             required
+                            @error('location_id') aria-invalid="true" aria-describedby="car-location-error" @enderror
                         >
                             <option
                                 value=""
@@ -245,6 +289,11 @@
                                 </option>
                             @endforeach
                         </select>
+                        @error('location_id')
+                            <div id="car-location-error" class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div class="admin-form-field-full">
@@ -257,12 +306,18 @@
 
                         <input
                             type="url"
-                            class="form-control"
+                            class="form-control @error('image') is-invalid @enderror"
                             id="car-image"
                             name="image"
                             value="{{ old('image', $viewData['car']->getImage()) }}"
                             placeholder="{{ __('car.image_placeholder') }}"
+                            @error('image') aria-invalid="true" aria-describedby="car-image-error" @enderror
                         >
+                        @error('image')
+                            <div id="car-image-error" class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div class="admin-form-field-full">
@@ -274,12 +329,18 @@
                         </label>
 
                         <textarea
-                            class="form-control"
+                            class="form-control @error('description') is-invalid @enderror"
                             id="car-description"
                             name="description"
                             rows="4"
                             placeholder="{{ __('car.description_placeholder') }}"
+                            @error('description') aria-invalid="true" aria-describedby="car-description-error" @enderror
                         >{{ old('description', $viewData['car']->getDescription()) }}</textarea>
+                        @error('description')
+                            <div id="car-description-error" class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
 

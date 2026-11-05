@@ -1,6 +1,7 @@
 {{--
+    Author: Isabella Cadavid Posada
     Author: Isabella Ocampo
-    Date: 2026-09-11
+    Date: 2026-11-05
     Description: Admin view for creating a new physical rental location.
 --}}
 
@@ -69,13 +70,19 @@
 
                         <input
                             type="text"
-                            class="form-control"
+                            class="form-control @error('name') is-invalid @enderror"
                             id="location-name"
                             name="name"
                             value="{{ old('name') }}"
                             placeholder="{{ __('location.name_placeholder') }}"
                             required
+                            @error('name') aria-invalid="true" aria-describedby="location-name-error" @enderror
                         >
+                        @error('name')
+                            <div id="location-name-error" class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div>
@@ -89,13 +96,19 @@
 
                         <input
                             type="text"
-                            class="form-control"
+                            class="form-control @error('city') is-invalid @enderror"
                             id="location-city"
                             name="city"
                             value="{{ old('city') }}"
                             placeholder="{{ __('location.city_placeholder') }}"
                             required
+                            @error('city') aria-invalid="true" aria-describedby="location-city-error" @enderror
                         >
+                        @error('city')
+                            <div id="location-city-error" class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div class="admin-form-field-full">
@@ -109,13 +122,19 @@
 
                         <input
                             type="text"
-                            class="form-control"
+                            class="form-control @error('address') is-invalid @enderror"
                             id="location-address"
                             name="address"
                             value="{{ old('address') }}"
                             placeholder="{{ __('location.address_placeholder') }}"
                             required
+                            @error('address') aria-invalid="true" aria-describedby="location-address-error" @enderror
                         >
+                        @error('address')
+                            <div id="location-address-error" class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div>
@@ -129,13 +148,19 @@
 
                         <input
                             type="text"
-                            class="form-control"
+                            class="form-control @error('headquarters') is-invalid @enderror"
                             id="location-headquarters"
                             name="headquarters"
                             value="{{ old('headquarters') }}"
                             placeholder="{{ __('location.headquarters_placeholder') }}"
                             required
+                            @error('headquarters') aria-invalid="true" aria-describedby="location-headquarters-error" @enderror
                         >
+                        @error('headquarters')
+                            <div id="location-headquarters-error" class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div>
@@ -149,13 +174,19 @@
 
                         <input
                             type="text"
-                            class="form-control"
+                            class="form-control @error('telephone') is-invalid @enderror"
                             id="location-telephone"
                             name="telephone"
                             value="{{ old('telephone') }}"
                             placeholder="{{ __('location.telephone_placeholder') }}"
                             required
+                            @error('telephone') aria-invalid="true" aria-describedby="location-telephone-error" @enderror
                         >
+                        @error('telephone')
+                            <div id="location-telephone-error" class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
 

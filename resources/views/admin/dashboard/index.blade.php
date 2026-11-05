@@ -1,8 +1,8 @@
 {{--
     Author: Isabella Cadavid Posada
     Author: Alejandro Correa Marin
-    Date: 2026-09-12
-    Description: Admin dashboard view with active reservations link.
+    Date: 2026-11-04
+    Description: Administrator dashboard with management shortcuts and no vehicle carousel.
 --}}
 
 @extends('layouts.app')
@@ -44,38 +44,7 @@
             </h2>
 
             <div class="admin-grid">
-                <div class="admin-card">
-                    <span class="admin-icon" aria-hidden="true">
-                        <svg
-                            viewBox="0 0 64 32"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                d="M6 22 L11 12 Q14 8 20 8 H40 Q46 8 49 12 L58 22 V25 Q58 27 56 27 H8 Q6 27 6 25 Z"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                fill="none"
-                            />
-
-                            <circle
-                                cx="18"
-                                cy="27"
-                                r="4"
-                                stroke="currentColor"
-                                stroke-width="2"
-                            />
-
-                            <circle
-                                cx="46"
-                                cy="27"
-                                r="4"
-                                stroke="currentColor"
-                                stroke-width="2"
-                            />
-                        </svg>
-                    </span>
-
+                <article class="admin-card">
                     <h3>
                         {{ __('authentication.vehicles') }}
                     </h3>
@@ -84,54 +53,24 @@
                         {{ __('authentication.vehicles_description') }}
                     </p>
 
-                    <a
-                        href="{{ route('admin.car.index') }}"
-                        class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link"
-                    >
-                        <span class="me-1"></span>
-                        {{ __('car.heading_management') }}
-                    </a>
-
-                    <a
-                        href="{{ route('admin.ranking.index') }}"
-                        class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link mt-2"
-                    >
-                        {{ __('ranking.manage_ranking') }}
-                    </a>
-                </div>
-
-                <div class="admin-card">
-                    <span class="admin-icon" aria-hidden="true">
-                        <svg
-                            viewBox="0 0 32 32"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
+                    <div class="d-flex flex-wrap gap-2">
+                        <a
+                            href="{{ route('admin.car.index') }}"
+                            class="btn btn-primary"
                         >
-                            <rect
-                                x="6"
-                                y="8"
-                                width="20"
-                                height="18"
-                                rx="2"
-                                stroke="currentColor"
-                                stroke-width="2"
-                            />
+                            {{ __('car.heading_management') }}
+                        </a>
 
-                            <path
-                                d="M6 13H26"
-                                stroke="currentColor"
-                                stroke-width="2"
-                            />
+                        <a
+                            href="{{ route('admin.ranking.index') }}"
+                            class="btn btn-outline-primary"
+                        >
+                            {{ __('ranking.manage_ranking') }}
+                        </a>
+                    </div>
+                </article>
 
-                            <path
-                                d="M11 5V10M21 5V10"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                            />
-                        </svg>
-                    </span>
-
+                <article class="admin-card">
                     <h3>
                         {{ __('authentication.reservations') }}
                     </h3>
@@ -140,45 +79,24 @@
                         {{ __('authentication.reservations_description') }}
                     </p>
 
-                    <a
-                        href="{{ route('admin.reservation.index') }}"
-                        class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link"
-                    >
-                        <span class="me-1"></span>
-                        {{ __('reservation.admin_title_index') }}
-                    </a>
-
-                    <a
-                        href="{{ route('admin.metrics.index') }}"
-                        class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link mt-2"
-                    >
-                        {{ __('metrics.manage_metrics') }}
-                    </a>
-                </div>
-
-                <div class="admin-card">
-                    <span class="admin-icon" aria-hidden="true">
-                        <svg
-                            viewBox="0 0 32 32"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
+                    <div class="d-flex flex-wrap gap-2">
+                        <a
+                            href="{{ route('admin.reservation.index') }}"
+                            class="btn btn-primary"
                         >
-                            <path
-                                d="M16 4C11.5 4 8 7.5 8 12C8 18 16 28 16 28C16 28 24 18 24 12C24 7.5 20.5 4 16 4Z"
-                                stroke="currentColor"
-                                stroke-width="2"
-                            />
+                            {{ __('reservation.admin_title_index') }}
+                        </a>
 
-                            <circle
-                                cx="16"
-                                cy="12"
-                                r="3"
-                                stroke="currentColor"
-                                stroke-width="2"
-                            />
-                        </svg>
-                    </span>
+                        <a
+                            href="{{ route('admin.metrics.index') }}"
+                            class="btn btn-outline-primary"
+                        >
+                            {{ __('metrics.manage_metrics') }}
+                        </a>
+                    </div>
+                </article>
 
+                <article class="admin-card">
                     <h3>
                         {{ __('location.heading_management') }}
                     </h3>
@@ -189,37 +107,13 @@
 
                     <a
                         href="{{ route('admin.location.index') }}"
-                        class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link"
+                        class="btn btn-primary"
                     >
-                        <span class="me-1"></span>
                         {{ __('location.manage_locations') }}
                     </a>
-                </div>
+                </article>
 
-                <div class="admin-card">
-                    <span class="admin-icon" aria-hidden="true">
-                        <svg
-                            viewBox="0 0 32 32"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <circle
-                                cx="16"
-                                cy="12"
-                                r="5"
-                                stroke="currentColor"
-                                stroke-width="2"
-                            />
-
-                            <path
-                                d="M6 26C6 20.5 10.5 17 16 17C21.5 17 26 20.5 26 26"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                            />
-                        </svg>
-                    </span>
-
+                <article class="admin-card">
                     <h3>
                         {{ __('authentication.users') }}
                     </h3>
@@ -230,11 +124,11 @@
 
                     <a
                         href="{{ route('admin.user.index') }}"
-                        class="badge rounded-pill text-dark text-decoration-none px-3 py-2 fw-bold shadow-sm d-inline-flex align-items-center admin-card-link"
+                        class="btn btn-primary"
                     >
                         {{ __('user.manage_users') }}
                     </a>
-                </div>
+                </article>
             </div>
         </div>
     </section>

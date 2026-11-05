@@ -1,0 +1,205 @@
+/*
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Styles organized by interface responsibility.
+ */
+
+:root {
+    --sr-ink: #170504;
+    --sr-plum: #3a0b10;
+    --sr-ember: #e8391f;
+    --sr-flame: #ff7a3d;
+    --sr-gold: #ffb238;
+    --sr-cream: #fff8f4;
+    --sr-white: #ffffff;
+    --sr-text: #161110;
+    --sr-muted: #7c6b64;
+    --sr-line: rgba(255, 255, 255, 0.22);
+    --sr-shadow: rgba(58, 11, 16, 0.22);
+    --sr-radius-lg: 26px;
+    --sr-radius-md: 16px;
+    --sr-mesh:
+        radial-gradient(circle at 12% 15%, rgba(255, 122, 61, 0.55), transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(232, 57, 31, 0.5), transparent 45%),
+        radial-gradient(circle at 60% 85%, rgba(255, 178, 56, 0.28), transparent 40%),
+        radial-gradient(circle at 15% 90%, rgba(58, 11, 16, 0.6), transparent 45%),
+        linear-gradient(155deg, var(--sr-ink) 0%, var(--sr-plum) 55%, #4a0f12 100%);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    color: var(--sr-text);
+    background: var(--sr-cream);
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Inter', sans-serif;
+}
+
+.display-font {
+    font-family: 'Anton', 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+}
+
+.brand-mark {
+    display: inline-flex;
+    width: 26px;
+    height: 26px;
+    color: var(--sr-gold);
+}
+
+.brand-mark svg,
+.brand-mark img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.brand-mark-sm {
+    width: 20px;
+    height: 20px;
+}
+
+.logo-badge {
+    display: inline-flex;
+    width: 64px;
+    height: 74px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.6rem;
+    color: var(--sr-ink);
+    background: linear-gradient(160deg, var(--sr-gold), var(--sr-flame));
+    border-radius: 20px 20px 34px 34px;
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+}
+
+.logo-badge svg {
+    width: 34px;
+    height: 34px;
+}
+
+.btn-pill-solid,
+.btn-logout {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1.6rem;
+    color: var(--sr-ink) !important;
+    background: var(--sr-white);
+    border: 0;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.92rem;
+    text-decoration: none;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.btn-pill-solid:hover,
+.btn-logout:hover {
+    color: var(--sr-ink) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
+}
+
+.btn-logout {
+    padding: 0.55rem 1.3rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.btn-pill-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.68rem 1.55rem;
+    color: var(--sr-white);
+    background: transparent;
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    text-decoration: none;
+    transition: border-color 0.18s ease, background 0.18s ease;
+}
+
+.btn-pill-ghost:hover {
+    color: var(--sr-white);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--sr-white);
+}
+
+.road-line {
+    display: none !important;
+}
+
+.form-label {
+    color: var(--sr-text);
+    font-weight: 600;
+    font-size: 0.92rem;
+}
+
+.form-control {
+    min-height: 50px;
+    padding: 0.7rem 1rem;
+    color: var(--sr-text);
+    border: 1.5px solid #f0ded4;
+    border-radius: var(--sr-radius-md);
+    background: var(--sr-cream);
+    font-size: 0.96rem;
+}
+
+.form-control:focus {
+    color: var(--sr-text);
+    border-color: var(--sr-ember);
+    background: var(--sr-white);
+    box-shadow: 0 0 0 0.2rem rgba(232, 57, 31, 0.15);
+}
+
+.form-select {
+    min-height: 50px;
+    padding: 0.7rem 2.25rem 0.7rem 1rem;
+    color: var(--sr-text);
+    background-color: var(--sr-cream);
+    border: 1.5px solid #f0ded4;
+    border-radius: var(--sr-radius-md);
+    font-size: 0.96rem;
+}
+
+.form-select:focus {
+    color: var(--sr-text);
+    background-color: var(--sr-white);
+    border-color: var(--sr-ember);
+    box-shadow: 0 0 0 0.2rem rgba(232, 57, 31, 0.15);
+}
+
+.form-check-input:checked {
+    border-color: var(--sr-ember);
+    background-color: var(--sr-ember);
+}
+
+.btn-link {
+    color: var(--sr-ember);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.simple-page {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 73px);
+    padding: 3rem 1.2rem;
+    overflow: hidden;
+    background: var(--sr-mesh);
+}
+

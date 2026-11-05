@@ -2,7 +2,8 @@
 
 /**
  * Author: Isabella Ocampo
- * Date: 2026-09-11
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
  * Description: Controller for switching the active application language.
  */
 
@@ -16,7 +17,7 @@ class LocaleController extends Controller
 {
     public function switch(string $lang): RedirectResponse
     {
-        if (in_array($lang, ['en', 'es'], true)) {
+        if (in_array($lang, array_keys(config('localization.supported', [])), true)) {
             Session::put('locale', $lang);
         }
 

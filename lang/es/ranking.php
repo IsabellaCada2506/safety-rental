@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Author: Alejandro Correa Marin
- * Date: 2026-09-12
- * Description: Spanish localization strings for the administrator car ranking module.
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Complete es translations for ranking.
  */
 
 return [

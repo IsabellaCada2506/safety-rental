@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Complete pt translations for reservation.
+ */
+
+return [
+    'title_my_reservations' => 'Minhas reservas',
+    'title_create' => 'Criar reserva',
+    'title_show' => 'Detalhes da reserva nº :code',
+    'admin_title_index' => 'Gerenciamento de reservas',
+    'admin_title_show' => 'Auditoria da reserva nº :code',
+    'state_pending' => 'Pendente',
+    'state_confirmed' => 'Confirmada',
+    'state_cancelled' => 'Cancelada',
+    'state_completed' => 'Concluída',
+    'reservation_code' => 'Código da reserva',
+    'code' => 'Código',
+    'status' => 'Status',
+    'dates' => 'Datas do aluguel',
+    'start_date' => 'Data de início',
+    'end_date' => 'Data de término',
+    'pickup_location' => 'Local de retirada / devolução',
+    'select_location' => 'Selecione uma unidade',
+    'vehicle' => 'Veículo',
+    'customer' => 'Cliente',
+    'daily_rate' => 'Diária',
+    'rental_days' => 'Dias de aluguel',
+    'total_price' => 'Total estimado',
+    'days_unit' => 'dia(s)',
+    'actions' => 'Ações',
+    'confirm_booking' => 'Confirmar e reservar',
+    'cancel_reservation' => 'Cancelar reserva',
+    'confirm_reservation' => 'Confirmar reserva',
+    'view_details' => 'Ver detalhes',
+    'back_to_list' => 'Voltar às minhas reservas',
+    'back_to_admin_list' => 'Voltar à lista administrativa',
+    'filter_all' => 'Todas',
+    'no_reservations' => 'Nenhuma reserva encontrada.',
+    'cancellation_confirm' => 'Deseja cancelar esta reserva? O veículo ficará disponível para outros usuários.',
+    'created_success' => 'Sua reserva foi criada com sucesso! Status atual: pendente.',
+    'confirmed_success' => 'A reserva foi confirmada com sucesso.',
+    'cancelled_success' => 'A reserva foi cancelada com sucesso.',
+    'car_unavailable' => 'O veículo selecionado não está disponível nas datas solicitadas devido a outra reserva.',
+    'start_date_past_error' => 'A data de início não pode ser anterior a hoje.',
+    'end_date_order_error' => 'A data de término deve ser posterior à data de início.',
+    'car_not_found' => 'O carro selecionado é inválido.',
+    'location_not_found' => 'A localização selecionada é inválida.',
+    'cancellation_not_allowed' => 'Esta reserva não pode mais ser cancelada.',
+    'transition_not_allowed' => 'A alteração de status solicitada não é permitida.',
+    'summary_heading' => 'Resumo do aluguel',
+    'user_info' => 'Informações do usuário',
+    'vehicle_info' => 'Informações do veículo',
+];

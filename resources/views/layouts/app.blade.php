@@ -1,8 +1,8 @@
 {{--
     Author: Isabella Cadavid Posada
     Author: Alejandro Correa Marin
-    Date: 2026-09-12
-    Description: Master application layout providing the base HTML structure, navigation, and footer.
+    Date: 2026-11-04
+    Description: Shared layout with Manrope typography, blue theme, consistent favicon and accessible navigation.
 --}}
 
 @if (isset($viewData) && ! empty($viewData['isPrintableDocument']))
@@ -10,7 +10,17 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <title>{{ $viewData['title'] ?? __('authentication.application_name') }}</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="{{ asset('images/favicon.png') }}?v=1"
+    >
+
+    <title>
+        {{ $viewData['title'] ?? __('authentication.application_name') }}
+    </title>
+
     @stack('styles')
 </head>
 <body>
@@ -23,6 +33,12 @@
 <head>
     <meta charset="utf-8">
 
+    <link
+        rel="icon"
+        type="image/png"
+        href="{{ asset('images/favicon.png') }}?v=1"
+    >
+
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1"
@@ -32,6 +48,7 @@
         name="csrf-token"
         content="{{ csrf_token() }}"
     >
+
     <title>
         {{ $viewData['title'] ?? __('authentication.application_name') }}
     </title>
@@ -53,36 +70,20 @@
     >
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
         rel="stylesheet"
     >
 
-    <link
-        href="{{ asset('css/authentication.css') }}?v=7"
-        rel="stylesheet"
-    >
-
-    <link
-        href="{{ asset('css/components/navigation.css') }}?v=7"
-        rel="stylesheet"
-    >
-
-    <link
-        href="{{ asset('css/admin.css') }}?v=7"
-        rel="stylesheet"
-    >
-
-    <link
-        href="{{ asset('css/catalog.css') }}?v=2"
-        rel="stylesheet"
-    >
-    @stack('styles')
+    @include('layouts.partials.styles')
 </head>
-
 <body>
+    <a class="skip-link" href="#main-content">
+        {{ __('general.skip_to_content') }}
+    </a>
+
     @include('components.navigation.navbar')
 
-    <main>
+    <main id="main-content" tabindex="-1">
         @yield('content')
     </main>
 
@@ -141,15 +142,20 @@
                 {{ __('authentication.application_name') }}
             </span>
 
-            <span aria-hidden="true">
-                ·
-            </span>
+            <span aria-hidden="true">·</span>
 
             <span>
                 {{ __('general.footer_rights') }}
             </span>
         </div>
     </footer>
+
+    @if (request()->routeIs('reservations.show', 'admin.reservation.show', 'admin.payment.show'))
+        <script
+            src="{{ asset('js/components/confirm.js') }}?v=1"
+            defer
+        ></script>
+    @endif
 
     @stack('scripts')
 </body>

@@ -1,0 +1,68 @@
+.dash-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 6.5rem 0 3.5rem;
+    background: var(--sr-mesh);
+}
+
+.dash-hero-inner {
+    position: relative;
+    z-index: 2;
+}
+
+.dash-label {
+    display: inline-block;
+    margin-bottom: 1.1rem;
+    padding: 0.45rem 1rem;
+    color: var(--sr-ink);
+    background: var(--sr-gold);
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.dash-hero h1 {
+    color: var(--sr-white);
+    font-size: clamp(2rem, 4.5vw, 2.85rem);
+    font-weight: 700;
+    margin-bottom: 0.9rem;
+}
+
+.dash-hero-text {
+    max-width: 560px;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.dash-user {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-top: 1.6rem;
+    padding: 0.55rem 1.2rem 0.55rem 0.55rem;
+    color: var(--sr-white);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--sr-line);
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+.dash-user-avatar {
+    display: flex;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    color: var(--sr-ink);
+    background: var(--sr-gold);
+    border-radius: 50%;
+    font-weight: 700;
+}
+
+@media (max-width: 576px) {
+.dash-hero {
+        padding: 6rem 0 2.5rem;
+    }
+
+}

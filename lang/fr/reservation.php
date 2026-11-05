@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Complete fr translations for reservation.
+ */
+
+return [
+    'title_my_reservations' => 'Mes réservations',
+    'title_create' => 'Créer une réservation',
+    'title_show' => 'Détail de la réservation n° :code',
+    'admin_title_index' => 'Gestion des réservations',
+    'admin_title_show' => 'Vérification de la réservation n° :code',
+    'state_pending' => 'En attente',
+    'state_confirmed' => 'Confirmée',
+    'state_cancelled' => 'Annulée',
+    'state_completed' => 'Terminée',
+    'reservation_code' => 'Code de réservation',
+    'code' => 'Code',
+    'status' => 'Statut',
+    'dates' => 'Dates de location',
+    'start_date' => 'Date de début',
+    'end_date' => 'Date de fin',
+    'pickup_location' => 'Agence de retrait / retour',
+    'select_location' => 'Sélectionnez une agence',
+    'vehicle' => 'Véhicule',
+    'customer' => 'Client',
+    'daily_rate' => 'Tarif journalier',
+    'rental_days' => 'Jours de location',
+    'total_price' => 'Total estimé',
+    'days_unit' => 'jour(s)',
+    'actions' => 'Actions',
+    'confirm_booking' => 'Confirmer et réserver',
+    'cancel_reservation' => 'Annuler la réservation',
+    'confirm_reservation' => 'Confirmer la réservation',
+    'view_details' => 'Voir les détails',
+    'back_to_list' => 'Retour à mes réservations',
+    'back_to_admin_list' => 'Retour à la liste administrative',
+    'filter_all' => 'Toutes',
+    'no_reservations' => 'Aucune réservation trouvée.',
+    'cancellation_confirm' => 'Voulez-vous annuler cette réservation ? Le véhicule sera à nouveau disponible pour les autres utilisateurs.',
+    'created_success' => 'Votre réservation a été créée avec succès ! Statut actuel : en attente.',
+    'confirmed_success' => 'La réservation a été confirmée avec succès.',
+    'cancelled_success' => 'La réservation a été annulée avec succès.',
+    'car_unavailable' => 'Le véhicule sélectionné est indisponible aux dates demandées en raison d’une autre réservation.',
+    'start_date_past_error' => 'La date de début ne peut pas être antérieure à aujourd’hui.',
+    'end_date_order_error' => 'La date de fin doit être postérieure à la date de début.',
+    'car_not_found' => 'La voiture sélectionnée n’est pas valide.',
+    'location_not_found' => 'L’agence sélectionnée n’est pas valide.',
+    'cancellation_not_allowed' => 'Cette réservation ne peut plus être annulée.',
+    'transition_not_allowed' => 'Le changement de statut demandé n’est pas autorisé.',
+    'summary_heading' => 'Récapitulatif de location',
+    'user_info' => 'Informations utilisateur',
+    'vehicle_info' => 'Informations sur le véhicule',
+];

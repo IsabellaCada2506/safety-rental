@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <span class="text-muted">{{ __('reservation.daily_rate') }}:</span>
-                                    <span class="fw-bold text-dark fs-6">${{ number_format($viewData['car']->getPrice(), 0, ',', '.') }}</span>
+                                    <span class="fw-bold text-dark fs-6">${{ number_format($viewData['car']->getPrice(), 0, app()->getLocale() === 'es' ? ',' : '.', app()->getLocale() === 'es' ? '.' : ',') }}</span>
                                 </div>
                             </div>
 
@@ -146,12 +146,12 @@
                                 </div>
                                 <div class="d-flex justify-content-between small text-muted mb-2">
                                     <span>{{ __('reservation.daily_rate') }}:</span>
-                                    <span class="fw-semibold text-dark">${{ number_format($viewData['car']->getPrice(), 0, ',', '.') }}</span>
+                                    <span class="fw-semibold text-dark">${{ number_format($viewData['car']->getPrice(), 0, app()->getLocale() === 'es' ? ',' : '.', app()->getLocale() === 'es' ? '.' : ',') }}</span>
                                 </div>
                                 <hr class="my-2">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span class="fw-bold text-dark">{{ __('reservation.total_price') }}:</span>
-                                    <span id="previewTotal" class="fw-bold text-primary fs-5">${{ number_format($viewData['car']->getPrice(), 0, ',', '.') }}</span>
+                                    <span id="previewTotal" class="fw-bold text-primary fs-5">${{ number_format($viewData['car']->getPrice(), 0, app()->getLocale() === 'es' ? ',' : '.', app()->getLocale() === 'es' ? '.' : ',') }}</span>
                                 </div>
                             </div>
 
@@ -167,6 +167,6 @@
 </div>
 
 @push('scripts')
-    <script src="{{ asset('js/reservation-create.js') }}"></script>
+    <script src="{{ asset('js/user/reservation-create.js') }}"></script>
 @endpush
 @endsection
