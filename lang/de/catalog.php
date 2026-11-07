@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * Author: Wendy Atehortua
+ * Date: 2026-11-06
+ * Description: Complete de translations for catalog.
+ */
+
+return [
+    'title_index' => 'Fahrzeugkatalog - Safety Rental',
+    'title_show' => 'Fahrzeugdetails - Safety Rental',
+    'title' => 'Katalog',
+    'subtitle' => 'Erkunden Sie unsere verfügbare Flotte für ein sicheres und hochwertiges Mieterlebnis.',
+    'no_image' => 'Kein Bild verfügbar',
+    'brand_label' => 'Marke:',
+    'model_label' => 'Modell:',
+    'year' => 'Jahr',
+    'mileage' => 'Kilometerstand',
+    'price' => 'Mietpreis',
+    'per_day' => '/ Tag',
+    'view_details' => 'Details anzeigen',
+    'empty' => 'Derzeit sind keine Fahrzeuge verfügbar.',
+    'available' => 'Verfügbar',
+    'security_info' => 'Sicherheits- und Garantieinformationen',
+    'security_desc' => 'Dieses Fahrzeug verfügt über genehmigte technische Prüfungen, Pannenhilfe und eine aktive Schutzpolice.',
+    'back' => 'Zurück zum Katalog',
+    'rent_now' => 'Jetzt mieten',
+    'unknown_vehicle' => 'Fahrzeug',
+    'km_unit' => 'km',
+    'passengers_label' => 'Passagiere',
+    'luggage_label' => 'Gepäck',
+    'units' => 'Einheiten',
+    'description_label' => 'Beschreibung',
+    'no_description' => 'Keine zusätzlichen Hinweise vorhanden.',
+    'status_deactivated' => 'Deaktiviert',
+    'plate_label' => 'Kennzeichen',
+    'search_label' => 'Suchen',
+    'search_placeholder' => 'Nach Marke, Modell, Beschreibung suchen...',
+    'all_categories' => 'Alle Kategorien',
+    'all_locations' => 'Alle Standorte',
+    'category_filter' => 'Kategorie',
+    'location_filter' => 'Abholort',
+    'start_date' => 'Abholdatum',
+    'end_date' => 'Rückgabedatum',
+    'filter_button' => 'Fahrzeuge filtern',
+    'clear_filters' => 'Filter zurücksetzen',
+    'active_filters' => 'Aktive Filter',
+    'no_results_title' => 'Keine Fahrzeuge entsprechen Ihren Kriterien',
+    'no_results_subtitle' => 'Passen Sie Ihre Suchkriterien, Daten an oder setzen Sie Filter zurück, um alle verfügbaren Fahrzeuge anzuzeigen.',
+    'results_count' => ':count Fahrzeug(e) gefunden',
+    'validation_end_date_after' => 'Das Rückgabedatum muss nach dem Abholdatum liegen.',
+    'validation_start_date_after_or_equal' => 'Das Abholdatum muss heute oder ein zukünftiges Datum sein.',
+    'validation_category_not_found' => 'Die ausgewählte Kategorie existiert nicht.',
+    'validation_location_not_found' => 'Der ausgewählte Standort existiert nicht.',
+];

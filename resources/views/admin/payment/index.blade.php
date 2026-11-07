@@ -1,8 +1,9 @@
 {{--
     Author: Alejandro Correa Marin
     Author: Wendy Atehortua
-    Date: 2026-09-13
-    Description: Admin index listing reservation payments with method, reference, and status.
+    Author: Isabella Cadavid Posada
+    Date: 2026-11-04
+    Description: Administrative payment cards with translated payment details and status.
 --}}
 
 @extends('layouts.app')
@@ -10,83 +11,137 @@
 @section('title', $viewData['title'])
 
 @section('content')
-<section class="admin-page">
-    <div class="admin-page-shape admin-page-shape-left" aria-hidden="true"></div>
-    <div class="admin-page-shape admin-page-shape-right" aria-hidden="true"></div>
-
+<section class="admin-page records-page">
     <div class="container admin-container">
         <header class="admin-header">
             <div>
                 <span class="admin-eyebrow">
                     {{ __('car.admin_area') }}
                 </span>
+
                 <h1 class="admin-title">
                     {{ $viewData['title'] }}
                 </h1>
             </div>
 
-            <a href="{{ route('admin.dashboard.index') }}" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
-                &larr; {{ __('authentication.dashboard') }}
-            </a>
+            <div class="d-flex align-items-center">
+            </div>
         </header>
 
         @if (session('success'))
-            <div class="alert alert-success admin-alert" role="alert">
+            <div class="alert alert-success admin-alert" role="status">
                 {{ session('success') }}
             </div>
         @endif
 
-        @if ($viewData['payments']->isEmpty())
-            <div class="card shadow-sm border-0 rounded-4 text-center py-5 bg-white">
-                <div class="card-body">
-                    <p class="text-muted mb-0">{{ __('payment.no_payments') }}</p>
-                </div>
-            </div>
-        @else
-            <div class="admin-index-table-wrapper">
-                <table class="admin-index-table">
-                    <thead>
-                        <tr>
-                            <th>{{ __('payment.reservation') }}</th>
-                            <th>{{ __('payment.customer') }}</th>
-                            <th>{{ __('payment.amount') }}</th>
-                            <th>{{ __('payment.method') }}</th>
-                            <th>{{ __('payment.transaction_code') }}</th>
-                            <th>{{ __('payment.status') }}</th>
-                            <th class="text-end">{{ __('payment.actions') }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($viewData['payments'] as $payment)
-                            <tr>
-                                <td>
-                                    <strong>#{{ $payment->getReservation()?->getCode() ?? '—' }}</strong>
-                                </td>
-                                <td>
-                                    {{ $payment->getReservation()?->getUser()?->getName() }}
-                                    {{ $payment->getReservation()?->getUser()?->getLastName() }}
-                                </td>
-                                <td>
-                                    <strong>${{ number_format($payment->getAmount(), 0, ',', '.') }}</strong>
-                                </td>
-                                <td>{{ $payment->getMethodLabel() }}</td>
-                                <td>{{ $payment->getTransactionCode() }}</td>
-                                <td>
-                                    <span class="badge {{ $payment->getStatusBadgeClass() }} px-2 py-1 rounded-pill">
-                                        {{ __('payment.status_' . $payment->getStatus()) }}
-                                    </span>
-                                </td>
-                                <td class="text-end">
-                                    <a href="{{ route('admin.payment.show', ['id' => $payment->getId()]) }}" class="btn btn-sm btn-outline-primary rounded-pill px-2 py-1">
-                                        {{ __('payment.view_details') }}
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+        @if ($errors->any())
+            <div class="alert alert-danger admin-alert" role="alert">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
         @endif
+
+        <div class="record-list">
+            @forelse ($viewData['payments'] as $payment)
+                <article class="record-card">
+                    <header class="record-card-header">
+                        <div>
+                            <span class="record-eyebrow">
+                                {{ __('payment.payment_code') }}
+                            </span>
+
+                            <h2 class="record-code">
+                                #{{ $payment->getCode() }}
+                            </h2>
+                        </div>
+
+                        <div class="record-header-meta">
+                            <div class="record-date">
+                                <span>{{ __('payment.date') }}</span>
+                                <strong>
+                                    {{ $payment->getDate()?->format('d/m/Y') ?? '—' }}
+                                </strong>
+                            </div>
+
+                            <span
+                                class="record-status"
+                                data-state="{{ $payment->getStatus() }}"
+                            >
+                                {{ __('payment.status_'.$payment->getStatus()) }}
+                            </span>
+                        </div>
+                    </header>
+
+                    <dl class="record-information">
+                        <div class="record-information-item">
+                            <dt>{{ __('reservation.user_info') }}</dt>
+
+                            <dd>
+                                <strong>
+                                    {{ $payment->getReservation()?->getUser()?->getName() }}
+                                    {{ $payment->getReservation()?->getUser()?->getLastName() }}
+                                </strong>
+
+                                <span class="record-secondary">
+                                    {{ $payment->getReservation()?->getUser()?->getEmail() ?? '—' }}
+                                </span>
+                            </dd>
+                        </div>
+
+                        <div class="record-information-item">
+                            <dt>{{ __('payment.reservation') }}</dt>
+
+                            <dd>
+                                <strong>
+                                    #{{ $payment->getReservation()?->getCode() ?? '—' }}
+                                </strong>
+                            </dd>
+                        </div>
+
+                        <div class="record-information-item">
+                            <dt>{{ __('payment.method') }}</dt>
+
+                            <dd>
+                                {{ $payment->getMethodLabel() }}
+                            </dd>
+                        </div>
+
+                        <div class="record-information-item">
+                            <dt>{{ __('payment.transaction_code') }}</dt>
+
+                            <dd class="record-reference">
+                                {{ $payment->getTransactionCode() }}
+                            </dd>
+                        </div>
+                    </dl>
+
+                    <footer class="record-card-footer">
+                        <div class="record-total">
+                            <span>{{ __('payment.amount') }}</span>
+
+                            <strong>
+                                ${{ number_format($payment->getAmount(), 0, app()->getLocale() === 'es' ? ',' : '.', app()->getLocale() === 'es' ? '.' : ',') }}
+                            </strong>
+                        </div>
+
+                        <a
+                            href="{{ route('admin.payment.show', ['id' => $payment->getId()]) }}"
+                            class="record-button record-button-primary"
+                        >
+                            {{ __('payment.view_details') }}
+                            <span aria-hidden="true">→</span>
+                        </a>
+                    </footer>
+                </article>
+            @empty
+                <div class="record-empty" role="status">
+                    <p>{{ __('payment.no_payments') }}</p>
+                </div>
+            @endforelse
+        </div>
     </div>
 </section>
 @endsection

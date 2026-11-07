@@ -2,18 +2,16 @@
 
 /**
  * Author: Isabella Cadavid Posada
- * Date: 2026-09-06
- * Description: English language strings for authentication, registration, profile, and home pages.
+ * Date: 2026-11-04
+ * Description: Complete en translations for authentication.
  */
 
 return [
     'application_name' => 'Safety Rental',
-
     'welcome_back' => 'Welcome back',
     'login_description' => 'Sign in to access your rental account.',
     'road_waiting' => 'The road is waiting.',
     'road_waiting_description' => 'Reserve the right vehicle for your next trip without queues or hidden terms.',
-
     'email' => 'Email address',
     'password' => 'Password',
     'remember_me' => 'Remember me',
@@ -22,7 +20,6 @@ return [
     'register' => 'Register',
     'create_account' => 'Create account',
     'confirm_password' => 'Confirm password',
-
     'first_name' => 'First name',
     'last_name' => 'Last name',
     'birth_date' => 'Birth date',
@@ -33,7 +30,6 @@ return [
     'emergency_contact_first_name' => 'Emergency contact first name',
     'emergency_contact_last_name' => 'Emergency contact last name',
     'emergency_contact_phone' => 'Emergency contact phone',
-
     'signed_in_as' => 'Signed in as',
     'user_dashboard' => 'User dashboard',
     'admin_dashboard' => 'Administration dashboard',
@@ -41,12 +37,10 @@ return [
     'admin_message' => 'You have permission to access the administration area.',
     'user_area' => 'User area',
     'administration_area' => 'Administration area',
-
     'verify_email' => 'Verify your email address',
     'verification_sent' => 'A new verification link has been sent to your email address.',
     'verification_instructions' => 'Check your email and open the verification link before continuing.',
     'resend_verification' => 'Resend verification email',
-
     'vehicle_rental' => 'Vehicle rental',
     'welcome_subtitle' => 'Choose from sedans, SUVs, pickups, and sports cars, then reserve in minutes.',
     'safe_driving' => 'Safe driving',
@@ -55,7 +49,6 @@ return [
     'varied_fleet_description' => 'Choose the right vehicle for city travel or open-road trips.',
     'quick_reservations' => 'Quick reservations',
     'quick_reservations_description' => 'Choose your dates, confirm, and drive without unnecessary paperwork.',
-
     'available_fleet' => 'Available fleet',
     'available' => 'Available',
     'executive_sedan' => 'Executive sedan',
@@ -66,7 +59,6 @@ return [
     'pickup_truck_description' => 'Power and cargo room for work or outdoor travel.',
     'sports_car' => 'Sports car',
     'sports_car_description' => 'Two seats and high performance for drivers who enjoy the road.',
-
     'management_panel' => 'Management panel',
     'vehicles' => 'Vehicles',
     'vehicles_description' => 'Manage the fleet, availability, and maintenance.',
@@ -76,10 +68,8 @@ return [
     'users_description' => 'Manage customer and staff accounts.',
     'coming_soon' => 'Coming soon',
     'profile' => 'My profile',
-
     'admin_area' => 'Admin area',
     'dashboard' => 'Dashboard',
-
     'edit_profile' => 'Edit profile',
     'profile_updated' => 'Your profile was updated successfully.',
     'profile_description' => 'Review your personal, driving, and emergency information.',
@@ -98,17 +88,21 @@ return [
     'forgot_password_description' => 'Enter your registered email address and we will send you a secure reset link.',
     'send_reset_link' => 'Send reset link',
     'reset_password' => 'Reset password',
-
     'home' => 'Home',
     'edit_profile_description' => 'Keep your customer information accurate and up to date.',
     'back_to_profile' => 'Back to profile',
     'save_changes' => 'Save changes',
     'cancel' => 'Cancel',
-
     'new_password' => 'New password',
     'password_confirmation' => 'Confirm password',
     'password_reset_success' => 'Your password has been reset successfully.',
     'password_reset_failed' => 'Unable to reset your password. Please try again.',
     'invalid_reset_token' => 'This password reset link is invalid or has expired.',
-
+    'name' => 'Name',
+    'license_number' => 'License number',
+    'emergency_contact' => 'Emergency contact phone',
+    'validation_adult' => 'You must be at least 18 years old.',
+    'validation_email_unique' => 'This email address is already registered.',
+    'validation_license_unique' => 'This license number is already registered.',
+    'validation_identification_unique' => 'This identification number is already registered.',
 ];

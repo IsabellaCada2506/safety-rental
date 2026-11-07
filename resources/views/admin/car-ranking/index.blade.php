@@ -1,6 +1,7 @@
 {{--
+    Author: Isabella Cadavid Posada
     Author: Alejandro Correa Marin
-    Date: 2026-09-12
+    Date: 2026-11-05
     Description: Admin view showing the top three most rented cars and a date range filter.
 --}}
 
@@ -27,8 +28,8 @@
                 </p>
             </div>
 
-            <a href="{{ route('admin.dashboard.index') }}" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
-                &larr; {{ __('authentication.dashboard') }}
+            <a href="{{ route('admin.car.index') }}" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
+                &larr; {{ __('general.btn_back') }}
             </a>
         </header>
 
@@ -51,9 +52,15 @@
                         type="date"
                         id="start_date"
                         name="start_date"
-                        class="form-control"
-                        value="{{ $viewData['startDate'] }}"
+                        class="form-control @error('start_date') is-invalid @enderror"
+                        value="{{ old('start_date', $viewData['startDate']) }}"
+                        @error('start_date') aria-invalid="true" aria-describedby="start_date-error" @enderror
                     >
+                    @error('start_date')
+                        <div id="start_date-error" class="invalid-feedback d-block">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
                 <div class="col-md-4">
                     <label for="end_date" class="form-label fw-semibold">{{ __('ranking.end_date') }}</label>
@@ -61,9 +68,15 @@
                         type="date"
                         id="end_date"
                         name="end_date"
-                        class="form-control"
-                        value="{{ $viewData['endDate'] }}"
+                        class="form-control @error('end_date') is-invalid @enderror"
+                        value="{{ old('end_date', $viewData['endDate']) }}"
+                        @error('end_date') aria-invalid="true" aria-describedby="end_date-error" @enderror
                     >
+                    @error('end_date')
+                        <div id="end_date-error" class="invalid-feedback d-block">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
                 <div class="col-md-4 d-flex gap-2">
                     <button type="submit" class="btn btn-dark rounded-pill fw-semibold px-4">

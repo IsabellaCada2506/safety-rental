@@ -1,0 +1,461 @@
+/*
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Styles organized by interface responsibility.
+ */
+
+/*
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: User catalog filters, vehicle cards and responsive vehicle details.
+ */
+
+.user-catalog {
+    padding-bottom: 4rem;
+    color: #172b4d;
+    font-family: 'Manrope', Arial, sans-serif;
+}
+
+.uc-heading {
+    margin-bottom: 2rem;
+}
+
+.user-catalog .uc-heading h1 {
+    margin-bottom: 0.75rem;
+    color: #10244a;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+}
+
+.uc-heading p {
+    margin: 0;
+    color: #53657e;
+    line-height: 1.8;
+}
+
+.uc-filter-panel {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: #ffffff;
+    border: 1px solid #dce5f2;
+    border-radius: 20px;
+}
+
+.uc-filter-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: start;
+}
+
+.uc-search-field {
+    grid-column: span 2;
+}
+
+.uc-field {
+    min-width: 0;
+}
+
+.uc-filter-panel .form-label {
+    margin-bottom: 0.5rem;
+    color: #36546d;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.uc-filter-panel .form-control,
+.uc-filter-panel .form-select {
+    min-height: 46px;
+    color: #172b4d;
+    background-color: #f8fbff;
+    border: 1px solid #c6d5e5;
+    border-radius: 11px;
+}
+
+.uc-filter-panel .form-control:focus,
+.uc-filter-panel .form-select:focus {
+    border-color: #2a6f97;
+    box-shadow: 0 0 0 3px rgba(42, 111, 151, 0.12);
+}
+
+.uc-filter-panel .form-control.is-invalid {
+    border-color: #b42318;
+}
+
+.uc-filter-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #e2eaf4;
+}
+
+.uc-result-count {
+    color: #53657e;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.uc-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+}
+
+.uc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    align-items: stretch;
+}
+
+.uc-card {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #d5e2ef;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(16, 36, 74, 0.04);
+}
+
+.uc-card-media {
+    position: relative;
+    padding: 1rem;
+    background: #edf4fc;
+    border-bottom: 1px solid #dce5f2;
+}
+
+.uc-card-media .uc-car-image {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+.uc-status,
+.uc-detail-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.uc-status {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    max-width: calc(100% - 2rem);
+}
+
+.uc-status-active {
+    color: #166534;
+    background: #dcfce7;
+    border-color: #a8dfb8;
+}
+
+.uc-status-inactive {
+    color: #53657e;
+    background: #edf2f7;
+    border-color: #cbd5e1;
+}
+
+.uc-card-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 1.5rem;
+}
+
+.uc-category {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #2a6f97;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    overflow-wrap: anywhere;
+}
+
+.user-catalog .uc-card-title {
+    margin-bottom: 1rem;
+    color: #10244a;
+    font-size: 1.2rem;
+    font-weight: 800;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.uc-price {
+    margin-bottom: 1.25rem;
+    color: #014f86;
+    font-size: 1.65rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+}
+
+.uc-price span {
+    color: #53657e;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.uc-specifications {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin: 0 0 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e2eaf4;
+}
+
+.uc-specifications dt {
+    margin-bottom: 0.3rem;
+    color: #53657e;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.uc-specifications dd {
+    margin: 0;
+    color: #172b4d;
+    font-size: 0.9rem;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.uc-location {
+    display: grid;
+    gap: 0.3rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #f0f5fc;
+    border-radius: 12px;
+    overflow-wrap: anywhere;
+}
+
+.uc-location span {
+    color: #53657e;
+    font-size: 0.8rem;
+}
+
+.uc-location strong {
+    color: #193c73;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.uc-button {
+    display: inline-flex;
+    min-height: 46px;
+    max-width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.1rem;
+    border: 1px solid transparent;
+    border-radius: 11px;
+    font-family: 'Manrope', Arial, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.uc-button-primary {
+    color: #ffffff;
+    background: #014f86;
+    border-color: #014f86;
+}
+
+.uc-button-primary:hover {
+    color: #ffffff;
+    background: #013a63;
+    border-color: #013a63;
+}
+
+.uc-button-secondary {
+    color: #164b83;
+    background: #edf4fc;
+    border-color: #c6d5e5;
+}
+
+.uc-button-secondary:hover {
+    color: #123c6a;
+    background: #dceafa;
+}
+
+.uc-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.uc-card-link {
+    width: 100%;
+    margin-top: auto;
+}
+
+.uc-empty {
+    grid-column: 1 / -1;
+    padding: 3rem 1.5rem;
+    background: #ffffff;
+    border: 1px dashed #b8cde0;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.uc-empty h2 {
+    color: #10244a;
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+
+.uc-empty p {
+    color: #53657e;
+}
+
+.uc-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    color: #014f86;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.uc-back-link:hover {
+    color: #013a63;
+    text-decoration: underline;
+}
+
+.uc-detail-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: start;
+}
+
+.uc-detail-media {
+    overflow: hidden;
+    padding: 1.5rem;
+    background: #edf4fc;
+    border: 1px solid #d5e2ef;
+    border-radius: 22px;
+}
+
+.uc-detail-media .uc-detail-image {
+    display: block;
+    width: 100%;
+    height: 460px;
+    object-fit: contain;
+    border-radius: 14px;
+}
+
+.uc-detail-panel {
+    min-width: 0;
+    padding: 2rem;
+    background: #ffffff;
+    border: 1px solid #d5e2ef;
+    border-radius: 22px;
+}
+
+.uc-detail-status {
+    margin-bottom: 1.25rem;
+}
+
+.user-catalog .uc-detail-title {
+    color: #10244a;
+    font-size: clamp(1.7rem, 3vw, 2.3rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+}
+
+.uc-detail-price {
+    margin-top: 1rem;
+    font-size: 2rem;
+}
+
+.uc-description {
+    margin-bottom: 1.5rem;
+}
+
+.uc-description h2 {
+    color: #36546d;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.uc-description p {
+    color: #53657e;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+.uc-button:focus-visible,
+.uc-back-link:focus-visible {
+    outline: 3px solid #2a6f97;
+    outline-offset: 3px;
+}
+
+@media (max-width: 1100px) {
+    .uc-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .uc-filter-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .uc-detail-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .uc-grid,
+    .uc-filter-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .uc-search-field {
+        grid-column: auto;
+    }
+
+    .uc-filter-panel,
+    .uc-card-body,
+    .uc-detail-panel {
+        padding: 1.25rem;
+    }
+
+    .uc-card-media .uc-car-image {
+        height: 200px;
+    }
+
+    .uc-detail-media .uc-detail-image {
+        height: 280px;
+    }
+
+    .uc-actions {
+        width: 100%;
+    }
+
+    .uc-actions .uc-button {
+        flex: 1;
+    }
+}

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Author: Alejandro Correa Marin
- * Date: 2026-09-12
- * Description: English localization strings for the administrator metrics module.
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Complete en translations for metrics.
  */
 
 return [

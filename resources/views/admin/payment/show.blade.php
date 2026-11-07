@@ -26,7 +26,7 @@
             </div>
 
             <a href="{{ route('admin.payment.index') }}" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
-                &larr; {{ __('payment.back_to_admin_list') }}
+                &larr; {{ __('general.btn_back') }}
             </a>
         </header>
 
@@ -63,7 +63,7 @@
                         </div>
                         <div class="col-sm-6">
                             <span class="text-muted d-block">{{ __('payment.amount') }}</span>
-                            <strong class="text-dark">${{ number_format($viewData['payment']->getAmount(), 0, ',', '.') }}</strong>
+                            <strong class="text-dark">${{ number_format($viewData['payment']->getAmount(), 0, app()->getLocale() === 'es' ? ',' : '.', app()->getLocale() === 'es' ? '.' : ',') }}</strong>
                         </div>
                         <div class="col-sm-6">
                             <span class="text-muted d-block">{{ __('payment.method') }}</span>
@@ -104,7 +104,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <span class="text-muted d-block">{{ __('reservation.total_price') }}</span>
-                                <strong class="text-dark">${{ number_format($viewData['reservation']->getTotalPrice(), 0, ',', '.') }}</strong>
+                                <strong class="text-dark">${{ number_format($viewData['reservation']->getTotalPrice(), 0, app()->getLocale() === 'es' ? ',' : '.', app()->getLocale() === 'es' ? '.' : ',') }}</strong>
                             </div>
                         </div>
                     </div>
@@ -118,7 +118,7 @@
                         <form
                             action="{{ route('admin.payment.refund', ['id' => $viewData['payment']->getId()]) }}"
                             method="POST"
-                            onsubmit="return confirm('{{ __('payment.refund_confirm') }}');"
+                            data-confirm-message="{{ __('payment.refund_confirm') }}"
                         >
                             @csrf
                             @method('PATCH')

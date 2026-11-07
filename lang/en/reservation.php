@@ -1,9 +1,10 @@
 <?php
 
 /**
- * Author: Isabella Ocampo
- * Date: 2026-09-11
- * Description: English localization strings for the Reservations module.
+ * Author: Isabella Cadavid Posada
+ * Author: Wendy Atehortua
+ * Date: 2026-11-04
+ * Description: Complete en translations for reservation.
  */
 
 return [
@@ -12,12 +13,10 @@ return [
     'title_show' => 'Reservation Detail #:code',
     'admin_title_index' => 'Reservation Management',
     'admin_title_show' => 'Reservation Audit #:code',
-
     'state_pending' => 'Pending',
     'state_confirmed' => 'Confirmed',
     'state_cancelled' => 'Cancelled',
     'state_completed' => 'Completed',
-
     'reservation_code' => 'Reservation Code',
     'code' => 'Code',
     'status' => 'Status',
@@ -28,12 +27,12 @@ return [
     'select_location' => 'Select a branch',
     'vehicle' => 'Vehicle',
     'customer' => 'Customer',
+    'car_license_plate' => 'License Plate',
     'daily_rate' => 'Daily Rate',
     'rental_days' => 'Rental Days',
     'total_price' => 'Estimated Total',
     'days_unit' => 'day(s)',
     'actions' => 'Actions',
-
     'confirm_booking' => 'Confirm & Reserve',
     'cancel_reservation' => 'Cancel Reservation',
     'confirm_reservation' => 'Confirm Reservation',
@@ -43,11 +42,9 @@ return [
     'filter_all' => 'All',
     'no_reservations' => 'No reservations found.',
     'cancellation_confirm' => 'Are you sure you want to cancel this reservation? This will make the vehicle available for other users.',
-
     'created_success' => 'Your reservation has been created successfully! Current state: Pending.',
     'confirmed_success' => 'The reservation has been confirmed successfully.',
     'cancelled_success' => 'The reservation has been cancelled successfully.',
-
     'car_unavailable' => 'The selected vehicle is not available for the requested date range due to an overlapping reservation.',
     'start_date_past_error' => 'The start date cannot be prior to today.',
     'end_date_order_error' => 'The end date must be after the start date.',
@@ -55,8 +52,33 @@ return [
     'location_not_found' => 'The selected location is not valid.',
     'cancellation_not_allowed' => 'This reservation can no longer be cancelled.',
     'transition_not_allowed' => 'The requested status transition is not allowed.',
-
     'summary_heading' => 'Rental Summary',
     'user_info' => 'User Information',
     'vehicle_info' => 'Vehicle Information',
+    'report_title' => 'Reservations Report',
+    'confirmed_report_title' => 'Confirmed Reservations Report',
+    'download_pdf_report' => 'Download PDF Report',
+    'download_excel_report' => 'Download Excel Report',
+    'generated_at' => 'Generated At',
+    'total_records' => 'Total Records',
+    'total_reservations' => 'Total Reservations',
+    'total_confirmed_reservations' => 'Total Confirmed Reservations',
+    'executive_summary_title' => 'Executive Summary',
+    'cancellation_ranking_title' => 'Cancellation Reasons Ranking',
+    'cancellation_reason_label' => 'Cancellation Reason',
+    'cancellation_count' => 'Cancellations Count',
+    'reservations_list_title' => 'Reservations List',
+    'cancel_survey_title' => 'Cancel Reservation #:code',
+    'cancel_survey_subtitle' => 'Please let us know the reason for cancelling your booking. This helps us improve our service.',
+    'confirm_cancellation_btn' => 'Confirm Cancellation',
+    'select_cancellation_reason' => 'Select a reason for cancellation',
+    'reason_plan_change' => 'Change of travel plans',
+    'reason_found_cheaper' => 'Found a better price elsewhere',
+    'reason_trip_cancelled' => 'Trip was cancelled',
+    'reason_financial' => 'Financial constraints',
+    'reason_other' => 'Other personal reasons',
+    'btn_metrics' => 'Reservation Metrics',
+    'download_report' => 'Download Report',
+    'report_format_pdf' => 'PDF Report',
+    'report_format_excel' => 'Excel Report',
 ];

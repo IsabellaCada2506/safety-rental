@@ -1,4 +1,5 @@
 {{--
+    Author: Isabella Cadavid Posada
     Author: Wendy Atehortua
     Date: 2026-09-10
     Description: Admin view for creating a new vehicle category.
@@ -35,6 +36,10 @@
                     {{ __('category.register_new_category') }}
                 </p>
             </div>
+
+            <a href="{{ route('admin.category.index') }}" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
+                &larr; {{ __('general.btn_back') }}
+            </a>
         </header>
 
         @if ($errors->any())
@@ -69,13 +74,19 @@
 
                         <input
                             type="text"
-                            class="form-control"
+                            class="form-control @error('model') is-invalid @enderror"
                             id="category-model"
                             name="model"
                             value="{{ old('model') }}"
                             placeholder="{{ __('category.model_placeholder') }}"
                             required
+                            @error('model') aria-invalid="true" aria-describedby="category-model-error" @enderror
                         >
+                        @error('model')
+                            <div id="category-model-error" class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div>
@@ -89,13 +100,19 @@
 
                         <input
                             type="text"
-                            class="form-control"
+                            class="form-control @error('brand') is-invalid @enderror"
                             id="category-brand"
                             name="brand"
                             value="{{ old('brand') }}"
                             placeholder="{{ __('category.brand_placeholder') }}"
                             required
+                            @error('brand') aria-invalid="true" aria-describedby="category-brand-error" @enderror
                         >
+                        @error('brand')
+                            <div id="category-brand-error" class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div class="admin-form-field-full">
@@ -109,13 +126,19 @@
 
                         <input
                             type="text"
-                            class="form-control"
+                            class="form-control @error('type') is-invalid @enderror"
                             id="category-type"
                             name="type"
                             value="{{ old('type') }}"
                             placeholder="{{ __('category.type_placeholder') }}"
                             required
+                            @error('type') aria-invalid="true" aria-describedby="category-type-error" @enderror
                         >
+                        @error('type')
+                            <div id="category-type-error" class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div>
@@ -129,14 +152,20 @@
 
                         <input
                             type="number"
-                            class="form-control"
+                            class="form-control @error('passenger_capacity') is-invalid @enderror"
                             id="category-passenger-capacity"
                             name="passenger_capacity"
                             value="{{ old('passenger_capacity') }}"
                             placeholder="{{ __('category.passenger_capacity_placeholder') }}"
                             min="1"
                             required
+                            @error('passenger_capacity') aria-invalid="true" aria-describedby="category-passenger-capacity-error" @enderror
                         >
+                        @error('passenger_capacity')
+                            <div id="category-passenger-capacity-error" class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div>
@@ -150,14 +179,20 @@
 
                         <input
                             type="number"
-                            class="form-control"
+                            class="form-control @error('luggage_capacity') is-invalid @enderror"
                             id="category-luggage-capacity"
                             name="luggage_capacity"
                             value="{{ old('luggage_capacity') }}"
                             placeholder="{{ __('category.luggage_capacity_placeholder') }}"
                             min="0"
                             required
+                            @error('luggage_capacity') aria-invalid="true" aria-describedby="category-luggage-capacity-error" @enderror
                         >
+                        @error('luggage_capacity')
+                            <div id="category-luggage-capacity-error" class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
 

@@ -2,8 +2,9 @@
 
 /**
  * Author: Isabella Ocampo
- * Date: 2026-09-11
- * Description: Middleware to configure application locale based on user session.
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Apply the supported session language to each request.
  */
 
 namespace App\Http\Middleware;
@@ -18,9 +19,25 @@ class SetLocale
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (Session::has('locale')) {
-            App::setLocale((string) Session::get('locale'));
+        $supportedLocales = array_keys(
+            config('localization.supported', [])
+        );
+
+        $defaultLocale = (string) config(
+            'localization.default',
+            'es'
+        );
+
+        $locale = (string) Session::get(
+            'locale',
+            $defaultLocale
+        );
+
+        if (! in_array($locale, $supportedLocales, true)) {
+            $locale = $defaultLocale;
         }
+
+        App::setLocale($locale);
 
         return $next($request);
     }

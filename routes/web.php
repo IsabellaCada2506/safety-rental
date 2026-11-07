@@ -68,6 +68,7 @@ Route::get($basePath.'/reservations', [ReservationController::class, 'index'])->
 Route::get($basePath.'/reservations/create', [ReservationController::class, 'create'])->middleware(['auth', 'verified', 'user'])->name('reservations.create');
 Route::post($basePath.'/reservations', [ReservationController::class, 'store'])->middleware(['auth', 'verified', 'user'])->name('reservations.store');
 Route::get($basePath.'/reservations/{id}', [ReservationController::class, 'show'])->middleware(['auth', 'verified', 'user'])->whereNumber('id')->name('reservations.show');
+Route::get($basePath.'/reservations/{id}/cancel', [ReservationController::class, 'showCancel'])->middleware(['auth', 'verified', 'user'])->whereNumber('id')->name('reservations.cancel.form');
 Route::patch($basePath.'/reservations/{id}/cancel', [ReservationController::class, 'cancel'])->middleware(['auth', 'verified', 'user'])->whereNumber('id')->name('reservations.cancel');
 Route::get($basePath.'/reservations/{id}/payment', [PaymentController::class, 'create'])->middleware(['auth', 'verified', 'user'])->whereNumber('id')->name('payments.create');
 Route::post($basePath.'/reservations/{id}/payment', [PaymentController::class, 'store'])->middleware(['auth', 'verified', 'user'])->whereNumber('id')->name('payments.store');
@@ -97,6 +98,7 @@ Route::put($basePath.'/admin/locations/{id}/update', [AdminLocationController::c
 Route::delete($basePath.'/admin/locations/{id}/delete', [AdminLocationController::class, 'delete'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.location.delete');
 
 Route::get($basePath.'/admin/reservations', [AdminReservationController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.reservation.index');
+Route::get($basePath.'/admin/reservations/report', [AdminReservationController::class, 'report'])->middleware(['auth', 'admin'])->name('admin.reservation.report');
 Route::get($basePath.'/admin/reservations/{id}', [AdminReservationController::class, 'show'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.reservation.show');
 Route::patch($basePath.'/admin/reservations/{id}/confirm', [AdminReservationController::class, 'confirm'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.reservation.confirm');
 Route::patch($basePath.'/admin/reservations/{id}/cancel', [AdminReservationController::class, 'cancel'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.reservation.cancel');
