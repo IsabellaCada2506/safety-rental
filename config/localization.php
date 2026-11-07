@@ -15,6 +15,8 @@ return [
         'fr' => 'general.language_fr',
         'it' => 'general.language_it',
         'pt' => 'general.language_pt',
+        'de' => 'general.language_de',
+        'ru' => 'general.language_ru',
     ],
 
     'flags' => [
@@ -23,5 +25,7 @@ return [
         'fr' => '🇫🇷',
         'it' => '🇮🇹',
         'pt' => '🇧🇷',
+        'de' => '🇩🇪',
+        'ru' => '🇷🇺',
     ],
 ];

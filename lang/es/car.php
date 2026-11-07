@@ -47,7 +47,7 @@ return [
     'mileage_placeholder' => 'Ej: 35000',
     'image_placeholder' => 'https://ejemplo.com/carro.jpg',
     'description_placeholder' => 'Transmisión, características o estado físico',
-    'btn_create' => '+ Registrar Nuevo Coche',
+    'btn_create' => 'Registrar Nuevo Coche',
     'btn_save' => 'Guardar Vehículo',
     'btn_edit' => 'Editar',
     'btn_update' => 'Actualizar Vehículo',
@@ -66,4 +66,5 @@ return [
     'price_min_error' => 'El precio de alquiler por día debe ser de al menos $50.000 COP.',
     'category' => 'Categoría',
     'status_updated_success' => 'Estado del vehículo actualizado correctamente.',
+    'btn_ranking' => 'Ranking de Vehículos',
 ];

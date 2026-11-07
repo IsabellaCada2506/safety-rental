@@ -36,6 +36,10 @@
                     {{ __('location.admin_title_edit') }}
                 </p>
             </div>
+
+            <a href="{{ route('admin.location.index') }}" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
+                &larr; {{ __('general.btn_back') }}
+            </a>
         </header>
 
         @if ($errors->any())

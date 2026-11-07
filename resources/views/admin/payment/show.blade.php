@@ -26,7 +26,7 @@
             </div>
 
             <a href="{{ route('admin.payment.index') }}" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
-                &larr; {{ __('payment.back_to_admin_list') }}
+                &larr; {{ __('general.btn_back') }}
             </a>
         </header>
 

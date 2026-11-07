@@ -66,4 +66,5 @@ return [
     'price_min_error' => 'Le prix de location par jour doit être d’au moins 50 000 COP.',
     'category' => 'Catégorie',
     'status_updated_success' => 'Statut du véhicule mis à jour avec succès.',
+    'btn_ranking' => 'Classement des voitures',
 ];

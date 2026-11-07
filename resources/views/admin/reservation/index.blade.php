@@ -27,13 +27,43 @@
                 </p>
             </div>
 
-            <a
-                href="{{ route('admin.dashboard.index') }}"
-                class="record-button record-button-secondary"
-            >
-                <span aria-hidden="true">←</span>
-                {{ __('authentication.dashboard') }}
-            </a>
+            <div class="d-flex align-items-center gap-2">
+                <a
+                    href="{{ route('admin.metrics.index') }}"
+                    class="record-button record-button-secondary"
+                >
+                    {{ __('reservation.btn_metrics') }}
+                </a>
+
+                <details class="language-dropdown position-relative">
+                    <summary
+                        class="record-button record-button-primary"
+                        style="list-style: none; cursor: pointer;"
+                    >
+                        <span>{{ __('reservation.download_report') }}</span>
+                        <span class="language-dropdown-arrow" aria-hidden="true">▾</span>
+                    </summary>
+
+                    <div class="language-dropdown-menu" style="min-width: 190px;">
+                        <a
+                            class="language-dropdown-option text-decoration-none d-block py-2 px-3"
+                            href="{{ route('admin.reservation.report', ['format' => 'pdf']) }}"
+                            target="_blank"
+                        >
+                            {{ __('reservation.report_format_pdf') }}
+                        </a>
+
+                        <div class="dropdown-divider my-1 border-top border-secondary"></div>
+
+                        <a
+                            class="language-dropdown-option text-decoration-none d-block py-2 px-3"
+                            href="{{ route('admin.reservation.report', ['format' => 'excel']) }}"
+                        >
+                            {{ __('reservation.report_format_excel') }}
+                        </a>
+                    </div>
+                </details>
+            </div>
         </header>
 
         @if (session('success'))

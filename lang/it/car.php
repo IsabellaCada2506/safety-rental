@@ -66,4 +66,5 @@ return [
     'price_min_error' => 'Il prezzo di noleggio al giorno deve essere di almeno 50.000 COP.',
     'category' => 'Categoria',
     'status_updated_success' => 'Stato del veicolo aggiornato correttamente.',
+    'btn_ranking' => 'Classifica veicoli',
 ];

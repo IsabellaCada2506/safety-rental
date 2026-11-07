@@ -35,5 +35,8 @@ return [
     'language_fr' => 'Français',
     'language_it' => 'Italien',
     'language_pt' => 'Portugais',
+    'language_de' => 'Allemand',
+    'language_ru' => 'Russe',
     'language_native' => 'Français',
+    'btn_back' => 'Retour',
 ];

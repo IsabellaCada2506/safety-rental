@@ -163,6 +163,22 @@ class Car extends Model
         $this->attributes['status'] = $status;
     }
 
+    /**
+     * Determine if the car can be deactivated.
+     *
+     * @param  Collection<int,Reservation>  $futureReservations  Collection of future reservations for this car.
+     */
+    public function canBeDeactivated(Collection $futureReservations): bool
+    {
+        foreach ($futureReservations as $reservation) {
+            if ($reservation->isPending() || $reservation->isConfirmed()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public function getCategoryId(): ?int
     {
         return isset($this->attributes['category_id']) ? (int) $this->attributes['category_id'] : null;

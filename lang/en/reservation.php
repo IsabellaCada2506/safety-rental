@@ -2,6 +2,7 @@
 
 /**
  * Author: Isabella Cadavid Posada
+ * Author: Wendy Atehortua
  * Date: 2026-11-04
  * Description: Complete en translations for reservation.
  */
@@ -26,6 +27,7 @@ return [
     'select_location' => 'Select a branch',
     'vehicle' => 'Vehicle',
     'customer' => 'Customer',
+    'car_license_plate' => 'License Plate',
     'daily_rate' => 'Daily Rate',
     'rental_days' => 'Rental Days',
     'total_price' => 'Estimated Total',
@@ -53,4 +55,30 @@ return [
     'summary_heading' => 'Rental Summary',
     'user_info' => 'User Information',
     'vehicle_info' => 'Vehicle Information',
+    'report_title' => 'Reservations Report',
+    'confirmed_report_title' => 'Confirmed Reservations Report',
+    'download_pdf_report' => 'Download PDF Report',
+    'download_excel_report' => 'Download Excel Report',
+    'generated_at' => 'Generated At',
+    'total_records' => 'Total Records',
+    'total_reservations' => 'Total Reservations',
+    'total_confirmed_reservations' => 'Total Confirmed Reservations',
+    'executive_summary_title' => 'Executive Summary',
+    'cancellation_ranking_title' => 'Cancellation Reasons Ranking',
+    'cancellation_reason_label' => 'Cancellation Reason',
+    'cancellation_count' => 'Cancellations Count',
+    'reservations_list_title' => 'Reservations List',
+    'cancel_survey_title' => 'Cancel Reservation #:code',
+    'cancel_survey_subtitle' => 'Please let us know the reason for cancelling your booking. This helps us improve our service.',
+    'confirm_cancellation_btn' => 'Confirm Cancellation',
+    'select_cancellation_reason' => 'Select a reason for cancellation',
+    'reason_plan_change' => 'Change of travel plans',
+    'reason_found_cheaper' => 'Found a better price elsewhere',
+    'reason_trip_cancelled' => 'Trip was cancelled',
+    'reason_financial' => 'Financial constraints',
+    'reason_other' => 'Other personal reasons',
+    'btn_metrics' => 'Reservation Metrics',
+    'download_report' => 'Download Report',
+    'report_format_pdf' => 'PDF Report',
+    'report_format_excel' => 'Excel Report',
 ];

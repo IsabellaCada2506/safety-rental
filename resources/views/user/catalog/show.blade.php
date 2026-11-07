@@ -13,10 +13,9 @@
 <section class="container catalog-page user-catalog">
     <a
         href="{{ route('catalog.index') }}"
-        class="uc-back-link"
+        class="btn btn-outline-secondary btn-sm rounded-pill px-3 mb-4 d-inline-block text-decoration-none"
     >
-        <span aria-hidden="true">←</span>
-        {{ __('catalog.back') }}
+        &larr; {{ __('general.btn_back') }}
     </a>
 
     <div class="uc-detail-grid">

@@ -28,8 +28,8 @@
                 </p>
             </div>
 
-            <a href="{{ route('admin.dashboard.index') }}" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
-                &larr; {{ __('authentication.dashboard') }}
+            <a href="{{ route('admin.car.index') }}" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
+                &larr; {{ __('general.btn_back') }}
             </a>
         </header>
 

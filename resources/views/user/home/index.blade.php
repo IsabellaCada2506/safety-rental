@@ -10,7 +10,7 @@
 
 @section('content')
 <div class="user-home">
-    <section class="user-banner" data-user-carousel data-interval="5000" data-fallback="{{ asset('images/car-placeholder.png') }}" data-pause-label="{{ __('user-home.pause') }}" data-play-label="{{ __('user-home.play') }}" data-status-template="{{ __('user-home.slide_status') }}" role="region" aria-label="{{ __('user-home.carousel_label') }}">
+    <section class="user-banner" data-user-carousel data-interval="4000" data-fallback="{{ asset('images/car-placeholder.png') }}" data-status-template="{{ __('user-home.slide_status') }}" role="region" aria-label="{{ __('user-home.carousel_label') }}">
         <div class="user-banner-images">
             <img src="{{ asset('images/home/slide-1.jpg') }}" alt="{{ __('user-home.image_one') }}" class="user-banner-image" data-user-slide fetchpriority="high">
             <img src="{{ asset('images/home/slide-2.jpg') }}" alt="{{ __('user-home.image_two') }}" class="user-banner-image" data-user-slide hidden>
@@ -33,7 +33,6 @@
                 <button type="button" class="user-banner-dot" data-user-dot="1" aria-label="{{ __('user-home.go_to_slide', ['number' => 2]) }}" aria-pressed="false"></button>
                 <button type="button" class="user-banner-dot" data-user-dot="2" aria-label="{{ __('user-home.go_to_slide', ['number' => 3]) }}" aria-pressed="false"></button>
             </div>
-            <button type="button" class="user-banner-pause" data-user-toggle>{{ __('user-home.pause') }}</button>
             <span class="user-home-sr-only" data-user-status aria-live="off">{{ __('user-home.slide_status', ['current' => 1, 'total' => 3]) }}</span>
         </div>
     </section>

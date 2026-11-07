@@ -1,14 +1,16 @@
 {{--
     Author: Isabella Cadavid Posada
     Author: Alejandro Correa Marin
-    Date: 2026-11-04
-    Description: Shared navigation with concise translated labels and active page indicators.
+    Author: Wendy Atehortua
+    Date: 2026-11-06
+    Description: Shared navigation with centered links, grouped profile dropdown with logout, clean language selector, and sticky positioning.
 --}}
 
-<nav class="navbar navbar-expand-lg safety-navbar">
-    <div class="container">
+<nav class="navbar navbar-expand-lg safety-navbar sticky-top">
+    <div class="container d-flex align-items-center justify-content-between">
+        {{-- Brand / Logo (Left) --}}
         <a
-            class="navbar-brand"
+            class="navbar-brand me-4"
             href="{{ route('welcome.index') }}"
         >
             <span class="brand-mark" aria-hidden="true">
@@ -49,8 +51,9 @@
             {{ __('authentication.application_name') }}
         </a>
 
-        @auth
-            <div class="nav-authenticated d-flex align-items-center gap-3">
+        {{-- Center Navigation Links --}}
+        <div class="nav-center-links d-none d-lg-flex align-items-center justify-content-center flex-grow-1 gap-2">
+            @auth
                 @if (! auth()->user()->isAdmin())
                     <a
                         class="btn-pill-ghost text-decoration-none"
@@ -90,40 +93,6 @@
                         @endif
                     >
                         {{ __('general.nav_reservations') }}
-                    </a>
-
-                    <a
-                        class="btn-pill-solid profile-navigation-button"
-                        href="{{ route('profile.index') }}"
-                        aria-label="{{ __('authentication.profile') }}"
-                        title="{{ __('authentication.profile') }}"
-                        @if (request()->routeIs('profile.*'))
-                            aria-current="page"
-                        @endif
-                    >
-                        <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            aria-hidden="true"
-                        >
-                            <circle
-                                cx="12"
-                                cy="8"
-                                r="4"
-                                stroke="currentColor"
-                                stroke-width="1.8"
-                            />
-
-                            <path
-                                d="M4.5 21C4.5 16.6 7.9 13.5 12 13.5C16.1 13.5 19.5 16.6 19.5 21"
-                                stroke="currentColor"
-                                stroke-width="1.8"
-                                stroke-linecap="round"
-                            />
-                        </svg>
                     </a>
                 @else
                     <a
@@ -196,43 +165,100 @@
                         {{ __('general.nav_users') }}
                     </a>
                 @endif
+            @endauth
+        </div>
 
-                <form
-                    class="logout-form m-0"
-                    method="POST"
-                    action="{{ route('auth.logout') }}"
-                >
-                    @csrf
+        {{-- Right Side: Profile / Auth Actions & Language Selector --}}
+        <div class="nav-right-actions d-flex align-items-center gap-3 ms-auto">
+            @auth
+                {{-- Grouped Profile Dropdown with Logout --}}
+                <div class="user-profile-dropdown position-relative">
+                    <details class="language-dropdown">
+                        <summary class="language-dropdown-toggle d-flex align-items-center gap-2" title="{{ __('authentication.profile') }}">
+                            <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                            >
+                                <circle
+                                    cx="12"
+                                    cy="8"
+                                    r="4"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                />
 
-                    <button class="btn-logout" type="submit">
-                        {{ __('authentication.logout') }}
-                    </button>
-                </form>
-            </div>
-        @else
-            <div class="nav-guest">
-                <a
-                    class="guest-navigation-link"
-                    href="{{ route('login') }}"
-                    @if (request()->routeIs('login'))
-                        aria-current="page"
-                    @endif
-                >
-                    {{ __('authentication.login') }}
-                </a>
+                                <path
+                                    d="M4.5 21C4.5 16.6 7.9 13.5 12 13.5C16.1 13.5 19.5 16.6 19.5 21"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                />
+                            </svg>
+                            <span class="d-none d-sm-inline fw-semibold">{{ auth()->user()->getName() }}</span>
+                            <span class="language-dropdown-arrow" aria-hidden="true">▾</span>
+                        </summary>
 
-                <a
-                    class="guest-navigation-link"
-                    href="{{ route('register') }}"
-                    @if (request()->routeIs('register'))
-                        aria-current="page"
-                    @endif
-                >
-                    {{ __('authentication.create_account') }}
-                </a>
-            </div>
-        @endauth
+                        <div class="language-dropdown-menu" style="min-width: 170px;">
+                            @if (! auth()->user()->isAdmin())
+                                <a
+                                    class="language-dropdown-option text-decoration-none d-block py-2 px-3"
+                                    href="{{ route('profile.index') }}"
+                                >
+                                    {{ __('authentication.profile') }}
+                                </a>
+                            @else
+                                <a
+                                    class="language-dropdown-option text-decoration-none d-block py-2 px-3"
+                                    href="{{ route('admin.dashboard.index') }}"
+                                >
+                                    {{ __('authentication.dashboard') }}
+                                </a>
+                            @endif
 
-        @include('components.navigation.language-selector')
+                            <div class="dropdown-divider my-1 border-top border-secondary"></div>
+
+                            <form
+                                class="logout-form m-0"
+                                method="POST"
+                                action="{{ route('auth.logout') }}"
+                            >
+                                @csrf
+                                <button class="language-dropdown-option w-100 text-start py-2 px-3 border-0 bg-transparent text-danger fw-semibold" type="submit">
+                                    {{ __('authentication.logout') }}
+                                </button>
+                            </form>
+                        </div>
+                    </details>
+                </div>
+            @else
+                <div class="nav-guest d-flex align-items-center gap-2">
+                    <a
+                        class="guest-navigation-link btn-pill-ghost text-decoration-none"
+                        href="{{ route('login') }}"
+                        @if (request()->routeIs('login'))
+                            aria-current="page"
+                        @endif
+                    >
+                        {{ __('authentication.login') }}
+                    </a>
+
+                    <a
+                        class="btn-pill-solid text-decoration-none"
+                        href="{{ route('register') }}"
+                        @if (request()->routeIs('register'))
+                            aria-current="page"
+                        @endif
+                    >
+                        {{ __('authentication.create_account') }}
+                    </a>
+                </div>
+            @endauth
+
+            @include('components.navigation.language-selector')
+        </div>
     </div>
 </nav>

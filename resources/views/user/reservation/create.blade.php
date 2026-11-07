@@ -18,7 +18,7 @@
                     <p class="text-muted small mb-0">{{ __('catalog.title_show') }}</p>
                 </div>
                 <a href="{{ route('catalog.show', ['id' => $viewData['car']->getId()]) }}" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
-                    &larr; {{ __('catalog.back') }}
+                    &larr; {{ __('general.btn_back') }}
                 </a>
             </div>
 

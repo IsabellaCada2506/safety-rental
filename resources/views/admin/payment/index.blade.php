@@ -24,13 +24,8 @@
                 </h1>
             </div>
 
-            <a
-                href="{{ route('admin.dashboard.index') }}"
-                class="record-button record-button-secondary"
-            >
-                <span aria-hidden="true">←</span>
-                {{ __('authentication.dashboard') }}
-            </a>
+            <div class="d-flex align-items-center">
+            </div>
         </header>
 
         @if (session('success'))

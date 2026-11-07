@@ -66,4 +66,5 @@ return [
     'price_min_error' => 'The rental price per day must be at least $50,000 COP.',
     'category' => 'Category',
     'status_updated_success' => 'Vehicle status updated successfully.',
+    'btn_ranking' => 'Car Ranking',
 ];

@@ -18,8 +18,8 @@
                     <h1 class="fw-bold fs-3 text-dark mb-1">{{ $viewData['title'] }}</h1>
                     <p class="text-muted small mb-0">{{ __('payment.subtitle') }}</p>
                 </div>
-                <a href="{{ route('reservations.show', ['id' => $viewData['reservation']->getId()]) }}" class="btn btn-outline-dark btn-sm rounded-pill px-3">
-                    &larr; {{ __('payment.back_to_reservation') }}
+                <a href="{{ route('reservations.show', ['id' => $viewData['reservation']->getId()]) }}" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
+                    &larr; {{ __('general.btn_back') }}
                 </a>
             </div>
 

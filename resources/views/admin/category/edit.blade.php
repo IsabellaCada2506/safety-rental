@@ -36,6 +36,10 @@
                     {{ __('category.btn_edit') }}: {{ $viewData['category']->getModel() }} {{ $viewData['category']->getBrand() }}
                 </p>
             </div>
+
+            <a href="{{ route('admin.category.index') }}" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
+                &larr; {{ __('general.btn_back') }}
+            </a>
         </header>
 
         @if ($errors->any())

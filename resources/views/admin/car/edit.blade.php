@@ -36,6 +36,10 @@
                     {{ __('car.edit_vehicle', ['plate' => $viewData['car']->getPlate()]) }}
                 </p>
             </div>
+
+            <a href="{{ route('admin.car.index') }}" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
+                &larr; {{ __('general.btn_back') }}
+            </a>
         </header>
 
         @if ($errors->any())

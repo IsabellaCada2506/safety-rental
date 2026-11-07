@@ -34,7 +34,7 @@
             </div>
 
             <a href="{{ route('admin.reservation.index') }}" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
-                &larr; {{ __('reservation.back_to_admin_list') }}
+                &larr; {{ __('general.btn_back') }}
             </a>
         </header>
 

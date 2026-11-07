@@ -2,6 +2,7 @@
 
 /**
  * Author: Isabella Cadavid Posada
+ * Author: Wendy Atehortua
  * Date: 2026-11-04
  * Description: Complete es translations for reservation.
  */
@@ -26,6 +27,7 @@ return [
     'select_location' => 'Selecciona una sede',
     'vehicle' => 'Vehículo',
     'customer' => 'Cliente',
+    'car_license_plate' => 'Placa del Vehículo',
     'daily_rate' => 'Tarifa Diaria',
     'rental_days' => 'Días de Alquiler',
     'total_price' => 'Total Estimado',
@@ -53,4 +55,30 @@ return [
     'summary_heading' => 'Resumen del Alquiler',
     'user_info' => 'Información del Usuario',
     'vehicle_info' => 'Información del Vehículo',
+    'report_title' => 'Informe de Reservas',
+    'confirmed_report_title' => 'Informe de Reservas Confirmadas',
+    'download_pdf_report' => 'Descargar Informe PDF',
+    'download_excel_report' => 'Descargar Informe Excel',
+    'generated_at' => 'Generado el',
+    'total_records' => 'Total de Registros',
+    'total_reservations' => 'Total de Reservas',
+    'total_confirmed_reservations' => 'Total de Reservas Confirmadas',
+    'executive_summary_title' => 'Resumen Ejecutivo',
+    'cancellation_ranking_title' => 'Ranking de Motivos de Cancelación',
+    'cancellation_reason_label' => 'Motivo de Cancelación',
+    'cancellation_count' => 'Cantidad de Cancelaciones',
+    'reservations_list_title' => 'Listado de Reservas',
+    'cancel_survey_title' => 'Cancelar Reserva #:code',
+    'cancel_survey_subtitle' => 'Por favor indícanos el motivo de la cancelación. Esto nos ayuda a mejorar nuestro servicio.',
+    'confirm_cancellation_btn' => 'Confirmar Cancelación',
+    'select_cancellation_reason' => 'Selecciona un motivo de cancelación',
+    'reason_plan_change' => 'Cambio de planes de viaje',
+    'reason_found_cheaper' => 'Encontré mejor precio en otro lugar',
+    'reason_trip_cancelled' => 'Viaje cancelado',
+    'reason_financial' => 'Motivos económicos',
+    'reason_other' => 'Otros motivos personales',
+    'btn_metrics' => 'Métricas de Reservas',
+    'download_report' => 'Descargar Informe',
+    'report_format_pdf' => 'Informe en PDF',
+    'report_format_excel' => 'Informe en Excel',
 ];

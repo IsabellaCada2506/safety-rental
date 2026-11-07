@@ -13,10 +13,9 @@
 <section class="container catalog-page locations-page">
     <a
         href="{{ route('locations.index') }}"
-        class="locations-back"
+        class="btn btn-outline-secondary btn-sm rounded-pill px-3 mb-4 d-inline-block text-decoration-none"
     >
-        <span aria-hidden="true">←</span>
-        {{ __('location.back_to_locations') }}
+        &larr; {{ __('general.btn_back') }}
     </a>
 
     <article class="locations-detail">

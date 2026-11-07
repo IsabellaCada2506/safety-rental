@@ -4,16 +4,12 @@
     Description: Accessible native language dropdown with decorative flags and POST forms.
 --}}
 
-<div class="ms-2 language-selector">
+<div class="language-selector">
     <details class="language-dropdown">
         <summary
             class="language-dropdown-toggle"
             title="{{ __('general.language_label') }}"
         >
-            <span class="language-flag" aria-hidden="true">
-                {{ config('localization.flags.'.app()->getLocale(), '🌐') }}
-            </span>
-
             <span>{{ strtoupper(app()->getLocale()) }}</span>
 
             <span class="visually-hidden">
@@ -45,10 +41,7 @@
                         @endif
                     >
                         <span class="language-option-name">
-                            <span class="language-flag" aria-hidden="true">
-                                {{ config('localization.flags.'.$locale, '🌐') }}
-                            </span>
-
+                            <span class="fw-bold me-2">{{ strtoupper($locale) }}</span>
                             <span lang="{{ $locale }}">
                                 {{ __('general.language_native', [], $locale) }}
                             </span>

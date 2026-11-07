@@ -37,13 +37,22 @@
                 </p>
             </div>
 
-            <a
-                class="admin-index-create-btn"
-                href="{{ route('admin.car.create') }}"
-            >
-                <span class="admin-index-create-icon" aria-hidden="true">+</span>
-                <span>{{ __('car.btn_create') }}</span>
-            </a>
+            <div class="d-flex align-items-center gap-2">
+                <a
+                    href="{{ route('admin.ranking.index') }}"
+                    class="record-button record-button-secondary"
+                >
+                    {{ __('car.btn_ranking') }}
+                </a>
+
+                <a
+                    class="admin-index-create-btn"
+                    href="{{ route('admin.car.create') }}"
+                >
+                    <span class="admin-index-create-icon" aria-hidden="true">+</span>
+                    <span>{{ __('car.btn_create') }}</span>
+                </a>
+            </div>
         </header>
 
         @if (session('success'))

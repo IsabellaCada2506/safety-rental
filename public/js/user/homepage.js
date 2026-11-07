@@ -1,7 +1,8 @@
 /*
  * Author: Isabella Cadavid Posada
- * Date: 2026-11-04
- * Description: Automatic user banner with pause controls, keyboard-friendly buttons and reduced-motion support.
+ * Author: Wendy Atehortua
+ * Date: 2026-11-06
+ * Description: Fully automatic user banner carousel without manual pause buttons, transitioning automatically.
  */
 
 (() => {
@@ -10,19 +11,16 @@
         const dots = Array.from(carousel.querySelectorAll('[data-user-dot]'));
         const previous = carousel.querySelector('[data-user-previous]');
         const next = carousel.querySelector('[data-user-next]');
-        const toggle = carousel.querySelector('[data-user-toggle]');
         const status = carousel.querySelector('[data-user-status]');
-        const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
-        const interval = Math.max(3000, Number(carousel.dataset.interval) || 5000);
+        const interval = Math.max(3000, Number(carousel.dataset.interval) || 4000);
         let currentIndex = 0;
         let timer = null;
-        let paused = motionPreference.matches;
-        let hovered = false;
-        let focused = false;
 
         const stop = () => {
-            window.clearInterval(timer);
-            timer = null;
+            if (timer !== null) {
+                window.clearInterval(timer);
+                timer = null;
+            }
         };
 
         const show = (index) => {
@@ -33,18 +31,19 @@
             dots.forEach((dot, dotIndex) => {
                 dot.setAttribute('aria-pressed', String(dotIndex === currentIndex));
             });
-            status.textContent = carousel.dataset.statusTemplate
-                .replace(':current', String(currentIndex + 1))
-                .replace(':total', String(slides.length));
+            if (status && carousel.dataset.statusTemplate) {
+                status.textContent = carousel.dataset.statusTemplate
+                    .replace(':current', String(currentIndex + 1))
+                    .replace(':total', String(slides.length));
+            }
         };
 
-        const sync = () => {
+        const start = () => {
             stop();
-            toggle.textContent = paused ? carousel.dataset.playLabel : carousel.dataset.pauseLabel;
-            const running = !paused && !hovered && !focused && !document.hidden;
-            status.setAttribute('aria-live', running ? 'off' : 'polite');
-            if (running && slides.length > 1) {
-                timer = window.setInterval(() => show(currentIndex + 1), interval);
+            if (slides.length > 1 && !document.hidden) {
+                timer = window.setInterval(() => {
+                    show(currentIndex + 1);
+                }, interval);
             }
         };
 
@@ -62,49 +61,36 @@
             }
         });
 
-        previous.addEventListener('click', () => {
-            show(currentIndex - 1);
-            sync();
-        });
-        next.addEventListener('click', () => {
-            show(currentIndex + 1);
-            sync();
-        });
+        if (previous) {
+            previous.addEventListener('click', () => {
+                show(currentIndex - 1);
+                start();
+            });
+        }
+
+        if (next) {
+            next.addEventListener('click', () => {
+                show(currentIndex + 1);
+                start();
+            });
+        }
+
         dots.forEach((dot, index) => {
             dot.addEventListener('click', () => {
                 show(index);
-                sync();
+                start();
             });
         });
-        toggle.addEventListener('click', () => {
-            paused = !paused;
-            sync();
-        });
-        carousel.addEventListener('mouseenter', () => {
-            hovered = true;
-            sync();
-        });
-        carousel.addEventListener('mouseleave', () => {
-            hovered = false;
-            sync();
-        });
-        carousel.addEventListener('focusin', () => {
-            focused = true;
-            sync();
-        });
-        carousel.addEventListener('focusout', (event) => {
-            focused = carousel.contains(event.relatedTarget);
-            sync();
-        });
-        document.addEventListener('visibilitychange', sync);
-        motionPreference.addEventListener('change', (event) => {
-            if (event.matches) {
-                paused = true;
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                stop();
+            } else {
+                start();
             }
-            sync();
         });
 
         show(0);
-        sync();
+        start();
     });
 })();

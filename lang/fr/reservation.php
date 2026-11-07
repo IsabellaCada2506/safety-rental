@@ -2,6 +2,7 @@
 
 /**
  * Author: Isabella Cadavid Posada
+ * Author: Wendy Atehortua
  * Date: 2026-11-04
  * Description: Complete fr translations for reservation.
  */
@@ -26,6 +27,7 @@ return [
     'select_location' => 'Sélectionnez une agence',
     'vehicle' => 'Véhicule',
     'customer' => 'Client',
+    'car_license_plate' => 'Plaque d\'immatriculation',
     'daily_rate' => 'Tarif journalier',
     'rental_days' => 'Jours de location',
     'total_price' => 'Total estimé',
@@ -53,4 +55,30 @@ return [
     'summary_heading' => 'Récapitulatif de location',
     'user_info' => 'Informations utilisateur',
     'vehicle_info' => 'Informations sur le véhicule',
+    'report_title' => 'Rapport des réservations',
+    'confirmed_report_title' => 'Rapport des réservations confirmées',
+    'download_pdf_report' => 'Télécharger le rapport PDF',
+    'download_excel_report' => 'Télécharger le rapport Excel',
+    'generated_at' => 'Généré le',
+    'total_records' => 'Total des enregistrements',
+    'total_reservations' => 'Total des réservations',
+    'total_confirmed_reservations' => 'Total des réservations confirmées',
+    'executive_summary_title' => 'Résumé exécutif',
+    'cancellation_ranking_title' => 'Classement des motifs d\'annulation',
+    'cancellation_reason_label' => 'Motif d\'annulation',
+    'cancellation_count' => 'Nombre d\'annulations',
+    'reservations_list_title' => 'Liste des réservations',
+    'cancel_survey_title' => 'Annuler la réservation n° :code',
+    'cancel_survey_subtitle' => 'Veuillez nous indiquer la raison de votre annulation. Cela nous aide à nous améliorer.',
+    'confirm_cancellation_btn' => 'Confirmer l\'annulation',
+    'select_cancellation_reason' => 'Sélectionnez un motif d\'annulation',
+    'reason_plan_change' => 'Changement de programme',
+    'reason_found_cheaper' => 'Meilleur prix trouvé ailleurs',
+    'reason_trip_cancelled' => 'Voyage annulé',
+    'reason_financial' => 'Raisons financières',
+    'reason_other' => 'Autres raisons personnelles',
+    'btn_metrics' => 'Métriques de réservations',
+    'download_report' => 'Télécharger le rapport',
+    'report_format_pdf' => 'Rapport PDF',
+    'report_format_excel' => 'Rapport Excel',
 ];

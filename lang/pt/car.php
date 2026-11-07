@@ -66,4 +66,5 @@ return [
     'price_min_error' => 'O preço do aluguel por dia deve ser de pelo menos 50.000 COP.',
     'category' => 'Categoria',
     'status_updated_success' => 'Status do veículo atualizado com sucesso.',
+    'btn_ranking' => 'Ranking de veículos',
 ];

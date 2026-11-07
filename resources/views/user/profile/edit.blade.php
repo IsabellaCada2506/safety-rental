@@ -23,12 +23,10 @@
         <div class="container profile-edit-container">
             <header class="profile-edit-hero">
                 <a
-                    class="profile-edit-back"
+                    class="btn btn-outline-secondary btn-sm rounded-pill px-3 mb-3 d-inline-block text-decoration-none"
                     href="{{ route('profile.index') }}"
                 >
-                    <span aria-hidden="true">←</span>
-
-                    {{ __('authentication.back_to_profile') }}
+                    &larr; {{ __('general.btn_back') }}
                 </a>
 
                 <div class="profile-edit-hero-content">

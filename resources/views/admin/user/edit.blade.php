@@ -29,7 +29,7 @@
             </div>
 
             <a href="{{ route('admin.user.index') }}" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
-                &larr; {{ __('user.btn_back') }}
+                &larr; {{ __('general.btn_back') }}
             </a>
         </header>
 
