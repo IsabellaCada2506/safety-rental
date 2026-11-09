@@ -18,6 +18,7 @@ Safety Rental is a vehicle rental web application built with Laravel. This guide
 - [13. Verification Commands](#13-verification-commands)
 - [14. Common Problems](#14-common-problems)
 - [15. Public Vehicle API](#15-public-vehicle-api)
+- [16. Partner Fleet Integration](#16-partner-fleet-integration)
 
 ## **2. Team Members**
 
@@ -478,3 +479,23 @@ Fields returned:
 - `detail_url`: application URL with the full vehicle detail
 
 Deactivated vehicles are excluded. An empty fleet returns `{ "vehicles": [] }`.
+
+## **16. Partner Fleet Integration**
+
+Safety Rental consumes the preceding team's public JSON API and shows those vehicles in `/partners`. Keys and URLs stay in environment variables. A local JSON file is not used as a substitute for the real HTTP call.
+
+Set these values in `.env`:
+
+```dotenv
+PARTNER_API_URL=https://TEAM-05-PUBLIC-URL/api/vehicles
+PARTNER_API_TOKEN=
+PARTNER_API_TIMEOUT=8
+```
+
+Until the architect delivers the team 05 URL, the local public catalog can be used to verify the HTTP client:
+
+```dotenv
+PARTNER_API_URL=http://127.0.0.1:8000/api/vehicles
+```
+
+The partners page translates HTTP errors, timeouts, connection failures, empty payloads, and missing configuration.

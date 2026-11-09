@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'partner' => [
+        'url' => env('PARTNER_API_URL'),
+        'token' => env('PARTNER_API_TOKEN'),
+        'timeout' => env('PARTNER_API_TIMEOUT', 8),
+    ],
+
 ];

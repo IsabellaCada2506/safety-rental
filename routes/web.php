@@ -27,6 +27,7 @@ use App\Http\Controllers\User\CatalogController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\LocaleController;
 use App\Http\Controllers\User\LocationController as UserLocationController;
+use App\Http\Controllers\User\PartnerController;
 use App\Http\Controllers\User\PaymentController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\ReceiptController;
@@ -68,6 +69,9 @@ Route::get($basePath.'/catalog/{id}', [CatalogController::class, 'show'])->middl
 
 Route::get($basePath.'/locations', [UserLocationController::class, 'index'])->middleware(['auth', 'verified', 'user'])->name('locations.index');
 Route::get($basePath.'/locations/{id}', [UserLocationController::class, 'show'])->middleware(['auth', 'verified', 'user'])->whereNumber('id')->name('locations.show');
+
+$partnerPath = 'partners';
+Route::get($partnerPath, [PartnerController::class, 'index'])->middleware(['auth', 'verified', 'user'])->name('partners.index');
 
 Route::get($basePath.'/reservations', [ReservationController::class, 'index'])->middleware(['auth', 'verified', 'user'])->name('reservations.index');
 Route::get($basePath.'/reservations/create', [ReservationController::class, 'create'])->middleware(['auth', 'verified', 'user'])->name('reservations.create');
