@@ -32,6 +32,7 @@ use App\Http\Controllers\User\PaymentController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\ReceiptController;
 use App\Http\Controllers\User\ReservationController;
+use App\Http\Controllers\User\RouteEstimateController;
 use App\Http\Controllers\User\VehicleApiController;
 use App\Http\Controllers\User\WelcomeController;
 use Illuminate\Support\Facades\Route;
@@ -72,6 +73,8 @@ Route::get($basePath.'/locations/{id}', [UserLocationController::class, 'show'])
 
 $partnerPath = 'partners';
 Route::get($partnerPath, [PartnerController::class, 'index'])->middleware(['auth', 'verified', 'user'])->name('partners.index');
+$routeEstimatePath = 'route-estimates';
+Route::get($routeEstimatePath, [RouteEstimateController::class, 'show'])->middleware(['auth', 'verified', 'user'])->name('route-estimates.show');
 
 Route::get($basePath.'/reservations', [ReservationController::class, 'index'])->middleware(['auth', 'verified', 'user'])->name('reservations.index');
 Route::get($basePath.'/reservations/create', [ReservationController::class, 'create'])->middleware(['auth', 'verified', 'user'])->name('reservations.create');

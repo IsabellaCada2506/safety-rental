@@ -2,7 +2,8 @@
 
 /**
  * Author: Isabella Ocampo
- * Date: 2026-09-11
+ * Author: Alejandro Correa Marin
+ * Date: 2026-11-09
  * Description: Spanish language strings for the rental location management and browsing module.
  */
 
@@ -46,6 +47,8 @@ return [
     'headquarters_label' => 'Sede / Unidad Operativa',
     'telephone_label' => 'Teléfono',
     'city_label' => 'Ciudad',
+    'latitude_label' => 'Latitud',
+    'longitude_label' => 'Longitud',
 
     // Placeholders
     'name_placeholder' => 'Ej. Sede El Poblado',
@@ -53,6 +56,8 @@ return [
     'headquarters_placeholder' => 'Ej. Sede Principal Medellín',
     'telephone_placeholder' => 'Ej. +57 604 444 1122',
     'city_placeholder' => 'Ej. Medellín',
+    'latitude_placeholder' => 'Ej. 6.2088',
+    'longitude_placeholder' => 'Ej. -75.5674',
 
     // Buttons
     'btn_create' => 'Nueva Sede',

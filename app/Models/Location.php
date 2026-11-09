@@ -2,7 +2,8 @@
 
 /**
  * Author: Isabella Ocampo
- * Date: 2026-09-11
+ * Author: Alejandro Correa Marin
+ * Date: 2026-11-09
  * Description: Location model representing physical branches where vehicles can be picked up and returned.
  */
 
@@ -22,6 +23,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * $this->attributes['headquarters'] - string      - contains the headquarters identifier
  * $this->attributes['telephone']    - string      - contains the contact telephone number
  * $this->attributes['city']         - string      - contains the city where the branch is located
+ * $this->attributes['latitude']     - float|null  - contains the geographic latitude of the branch
+ * $this->attributes['longitude']    - float|null  - contains the geographic longitude of the branch
  * $this->attributes['created_at']   - string|null - contains the creation timestamp
  * $this->attributes['updated_at']   - string|null - contains the update timestamp
  *
@@ -39,6 +42,8 @@ class Location extends Model
         'headquarters',
         'telephone',
         'city',
+        'latitude',
+        'longitude',
     ];
 
     protected function casts(): array
@@ -46,6 +51,8 @@ class Location extends Model
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
+            'latitude' => 'float',
+            'longitude' => 'float',
         ];
     }
 
@@ -102,6 +109,31 @@ class Location extends Model
     public function setCity(string $city): void
     {
         $this->attributes['city'] = $city;
+    }
+
+    public function getLatitude(): ?float
+    {
+        return isset($this->attributes['latitude']) ? (float) $this->attributes['latitude'] : null;
+    }
+
+    public function setLatitude(?float $latitude): void
+    {
+        $this->attributes['latitude'] = $latitude;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return isset($this->attributes['longitude']) ? (float) $this->attributes['longitude'] : null;
+    }
+
+    public function setLongitude(?float $longitude): void
+    {
+        $this->attributes['longitude'] = $longitude;
+    }
+
+    public function hasCoordinates(): bool
+    {
+        return $this->getLatitude() !== null && $this->getLongitude() !== null;
     }
 
     public function getCreatedAt(): ?Carbon

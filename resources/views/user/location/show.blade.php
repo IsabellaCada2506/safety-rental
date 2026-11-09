@@ -1,6 +1,7 @@
 {{--
     Author: Isabella Ocampo
-    Date: 2026-09-11
+    Author: Alejandro Correa Marin
+    Date: 2026-11-09
     Description: Customer view showing contact information of a branch and the vehicles available for rent at that location.
 --}}
 
@@ -48,6 +49,7 @@
                 <a href="{{ route('locations.index') }}" class="btn btn-outline-secondary rounded-pill px-4 py-2 fw-medium">
                     &larr; {{ __('location.back_to_locations') }}
                 </a>
+                <x-route-estimate-form :location="$viewData['location']" />
             </div>
         </div>
     </div>

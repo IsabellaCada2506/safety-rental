@@ -1,6 +1,7 @@
 {{--
     Author: Wendy Atehortua
-    Date: 2026-09-13
+    Author: Alejandro Correa Marin
+    Date: 2026-11-09
     Description: Detail view for a single active vehicle in the rental catalog, including reservation flow.
 --}}
 
@@ -70,6 +71,10 @@
                             <button class="btn btn-secondary fw-semibold py-2 rounded-pill shadow-sm" disabled>
                                 {{ __('catalog.status_deactivated') }}
                             </button>
+                        @endif
+
+                        @if ($viewData['car']->getLocation())
+                            <x-route-estimate-form :location="$viewData['car']->getLocation()" />
                         @endif
                     </div>
                 </div>

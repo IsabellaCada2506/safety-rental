@@ -2,7 +2,8 @@
 
 /**
  * Author: Isabella Ocampo
- * Date: 2026-09-11
+ * Author: Alejandro Correa Marin
+ * Date: 2026-11-09
  * Description: Administrator controller for managing physical rental branch locations.
  */
 
@@ -49,6 +50,8 @@ class LocationController extends Controller
         $location->setHeadquarters((string) $validatedData['headquarters']);
         $location->setTelephone((string) $validatedData['telephone']);
         $location->setCity((string) $validatedData['city']);
+        $location->setLatitude(self::nullableCoordinate($validatedData['latitude'] ?? null));
+        $location->setLongitude(self::nullableCoordinate($validatedData['longitude'] ?? null));
         $location->save();
 
         return redirect()->route('admin.location.index')
@@ -76,6 +79,8 @@ class LocationController extends Controller
         $location->setHeadquarters((string) $validatedData['headquarters']);
         $location->setTelephone((string) $validatedData['telephone']);
         $location->setCity((string) $validatedData['city']);
+        $location->setLatitude(self::nullableCoordinate($validatedData['latitude'] ?? null));
+        $location->setLongitude(self::nullableCoordinate($validatedData['longitude'] ?? null));
         $location->save();
 
         return redirect()->route('admin.location.index')
@@ -95,5 +100,14 @@ class LocationController extends Controller
 
         return redirect()->route('admin.location.index')
             ->with('success', __('location.deleted_success'));
+    }
+
+    private static function nullableCoordinate(mixed $coordinate): ?float
+    {
+        if ($coordinate === null || $coordinate === '') {
+            return null;
+        }
+
+        return (float) $coordinate;
     }
 }

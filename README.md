@@ -19,6 +19,7 @@ Safety Rental is a vehicle rental web application built with Laravel. This guide
 - [14. Common Problems](#14-common-problems)
 - [15. Public Vehicle API](#15-public-vehicle-api)
 - [16. Partner Fleet Integration](#16-partner-fleet-integration)
+- [17. Google Maps Route Estimates](#17-google-maps-route-estimates)
 
 ## **2. Team Members**
 
@@ -499,3 +500,17 @@ PARTNER_API_URL=http://127.0.0.1:8000/api/vehicles
 ```
 
 The partners page translates HTTP errors, timeouts, connection failures, empty payloads, and missing configuration.
+
+## **17. Google Maps Route Estimates**
+
+Customers can estimate driving distance and travel time from their current location to a pickup branch. The application calls the Google Maps Routes API from the server. `GOOGLE_MAPS_API_KEY` must never be sent to the browser.
+
+Set these values in `.env`:
+
+```dotenv
+GOOGLE_MAPS_API_KEY=your-server-side-key
+GOOGLE_ROUTES_API_URL=https://routes.googleapis.com/directions/v2:computeRoutes
+GOOGLE_ROUTES_TIMEOUT=8
+```
+
+The estimate appears on `/route-estimates` after the customer shares the browser location from a vehicle detail or branch page. HTTP errors, timeouts, empty routes, and missing configuration are translated in the interface.

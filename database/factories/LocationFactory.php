@@ -2,7 +2,8 @@
 
 /**
  * Author: Isabella Ocampo
- * Date: 2026-09-11
+ * Author: Alejandro Correa Marin
+ * Date: 2026-11-09
  * Description: Factory for generating Location model instances for testing and seeding.
  */
 
@@ -23,6 +24,8 @@ class LocationFactory extends Factory
             'headquarters' => fake()->city().' Main Headquarters',
             'telephone' => fake()->phoneNumber(),
             'city' => fake()->city(),
+            'latitude' => fake()->latitude(6.1, 6.3),
+            'longitude' => fake()->longitude(-75.7, -75.4),
         ];
     }
 }

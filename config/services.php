@@ -41,4 +41,10 @@ return [
         'timeout' => env('PARTNER_API_TIMEOUT', 8),
     ],
 
+    'google' => [
+        'maps_api_key' => env('GOOGLE_MAPS_API_KEY'),
+        'routes_url' => env('GOOGLE_ROUTES_API_URL', 'https://routes.googleapis.com/directions/v2:computeRoutes'),
+        'timeout' => env('GOOGLE_ROUTES_TIMEOUT', 8),
+    ],
+
 ];

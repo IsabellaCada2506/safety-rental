@@ -2,7 +2,8 @@
 
 /**
  * Author: Isabella Ocampo
- * Date: 2026-09-11
+ * Author: Alejandro Correa Marin
+ * Date: 2026-11-09
  * Description: Form request for validating new rental location creation by administrators.
  */
 
@@ -25,6 +26,8 @@ class StoreLocationRequest extends FormRequest
             'headquarters' => ['required', 'string', 'max:255'],
             'telephone' => ['required', 'string', 'max:50'],
             'city' => ['required', 'string', 'max:100'],
+            'latitude' => ['nullable', 'numeric', 'between:-90,90'],
+            'longitude' => ['nullable', 'numeric', 'between:-180,180'],
         ];
     }
 }

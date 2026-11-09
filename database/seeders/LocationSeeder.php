@@ -2,7 +2,8 @@
 
 /**
  * Author: Isabella Ocampo
- * Date: 2026-09-11
+ * Author: Alejandro Correa Marin
+ * Date: 2026-11-09
  * Description: Seeder for physical branch locations of Safety Rental.
  */
 
@@ -22,6 +23,8 @@ class LocationSeeder extends Seeder
                 'headquarters' => 'Sede Principal Medellín',
                 'telephone' => '+57 604 444 1122',
                 'city' => 'Medellín',
+                'latitude' => 6.2088000,
+                'longitude' => -75.5674000,
             ],
             [
                 'name' => 'Sede Laureles',
@@ -29,6 +32,8 @@ class LocationSeeder extends Seeder
                 'headquarters' => 'Sede Occidente',
                 'telephone' => '+57 604 444 3344',
                 'city' => 'Medellín',
+                'latitude' => 6.2447000,
+                'longitude' => -75.5896000,
             ],
             [
                 'name' => 'Sede Aeropuerto JMC',
@@ -36,14 +41,19 @@ class LocationSeeder extends Seeder
                 'headquarters' => 'Sede Aeroportuaria Rionegro',
                 'telephone' => '+57 604 444 5566',
                 'city' => 'Rionegro',
+                'latitude' => 6.1646000,
+                'longitude' => -75.4231000,
             ],
         ];
 
         foreach ($locations as $data) {
-            Location::firstOrCreate(
+            $location = Location::firstOrCreate(
                 ['name' => $data['name']],
                 $data
             );
+            $location->setLatitude($data['latitude']);
+            $location->setLongitude($data['longitude']);
+            $location->save();
         }
     }
 }

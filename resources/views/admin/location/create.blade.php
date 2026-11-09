@@ -157,6 +157,44 @@
                             required
                         >
                     </div>
+
+                    <div>
+                        <label
+                            class="form-label"
+                            for="location-latitude"
+                        >
+                            {{ __('location.latitude_label') }}
+                        </label>
+
+                        <input
+                            type="number"
+                            step="0.0000001"
+                            class="form-control"
+                            id="location-latitude"
+                            name="latitude"
+                            value="{{ old('latitude') }}"
+                            placeholder="{{ __('location.latitude_placeholder') }}"
+                        >
+                    </div>
+
+                    <div>
+                        <label
+                            class="form-label"
+                            for="location-longitude"
+                        >
+                            {{ __('location.longitude_label') }}
+                        </label>
+
+                        <input
+                            type="number"
+                            step="0.0000001"
+                            class="form-control"
+                            id="location-longitude"
+                            name="longitude"
+                            value="{{ old('longitude') }}"
+                            placeholder="{{ __('location.longitude_placeholder') }}"
+                        >
+                    </div>
                 </div>
 
                 <div class="admin-form-actions">
