@@ -1,0 +1,290 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0" version="22.1.16">
+  <diagram id="mvc-arch-v2" name="MVC Architecture">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2000" pageHeight="1600" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="legend" value="&lt;b&gt;Legend&lt;/b&gt;&lt;br&gt;&lt;font color='#000000'&gt;— Communication&lt;/font&gt;&lt;br&gt;&lt;font color='#d79b00'&gt;— Dependency&lt;/font&gt;&lt;br&gt;&lt;font color='#d79b00'&gt;— Request / Response&lt;/font&gt;&lt;br&gt;&lt;font color='#000000'&gt;— belongsTo (Models)&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;fillColor=#ffffff;strokeColor=#666666;fontSize=11;spacingLeft=8;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="20" y="430" width="170" height="110" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="client" value="&lt;b&gt;Client&lt;/b&gt;&lt;br&gt;Mobile / desktop" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="20" y="620" width="130" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="server" value="Laravel Server" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#ffffff;strokeColor=#666666;arcSize=8;fontStyle=1;fontSize=16;dashPattern=1 1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="20" width="1780" height="1500" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="views" value="Views  ·  resources/views" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;verticalAlign=top;fontStyle=1;fontSize=14;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="210" y="60" width="1720" height="280" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="v-auth" value="authentication/" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=28;horizontalStack=0;resizeParent=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="230" y="100" width="400" height="220" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-auth-1" value="&lt;b&gt;login/index&lt;/b&gt;&lt;br&gt;LoginController" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="v-auth">
+          <mxGeometry y="28" width="400" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-auth-2" value="&lt;b&gt;register/index&lt;/b&gt;&lt;br&gt;RegisterController" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="v-auth">
+          <mxGeometry y="76" width="400" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-auth-3" value="&lt;b&gt;passwords/email · reset · confirm&lt;/b&gt;&lt;br&gt;ForgotPasswordController · ResetPasswordController · ConfirmPasswordController" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="v-auth">
+          <mxGeometry y="124" width="400" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-auth-4" value="&lt;b&gt;verification/index&lt;/b&gt;&lt;br&gt;VerificationController" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="v-auth">
+          <mxGeometry y="172" width="400" height="48" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="v-admin" value="admin/" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=28;horizontalStack=0;resizeParent=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="650" y="100" width="420" height="220" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-admin-1" value="&lt;b&gt;dashboard · car · category · location&lt;/b&gt;&lt;br&gt;DashboardController · CarController · CategoryController · LocationController" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="v-admin">
+          <mxGeometry y="28" width="420" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-admin-2" value="&lt;b&gt;reservation · payment · user&lt;/b&gt;&lt;br&gt;ReservationController · PaymentController · UserController" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="v-admin">
+          <mxGeometry y="92" width="420" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-admin-3" value="&lt;b&gt;car-ranking · metrics&lt;/b&gt;&lt;br&gt;CarRankingController · MetricsController" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="v-admin">
+          <mxGeometry y="156" width="420" height="64" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="v-user" value="user/" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=28;horizontalStack=0;resizeParent=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1090" y="100" width="500" height="220" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-user-1" value="&lt;b&gt;welcome · home · profile · catalog · location&lt;/b&gt;&lt;br&gt;WelcomeController · HomeController · ProfileController · CatalogController · LocationController" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="v-user">
+          <mxGeometry y="28" width="500" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-user-2" value="&lt;b&gt;reservation · payment · receipt&lt;/b&gt;&lt;br&gt;ReservationController · PaymentController · ReceiptController" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="v-user">
+          <mxGeometry y="92" width="500" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-user-3" value="&lt;b&gt;partner · route-estimate&lt;/b&gt;&lt;br&gt;PartnerController · RouteEstimateController&lt;br&gt;components/navbar · car-image · route-estimate-form · layouts/app" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="v-user">
+          <mxGeometry y="156" width="500" height="64" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="mw" value="&lt;b&gt;Auth &amp;amp; Middleware&lt;/b&gt;&lt;br&gt;SetLocale · auth · verified&lt;br&gt;EnsureUserIsUser · EnsureUserIsAdmin" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="210" y="600" width="210" height="80" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="routes" value="&lt;b&gt;routes/web.php&lt;/b&gt;&lt;br&gt;Named concatenated routes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="460" y="610" width="180" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="controllers" value="Controllers  ·  app/Http/Controllers" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontStyle=1;fontSize=14;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="680" y="360" width="1230" height="520" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="c-auth" value="Authentication/" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=28;horizontalStack=0;resizeParent=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="700" y="400" width="380" height="300" as="geometry"/>
+        </mxCell>
+        <mxCell id="c-auth-1" value="&lt;b&gt;LoginController&lt;/b&gt;&lt;br&gt;Model: User" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="c-auth">
+          <mxGeometry y="28" width="380" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="c-auth-2" value="&lt;b&gt;RegisterController&lt;/b&gt;&lt;br&gt;Model: User" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="c-auth">
+          <mxGeometry y="72" width="380" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="c-auth-3" value="&lt;b&gt;ForgotPasswordController · ResetPasswordController&lt;/b&gt;&lt;br&gt;Model: User" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="c-auth">
+          <mxGeometry y="116" width="380" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="c-auth-4" value="&lt;b&gt;VerificationController · ConfirmPasswordController&lt;/b&gt;&lt;br&gt;Model: User" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="c-auth">
+          <mxGeometry y="160" width="380" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="c-auth-5" value="LocaleController (User/)&lt;br&gt;Language switch · no model" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="c-auth">
+          <mxGeometry y="204" width="380" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="c-auth-6" value="Mail (log driver)&lt;br&gt;Email verification / password reset" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="c-auth">
+          <mxGeometry y="248" width="380" height="44" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="c-admin" value="Admin/" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=28;horizontalStack=0;resizeParent=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="400" width="380" height="456" as="geometry"/>
+        </mxCell>
+        <mxCell id="c-admin-1" value="&lt;b&gt;DashboardController&lt;/b&gt;&lt;br&gt;Models: User · Reservation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="c-admin">
+          <mxGeometry y="28" width="380" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="c-admin-2" value="&lt;b&gt;CarController&lt;/b&gt;&lt;br&gt;Model: Car  ·  views/admin/car" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="c-admin">
+          <mxGeometry y="72" width="380" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="c-admin-3" value="&lt;b&gt;CategoryController&lt;/b&gt;&lt;br&gt;Model: Category  ·  views/admin/category" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="c-admin">
+          <mxGeometry y="116" width="380" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="c-admin-4" value="&lt;b&gt;LocationController&lt;/b&gt;&lt;br&gt;Model: Location  ·  views/admin/location" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="c-admin">
+          <mxGeometry y="160" width="380" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="c-admin-5" value="&lt;b&gt;ReservationController&lt;/b&gt;&lt;br&gt;Model: Reservation  ·  ReservationPolicy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="c-admin">
+          <mxGeometry y="204" width="380" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="c-admin-6" value="&lt;b&gt;PaymentController&lt;/b&gt;&lt;br&gt;Model: Payment  ·  PaymentPolicy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="c-admin">
+          <mxGeometry y="248" width="380" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="c-admin-7" value="&lt;b&gt;UserController&lt;/b&gt;&lt;br&gt;Model: User  ·  views/admin/user" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="c-admin">
+          <mxGeometry y="292" width="380" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="c-admin-8" value="&lt;b&gt;CarRankingController&lt;/b&gt;&lt;br&gt;Model: Car" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="c-admin">
+          <mxGeometry y="336" width="380" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="c-admin-9" value="&lt;b&gt;MetricsController&lt;/b&gt;&lt;br&gt;Models: Reservation · Payment" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="c-admin">
+          <mxGeometry y="380" width="380" height="44" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="c-user" value="User/" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=28;horizontalStack=0;resizeParent=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1500" y="400" width="390" height="456" as="geometry"/>
+        </mxCell>
+        <mxCell id="c-user-1" value="&lt;b&gt;WelcomeController · HomeController · ProfileController&lt;/b&gt;&lt;br&gt;Model: User" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="c-user">
+          <mxGeometry y="28" width="390" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="c-user-2" value="&lt;b&gt;CatalogController&lt;/b&gt;&lt;br&gt;Models: Car · Category · Location" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="c-user">
+          <mxGeometry y="76" width="390" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="c-user-3" value="&lt;b&gt;LocationController&lt;/b&gt;&lt;br&gt;Models: Location · Car" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="c-user">
+          <mxGeometry y="124" width="390" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="c-user-4" value="&lt;b&gt;ReservationController&lt;/b&gt;&lt;br&gt;Models: Reservation · Car · Location · User" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="c-user">
+          <mxGeometry y="172" width="390" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="c-user-5" value="&lt;b&gt;PaymentController · ReceiptController&lt;/b&gt;&lt;br&gt;Models: Payment · Reservation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="c-user">
+          <mxGeometry y="220" width="390" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="c-user-6" value="&lt;b&gt;VehicleApiController&lt;/b&gt;&lt;br&gt;Model: Car  ·  GET /api/vehicles JSON" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="c-user">
+          <mxGeometry y="268" width="390" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="c-user-7" value="&lt;b&gt;PartnerController&lt;/b&gt;&lt;br&gt;PartnerFleetHelper · team 05 HTTP API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="c-user">
+          <mxGeometry y="316" width="390" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="c-user-8" value="&lt;b&gt;RouteEstimateController&lt;/b&gt;&lt;br&gt;GoogleRoutesHelper · Model: Location" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;" vertex="1" parent="c-user">
+          <mxGeometry y="364" width="390" height="48" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="helpers" value="Helpers / outbound HTTP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;dashed=1;verticalAlign=top;fontStyle=1;fontSize=12;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="210" y="360" width="430" height="140" as="geometry"/>
+        </mxCell>
+        <mxCell id="h1" value="&lt;b&gt;PartnerFleetHelper&lt;/b&gt;&lt;br&gt;Used by PartnerController · PARTNER_API_URL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="230" y="395" width="390" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="h2" value="&lt;b&gt;GoogleRoutesHelper&lt;/b&gt;&lt;br&gt;Used by RouteEstimateController · GOOGLE_MAPS_API_KEY" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="230" y="445" width="390" height="44" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="models" value="Models  ·  app/Models" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;verticalAlign=top;fontStyle=1;fontSize=14;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="210" y="920" width="720" height="230" as="geometry"/>
+        </mxCell>
+        <mxCell id="m-user" value="&lt;b&gt;User&lt;/b&gt;&lt;br&gt;Eloquent model&lt;br&gt;hasMany Reservation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="680" y="960" width="220" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="m-res" value="&lt;b&gt;Reservation&lt;/b&gt;&lt;br&gt;Eloquent model&lt;br&gt;belongsTo User, Car, Location" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="450" y="960" width="210" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="m-car" value="&lt;b&gt;Car&lt;/b&gt;&lt;br&gt;Eloquent model&lt;br&gt;belongsTo Category, Location" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="230" y="960" width="200" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="m-loc" value="&lt;b&gt;Location&lt;/b&gt;&lt;br&gt;Eloquent model&lt;br&gt;hasMany Car, Reservation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="230" y="1050" width="200" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="m-pay" value="&lt;b&gt;Payment&lt;/b&gt;&lt;br&gt;Eloquent model&lt;br&gt;belongsTo Reservation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="450" y="1050" width="210" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="m-cat" value="&lt;b&gt;Category&lt;/b&gt;&lt;br&gt;Eloquent model&lt;br&gt;hasMany Car" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="680" y="1050" width="220" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="policies" value="Policies  ·  app/Policies" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;verticalAlign=top;fontStyle=1;fontSize=14;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="960" y="920" width="430" height="140" as="geometry"/>
+        </mxCell>
+        <mxCell id="p-pay" value="&lt;b&gt;PaymentPolicy&lt;/b&gt;&lt;br&gt;Access rules for Payment" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="980" y="960" width="190" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="p-res" value="&lt;b&gt;ReservationPolicy&lt;/b&gt;&lt;br&gt;Access rules for Reservation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="960" width="190" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="orm" value="&lt;b&gt;Eloquent ORM&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="1180" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="mysql" value="&lt;b&gt;MySQL&lt;/b&gt;&lt;br&gt;safety_rental" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="560" y="1180" width="160" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="migrations" value="Migrations  ·  database/migrations" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;verticalAlign=top;fontStyle=1;fontSize=14;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="760" y="1170" width="1110" height="230" as="geometry"/>
+        </mxCell>
+        <mxCell id="mig1" value="create_users_table" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="780" y="1215" width="200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="mig2" value="create_categories_table" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="1215" width="200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="mig3" value="create_cars_table" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="1215" width="200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="mig4" value="create_locations_table" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="1215" width="200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="mig5" value="create_reservations_table" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="780" y="1270" width="200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="mig6" value="create_payments_table" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="1270" width="200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="mig7" value="add_location_id_to_cars" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="1270" width="200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="mig8" value="add_reservation_id_to_payments" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="1270" width="200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="mig9" value="add_coordinates_to_locations" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="780" y="1325" width="200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="mig10" value="create_sessions / password_reset_tokens" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="1325" width="310" height="40" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e-client-mw" style="endArrow=classic;html=1;strokeColor=#d79b00;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="client" target="mw">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-mw-routes" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#000000;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="mw" target="routes">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-routes-ctrl" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#000000;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="routes" target="controllers">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-ctrl-views" style="endArrow=classic;html=1;dashed=1;strokeColor=#d79b00;strokeWidth=2;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="controllers" target="views">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-ctrl-models" style="endArrow=classic;html=1;dashed=1;strokeColor=#d79b00;strokeWidth=2;exitX=0.15;exitY=1;entryX=0.9;entryY=0;" edge="1" parent="1" source="controllers" target="models">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-ctrl-pol" style="endArrow=classic;html=1;dashed=1;strokeColor=#d79b00;strokeWidth=2;exitX=0.4;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="controllers" target="policies">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-ctrl-help" style="endArrow=classic;html=1;dashed=1;strokeColor=#d79b00;strokeWidth=2;exitX=0;exitY=0.2;entryX=1;entryY=0.5;" edge="1" parent="1" source="controllers" target="helpers">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-car-res" value="belongsTo" style="endArrow=classic;html=1;strokeColor=#000000;fontSize=10;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="m-car" target="m-res">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-res-user" value="belongsTo" style="endArrow=classic;html=1;strokeColor=#000000;fontSize=10;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="m-res" target="m-user">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-car-loc" value="belongsTo" style="endArrow=classic;html=1;strokeColor=#000000;fontSize=10;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="m-car" target="m-loc">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-pay-res" value="belongsTo" style="endArrow=classic;html=1;strokeColor=#000000;fontSize=10;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="m-pay" target="m-res">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-car-cat" value="belongsTo" style="endArrow=classic;html=1;strokeColor=#000000;fontSize=10;exitX=1;exitY=0.75;entryX=0;entryY=0.3;" edge="1" parent="1" source="m-car" target="m-cat">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-mod-orm" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#000000;strokeWidth=2;exitX=0.35;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="models" target="orm">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-orm-mysql" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#000000;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="orm" target="mysql">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-mysql-mig" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#000000;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.3;" edge="1" parent="1" source="mysql" target="migrations">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

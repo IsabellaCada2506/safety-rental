@@ -20,6 +20,7 @@ Safety Rental is a vehicle rental web application built with Laravel. This guide
 - [15. Public Vehicle API](#15-public-vehicle-api)
 - [16. Partner Fleet Integration](#16-partner-fleet-integration)
 - [17. Google Maps Route Estimates](#17-google-maps-route-estimates)
+- [18. Architecture diagram](#18-architecture-diagram)
 
 ## **2. Team Members**
 
@@ -514,3 +515,9 @@ GOOGLE_ROUTES_TIMEOUT=8
 ```
 
 The estimate appears on `/route-estimates` after the customer shares the browser location from a vehicle detail or branch page. HTTP errors, timeouts, empty routes, and missing configuration are translated in the interface.
+
+## **18. Architecture diagram**
+
+The MVC architecture diagram is [`docs/arquitectura-mvc-completa-en.drawio`](docs/arquitectura-mvc-completa-en.drawio).
+
+Open it in [diagrams.net](https://app.diagrams.net). It lists every Authentication, Admin, and User controller with its model and view folder.
