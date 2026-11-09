@@ -1,0 +1,14 @@
+.git
+.github
+node_modules
+storage/logs
+storage/framework/cache
+storage/framework/sessions
+storage/framework/views
+vendor
+.env
+importante.md
+tests
+*.md
+!README.md
+!docs/architecture.md

@@ -20,6 +20,7 @@ Safety Rental is a vehicle rental web application built with Laravel. This guide
 - [15. Public Vehicle API](#15-public-vehicle-api)
 - [16. Partner Fleet Integration](#16-partner-fleet-integration)
 - [17. Google Maps Route Estimates](#17-google-maps-route-estimates)
+- [18. Architecture, Docker, and GCP](#18-architecture-docker-and-gcp)
 
 ## **2. Team Members**
 
@@ -514,3 +515,24 @@ GOOGLE_ROUTES_TIMEOUT=8
 ```
 
 The estimate appears on `/route-estimates` after the customer shares the browser location from a vehicle detail or branch page. HTTP errors, timeouts, empty routes, and missing configuration are translated in the interface.
+
+## **18. Architecture, Docker, and GCP**
+
+The inbound and outbound communication diagram lives in [`docs/architecture.md`](docs/architecture.md) and [`docs/architecture.svg`](docs/architecture.svg).
+
+It shows:
+
+- inbound HTML from customer and admin browsers
+- inbound JSON from the next teams through `GET /api/vehicles`
+- outbound HTTP to the preceding team API (`PARTNER_API_URL`)
+- outbound HTTP to Google Maps Routes (`GOOGLE_MAPS_API_KEY`, server-side only)
+- MySQL through Eloquent
+- deployment of the `Dockerfile` image to GCP Cloud Run with secrets injected at runtime
+
+Build and run the container locally:
+
+```bash
+docker build -t safety-rental .
+docker run --rm -p 8000:8000 --env-file .env safety-rental
+```
+
