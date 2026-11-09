@@ -247,4 +247,30 @@ class Car extends Model
     {
         return $this->getStatus() === self::STATUS_ACTIVE;
     }
+
+    public static function listAvailableForPublicApi(): Collection
+    {
+        return self::query()
+            ->with(['category', 'location'])
+            ->where('status', self::STATUS_ACTIVE)
+            ->orderBy('id')
+            ->get();
+    }
+
+    public function toPublicApiArray(): array
+    {
+        $category = $this->getCategory();
+        $location = $this->getLocation();
+
+        return [
+            'id' => $this->getId(),
+            'make' => $category !== null ? $category->getBrand() : null,
+            'model' => $category !== null ? $category->getModel() : null,
+            'category' => $category !== null ? $category->getType() : null,
+            'location' => $location !== null ? $location->getName() : null,
+            'daily_rate' => $this->getPrice(),
+            'availability' => $this->isActive() ? 'available' : 'unavailable',
+            'detail_url' => route('catalog.show', ['id' => $this->getId()]),
+        ];
+    }
 }

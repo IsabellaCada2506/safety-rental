@@ -5,7 +5,7 @@
  * Author: Isabella Ocampo
  * Author: Alejandro Correa Marin
  * Author: Wendy Atehortua
- * Date: 2026-09-12
+ * Date: 2026-11-09
  * Description: Web routes for the Safety Rental application, mapping HTTP requests to controller actions without closures.
  */
 
@@ -31,6 +31,7 @@ use App\Http\Controllers\User\PaymentController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\ReceiptController;
 use App\Http\Controllers\User\ReservationController;
+use App\Http\Controllers\User\VehicleApiController;
 use App\Http\Controllers\User\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,6 +53,10 @@ Route::post($basePath.'/logout', [LoginController::class, 'logout'])->middleware
 Route::get($basePath.'/email/verify', [VerificationController::class, 'index'])->middleware('auth')->name('verification.notice');
 Route::get($basePath.'/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->middleware(['auth', 'signed'])->whereNumber('id')->name('verification.verify');
 Route::post($basePath.'/email/verification-notification', [VerificationController::class, 'resend'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+$apiPath = 'api';
+Route::get($apiPath.'/vehicles', [VehicleApiController::class, 'index'])->name('api.vehicles.index');
+Route::get($apiPath.'/vehicles/{id}', [VehicleApiController::class, 'show'])->whereNumber('id')->name('api.vehicles.show');
 
 Route::get($basePath.'/home', [HomeController::class, 'index'])->middleware(['auth', 'verified', 'user'])->name('home.index');
 Route::get($basePath.'/profile', [ProfileController::class, 'index'])->middleware(['auth', 'user'])->name('profile.index');

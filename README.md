@@ -17,6 +17,7 @@ Safety Rental is a vehicle rental web application built with Laravel. This guide
 - [12. Local Email Verification and Password Reset](#12-local-email-verification-and-password-reset)
 - [13. Verification Commands](#13-verification-commands)
 - [14. Common Problems](#14-common-problems)
+- [15. Public Vehicle API](#15-public-vehicle-api)
 
 ## **2. Team Members**
 
@@ -418,3 +419,62 @@ grep -oE 'http\://[^ ]+/password/reset/[^ ]+' storage/logs/laravel.log | tail -1
 ```
 
 Copy the URL printed in the terminal and paste it into the browser.
+
+## **15. Public Vehicle API**
+
+Safety Rental exposes a public JSON catalog of vehicles that are currently available for rent. Other teams can consume this endpoint without authentication.
+
+### **15.1. List available vehicles**
+
+```text
+GET /api/vehicles
+```
+
+Example:
+
+```bash
+curl http://127.0.0.1:8000/api/vehicles
+```
+
+Example response:
+
+```json
+{
+  "vehicles": [
+    {
+      "id": 1,
+      "make": "Toyota",
+      "model": "Corolla",
+      "category": "Sedan",
+      "location": "Sede El Poblado",
+      "daily_rate": 180000,
+      "availability": "available",
+      "detail_url": "http://127.0.0.1:8000/catalog/1"
+    }
+  ]
+}
+```
+
+### **15.2. Vehicle detail**
+
+```text
+GET /api/vehicles/{id}
+```
+
+Example:
+
+```bash
+curl http://127.0.0.1:8000/api/vehicles/1
+```
+
+Fields returned:
+
+- `make`: vehicle brand
+- `model`: vehicle model
+- `category`: vehicle type
+- `location`: pickup branch name
+- `daily_rate`: rental price per day in COP
+- `availability`: `available` when the vehicle can be rented
+- `detail_url`: application URL with the full vehicle detail
+
+Deactivated vehicles are excluded. An empty fleet returns `{ "vehicles": [] }`.
