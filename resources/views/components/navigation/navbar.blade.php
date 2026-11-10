@@ -185,16 +185,6 @@
                         {{ __('general.partners') }}
                     </a>
                 @endif
-            @else
-                <a
-                    class="btn-pill-ghost text-decoration-none"
-                    href="{{ route('partner.index') }}"
-                    @if (request()->routeIs('partner.*'))
-                        aria-current="page"
-                    @endif
-                >
-                    {{ __('general.partners') }}
-                </a>
             @endauth
         </div>
 
