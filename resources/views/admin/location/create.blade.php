@@ -1,3 +1,9 @@
+{{--
+    Author: Alejandro Correa Marin
+    Date: 2026-09-12
+    Description: Admin view for registering new rental locations.
+--}}
+
 @extends('layouts.app')
 
 @section('title', $viewData['title'])

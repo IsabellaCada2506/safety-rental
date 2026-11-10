@@ -61,8 +61,6 @@ class Car extends Model
         'location_id',
     ];
 
-    protected $guarded = ['id'];
-
     protected function casts(): array
     {
         return [

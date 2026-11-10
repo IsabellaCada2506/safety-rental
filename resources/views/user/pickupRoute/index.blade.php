@@ -1,3 +1,9 @@
+{{--
+    Author: Wendy Atehortua
+    Date: 2026-11-07
+    Description: Driving route calculator to vehicle pickup headquarters using Google Maps.
+--}}
+
 @extends('layouts.app')
 
 @section('title', $viewData['title'])

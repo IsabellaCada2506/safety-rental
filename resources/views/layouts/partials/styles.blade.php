@@ -1,5 +1,9 @@
-{{-- Shared styles first, module overrides after the theme. --}}
-    <link href="{{ asset('css/base.css') }}?v=10" rel="stylesheet">
+{{--
+    Author: Isabella Cadavid Posada
+    Date: 2026-11-04
+    Description: Application stylesheet loader partial resolving theme and module styles.
+--}}
+<link href="{{ asset('css/base.css') }}?v=10" rel="stylesheet">
     <link href="{{ asset('css/components/navigation-base.css') }}?v=10" rel="stylesheet">
     <link href="{{ asset('css/components/footer.css') }}?v=10" rel="stylesheet">
     <link href="{{ asset('css/components/dashboard.css') }}?v=10" rel="stylesheet">

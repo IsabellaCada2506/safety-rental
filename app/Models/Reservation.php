@@ -63,8 +63,6 @@ class Reservation extends Model
         'payment_id',
     ];
 
-    protected $guarded = ['id'];
-
     protected function casts(): array
     {
         return [

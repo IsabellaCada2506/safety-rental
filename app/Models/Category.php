@@ -37,8 +37,6 @@ class Category extends Model
         'luggage_capacity',
     ];
 
-    protected $guarded = ['id'];
-
     protected function casts(): array
     {
         return [

@@ -46,8 +46,6 @@ class Location extends Model
         'longitude',
     ];
 
-    protected $guarded = ['id'];
-
     protected function casts(): array
     {
         return [

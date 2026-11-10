@@ -6,7 +6,7 @@
  * Description: Concrete implementation of ReportGenerator for producing PDF reports of reservations using DomPDF.
  */
 
-namespace App\Reports;
+namespace App\Utils;
 
 use App\Interfaces\ReportGenerator;
 use App\Models\Reservation;

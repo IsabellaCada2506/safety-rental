@@ -26,5 +26,12 @@ return [
     'duration' => 'Geschätzte Fahrzeit',
     'google_attribution' => 'Routeninformationen von Google Maps.',
     'open_maps' => 'In Google Maps öffnen',
+    'partner_badge' => 'Partnerprodukt',
+    'view_product' => 'Im Partnershop ansehen',
+    'stock_available' => 'Bestand: :count',
+    'out_of_stock' => 'Ausverkauft',
+    'partner_brand' => 'Marke',
+    'partner_price' => 'Preis',
+    'partner_item_fallback' => 'Produkt #:id',
 
 ];

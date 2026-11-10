@@ -6,7 +6,7 @@
  * Description: Concrete implementation of ReportGenerator producing professional styled Microsoft Excel (.xlsx) OpenXML workbooks.
  */
 
-namespace App\Reports;
+namespace App\Utils;
 
 use App\Interfaces\ReportGenerator;
 use App\Models\Reservation;

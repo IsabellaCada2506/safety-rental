@@ -1,3 +1,9 @@
+{{--
+    Author: Wendy Atehortua
+    Date: 2026-11-04
+    Description: Public detail view for individual vehicles consumed through external links.
+--}}
+
 @extends('layouts.app')
 @section('title', $viewData['title'])
 @section('content')

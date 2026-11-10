@@ -11,14 +11,14 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 
 class LocaleController extends Controller
 {
-    public function switch(string $lang): RedirectResponse
+    public function switch(Request $request, string $lang): RedirectResponse
     {
         if (in_array($lang, array_keys(config('localization.supported', [])), true)) {
-            Session::put('locale', $lang);
+            $request->session()->put('locale', $lang);
         }
 
         return redirect()->back();

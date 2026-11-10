@@ -26,5 +26,12 @@ return [
     'duration' => 'Tempo di viaggio stimato',
     'google_attribution' => 'Informazioni sul percorso fornite da Google Maps.',
     'open_maps' => 'Apri in Google Maps',
+    'partner_badge' => 'Prodotto partner',
+    'view_product' => 'Vedi nel negozio partner',
+    'stock_available' => 'Disponibile: :count',
+    'out_of_stock' => 'Esaurito',
+    'partner_brand' => 'Marca',
+    'partner_price' => 'Prezzo',
+    'partner_item_fallback' => 'Prodotto #:id',
 
 ];

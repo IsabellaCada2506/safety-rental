@@ -22,6 +22,6 @@ class VehicleApiController extends Controller
         return response()->json([
             'data' => VehicleResource::collection($cars)->resolve(),
             'availability_basis' => 'today',
-        ]);
+        ], 200);
     }
 }

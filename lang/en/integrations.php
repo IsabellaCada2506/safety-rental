@@ -26,5 +26,12 @@ return [
     'duration' => 'Estimated travel time',
     'google_attribution' => 'Route information provided by Google Maps.',
     'open_maps' => 'Open in Google Maps',
+    'partner_badge' => 'Partner Product',
+    'view_product' => 'View on partner site',
+    'stock_available' => 'Stock: :count',
+    'out_of_stock' => 'Out of stock',
+    'partner_brand' => 'Brand',
+    'partner_price' => 'Price',
+    'partner_item_fallback' => 'Product #:id',
 
 ];

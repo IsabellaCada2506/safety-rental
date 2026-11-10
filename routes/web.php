@@ -27,10 +27,13 @@ use App\Http\Controllers\User\CatalogController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\LocaleController;
 use App\Http\Controllers\User\LocationController as UserLocationController;
+use App\Http\Controllers\User\PartnerController;
 use App\Http\Controllers\User\PaymentController;
+use App\Http\Controllers\User\PickupRouteController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\ReceiptController;
 use App\Http\Controllers\User\ReservationController;
+use App\Http\Controllers\User\VehicleController;
 use App\Http\Controllers\User\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -112,4 +115,7 @@ Route::get($basePath.'/admin/users/{id}/edit', [AdminUserController::class, 'edi
 Route::put($basePath.'/admin/users/{id}/update', [AdminUserController::class, 'update'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.user.update');
 Route::delete($basePath.'/admin/users/{id}/delete', [AdminUserController::class, 'delete'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.user.delete');
 
-require __DIR__.'/integrations.php';
+Route::get($basePath.'/partners', [PartnerController::class, 'index'])->name('partner.index');
+Route::get($basePath.'/vehicles/{id}', [VehicleController::class, 'show'])->whereNumber('id')->name('vehicles.show');
+Route::get($basePath.'/catalog/{id}/pickup-route', [PickupRouteController::class, 'index'])->middleware(['auth', 'verified', 'user'])->whereNumber('id')->name('pickupRoutes.index');
+Route::post($basePath.'/catalog/{id}/pickup-route', [PickupRouteController::class, 'calculate'])->middleware(['auth', 'verified', 'user', 'throttle:10,1'])->whereNumber('id')->name('pickupRoutes.calculate');

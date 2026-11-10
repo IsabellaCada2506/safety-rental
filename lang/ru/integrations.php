@@ -26,5 +26,12 @@ return [
     'duration' => 'Примерное время в пути',
     'google_attribution' => 'Информация о маршруте предоставлена Google Maps.',
     'open_maps' => 'Открыть в Google Maps',
+    'partner_badge' => 'Товар партнёра',
+    'view_product' => 'Посмотреть в магазине партнёра',
+    'stock_available' => 'В наличии: :count',
+    'out_of_stock' => 'Нет в наличии',
+    'partner_brand' => 'Бренд',
+    'partner_price' => 'Цена',
+    'partner_item_fallback' => 'Товар #:id',
 
 ];

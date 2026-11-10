@@ -177,7 +177,7 @@
 
         <div class="uc-filter-footer">
             <span class="uc-result-count">
-                {{ __('catalog.results_count', ['count' => $viewData['cars']->count()]) }}
+                {{ __('catalog.results_count', ['count' => $viewData['cars']->total()]) }}
             </span>
 
             <div class="uc-actions">
@@ -298,5 +298,11 @@
             </div>
         @endforelse
     </div>
+
+    @if ($viewData['cars']->hasPages())
+        <div class="d-flex justify-content-center mt-5 mb-4">
+            {{ $viewData['cars']->links() }}
+        </div>
+    @endif
 </section>
 @endsection

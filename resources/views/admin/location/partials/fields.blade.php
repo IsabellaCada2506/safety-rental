@@ -1,3 +1,9 @@
+{{--
+    Author: Alejandro Correa Marin
+    Date: 2026-09-12
+    Description: Reusable form fields partial for creating and editing rental locations.
+--}}
+
 <div class="admin-form-grid">
     <div>
         <label for="location-name" class="form-label">
