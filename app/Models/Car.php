@@ -61,6 +61,8 @@ class Car extends Model
         'location_id',
     ];
 
+    protected $guarded = ['id'];
+
     protected function casts(): array
     {
         return [
@@ -69,11 +71,6 @@ class Car extends Model
         ];
     }
 
-    /**
-     * Select active vehicles without an overlapping reservation today.
-     *
-     * @return Collection<int, Car>
-     */
     public static function availableForPublicFeed(): Collection
     {
         $today = now()->toDateString();
@@ -182,11 +179,6 @@ class Car extends Model
         $this->attributes['status'] = $status;
     }
 
-    /**
-     * Determine if the car can be deactivated.
-     *
-     * @param  Collection<int,Reservation>  $futureReservations  Collection of future reservations for this car.
-     */
     public function canBeDeactivated(Collection $futureReservations): bool
     {
         foreach ($futureReservations as $reservation) {

@@ -68,7 +68,7 @@
             @forelse ($viewData['cars'] as $car)
 <article class="collection-card vehicle-card">
     <div class="vehicle-card-media">
-        <x-car-image :image="$car->getImage()" :alt="($car->getCategory()?->getName() ?? __('car.image_alt')).' · '.$car->getPlate()" class="vehicle-card-image" loading="lazy" />
+        <x-responsive-image :src="$car->getImage()" :alt="($car->getCategory()?->getName() ?? __('general.image_alt')).' · '.$car->getPlate()" class="vehicle-card-image" loading="lazy" />
         <span class="collection-status {{ $car->isActive() ? 'collection-status-active' : 'collection-status-inactive' }}">{{ $car->isActive() ? __('car.status_active') : __('car.status_deactivated') }}</span>
     </div>
     <div class="collection-card-body">

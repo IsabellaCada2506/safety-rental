@@ -72,8 +72,9 @@
                 </header>
 
                 <div class="user-reservation-image">
-                    <x-car-image
-                        :image="$reservation->getCar()?->getImage()"
+                    <x-responsive-image
+                        :src="$reservation->getCar()?->getImage()"
+                        :alt="$reservation->getCar()?->getCategory()?->getName() ?? __('general.image_alt')"
                         class="user-reservation-photo"
                     />
                 </div>

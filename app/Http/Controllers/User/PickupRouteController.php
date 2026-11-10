@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Author: Wendy Atehortua
+ * Date: 2026-11-07
+ * Description: Controller for displaying the pickup route form and calculating a driving route to the car location.
+ */
+
 namespace App\Http\Controllers\User;
 
 use App\Http\Clients\GoogleMapsRoutesClient;

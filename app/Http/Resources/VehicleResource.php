@@ -1,8 +1,13 @@
 <?php
 
+/**
+ * Author: Isabella Ocampo
+ * Date: 2026-11-04
+ * Description: API resource transformer for the Car model exposed through the public vehicle feed.
+ */
+
 namespace App\Http\Resources;
 
-use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -10,7 +15,6 @@ class VehicleResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
-        /** @var Car $car */
         $car = $this->resource;
 
         return [

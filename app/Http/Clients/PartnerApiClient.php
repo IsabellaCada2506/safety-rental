@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-07
+ * Description: HTTP client fetching partner business listings from an external REST API.
+ */
+
 namespace App\Http\Clients;
 
 use Illuminate\Http\Client\ConnectionException;
@@ -30,7 +36,6 @@ class PartnerApiClient
             if ($items === []) {
                 return ['items' => [], 'error' => 'empty'];
             }
-            // Preserve the real partner fields until the architect confirms its schema.
             foreach ($items as $item) {
                 if (! is_array($item)) {
                     return ['items' => [], 'error' => 'invalid_response'];

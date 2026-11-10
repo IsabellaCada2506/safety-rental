@@ -25,11 +25,6 @@ class PdfReportGenerator implements ReportGenerator
         $this->pdf = $pdf;
     }
 
-    /**
-     * Generate and return a PDF download response.
-     *
-     * @param  array<string, mixed>  $metadata
-     */
     public function generate(Collection $reservations, array $metadata = []): Response
     {
         $totalReservations = $reservations->count();

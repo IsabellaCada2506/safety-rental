@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Author: Alejandro Correa Marin
+ * Date: 2026-11-05
+ * Description: Request validation for storing a new branch location.
+ */
+
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;

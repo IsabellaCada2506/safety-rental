@@ -26,5 +26,5 @@ return [
     'duration' => 'Geschätzte Fahrzeit',
     'google_attribution' => 'Routeninformationen von Google Maps.',
     'open_maps' => 'In Google Maps öffnen',
-    
+
 ];

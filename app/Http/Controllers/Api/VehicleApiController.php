@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: API controller exposing the public vehicle availability feed as a JSON endpoint.
+ */
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;

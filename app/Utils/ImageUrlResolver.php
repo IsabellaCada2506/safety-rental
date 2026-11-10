@@ -12,7 +12,7 @@ namespace App\Utils;
 
 class ImageUrlResolver
 {
-    public static function resolve(?string $image, string $placeholder = 'images/car-placeholder.png'): string
+    public static function resolve(?string $image, string $placeholder = 'images/placeholder.png'): string
     {
         if (! $image) {
             return asset($placeholder);

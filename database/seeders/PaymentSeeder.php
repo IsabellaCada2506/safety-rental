@@ -17,7 +17,7 @@ class PaymentSeeder extends Seeder
 {
     public function run(): void
     {
-        $reservation1 = Reservation::query()->where('code', 84920184)->first();
+        $reservation1 = Reservation::query()->with('car')->where('code', 84920184)->first();
         if ($reservation1 && $reservation1->getCar()) {
             $days = $reservation1->getStartDate()->diffInDays($reservation1->getEndDate());
             $amount = $reservation1->getCar()->getPrice() * $days;
@@ -38,7 +38,7 @@ class PaymentSeeder extends Seeder
             $reservation1->save();
         }
 
-        $reservation3 = Reservation::query()->where('code', 73910245)->first();
+        $reservation3 = Reservation::query()->with('car')->where('code', 73910245)->first();
         if ($reservation3 && $reservation3->getCar()) {
             $days = $reservation3->getStartDate()->diffInDays($reservation3->getEndDate());
             $amount = $reservation3->getCar()->getPrice() * $days;
@@ -59,7 +59,7 @@ class PaymentSeeder extends Seeder
             $reservation3->save();
         }
 
-        $reservation5 = Reservation::query()->where('code', 19283746)->first();
+        $reservation5 = Reservation::query()->with('car')->where('code', 19283746)->first();
         if ($reservation5 && $reservation5->getCar()) {
             $days = $reservation5->getStartDate()->diffInDays($reservation5->getEndDate());
             $amount = $reservation5->getCar()->getPrice() * $days;

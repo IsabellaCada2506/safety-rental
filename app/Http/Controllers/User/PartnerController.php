@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Author: Isabella Ocampo
+ * Date: 2026-11-03
+ * Description: Controller for displaying the partner business listing fetched from an external API.
+ */
+
 namespace App\Http\Controllers\User;
 
 use App\Http\Clients\PartnerApiClient;

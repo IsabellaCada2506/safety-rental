@@ -26,5 +26,5 @@ return [
     'duration' => 'Durée estimée',
     'google_attribution' => 'Informations de trajet fournies par Google Maps.',
     'open_maps' => 'Ouvrir dans Google Maps',
-    
+
 ];

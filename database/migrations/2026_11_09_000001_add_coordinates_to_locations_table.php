@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-09
+ * Description: Add latitude and longitude coordinates to locations table for routing.
+ */
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

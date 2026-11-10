@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-03
+ * Description: Admin controller for managing physical branch locations.
+ */
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;

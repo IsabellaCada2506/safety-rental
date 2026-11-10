@@ -63,6 +63,8 @@ class Reservation extends Model
         'payment_id',
     ];
 
+    protected $guarded = ['id'];
+
     protected function casts(): array
     {
         return [
@@ -330,14 +332,6 @@ class Reservation extends Model
             && ! $this->hasSuccessfulPayment();
     }
 
-    /**
-     * Determine if a given date range overlaps any existing reservations for the same car.
-     *
-     * @param  Car  $car  The car being checked.
-     * @param  Carbon  $newStart  Start date of the candidate reservation.
-     * @param  Carbon  $newEnd  End date of the candidate reservation.
-     * @param  Collection<int,Reservation>  $existingReservations  Collection of existing reservations for the car.
-     */
     public static function datesOverlap(Car $car, Carbon $newStart, Carbon $newEnd, Collection $existingReservations): bool
     {
         foreach ($existingReservations as $reservation) {

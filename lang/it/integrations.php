@@ -27,5 +27,4 @@ return [
     'google_attribution' => 'Informazioni sul percorso fornite da Google Maps.',
     'open_maps' => 'Apri in Google Maps',
 
-    
 ];

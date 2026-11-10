@@ -26,5 +26,5 @@ return [
     'duration' => 'Tempo estimado de viagem',
     'google_attribution' => 'Informações de rota fornecidas pelo Google Maps.',
     'open_maps' => 'Abrir no Google Maps',
-    
+
 ];

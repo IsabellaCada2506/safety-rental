@@ -73,9 +73,9 @@
                     </span>
                 </div>
 
-                <x-car-image
-                    :image="$viewData['reservation']->getCar()?->getImage()"
-                    :alt="$viewData['reservation']->getCar()?->getCategory()?->getName() ?? __('car.image_alt')"
+                <x-responsive-image
+                    :src="$viewData['reservation']->getCar()?->getImage()"
+                    :alt="$viewData['reservation']->getCar()?->getCategory()?->getName() ?? __('general.image_alt')"
                     class="img-fluid rounded-4 w-100 mb-4"
                 />
 

@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Author: Wendy Atehortua
+ * Date: 2026-11-07
+ * Description: Request validation for the pickup route calculation form input.
+ */
+
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;

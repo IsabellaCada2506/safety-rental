@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Author: Wendy Atehortua
+ * Date: 2026-11-07
+ * Description: HTTP client wrapping the Google Maps Routes API v2 to calculate driving routes.
+ */
+
 namespace App\Http\Clients;
 
 use App\Models\Location;

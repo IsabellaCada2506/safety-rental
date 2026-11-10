@@ -34,8 +34,9 @@
             <div class="row g-4">
                 <div class="col-md-5">
                     <div class="card shadow-sm border-0 rounded-4 overflow-hidden bg-white h-100">
-                        <x-car-image
-                            :image="$viewData['car']->getImage()"
+                        <x-responsive-image
+                            :src="$viewData['car']->getImage()"
+                            :alt="$viewData['car']->getCategory()?->getName() ?? __('general.image_alt')"
                             class="card-img-top object-fit-cover"
                             style="height: 220px;"
                         />

@@ -20,9 +20,9 @@
 
     <div class="uc-detail-grid">
         <div class="uc-detail-media">
-            <x-car-image
-                :image="$viewData['car']->getImage()"
-                :alt="$viewData['car']->getCategory()?->getName() ?? __('car.image_alt')"
+            <x-responsive-image
+                :src="$viewData['car']->getImage()"
+                :alt="$viewData['car']->getCategory()?->getName() ?? __('general.image_alt')"
                 class="uc-detail-image"
             />
         </div>

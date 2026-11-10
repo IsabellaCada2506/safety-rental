@@ -19,11 +19,6 @@ use ZipArchive;
 
 class ExcelReportGenerator implements ReportGenerator
 {
-    /**
-     * Generate and return a native styled .xlsx Excel download response.
-     *
-     * @param  array<string, mixed>  $metadata
-     */
     public function generate(Collection $reservations, array $metadata = []): SymfonyResponse
     {
         $totalReservations = $reservations->count();

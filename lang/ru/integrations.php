@@ -26,5 +26,5 @@ return [
     'duration' => 'Примерное время в пути',
     'google_attribution' => 'Информация о маршруте предоставлена Google Maps.',
     'open_maps' => 'Открыть в Google Maps',
-    
+
 ];

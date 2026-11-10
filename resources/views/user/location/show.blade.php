@@ -58,9 +58,9 @@
         @forelse ($viewData['location']->getCars() as $car)
             <article class="locations-card">
                 <div class="locations-vehicle-media">
-                    <x-car-image
-                        :image="$car->getImage()"
-                        :alt="$car->getCategory()?->getName() ?? __('car.image_alt')"
+                    <x-responsive-image
+                        :src="$car->getImage()"
+                        :alt="$car->getCategory()?->getName() ?? __('general.image_alt')"
                         class="locations-vehicle-image"
                         loading="lazy"
                     />

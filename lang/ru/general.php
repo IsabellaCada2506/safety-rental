@@ -39,4 +39,6 @@ return [
     'language_ru' => 'Русский',
     'language_native' => 'Русский',
     'btn_back' => 'Назад',
+    'image_alt' => 'Предварительный просмотр изображения',
+    'partners' => 'Партнёры',
 ];
