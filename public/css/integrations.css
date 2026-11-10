@@ -1,0 +1,350 @@
+.integration-page {
+    --integration-dark: #012a4a;
+    --integration-blue: #0077b6;
+    --integration-soft: #edf8ff;
+    --integration-border: #dce9f3;
+    --integration-muted: #60758a;
+
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 40px 20px 64px;
+    color: var(--integration-dark);
+}
+
+.integration-hero {
+    padding: 32px;
+    margin-bottom: 28px;
+    border: 1px solid var(--integration-border);
+    border-radius: 28px;
+    background: linear-gradient(120deg, #edf8ff, #ffffff 75%);
+}
+
+.integration-hero h1 {
+    margin: 12px 0;
+    font-size: clamp(1.8rem, 4vw, 2.7rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+}
+
+.integration-hero p {
+    max-width: 700px;
+    margin-bottom: 0;
+    color: var(--integration-muted);
+    line-height: 1.7;
+}
+
+.integration-tag {
+    display: inline-flex;
+    padding: 7px 13px;
+    border-radius: 100px;
+    background: #dceffc;
+    color: #023e8a;
+    font-size: 0.82rem;
+    font-weight: 800;
+}
+
+.integration-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 24px;
+    align-items: start;
+}
+
+.integration-card {
+    padding: 28px;
+    border: 1px solid var(--integration-border);
+    border-radius: 24px;
+    background: #ffffff;
+    box-shadow: 0 12px 35px rgb(1 42 74 / 4%);
+}
+
+.integration-card + .integration-card {
+    margin-top: 20px;
+}
+
+.integration-card h2,
+.integration-card h3 {
+    color: var(--integration-dark);
+    font-weight: 800;
+}
+
+.integration-card h2 {
+    margin-bottom: 20px;
+    font-size: 1.25rem;
+}
+
+.integration-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.integration-step h2 {
+    margin: 0;
+}
+
+.integration-number {
+    display: inline-grid;
+    flex: 0 0 38px;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    border-radius: 13px;
+    background: #e3f3fc;
+    color: #023e8a;
+    font-weight: 800;
+}
+
+.integration-muted {
+    color: var(--integration-muted);
+    line-height: 1.65;
+}
+
+.integration-coordinates {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin: 22px 0;
+}
+
+.integration-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.integration-input {
+    width: 100%;
+    min-height: 52px;
+    padding: 12px 15px;
+    border: 1px solid #bed4e5;
+    border-radius: 14px;
+    background: #fbfdff;
+    color: #012a4a;
+    font: inherit;
+}
+
+.integration-input:focus {
+    outline: 3px solid rgb(0 119 182 / 15%);
+    border-color: #0077b6;
+}
+
+.integration-input[aria-invalid="true"] {
+    border-color: #bd3544;
+}
+
+.integration-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.integration-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 12px 20px;
+    border: 1px solid transparent;
+    border-radius: 14px;
+    background: #0077b6;
+    color: #ffffff;
+    font: inherit;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 150ms ease, box-shadow 150ms ease;
+}
+
+.integration-button:hover {
+    background: #023e8a;
+    color: #ffffff;
+    box-shadow: 0 6px 16px rgb(0 119 182 / 16%);
+}
+
+.integration-button-secondary {
+    border-color: #c4dfef;
+    background: #eff8fe;
+    color: #014f86;
+}
+
+.integration-button-secondary:hover {
+    background: #dceffc;
+    color: #012a4a;
+}
+
+.integration-button:focus-visible {
+    outline: 3px solid #48cae4;
+    outline-offset: 3px;
+}
+
+.integration-button:disabled {
+    opacity: 0.65;
+    cursor: wait;
+}
+
+.integration-button[hidden] {
+    display: none;
+}
+
+.integration-button-wide {
+    width: 100%;
+}
+
+.integration-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.integration-metric {
+    padding: 20px;
+    border-radius: 18px;
+    background: #eff8fe;
+}
+
+.integration-metric span {
+    display: block;
+    margin-bottom: 8px;
+    color: #526e84;
+    font-size: 0.85rem;
+}
+
+.integration-metric strong {
+    color: #023e8a;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 800;
+}
+
+.integration-directions {
+    padding-left: 24px;
+    margin: 0;
+}
+
+.integration-directions li {
+    padding: 10px 0 10px 8px;
+    border-bottom: 1px solid #edf2f7;
+    line-height: 1.65;
+}
+
+.integration-directions li::marker {
+    color: #0077b6;
+    font-weight: 800;
+}
+
+.integration-notice {
+    padding: 18px;
+    border: 1px solid #cfe4f3;
+    border-radius: 16px;
+    background: #f1f9ff;
+    color: #244c68;
+    line-height: 1.65;
+}
+
+.integration-error {
+    margin-top: 7px;
+    color: #ad2638;
+    font-size: 0.87rem;
+}
+
+.integration-status {
+    margin: 12px 0 0;
+    color: #526e84;
+}
+
+.integration-status:empty {
+    display: none;
+}
+
+.integration-attribution {
+    margin: 22px 0 0;
+    color: #5e5e5e;
+    font-size: 0.85rem;
+}
+
+.integration-partners {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.integration-partners .integration-card {
+    margin: 0;
+}
+
+.integration-fields {
+    margin: 0;
+}
+
+.integration-fields dt {
+    margin-top: 16px;
+    color: #42647f;
+    font-size: 0.85rem;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.integration-fields dt:first-child {
+    margin-top: 0;
+}
+
+.integration-fields dd {
+    margin: 5px 0 0;
+    color: #012a4a;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+}
+
+.integration-location-fields {
+    padding: 22px;
+    margin: 24px 0;
+    border: 1px solid #dce9f3;
+    border-radius: 20px;
+    background: #f7fbff;
+}
+
+.integration-location-fields legend {
+    float: none;
+    width: auto;
+    padding: 0 8px;
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.integration-location-fields .integration-coordinates {
+    margin: 0;
+}
+
+@media (max-width: 800px) {
+    .integration-grid,
+    .integration-partners {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 520px) {
+    .integration-page {
+        padding: 24px 16px 40px;
+    }
+
+    .integration-hero,
+    .integration-card {
+        padding: 22px;
+        border-radius: 20px;
+    }
+
+    .integration-coordinates,
+    .integration-metrics {
+        grid-template-columns: 1fr;
+    }
+
+    .integration-actions .integration-button {
+        width: 100%;
+    }
+}

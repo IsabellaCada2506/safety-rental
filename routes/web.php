@@ -111,3 +111,5 @@ Route::get($basePath.'/admin/users', [AdminUserController::class, 'index'])->mid
 Route::get($basePath.'/admin/users/{id}/edit', [AdminUserController::class, 'edit'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.user.edit');
 Route::put($basePath.'/admin/users/{id}/update', [AdminUserController::class, 'update'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.user.update');
 Route::delete($basePath.'/admin/users/{id}/delete', [AdminUserController::class, 'delete'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.user.delete');
+
+require __DIR__.'/integrations.php';

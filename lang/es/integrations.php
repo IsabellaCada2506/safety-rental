@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'partners' => 'Aliados',
+    'partner_intro' => 'Descubre los servicios publicados por nuestro equipo aliado.',
+    'yes' => 'Sí',
+    'no' => 'No',
+    'unconfigured' => 'Este servicio aún no está configurado. Inténtalo más tarde.',
+    'unavailable' => 'El servicio no está disponible temporalmente. Inténtalo más tarde.',
+    'invalid_response' => 'El servicio devolvió una respuesta inesperada. Inténtalo más tarde.',
+    'empty' => 'No hay servicios disponibles en este momento.',
+    'connection' => 'No pudimos conectarnos a tiempo. Inténtalo de nuevo.',
+    'latitude' => 'Latitud',
+    'longitude' => 'Longitud',
+    'pickup_route' => 'Planea tu ruta de recogida',
+    'route_intro' => 'Escribe tus coordenadas actuales o comparte tu ubicación. La estimación es en carro y puede cambiar con el tráfico.',
+    'invalid_coordinates' => 'Escribe una latitud válida (−90 a 90) y una longitud válida (−180 a 180).',
+    'missing_destination' => 'La sede de recogida aún no tiene coordenadas válidas. Puedes continuar con tu reserva.',
+    'quota' => 'El servicio de rutas alcanzó su límite de consultas. Inténtalo más tarde.',
+    'no_route' => 'No se encontró una ruta en carro entre estas ubicaciones.',
+    'geolocation_error' => 'No pudimos obtener tu ubicación. Permite el acceso por HTTPS o escribe las coordenadas manualmente.',
+    'use_location' => 'Usar mi ubicación',
+    'calculate' => 'Calcular ruta',
+    'recommended_route' => 'Ruta recomendada',
+    'distance' => 'Distancia',
+    'duration' => 'Tiempo estimado de viaje',
+    'google_attribution' => 'Información de ruta proporcionada por Google Maps.',
+    'open_maps' => 'Abrir en Google Maps',
+    
+];

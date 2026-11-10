@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'partners' => 'Partners',
+    'partner_intro' => 'Discover the services published by our partner team.',
+    'yes' => 'Yes',
+    'no' => 'No',
+    'unconfigured' => 'This service is not configured yet. Please try again later.',
+    'unavailable' => 'The service is temporarily unavailable. Please try again later.',
+    'invalid_response' => 'The service returned an unexpected response. Please try again later.',
+    'empty' => 'There are no services available at the moment.',
+    'connection' => 'We could not connect in time. Please try again.',
+    'latitude' => 'Latitude',
+    'longitude' => 'Longitude',
+    'pickup_route' => 'Plan your pickup route',
+    'route_intro' => 'Enter your current coordinates or share your location. The estimate is for driving and may change with traffic.',
+    'invalid_coordinates' => 'Enter valid latitude (−90 to 90) and longitude (−180 to 180).',
+    'missing_destination' => 'The pickup location does not have valid coordinates yet. You can still continue your reservation.',
+    'quota' => 'The route service has reached its request limit. Please try again later.',
+    'no_route' => 'No driving route was found for these locations.',
+    'geolocation_error' => 'We could not obtain your location. Allow location access over HTTPS or enter the coordinates manually.',
+    'use_location' => 'Use my location',
+    'calculate' => 'Calculate route',
+    'recommended_route' => 'Recommended route',
+    'distance' => 'Distance',
+    'duration' => 'Estimated travel time',
+    'google_attribution' => 'Route information provided by Google Maps.',
+    'open_maps' => 'Open in Google Maps',
+    
+];

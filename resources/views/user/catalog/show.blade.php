@@ -105,6 +105,8 @@
                 </div>
             @endif
 
+            <a class="btn btn-outline-primary mb-3" href="{{ route('pickupRoutes.index', ['id' => $viewData['car']->getId()]) }}">{{ __('integrations.pickup_route') }}</a>
+
             @if ($viewData['car']->isActive())
                 <a
                     href="{{ route('reservations.create', ['car_id' => $viewData['car']->getId()]) }}"

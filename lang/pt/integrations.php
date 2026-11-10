@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'partners' => 'Parceiros',
+    'partner_intro' => 'Descubra os serviços publicados pela nossa equipe parceira.',
+    'yes' => 'Sim',
+    'no' => 'Não',
+    'unconfigured' => 'Este serviço ainda não está configurado. Tente mais tarde.',
+    'unavailable' => 'O serviço está temporariamente indisponível. Tente mais tarde.',
+    'invalid_response' => 'O serviço retornou uma resposta inesperada. Tente mais tarde.',
+    'empty' => 'Não há serviços disponíveis no momento.',
+    'connection' => 'Não foi possível conectar a tempo. Tente novamente.',
+    'latitude' => 'Latitude',
+    'longitude' => 'Longitude',
+    'pickup_route' => 'Planeje sua rota de retirada',
+    'route_intro' => 'Digite suas coordenadas ou compartilhe sua localização. A estimativa de carro pode variar com o trânsito.',
+    'invalid_coordinates' => 'Digite uma latitude válida (−90 a 90) e uma longitude válida (−180 a 180).',
+    'missing_destination' => 'O local de retirada ainda não tem coordenadas válidas. Você pode continuar a reserva.',
+    'quota' => 'O serviço atingiu o limite de consultas. Tente mais tarde.',
+    'no_route' => 'Nenhuma rota de carro foi encontrada.',
+    'geolocation_error' => 'Não foi possível obter sua localização. Permita o acesso por HTTPS ou digite as coordenadas.',
+    'use_location' => 'Usar minha localização',
+    'calculate' => 'Calcular rota',
+    'recommended_route' => 'Rota recomendada',
+    'distance' => 'Distância',
+    'duration' => 'Tempo estimado de viagem',
+    'google_attribution' => 'Informações de rota fornecidas pelo Google Maps.',
+    'open_maps' => 'Abrir no Google Maps',
+    
+];

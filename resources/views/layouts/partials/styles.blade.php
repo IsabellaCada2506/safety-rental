@@ -76,3 +76,8 @@
     <link href="{{ asset('css/usability.css') }}?v=10" rel="stylesheet">
 
 <link href="{{ asset('css/components/language-selector.css') }}?v=1" rel="stylesheet">
+
+<link
+    href="{{ asset('css/integrations.css') }}?v=1"
+    rel="stylesheet"
+>

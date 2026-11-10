@@ -1,11 +1,5 @@
 <?php
 
-/**
- * Author: Isabella Ocampo
- * Date: 2026-09-11
- * Description: Form request for validating new rental location creation by administrators.
- */
-
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;

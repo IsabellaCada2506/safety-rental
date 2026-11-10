@@ -10,6 +10,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -66,6 +67,24 @@ class Car extends Model
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
+    }
+
+    /**
+     * Select active vehicles without an overlapping reservation today.
+     *
+     * @return Collection<int, Car>
+     */
+    public static function availableForPublicFeed(): Collection
+    {
+        $today = now()->toDateString();
+
+        return self::query()->with(['category', 'location'])
+            ->where('status', self::STATUS_ACTIVE)
+            ->whereHas('category')->whereHas('location')
+            ->whereDoesntHave('reservations', function (Builder $reservationQuery) use ($today): void {
+                $reservationQuery->whereIn('state', [Reservation::STATE_PENDING, Reservation::STATE_CONFIRMED])
+                    ->whereDate('start_date', '<=', $today)->whereDate('end_date', '>=', $today);
+            })->orderBy('id')->get();
     }
 
     public function getId(): int

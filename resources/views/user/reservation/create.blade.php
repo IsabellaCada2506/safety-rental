@@ -29,6 +29,8 @@
                 </div>
             @endif
 
+            <a class="btn btn-outline-primary mb-3" href="{{ route('pickupRoutes.index', ['id' => $viewData['car']->getId()]) }}">{{ __('integrations.pickup_route') }}</a>
+
             <div class="row g-4">
                 <div class="col-md-5">
                     <div class="card shadow-sm border-0 rounded-4 overflow-hidden bg-white h-100">
