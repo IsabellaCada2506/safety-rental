@@ -1,6 +1,6 @@
 # **Safety Rental**
 
-Safety Rental is a vehicle rental web application built with Laravel. This guide contains the steps required to download, configure, initialize, and run the project locally.
+Safety Rental is a vehicle rental web application built with Laravel. This guide contains the steps required to download, configure, initialize, and run the project locally or with Docker.
 
 ## **1. Table of Contents**
 
@@ -12,11 +12,12 @@ Safety Rental is a vehicle rental web application built with Laravel. This guide
 - [7. Configure the Database](#7-configure-the-database)
 - [8. Run Migrations and Seeders](#8-run-migrations-and-seeders)
 - [9. Run the Application](#9-run-the-application)
-- [10. Application Access](#10-application-access)
-- [11. Seeded Users](#11-seeded-users)
-- [12. Local Email Verification and Password Reset](#12-local-email-verification-and-password-reset)
-- [13. Verification Commands](#13-verification-commands)
-- [14. Common Problems](#14-common-problems)
+- [10. Run with Docker](#10-run-with-docker)
+- [11. Application Access & Integrations](#11-application-access--integrations)
+- [12. Seeded Users](#12-seeded-users)
+- [13. Local Email Verification and Password Reset](#13-local-email-verification-and-password-reset)
+- [14. Verification Commands](#14-verification-commands)
+- [15. Common Problems](#15-common-problems)
 
 ## **2. Team Members**
 
@@ -31,8 +32,9 @@ Install the following tools before starting:
 
 - PHP 8.3 or later
 - Composer
-- MySQL
+- MySQL 8.0+
 - Git
+- Docker & Docker Compose *(optional, if running containerized)*
 - A local server package such as MAMP or XAMPP, if preferred
 
 Verify the installations:
@@ -73,18 +75,20 @@ Regenerate Composer's autoload files:
 composer dump-autoload
 ```
 
+> **Note on Frontend Assets:** The project does not require Node.js, NPM, or Vite (`@vite`). All static CSS/JS files and icons are loaded directly via public assets or CDN links.
+
 ## **6. Configure the Environment**
 
-Create the local environment file:
+Create the local environment file from the example:
 
 ```bash
 cp .env.example .env
 ```
 
-On Windows Command Prompt, use:
+On Windows Command Prompt / PowerShell:
 
-```bat
-copy .env.example .env
+```powershell
+Copy-Item .env.example .env
 ```
 
 Generate the application key:
@@ -93,7 +97,7 @@ Generate the application key:
 php artisan key:generate
 ```
 
-Set the main application values in `.env`:
+Configure the main application values in `.env`:
 
 ```dotenv
 APP_NAME="Safety Rental"
@@ -101,8 +105,21 @@ APP_ENV=local
 APP_DEBUG=true
 APP_URL=http://127.0.0.1:8000
 
-APP_LOCALE=es
+APP_LOCALE=en
 APP_FALLBACK_LOCALE=en
+```
+
+### **6.1 External APIs & Integration Keys**
+
+Configure external service credentials in `.env`:
+
+```dotenv
+# Google Maps Routes & Directions API Key
+GOOGLE_MAPS_API_KEY=your_google_maps_api_key
+
+# External Partner Catalog API
+PARTNER_API_URL=https://your-partner-api-host/api/products
+PARTNER_API_ITEMS_PATH=data
 ```
 
 ## **7. Configure the Database**
@@ -123,7 +140,7 @@ DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=safety_rental
 DB_USERNAME=root
-DB_PASSWORD=
+DB_PASSWORD=root
 ```
 
 ### **7.2. MAMP Configuration on macOS**
@@ -138,8 +155,6 @@ DB_DATABASE=safety_rental
 DB_USERNAME=root
 DB_PASSWORD=root
 ```
-
-If MAMP uses a different port or password, use the values displayed in its MySQL settings.
 
 ### **7.3. Clear the Configuration Cache**
 
@@ -169,11 +184,6 @@ If the database already contains information that must be preserved, use:
 php artisan migrate
 php artisan db:seed
 ```
-our 
-
-```bash
-php artisan migrate:refresh --seed
-```
 
 ## **9. Run the Application**
 
@@ -195,51 +205,67 @@ Stop the server with:
 Control + C
 ```
 
-## **10. Application Access**
+## **10. Run with Docker**
+
+The project includes containerization support via `Dockerfile` and `docker-compose.yml`.
+
+### **10.1 Build and Start Containers**
+
+```bash
+docker compose up -d --build
+```
+
+### **10.2 Initialize Database Inside Container**
+
+```bash
+docker compose exec app php artisan key:generate
+docker compose exec app php artisan migrate:fresh --seed
+```
+
+The application will be accessible at <http://localhost:8000>.
+
+To shut down containers:
+
+```bash
+docker compose down
+```
+
+## **11. Application Access & Integrations**
 
 | Area | URL | Access |
 |---|---|---|
-| Public home | <http://127.0.0.1:8000> | Everyone |
-| Login | <http://127.0.0.1:8000/login> | Everyone |
+| Public Home | <http://127.0.0.1:8000> | Public (Guests) |
+| Login | <http://127.0.0.1:8000/login> | Guests |
 | Registration | <http://127.0.0.1:8000/register> | Guests |
-| Customer home | <http://127.0.0.1:8000/home> | Verified customers |
-| Profile | <http://127.0.0.1:8000/profile> | Authenticated customers |
-| Catalog | <http://127.0.0.1:8000/catalog> | Verified customers |
-| Reservations | <http://127.0.0.1:8000/reservations> | Verified customers |
-| Administration | <http://127.0.0.1:8000/admin/dashboard> | Verified administrators |
+| Customer Home | <http://127.0.0.1:8000/home> | Authenticated & Verified Customers |
+| Profile | <http://127.0.0.1:8000/profile> | Authenticated Customers |
+| Catalog | <http://127.0.0.1:8000/catalog> | Authenticated Customers |
+| Locations | <http://127.0.0.1:8000/locations> | Authenticated Customers |
+| Reservations | <http://127.0.0.1:8000/reservations> | Authenticated Customers |
+| Partners (Aliados) | <http://127.0.0.1:8000/partners> | Authenticated Users (Customers & Admins) |
+| Administration Dashboard | <http://127.0.0.1:8000/admin/dashboard> | Verified Administrators |
+| Public Vehicles API | <http://127.0.0.1:8000/api/vehicles> | Public API |
 
-## **11. Seeded Users**
+## **12. Seeded Users**
 
-The following accounts are created by either of these commands:
-
-```bash
-php artisan db:seed
-```
-
-```bash
-php artisan migrate:fresh --seed
-```
+The following accounts are created by either `php artisan db:seed` or `php artisan migrate:fresh --seed`:
 
 | Name | Role | Email | Password | Email status |
 |---|---|---|---|---|
 | Safety Rental Administrator | Administrator | `admin@safetyrental.test` | `password` | Verified |
-| Admin User | Administrator | `admin@safetyrental.com` | `admin12345` | Not marked as verified by the seeder |
+| Admin User | Administrator | `admin@safetyrental.com` | `admin12345` | Not marked as verified |
 | Isabella Ocampo | Customer | `isa@gmail.com` | `b12345678` | Verified |
 | Carlos Rueda | Customer | `carlos@gmail.com` | `c12345678` | Verified |
 | Safety Rental Customer | Customer | `customer@safetyrental.test` | `password` | Verified |
 
-### **11.1. Recommended Administrator Account**
-
-Use this account for immediate access to all administrator features:
+### **12.1. Recommended Administrator Account**
 
 ```text
 Email: admin@safetyrental.test
 Password: password
 ```
 
-### **11.2. Recommended Customer Account**
-
-Use this account for immediate customer access:
+### **12.2. Recommended Customer Account**
 
 ```text
 Email: customer@safetyrental.test
@@ -248,9 +274,9 @@ Password: password
 
 > **Important:** Seeded credentials are intended only for local development and testing. Change or remove them before deploying the application.
 
-## **12. Local Email Verification and Password Reset**
+## **13. Local Email Verification and Password Reset**
 
-### **12.1. Configure Local Email Logging**
+### **13.1. Configure Local Email Logging**
 
 Keep the following value in `.env` while testing locally:
 
@@ -264,7 +290,7 @@ Verification and password-reset messages will be written to:
 storage/logs/laravel.log
 ```
 
-### **12.2. Request a Password Reset**
+### **13.2. Request a Password Reset**
 
 Open the password recovery page:
 
@@ -274,147 +300,51 @@ http://127.0.0.1:8000/password/request
 
 Enter the email address of an existing user and submit the form.
 
-### **12.3. Obtain the Password Reset Link**
+### **13.3. Obtain the Password Reset Link**
 
-After requesting the password reset, run the following command in the project terminal:
+Run the following command in the project terminal:
 
 ```bash
 grep -oE 'http\://[^ ]+/password/reset/[^ ]+' storage/logs/laravel.log | tail -1
 ```
 
-The terminal will display the most recent password-reset URL.
-
 Copy the complete URL, paste it into the browser, and enter the new password.
 
-### **12.4. Open the Log Manually**
+## **14. Verification Commands**
 
-You can also open the following file:
-
-```text
-storage/logs/laravel.log
-```
-
-Find the most recent verification or password-reset link and copy it into the browser.
-
-## **13. Verification Commands**
-
-Run these commands before submitting changes:
+Run these commands to verify codebase integrity and routes:
 
 ```bash
 composer dump-autoload
 php artisan optimize:clear
 php artisan route:list
 php artisan test
-./vendor/bin/pint --test
 ```
 
-If Pint reports formatting problems, apply its automatic corrections:
+## **15. Common Problems**
 
-```bash
-./vendor/bin/pint
-```
-
-Run the verification again:
-
-```bash
-./vendor/bin/pint --test
-php artisan test
-```
-
-## **14. Common Problems**
-
-### **14.1. Database Connection Error**
+### **15.1. Database Connection Error**
 
 - Confirm that MySQL is running.
-- Confirm the database name in `.env`.
-- Confirm the database port, username, and password.
-- Run `php artisan optimize:clear` after changing `.env`.
+- Confirm the database credentials and port in `.env`.
+- Run `php artisan optimize:clear` after modifying `.env`.
 
-For MAMP, verify that the MySQL port is normally:
-
-```dotenv
-DB_PORT=8889
-```
-
-### **14.2. Application Key Is Missing**
-
-Run:
+### **15.2. Application Key Is Missing**
 
 ```bash
 php artisan key:generate
-```
-
-Then clear the cached configuration:
-
-```bash
 php artisan optimize:clear
 ```
 
-### **14.3. Classes, Routes, or Recent Changes Are Not Recognized**
+### **15.3. External Partner API or Maps Issues**
 
-Run:
+- Ensure `PARTNER_API_URL` and `GOOGLE_MAPS_API_KEY` are defined in `.env`.
+- Check network connectivity and verify the key has permissions for Routes and Maps JavaScript API.
+
+### **15.4. Classes or Views Not Updating**
 
 ```bash
 composer dump-autoload
 php artisan optimize:clear
+php artisan view:clear
 ```
-
-If dependencies have not been installed, run:
-
-```bash
-composer install
-composer dump-autoload
-php artisan optimize:clear
-```
-
-### **14.4. Seed Data Was Not Created**
-
-Run:
-
-```bash
-php artisan db:seed
-```
-
-To recreate the complete local database and seed all sample information, run:
-
-```bash
-php artisan migrate:fresh --seed
-```
-
-> **Warning:** This command deletes the existing tables and information.
-
-### **14.5. Port 8000 Is Already in Use**
-
-Run the application using another port:
-
-```bash
-php artisan serve --port=8001
-```
-
-Then open:
-
-```text
-http://127.0.0.1:8001
-```
-
-### **14.6. Password Reset Link Is Not Displayed**
-
-Confirm that `.env` contains:
-
-```dotenv
-MAIL_MAILER=log
-```
-
-Clear the cached configuration:
-
-```bash
-php artisan optimize:clear
-```
-
-Request the password reset again and run:
-
-```bash
-grep -oE 'http\://[^ ]+/password/reset/[^ ]+' storage/logs/laravel.log | tail -1
-```
-
-Copy the URL printed in the terminal and paste it into the browser.
