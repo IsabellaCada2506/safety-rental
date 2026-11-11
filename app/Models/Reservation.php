@@ -19,10 +19,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * RESERVATION ATTRIBUTES
- * $this->attributes['id']           - int         - contains the reservation primary key
- * $this->attributes['code']         - int         - contains the unique reservation code
- * $this->attributes['state']        - string      - contains the reservation state
- * $this->attributes['start_date']   - string|null - contains the rental start date
+ * $this->attributes['id']                  - int         - contains the reservation primary key
+ * $this->attributes['code']                - int         - contains the unique reservation code
+ * $this->attributes['state']               - string      - contains the reservation state
+ * $this->attributes['cancellation_reason'] - string|null - contains the reason for cancellation
+ * $this->attributes['start_date']          - string|null - contains the rental start date
  * $this->attributes['end_date']     - string|null - contains the rental end date
  * $this->attributes['user_id']      - int         - contains the customer user id
  * $this->attributes['car_id']       - int         - contains the rented car id
@@ -53,6 +54,7 @@ class Reservation extends Model
     protected $fillable = [
         'code',
         'state',
+        'cancellation_reason',
         'start_date',
         'end_date',
         'user_id',
@@ -94,6 +96,18 @@ class Reservation extends Model
     public function setState(string $state): void
     {
         $this->attributes['state'] = $state;
+    }
+
+    public function getCancellationReason(): ?string
+    {
+        return isset($this->attributes['cancellation_reason'])
+            ? (string) $this->attributes['cancellation_reason']
+            : null;
+    }
+
+    public function setCancellationReason(?string $cancellationReason): void
+    {
+        $this->attributes['cancellation_reason'] = $cancellationReason;
     }
 
     public function getStartDate(): ?Carbon
@@ -314,5 +328,23 @@ class Reservation extends Model
         return ! $this->isCancelled()
             && ! $this->isCompleted()
             && ! $this->hasSuccessfulPayment();
+    }
+
+    public static function datesOverlap(Car $car, Carbon $newStart, Carbon $newEnd, Collection $existingReservations): bool
+    {
+        foreach ($existingReservations as $reservation) {
+            $existingStart = $reservation->getStartDate();
+            $existingEnd = $reservation->getEndDate();
+
+            if (! $existingStart || ! $existingEnd) {
+                continue;
+            }
+
+            if ($newStart->lessThanOrEqualTo($existingEnd) && $newEnd->greaterThanOrEqualTo($existingStart)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

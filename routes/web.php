@@ -27,10 +27,13 @@ use App\Http\Controllers\User\CatalogController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\LocaleController;
 use App\Http\Controllers\User\LocationController as UserLocationController;
+use App\Http\Controllers\User\PartnerController;
 use App\Http\Controllers\User\PaymentController;
+use App\Http\Controllers\User\PickupRouteController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\ReceiptController;
 use App\Http\Controllers\User\ReservationController;
+use App\Http\Controllers\User\VehicleController;
 use App\Http\Controllers\User\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -68,6 +71,7 @@ Route::get($basePath.'/reservations', [ReservationController::class, 'index'])->
 Route::get($basePath.'/reservations/create', [ReservationController::class, 'create'])->middleware(['auth', 'verified', 'user'])->name('reservations.create');
 Route::post($basePath.'/reservations', [ReservationController::class, 'store'])->middleware(['auth', 'verified', 'user'])->name('reservations.store');
 Route::get($basePath.'/reservations/{id}', [ReservationController::class, 'show'])->middleware(['auth', 'verified', 'user'])->whereNumber('id')->name('reservations.show');
+Route::get($basePath.'/reservations/{id}/cancel', [ReservationController::class, 'showCancel'])->middleware(['auth', 'verified', 'user'])->whereNumber('id')->name('reservations.cancel.form');
 Route::patch($basePath.'/reservations/{id}/cancel', [ReservationController::class, 'cancel'])->middleware(['auth', 'verified', 'user'])->whereNumber('id')->name('reservations.cancel');
 Route::get($basePath.'/reservations/{id}/payment', [PaymentController::class, 'create'])->middleware(['auth', 'verified', 'user'])->whereNumber('id')->name('payments.create');
 Route::post($basePath.'/reservations/{id}/payment', [PaymentController::class, 'store'])->middleware(['auth', 'verified', 'user'])->whereNumber('id')->name('payments.store');
@@ -97,6 +101,7 @@ Route::put($basePath.'/admin/locations/{id}/update', [AdminLocationController::c
 Route::delete($basePath.'/admin/locations/{id}/delete', [AdminLocationController::class, 'delete'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.location.delete');
 
 Route::get($basePath.'/admin/reservations', [AdminReservationController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.reservation.index');
+Route::get($basePath.'/admin/reservations/report', [AdminReservationController::class, 'report'])->middleware(['auth', 'admin'])->name('admin.reservation.report');
 Route::get($basePath.'/admin/reservations/{id}', [AdminReservationController::class, 'show'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.reservation.show');
 Route::patch($basePath.'/admin/reservations/{id}/confirm', [AdminReservationController::class, 'confirm'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.reservation.confirm');
 Route::patch($basePath.'/admin/reservations/{id}/cancel', [AdminReservationController::class, 'cancel'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.reservation.cancel');
@@ -109,3 +114,8 @@ Route::get($basePath.'/admin/users', [AdminUserController::class, 'index'])->mid
 Route::get($basePath.'/admin/users/{id}/edit', [AdminUserController::class, 'edit'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.user.edit');
 Route::put($basePath.'/admin/users/{id}/update', [AdminUserController::class, 'update'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.user.update');
 Route::delete($basePath.'/admin/users/{id}/delete', [AdminUserController::class, 'delete'])->middleware(['auth', 'admin'])->whereNumber('id')->name('admin.user.delete');
+
+Route::get($basePath.'/partners', [PartnerController::class, 'index'])->name('partner.index');
+Route::get($basePath.'/vehicles/{id}', [VehicleController::class, 'show'])->whereNumber('id')->name('vehicles.show');
+Route::get($basePath.'/catalog/{id}/pickup-route', [PickupRouteController::class, 'index'])->middleware(['auth', 'verified', 'user'])->whereNumber('id')->name('pickupRoutes.index');
+Route::post($basePath.'/catalog/{id}/pickup-route', [PickupRouteController::class, 'calculate'])->middleware(['auth', 'verified', 'user', 'throttle:10,1'])->whereNumber('id')->name('pickupRoutes.calculate');

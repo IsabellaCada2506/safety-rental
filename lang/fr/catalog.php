@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Complete fr translations for catalog.
+ */
+
+return [
+    'title_index' => 'Catalogue de véhicules - Safety Rental',
+    'title_show' => 'Détail du véhicule - Safety Rental',
+    'title' => 'Catalogue',
+    'subtitle' => 'Découvrez notre flotte pour une location sûre et de qualité.',
+    'no_image' => 'Aucune image disponible',
+    'brand_label' => 'Marque :',
+    'model_label' => 'Modèle :',
+    'year' => 'Année',
+    'mileage' => 'Kilométrage',
+    'price' => 'Prix de location',
+    'per_day' => '/ jour',
+    'view_details' => 'Voir les détails',
+    'empty' => 'Aucun véhicule disponible pour le moment.',
+    'available' => 'Disponible',
+    'security_info' => 'Informations sur la sécurité et la garantie',
+    'security_desc' => 'Ce véhicule bénéficie de contrôles techniques approuvés, d’une assistance routière et d’une couverture de protection active.',
+    'back' => 'Retour au catalogue',
+    'rent_now' => 'Louer maintenant',
+    'unknown_vehicle' => 'Véhicule',
+    'km_unit' => 'km',
+    'passengers_label' => 'Passagers',
+    'luggage_label' => 'Bagages',
+    'units' => 'unités',
+    'description_label' => 'Description',
+    'no_description' => 'Aucune remarque supplémentaire.',
+    'status_deactivated' => 'Désactivé',
+    'plate_label' => 'Immatriculation',
+    'search_label' => 'Rechercher',
+    'search_placeholder' => 'Rechercher par marque, modèle, description...',
+    'all_categories' => 'Toutes les catégories',
+    'all_locations' => 'Toutes les agences',
+    'category_filter' => 'Catégorie',
+    'location_filter' => 'Agence de retrait',
+    'start_date' => 'Date de retrait',
+    'end_date' => 'Date de retour',
+    'filter_button' => 'Filtrer les véhicules',
+    'clear_filters' => 'Effacer les filtres',
+    'active_filters' => 'Filtres actifs',
+    'no_results_title' => 'Aucun véhicule ne correspond à vos critères',
+    'no_results_subtitle' => 'Modifiez votre recherche ou vos dates, ou effacez les filtres pour voir toutes les voitures disponibles.',
+    'results_count' => ':count véhicule(s) trouvé(s)',
+    'validation_end_date_after' => 'La date de retour doit être postérieure à la date de retrait.',
+    'validation_start_date_after_or_equal' => 'La date de retrait doit être aujourd’hui ou une date future.',
+    'validation_category_not_found' => 'La catégorie sélectionnée n’existe pas.',
+    'validation_location_not_found' => 'L’agence sélectionnée n’existe pas.',
+];

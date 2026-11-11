@@ -1,0 +1,265 @@
+/*
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Styles organized by interface responsibility.
+ */
+
+/*
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Blue profile accents without background strips or decorative bubbles.
+ */
+
+/* Page backgrounds */
+
+.profile-page,
+.profile-edit-page {
+    background: #f3f7fd;
+}
+
+/* Remove background strips and decorative bubbles */
+
+.profile-page::before,
+.profile-page::after,
+.profile-edit-page::before,
+.profile-edit-page::after,
+.profile-page .profile-background-shape,
+.profile-edit-page .profile-edit-orb {
+    display: none;
+}
+
+/* Profile cards */
+
+.profile-page .profile-summary-card,
+.profile-page .profile-information-card {
+    border-color: #d7e4f2;
+    box-shadow: 0 16px 38px rgba(16, 36, 74, 0.06);
+}
+
+.profile-page .profile-data-grid > div,
+.profile-page .profile-data-list > div {
+    border-color: #dce7f3;
+}
+
+.profile-page .profile-summary-divider {
+    background: #dce7f3;
+    border-color: #dce7f3;
+}
+
+/* Profile avatar */
+
+.profile-page .profile-avatar {
+    color: #ffffff;
+    background: #2a6f97;
+    border-color: #e6f3fb;
+    box-shadow: 0 12px 28px rgba(42, 111, 151, 0.16);
+}
+
+/* Profile section icons */
+
+.profile-page .profile-section-icon,
+.profile-page .profile-section-icon-orange,
+.profile-page .profile-section-icon-gold {
+    color: #014f86;
+    background: #edf7fb;
+}
+
+/* Edit profile button */
+
+.profile-page .profile-edit-button,
+.profile-page .profile-edit-button:link,
+.profile-page .profile-edit-button:visited {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 14px 24px;
+    border: 1px solid #014f86;
+    border-radius: 14px;
+    background: #014f86;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 800;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 6px 16px rgba(1, 79, 134, 0.18);
+    transition:
+        background-color 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.profile-page .profile-edit-button svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    color: inherit;
+}
+
+.profile-page .profile-edit-button:hover {
+    border-color: #10244a;
+    background: #10244a;
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(16, 36, 74, 0.22);
+}
+
+.profile-page .profile-edit-button:active {
+    border-color: #012a4a;
+    background: #012a4a;
+    color: #ffffff;
+}
+
+.profile-page .profile-edit-button:focus-visible {
+    outline: 3px solid #014f86;
+    outline-offset: 4px;
+}
+
+/* Editing heading card */
+
+.profile-edit-page .profile-edit-hero {
+    background: linear-gradient(120deg, #10244a, #014f86);
+    border: 1px solid #244f78;
+    box-shadow: 0 12px 30px rgba(16, 36, 74, 0.12);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.profile-edit-page .profile-edit-hero h1 {
+    color: #ffffff;
+}
+
+.profile-edit-page .profile-edit-hero p {
+    color: #d5e6f5;
+}
+
+.profile-edit-page .profile-edit-eyebrow {
+    color: #a9d6e5;
+}
+
+.profile-edit-page .profile-edit-back,
+.profile-edit-page .profile-edit-back:link,
+.profile-edit-page .profile-edit-back:visited {
+    color: #e1effa;
+}
+
+.profile-edit-page .profile-edit-back:hover {
+    color: #ffffff;
+}
+
+.profile-edit-page .profile-edit-back:focus-visible {
+    outline: 3px solid #90e0ef;
+    outline-offset: 4px;
+}
+
+/* Editing avatar */
+
+.profile-edit-page .profile-edit-avatar {
+    color: #ffffff;
+    background: linear-gradient(145deg, #2a6f97, #014f86);
+    border-color: #dceff6;
+    box-shadow: 0 14px 30px rgba(42, 111, 151, 0.16);
+}
+
+/* Editing cards */
+
+.profile-edit-page .profile-edit-card {
+    border-color: #d7e4f2;
+    box-shadow: 0 16px 38px rgba(16, 36, 74, 0.06);
+}
+
+.profile-edit-page .profile-edit-card-header {
+    border-bottom-color: #dce7f3;
+}
+
+.profile-edit-page .profile-edit-card-number,
+.profile-edit-page .profile-edit-card-number-orange,
+.profile-edit-page .profile-edit-card-number-gold {
+    color: #014f86;
+    background: #e4f1fb;
+}
+
+/* Form fields */
+
+.profile-edit-page .profile-edit-field input {
+    background: #f7faff;
+    border-color: #d5e3f1;
+}
+
+.profile-edit-page .profile-edit-field input:hover {
+    border-color: #a9c8e1;
+}
+
+.profile-edit-page .profile-edit-field input:focus {
+    background: #ffffff;
+    border-color: #2a6f97;
+    box-shadow: 0 0 0 0.22rem rgba(42, 111, 151, 0.14);
+}
+
+/* Validation errors */
+
+.profile-edit-page .profile-edit-field input.is-invalid {
+    border-color: #dc3545;
+}
+
+.profile-edit-page .profile-edit-field input.is-invalid:focus {
+    box-shadow: 0 0 0 0.22rem rgba(220, 53, 69, 0.12);
+}
+
+/* Bottom action bar */
+
+.profile-edit-page .profile-edit-actions {
+    background: linear-gradient(120deg, #10244a, #014f86);
+    border: 1px solid #244f78;
+    box-shadow: 0 12px 28px rgba(16, 36, 74, 0.12);
+}
+
+.profile-edit-page .profile-edit-cancel,
+.profile-edit-page .profile-edit-cancel:visited {
+    color: #ffffff;
+    background: transparent;
+    border-color: #a9c8e1;
+}
+
+.profile-edit-page .profile-edit-cancel:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.12);
+    border-color: #ffffff;
+}
+
+.profile-edit-page .profile-edit-save {
+    color: #014f86;
+    background: #ffffff;
+    border-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.profile-edit-page .profile-edit-save:hover {
+    color: #10244a;
+    background: #e4f1fb;
+    border-color: #e4f1fb;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
+}
+
+.profile-edit-page .profile-edit-cancel:focus-visible,
+.profile-edit-page .profile-edit-save:focus-visible {
+    outline: 3px solid #90e0ef;
+    outline-offset: 4px;
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+    .profile-page .profile-edit-button,
+    .profile-edit-page .profile-edit-cancel,
+    .profile-edit-page .profile-edit-save,
+    .profile-edit-page .profile-edit-field input {
+        transition: none;
+    }
+
+    .profile-edit-page .profile-edit-save:hover {
+        transform: none;
+    }
+}

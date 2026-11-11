@@ -1,7 +1,7 @@
 {{--
     Author: Isabella Cadavid Posada
-    Date: 2026-09-11
-    Description: Login form view for existing users.
+    Date: 2026-11-04
+    Description: Login form with accessible field validation feedback.
 --}}
 
 @extends('layouts.app')
@@ -85,7 +85,7 @@
                     </p>
 
                     @if (session('status'))
-                        <div class="alert alert-success" role="alert">
+                        <div class="alert alert-success" role="status">
                             {{ session('status') }}
                         </div>
                     @endif
@@ -110,10 +110,18 @@
                                 autocomplete="email"
                                 required
                                 autofocus
+                                @error('email')
+                                    aria-invalid="true"
+                                    aria-describedby="email-error"
+                                @enderror
                             >
 
                             @error('email')
-                                <div class="invalid-feedback">
+                                <div
+                                    id="email-error"
+                                    class="invalid-feedback"
+                                    role="alert"
+                                >
                                     {{ $message }}
                                 </div>
                             @enderror
@@ -131,10 +139,18 @@
                                 type="password"
                                 autocomplete="current-password"
                                 required
+                                @error('password')
+                                    aria-invalid="true"
+                                    aria-describedby="password-error"
+                                @enderror
                             >
 
                             @error('password')
-                                <div class="invalid-feedback">
+                                <div
+                                    id="password-error"
+                                    class="invalid-feedback"
+                                    role="alert"
+                                >
                                     {{ $message }}
                                 </div>
                             @enderror

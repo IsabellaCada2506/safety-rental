@@ -1,0 +1,210 @@
+/*
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Styles organized by interface responsibility.
+ */
+
+:root {
+    --sr-primary: #014f86;
+    --sr-primary-hover: #013a63;
+    --sr-navy: #10244a;
+    --sr-surface: #ffffff;
+    --sr-background: #f3f7fd;
+    --sr-border: #dce5f2;
+    --sr-soft-blue: #e8f0ff;
+
+    --sr-ink: #012a4a;
+    --sr-plum: #013a63;
+    --sr-ember: #014f86;
+    --sr-flame: #2a6f97;
+    --sr-gold: #a9d6e5;
+    --sr-cream: #f3f7fd;
+    --sr-white: #ffffff;
+    --sr-text: #172b4d;
+    --sr-muted: #53657e;
+    --sr-line: #dce5f2;
+    --sr-shadow: rgba(1, 42, 74, 0.06);
+
+    --sr-radius-lg: 20px;
+    --sr-radius-md: 12px;
+
+    --sr-mesh:
+        linear-gradient(
+            135deg,
+            #f1f9fc 0%,
+            #dceff6 60%,
+            #caf0f8 100%
+        );
+
+    --sr-dark-gradient:
+        linear-gradient(
+            115deg,
+            #10244a 0%,
+            #193c73 55%,
+            #3868a8 100%
+        );
+
+    --bs-primary: #014f86;
+    --bs-primary-rgb: 1, 79, 134;
+    --bs-link-color: #014f86;
+    --bs-link-hover-color: #013a63;
+    --bs-body-font-family: 'Manrope', Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    color: var(--sr-text);
+    background: var(--sr-background);
+    font-family: 'Manrope', Arial, sans-serif;
+}
+
+body > main {
+    flex: 1;
+    min-width: 0;
+    padding-top: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.display-font,
+button,
+input,
+select,
+textarea {
+    font-family: 'Manrope', Arial, sans-serif;
+}
+
+.catalog-page {
+    margin-top: 0 !important;
+    padding-top: 3rem !important;
+    padding-bottom: 3rem;
+}
+
+.logo-badge {
+    color: #014f86;
+    background: #ffffff;
+    border: 1px solid #d5e7ef;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(1, 42, 74, 0.05);
+}
+
+.form-label {
+    color: #012a4a;
+    font-weight: 600;
+}
+
+.form-control,
+.form-select {
+    min-height: 46px;
+    color: #012a4a;
+    background-color: #ffffff;
+    border: 1px solid #bfd5e0;
+    border-radius: var(--sr-radius-md);
+    font-family: 'Manrope', Arial, sans-serif;
+    font-size: 1rem;
+}
+
+.form-control::placeholder {
+    color: #63748b;
+    opacity: 1;
+}
+
+textarea.form-control {
+    min-height: 120px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    color: #012a4a;
+    background-color: #ffffff;
+    border-color: #2a6f97;
+    box-shadow: 0 0 0 3px rgba(42, 111, 151, 0.12);
+}
+
+.form-control.is-invalid,
+.form-select.is-invalid,
+.form-control[aria-invalid='true'],
+.form-select[aria-invalid='true'] {
+    border-color: #b42318;
+}
+
+.invalid-feedback {
+    color: #b42318;
+}
+
+.form-check-input:checked {
+    background-color: var(--sr-primary);
+    border-color: var(--sr-primary);
+}
+
+.form-check-input:focus {
+    border-color: #2a6f97;
+    box-shadow: 0 0 0 3px rgba(42, 111, 151, 0.12);
+}
+
+.btn-primary {
+    --bs-btn-color: #ffffff;
+    --bs-btn-bg: #014f86;
+    --bs-btn-border-color: #014f86;
+    --bs-btn-hover-color: #ffffff;
+    --bs-btn-hover-bg: #013a63;
+    --bs-btn-hover-border-color: #013a63;
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-bg: #013a63;
+    --bs-btn-active-border-color: #013a63;
+    --bs-btn-disabled-color: #ffffff;
+    --bs-btn-disabled-bg: #014f86;
+    --bs-btn-disabled-border-color: #014f86;
+
+    min-height: 44px;
+    padding: 0.7rem 1.1rem;
+    color: #ffffff;
+    background: var(--sr-primary);
+    border: 1px solid var(--sr-primary);
+    border-radius: var(--sr-radius-md);
+    font-family: 'Manrope', Arial, sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: none;
+}
+
+.btn-primary:hover {
+    color: #ffffff;
+    background: var(--sr-primary-hover);
+    border-color: var(--sr-primary-hover);
+    box-shadow: none;
+    transform: none;
+}
+
+.btn-outline-primary {
+    --bs-btn-color: #014f86;
+    --bs-btn-border-color: #014f86;
+    --bs-btn-hover-color: #ffffff;
+    --bs-btn-hover-bg: #014f86;
+    --bs-btn-hover-border-color: #014f86;
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-bg: #013a63;
+    --bs-btn-active-border-color: #013a63;
+    --bs-btn-disabled-color: #014f86;
+    --bs-btn-disabled-border-color: #014f86;
+
+    min-height: 44px;
+    border-radius: var(--sr-radius-md);
+    font-weight: 600;
+}
+
+@media (max-width: 600px) {
+.catalog-detail-image {
+        height: 260px;
+        object-fit: cover;
+    }
+
+}
+

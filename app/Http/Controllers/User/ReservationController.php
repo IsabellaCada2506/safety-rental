@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\CancelReservationRequest;
 use App\Http\Requests\User\CreateReservationRequest;
 use App\Http\Requests\User\StoreReservationRequest;
 use App\Models\Car;
@@ -113,8 +114,30 @@ class ReservationController extends Controller
         return view('user.reservation.show')->with('viewData', $viewData);
     }
 
-    public function cancel(int $id): RedirectResponse
+    public function showCancel(int $id): View|RedirectResponse
     {
+        $reservation = Reservation::query()
+            ->with(['car.category'])
+            ->findOrFail($id);
+
+        $this->authorize('cancel', $reservation);
+
+        if (! $reservation->isCancellable()) {
+            return redirect()
+                ->route('reservations.show', ['id' => $id])
+                ->withErrors(['error' => __('reservation.cancellation_not_allowed')]);
+        }
+
+        $viewData = [];
+        $viewData['title'] = __('reservation.cancel_reservation');
+        $viewData['reservation'] = $reservation;
+
+        return view('user.reservation.cancel')->with('viewData', $viewData);
+    }
+
+    public function cancel(CancelReservationRequest $request, int $id): RedirectResponse
+    {
+        $validatedData = $request->validated();
         $reservation = Reservation::query()->findOrFail($id);
 
         $this->authorize('cancel', $reservation);
@@ -126,6 +149,7 @@ class ReservationController extends Controller
         }
 
         $reservation->setState(Reservation::STATE_CANCELLED);
+        $reservation->setCancellationReason($validatedData['reason']);
         $reservation->save();
 
         return redirect()

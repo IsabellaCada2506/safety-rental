@@ -15,6 +15,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
+ * @property float|null $latitude Pickup latitude.
+ * @property float|null $longitude Pickup longitude.
+ *
  * LOCATION ATTRIBUTES
  * $this->attributes['id']           - int         - contains the location primary key (id)
  * $this->attributes['name']         - string      - contains the branch name
@@ -39,14 +42,38 @@ class Location extends Model
         'headquarters',
         'telephone',
         'city',
+        'latitude',
+        'longitude',
     ];
 
     protected function casts(): array
     {
         return [
+            'latitude' => 'float',
+            'longitude' => 'float',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
+    }
+
+    public function getLatitude(): ?float
+    {
+        return isset($this->attributes['latitude']) ? (float) $this->attributes['latitude'] : null;
+    }
+
+    public function setLatitude(?float $latitude): void
+    {
+        $this->attributes['latitude'] = $latitude;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return isset($this->attributes['longitude']) ? (float) $this->attributes['longitude'] : null;
+    }
+
+    public function setLongitude(?float $longitude): void
+    {
+        $this->attributes['longitude'] = $longitude;
     }
 
     public function getId(): int

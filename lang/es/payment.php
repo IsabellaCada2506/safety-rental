@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Author: Alejandro Correa Marin
- * Date: 2026-09-12
- * Description: Spanish localization strings for the simulated payments module.
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Complete es translations for payment.
  */
 
 return [
@@ -11,7 +11,6 @@ return [
     'admin_title_index' => 'Gestión de pagos',
     'admin_title_show' => 'Detalle de pago #:code',
     'manage_payments' => 'Pagos',
-
     'heading' => 'Pago simulado',
     'subtitle' => 'Completa un pago de demostración con el total aprobado de la reserva.',
     'receipt_label' => 'Recibo de pago de alquiler',
@@ -19,7 +18,6 @@ return [
     'download_receipt' => 'Descargar recibo',
     'currency' => 'COP',
     'receipt_not_paid' => 'El recibo de pago solo está disponible después de un pago exitoso.',
-
     'payment_code' => 'Código de pago',
     'transaction_code' => 'Referencia de transacción',
     'method' => 'Método de pago',
@@ -36,12 +34,10 @@ return [
     'vehicle' => 'Vehículo',
     'customer' => 'Cliente',
     'actions' => 'Acciones',
-
     'status_completed' => 'Completado',
     'status_pending' => 'Pendiente',
     'status_failed' => 'Fallido',
     'status_refunded' => 'Reembolsado',
-
     'simulated_result' => 'Resultado de la simulación',
     'simulate_success' => 'Simular pago exitoso',
     'simulate_failure' => 'Simular pago fallido',
@@ -55,7 +51,6 @@ return [
     'no_payments' => 'No se encontraron registros de pago.',
     'unpaid' => 'Sin pagar',
     'paid' => 'Pagado',
-
     'completed_success' => 'El pago simulado se registró correctamente.',
     'failed_reported' => 'El pago simulado falló. La reserva no quedó marcada como pagada.',
     'refunded_success' => 'El reembolso se aplicó según la política aprobada.',

@@ -1,0 +1,120 @@
+/*
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Styles organized by interface responsibility.
+ */
+
+.ignition-page,
+.ignition-grid {
+    min-height: auto;
+}
+
+.ignition-grid {
+    min-height: 620px;
+}
+
+.ignition-hero {
+    background: var(--sr-mesh);
+}
+
+.ignition-hero-title {
+    max-width: 520px;
+    color: #012a4a;
+    font-size: clamp(2.25rem, 4vw, 3.75rem);
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 1.12;
+}
+
+.ignition-hero-subtitle {
+    max-width: 440px;
+    color: #496779;
+    line-height: 1.8;
+}
+
+.ignition-panel {
+    background: #ffffff;
+}
+
+.ignition-form-wrap h1 {
+    color: #012a4a;
+    font-weight: 800;
+    letter-spacing: -0.035em;
+}
+
+.authentication-description {
+    color: #496779;
+}
+
+.ignition-key {
+    color: #014f86;
+    background: #edf7fb;
+    border: 1px solid #d5e7ef;
+    border-radius: 14px;
+    box-shadow: none;
+}
+
+.authentication-link {
+    color: var(--sr-primary);
+}
+
+.authentication-link:hover {
+    color: var(--sr-primary-hover);
+    text-decoration: underline;
+}
+
+.authentication-button {
+    --bs-btn-color: #ffffff;
+    --bs-btn-bg: #014f86;
+    --bs-btn-border-color: #014f86;
+    --bs-btn-hover-color: #ffffff;
+    --bs-btn-hover-bg: #013a63;
+    --bs-btn-hover-border-color: #013a63;
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-bg: #013a63;
+    --bs-btn-active-border-color: #013a63;
+    --bs-btn-disabled-color: #ffffff;
+    --bs-btn-disabled-bg: #014f86;
+    --bs-btn-disabled-border-color: #014f86;
+
+    min-height: 44px;
+    padding: 0.7rem 1.1rem;
+    color: #ffffff;
+    background: var(--sr-primary);
+    border: 1px solid var(--sr-primary);
+    border-radius: var(--sr-radius-md);
+    font-family: 'Manrope', Arial, sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: none;
+}
+
+.authentication-button:hover {
+    color: #ffffff;
+    background: var(--sr-primary-hover);
+    border-color: var(--sr-primary-hover);
+    box-shadow: none;
+    transform: none;
+}
+
+.authentication-button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+.ignition-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+.ignition-hero,
+.ignition-panel {
+        padding: 2rem 1.25rem;
+    }
+
+.ignition-hero-title {
+        font-size: 2.25rem;
+    }
+
+}
+

@@ -18,7 +18,7 @@
                     <p class="text-muted small mb-0">{{ __('catalog.title_show') }}</p>
                 </div>
                 <a href="{{ route('catalog.show', ['id' => $viewData['car']->getId()]) }}" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
-                    &larr; {{ __('catalog.back') }}
+                    &larr; {{ __('general.btn_back') }}
                 </a>
             </div>
 
@@ -29,11 +29,14 @@
                 </div>
             @endif
 
+            <a class="btn btn-outline-primary mb-3" href="{{ route('pickupRoutes.index', ['id' => $viewData['car']->getId()]) }}">{{ __('integrations.pickup_route') }}</a>
+
             <div class="row g-4">
                 <div class="col-md-5">
                     <div class="card shadow-sm border-0 rounded-4 overflow-hidden bg-white h-100">
-                        <x-car-image
-                            :image="$viewData['car']->getImage()"
+                        <x-responsive-image
+                            :src="$viewData['car']->getImage()"
+                            :alt="$viewData['car']->getCategory()?->getName() ?? __('general.image_alt')"
                             class="card-img-top object-fit-cover"
                             style="height: 220px;"
                         />
@@ -56,7 +59,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <span class="text-muted">{{ __('reservation.daily_rate') }}:</span>
-                                    <span class="fw-bold text-dark fs-6">${{ number_format($viewData['car']->getPrice(), 0, ',', '.') }}</span>
+                                    <span class="fw-bold text-dark fs-6">${{ number_format($viewData['car']->getPrice(), 0, app()->getLocale() === 'es' ? ',' : '.', app()->getLocale() === 'es' ? '.' : ',') }}</span>
                                 </div>
                             </div>
 
@@ -146,12 +149,12 @@
                                 </div>
                                 <div class="d-flex justify-content-between small text-muted mb-2">
                                     <span>{{ __('reservation.daily_rate') }}:</span>
-                                    <span class="fw-semibold text-dark">${{ number_format($viewData['car']->getPrice(), 0, ',', '.') }}</span>
+                                    <span class="fw-semibold text-dark">${{ number_format($viewData['car']->getPrice(), 0, app()->getLocale() === 'es' ? ',' : '.', app()->getLocale() === 'es' ? '.' : ',') }}</span>
                                 </div>
                                 <hr class="my-2">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span class="fw-bold text-dark">{{ __('reservation.total_price') }}:</span>
-                                    <span id="previewTotal" class="fw-bold text-primary fs-5">${{ number_format($viewData['car']->getPrice(), 0, ',', '.') }}</span>
+                                    <span id="previewTotal" class="fw-bold text-primary fs-5">${{ number_format($viewData['car']->getPrice(), 0, app()->getLocale() === 'es' ? ',' : '.', app()->getLocale() === 'es' ? '.' : ',') }}</span>
                                 </div>
                             </div>
 
@@ -167,6 +170,6 @@
 </div>
 
 @push('scripts')
-    <script src="{{ asset('js/reservation-create.js') }}"></script>
+    <script src="{{ asset('js/user/reservation-create.js') }}"></script>
 @endpush
 @endsection

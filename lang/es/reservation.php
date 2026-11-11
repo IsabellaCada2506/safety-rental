@@ -1,9 +1,10 @@
 <?php
 
 /**
- * Author: Isabella Ocampo
- * Date: 2026-09-11
- * Description: Spanish localization strings for the Reservations module.
+ * Author: Isabella Cadavid Posada
+ * Author: Wendy Atehortua
+ * Date: 2026-11-04
+ * Description: Complete es translations for reservation.
  */
 
 return [
@@ -12,12 +13,10 @@ return [
     'title_show' => 'Detalle de Reserva #:code',
     'admin_title_index' => 'Gestión de Reservas',
     'admin_title_show' => 'Auditoría de Reserva #:code',
-
     'state_pending' => 'Pendiente',
     'state_confirmed' => 'Confirmada',
     'state_cancelled' => 'Cancelada',
     'state_completed' => 'Finalizada',
-
     'reservation_code' => 'Código de Reserva',
     'code' => 'Código',
     'status' => 'Estado',
@@ -28,12 +27,12 @@ return [
     'select_location' => 'Selecciona una sede',
     'vehicle' => 'Vehículo',
     'customer' => 'Cliente',
+    'car_license_plate' => 'Placa del Vehículo',
     'daily_rate' => 'Tarifa Diaria',
     'rental_days' => 'Días de Alquiler',
     'total_price' => 'Total Estimado',
     'days_unit' => 'día(s)',
     'actions' => 'Acciones',
-
     'confirm_booking' => 'Confirmar y Reservar',
     'cancel_reservation' => 'Cancelar Reserva',
     'confirm_reservation' => 'Confirmar Reserva',
@@ -43,11 +42,9 @@ return [
     'filter_all' => 'Todas',
     'no_reservations' => 'No se encontraron reservas registradas.',
     'cancellation_confirm' => '¿Estás seguro de que deseas cancelar esta reserva? Esta acción liberará el vehículo para otros usuarios.',
-
     'created_success' => '¡Tu reserva ha sido creada exitosamente! Estado actual: Pendiente.',
     'confirmed_success' => 'La reserva ha sido confirmada satisfactoriamente.',
     'cancelled_success' => 'La reserva ha sido cancelada exitosamente.',
-
     'car_unavailable' => 'El vehículo seleccionado no se encuentra disponible para el rango de fechas solicitado debido a un solapamiento con otra reserva.',
     'start_date_past_error' => 'La fecha de inicio no puede ser anterior al día de hoy.',
     'end_date_order_error' => 'La fecha final debe ser posterior a la fecha de inicio.',
@@ -55,8 +52,33 @@ return [
     'location_not_found' => 'La sede seleccionada no es válida.',
     'cancellation_not_allowed' => 'Esta reserva ya no puede ser cancelada.',
     'transition_not_allowed' => 'La transición de estado solicitada no está permitida.',
-
     'summary_heading' => 'Resumen del Alquiler',
     'user_info' => 'Información del Usuario',
     'vehicle_info' => 'Información del Vehículo',
+    'report_title' => 'Informe de Reservas',
+    'confirmed_report_title' => 'Informe de Reservas Confirmadas',
+    'download_pdf_report' => 'Descargar Informe PDF',
+    'download_excel_report' => 'Descargar Informe Excel',
+    'generated_at' => 'Generado el',
+    'total_records' => 'Total de Registros',
+    'total_reservations' => 'Total de Reservas',
+    'total_confirmed_reservations' => 'Total de Reservas Confirmadas',
+    'executive_summary_title' => 'Resumen Ejecutivo',
+    'cancellation_ranking_title' => 'Ranking de Motivos de Cancelación',
+    'cancellation_reason_label' => 'Motivo de Cancelación',
+    'cancellation_count' => 'Cantidad de Cancelaciones',
+    'reservations_list_title' => 'Listado de Reservas',
+    'cancel_survey_title' => 'Cancelar Reserva #:code',
+    'cancel_survey_subtitle' => 'Por favor indícanos el motivo de la cancelación. Esto nos ayuda a mejorar nuestro servicio.',
+    'confirm_cancellation_btn' => 'Confirmar Cancelación',
+    'select_cancellation_reason' => 'Selecciona un motivo de cancelación',
+    'reason_plan_change' => 'Cambio de planes de viaje',
+    'reason_found_cheaper' => 'Encontré mejor precio en otro lugar',
+    'reason_trip_cancelled' => 'Viaje cancelado',
+    'reason_financial' => 'Motivos económicos',
+    'reason_other' => 'Otros motivos personales',
+    'btn_metrics' => 'Métricas de Reservas',
+    'download_report' => 'Descargar Informe',
+    'report_format_pdf' => 'Informe en PDF',
+    'report_format_excel' => 'Informe en Excel',
 ];

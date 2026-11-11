@@ -2,18 +2,16 @@
 
 /**
  * Author: Isabella Cadavid Posada
- * Date: 2026-09-06
- * Description: Spanish language strings for authentication, registration, profile, and home pages.
+ * Date: 2026-11-04
+ * Description: Complete es translations for authentication.
  */
 
 return [
     'application_name' => 'Safety Rental',
-
     'welcome_back' => 'Bienvenido nuevamente',
     'login_description' => 'Inicia sesión para acceder a tu cuenta de alquiler.',
     'road_waiting' => 'El camino te espera.',
     'road_waiting_description' => 'Reserva el vehículo adecuado para tu próximo viaje, sin filas ni condiciones ocultas.',
-
     'email' => 'Correo electrónico',
     'password' => 'Contraseña',
     'remember_me' => 'Recordarme',
@@ -22,7 +20,6 @@ return [
     'register' => 'Registrarse',
     'create_account' => 'Crear cuenta',
     'confirm_password' => 'Confirmar contraseña',
-
     'first_name' => 'Nombre',
     'last_name' => 'Apellido',
     'birth_date' => 'Fecha de nacimiento',
@@ -33,7 +30,6 @@ return [
     'emergency_contact_first_name' => 'Nombre del contacto de emergencia',
     'emergency_contact_last_name' => 'Apellido del contacto de emergencia',
     'emergency_contact_phone' => 'Teléfono del contacto de emergencia',
-
     'signed_in_as' => 'Sesión iniciada como',
     'user_dashboard' => 'Panel de usuario',
     'admin_dashboard' => 'Panel de administración',
@@ -41,12 +37,10 @@ return [
     'admin_message' => 'Tienes permiso para acceder al área de administración.',
     'user_area' => 'Área de usuario',
     'administration_area' => 'Área de administración',
-
     'verify_email' => 'Verifica tu correo electrónico',
     'verification_sent' => 'Se envió un nuevo enlace de verificación a tu correo electrónico.',
     'verification_instructions' => 'Revisa tu correo y abre el enlace de verificación antes de continuar.',
     'resend_verification' => 'Reenviar correo de verificación',
-
     'vehicle_rental' => 'Alquiler de vehículos',
     'welcome_subtitle' => 'Elige entre sedanes, camionetas, pickups y vehículos deportivos, y reserva en minutos.',
     'safe_driving' => 'Conducción segura',
@@ -55,7 +49,6 @@ return [
     'varied_fleet_description' => 'Elige el vehículo adecuado para viajar por la ciudad o por carretera.',
     'quick_reservations' => 'Reservas rápidas',
     'quick_reservations_description' => 'Elige tus fechas, confirma y conduce sin trámites innecesarios.',
-
     'available_fleet' => 'Flota disponible',
     'available' => 'Disponible',
     'executive_sedan' => 'Sedán ejecutivo',
@@ -66,7 +59,6 @@ return [
     'pickup_truck_description' => 'Potencia y espacio de carga para trabajar o viajar al aire libre.',
     'sports_car' => 'Automóvil deportivo',
     'sports_car_description' => 'Dos asientos y alto rendimiento para quienes disfrutan conducir.',
-
     'management_panel' => 'Panel de gestión',
     'vehicles' => 'Vehículos',
     'vehicles_description' => 'Administra la flota, la disponibilidad y el mantenimiento.',
@@ -76,10 +68,8 @@ return [
     'users_description' => 'Administra las cuentas de clientes y empleados.',
     'coming_soon' => 'Próximamente',
     'profile' => 'Mi perfil',
-
     'admin_area' => 'Área de administración',
     'dashboard' => 'Panel de control',
-
     'edit_profile' => 'Editar perfil',
     'profile_updated' => 'Tu perfil fue actualizado correctamente.',
     'profile_description' => 'Consulta tu información personal, de conducción y de emergencia.',
@@ -98,16 +88,21 @@ return [
     'forgot_password_description' => 'Ingresa tu correo registrado y te enviaremos un enlace seguro para restablecerla.',
     'send_reset_link' => 'Enviar enlace de recuperación',
     'reset_password' => 'Restablecer contraseña',
-
     'home' => 'Inicio',
     'edit_profile_description' => 'Mantén tu información de cliente correcta y actualizada.',
     'back_to_profile' => 'Volver al perfil',
     'save_changes' => 'Guardar cambios',
     'cancel' => 'Cancelar',
-
     'new_password' => 'Nueva contraseña',
     'password_confirmation' => 'Confirmar contraseña',
     'password_reset_success' => 'Tu contraseña fue restablecida correctamente.',
     'password_reset_failed' => 'No fue posible restablecer tu contraseña. Inténtalo nuevamente.',
     'invalid_reset_token' => 'Este enlace para restablecer la contraseña no es válido o ha expirado.',
+    'name' => 'Nombre',
+    'license_number' => 'Número de licencia',
+    'emergency_contact' => 'Teléfono de emergencia',
+    'validation_adult' => 'Debes tener al menos 18 años.',
+    'validation_email_unique' => 'Este correo electrónico ya está registrado.',
+    'validation_license_unique' => 'Este número de licencia ya está registrado.',
+    'validation_identification_unique' => 'Este número de identificación ya está registrado.',
 ];

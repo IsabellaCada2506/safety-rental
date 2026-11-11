@@ -27,18 +27,18 @@ class CatalogController extends Controller
             ->where('status', Car::STATUS_ACTIVE);
 
         if (! empty($filters['search'])) {
-            $searchTerm = '%'.strtolower((string) $filters['search']).'%';
+            $searchTerm = '%'.(string) $filters['search'].'%';
             $query->where(function ($subQuery) use ($searchTerm): void {
-                $subQuery->whereRaw('LOWER(plate) LIKE ?', [$searchTerm])
-                    ->orWhereRaw('LOWER(color) LIKE ?', [$searchTerm])
+                $subQuery->where('plate', 'like', $searchTerm)
+                    ->orWhere('color', 'like', $searchTerm)
                     ->orWhereHas('category', function ($categoryQuery) use ($searchTerm): void {
-                        $categoryQuery->whereRaw('LOWER(brand) LIKE ?', [$searchTerm])
-                            ->orWhereRaw('LOWER(model) LIKE ?', [$searchTerm])
-                            ->orWhereRaw('LOWER(type) LIKE ?', [$searchTerm]);
+                        $categoryQuery->where('brand', 'like', $searchTerm)
+                            ->orWhere('model', 'like', $searchTerm)
+                            ->orWhere('type', 'like', $searchTerm);
                     })
                     ->orWhereHas('location', function ($locationQuery) use ($searchTerm): void {
-                        $locationQuery->whereRaw('LOWER(name) LIKE ?', [$searchTerm])
-                            ->orWhereRaw('LOWER(city) LIKE ?', [$searchTerm]);
+                        $locationQuery->where('name', 'like', $searchTerm)
+                            ->orWhere('city', 'like', $searchTerm);
                     });
             });
         }
@@ -65,7 +65,7 @@ class CatalogController extends Controller
             });
         }
 
-        $cars = $query->orderBy('id', 'desc')->get();
+        $cars = $query->orderBy('id', 'desc')->paginate(8)->withQueryString();
 
         $viewData = [];
         $viewData['title'] = __('catalog.title_index');

@@ -28,9 +28,8 @@
                 </p>
             </div>
 
-            <a href="{{ route('admin.dashboard.index') }}" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
-                &larr; {{ __('authentication.dashboard') }}
-            </a>
+            <div class="d-flex align-items-center">
+            </div>
         </header>
 
         @if (session('success'))

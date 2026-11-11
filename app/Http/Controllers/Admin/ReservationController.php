@@ -2,20 +2,42 @@
 
 /**
  * Author: Isabella Ocampo
+ * Author: Wendy Atehortua
  * Date: 2026-09-11
- * Description: Admin controller for auditing, confirming, and managing customer reservations.
+ * Description: Admin controller for auditing, confirming, managing customer reservations, and generating reports.
  */
 
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\FilterReservationRequest;
+use App\Interfaces\ReportGenerator;
 use App\Models\Reservation;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\Response;
 
 class ReservationController extends Controller
 {
+    private ReportGenerator $reportGenerator;
+
+    public function __construct(ReportGenerator $reportGenerator)
+    {
+        $this->reportGenerator = $reportGenerator;
+    }
+
+    public function report(): Response
+    {
+        $reservations = Reservation::query()
+            ->with(['user', 'car.category', 'location', 'payment'])
+            ->orderByDesc('created_at')
+            ->get();
+
+        return $this->reportGenerator->generate($reservations, [
+            'title' => __('reservation.report_title'),
+        ]);
+    }
+
     public function index(FilterReservationRequest $request): View
     {
         $validatedData = $request->validated();

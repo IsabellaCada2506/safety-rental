@@ -1,0 +1,359 @@
+/*
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Styles organized by interface responsibility.
+ */
+
+/*
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Administrative record cards with contrasting headers and accessible actions.
+ */
+
+.records-page .admin-title {
+    font-size: clamp(1.9rem, 4vw, 3rem);
+    letter-spacing: -0.04em;
+}
+
+.record-list {
+    display: grid;
+    gap: 1.75rem;
+}
+
+.record-card {
+    min-width: 0;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #bccfe3;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(16, 36, 74, 0.07);
+}
+
+.record-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1.4rem 1.6rem;
+    background: #193c73;
+    border-bottom: 1px solid #284f85;
+}
+
+.record-eyebrow {
+    display: block;
+    margin-bottom: 0.45rem;
+    color: #d5e4fc;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.record-card .record-code {
+    margin: 0;
+    color: #ffffff;
+    font-family: 'Manrope', Arial, sans-serif;
+    font-size: clamp(1.4rem, 3vw, 1.75rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+}
+
+.record-header-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+}
+
+.record-date {
+    display: grid;
+    gap: 0.25rem;
+    color: #ffffff;
+    font-size: 0.9rem;
+}
+
+.record-date span {
+    color: #d5e4fc;
+    font-size: 0.8rem;
+}
+
+.record-date strong {
+    font-weight: 700;
+}
+
+.record-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0.85rem;
+    color: #36546d;
+    background: #e2eaf3;
+    border: 1px solid #c8d6e2;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.record-status[data-state='pending'] {
+    color: #805315;
+    background: #fff3d6;
+    border-color: #ead39c;
+}
+
+.record-status[data-state='confirmed'],
+.record-status[data-state='completed'] {
+    color: #166534;
+    background: #dcfce7;
+    border-color: #a8dfb8;
+}
+
+.record-status[data-state='cancelled'],
+.record-status[data-state='failed'] {
+    color: #991b1b;
+    background: #fee2e2;
+    border-color: #f3b1b1;
+}
+
+.record-status[data-state='refunded'] {
+    color: #36546d;
+    background: #e2eaf3;
+    border-color: #c8d6e2;
+}
+
+.record-information {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin: 0;
+    padding: 1.7rem 1.6rem;
+    background: #ffffff;
+}
+
+.record-information-item {
+    min-width: 0;
+}
+
+.record-information dt {
+    margin-bottom: 0.65rem;
+    color: #53657e;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.record-information dd {
+    margin: 0;
+    color: #172b4d;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.record-information dd strong {
+    font-weight: 700;
+}
+
+.record-secondary {
+    display: block;
+    margin-top: 0.3rem;
+    color: #53657e;
+    font-size: 0.85rem;
+}
+
+.record-reference {
+    font-variant-numeric: tabular-nums;
+}
+
+.record-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    padding: 1.3rem 1.6rem;
+    background: #f0f5fc;
+    border-top: 1px solid #d5e1ef;
+}
+
+.record-total {
+    display: grid;
+    gap: 0.3rem;
+    min-width: 0;
+}
+
+.record-total span {
+    color: #53657e;
+    font-size: 0.8rem;
+}
+
+.record-total strong {
+    color: #014f86;
+    font-size: 1.55rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+}
+
+.record-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+}
+
+.record-actions form {
+    margin: 0;
+}
+
+.record-button {
+    display: inline-flex;
+    min-height: 44px;
+    max-width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1rem;
+    border: 1px solid transparent;
+    border-radius: 11px;
+    font-family: 'Manrope', Arial, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.record-button-primary {
+    color: #ffffff;
+    background: #014f86;
+    border-color: #014f86;
+}
+
+.record-button-primary:hover {
+    color: #ffffff;
+    background: #013a63;
+    border-color: #013a63;
+}
+
+.record-button-secondary {
+    color: #164b83;
+    background: #ffffff;
+    border-color: #bdcfe2;
+}
+
+.record-button-secondary:hover {
+    color: #123c6a;
+    background: #e8f0ff;
+}
+
+.record-button-success {
+    color: #166534;
+    background: #dcfce7;
+    border-color: #a8dfb8;
+}
+
+.record-button-success:hover {
+    color: #14532d;
+    background: #bbf7d0;
+}
+
+.record-button-danger {
+    color: #991b1b;
+    background: #fee2e2;
+    border-color: #f3b1b1;
+}
+
+.record-button-danger:hover {
+    color: #7f1d1d;
+    background: #fecaca;
+}
+
+.record-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-bottom: 1.5rem;
+}
+
+.record-filter {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem 1rem;
+    color: #36546d;
+    background: #ffffff;
+    border: 1px solid #c5d5e7;
+    border-radius: 11px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.record-filter:hover {
+    color: #014f86;
+    background: #e8f0ff;
+}
+
+.record-filter[aria-current='page'],
+.record-filter[aria-current='page']:hover {
+    color: #ffffff;
+    background: #193c73;
+    border-color: #193c73;
+}
+
+.record-button:focus-visible,
+.record-filter:focus-visible {
+    outline: 3px solid #2a6f97;
+    outline-offset: 3px;
+}
+
+.record-empty {
+    padding: 3rem 1.5rem;
+    color: #53657e;
+    background: #ffffff;
+    border: 1px dashed #b8cde0;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.record-empty p {
+    margin: 0;
+}
+
+@media (max-width: 991px) {
+    .record-information {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 575px) {
+    .record-card-header,
+    .record-card-footer,
+    .record-information {
+        padding: 1.25rem;
+    }
+
+    .record-information {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.25rem;
+    }
+
+    .record-actions {
+        width: 100%;
+    }
+
+    .record-actions > a,
+    .record-actions > form {
+        flex: 1 1 100%;
+    }
+
+    .record-actions form .record-button {
+        width: 100%;
+    }
+}

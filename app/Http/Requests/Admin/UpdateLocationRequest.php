@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Author: Isabella Ocampo
- * Date: 2026-09-11
- * Description: Form request for validating rental location updates by administrators.
+ * Author: Alejandro Correa Marin
+ * Date: 2026-11-05
+ * Description: Request validation for updating an existing branch location.
  */
 
 namespace App\Http\Requests\Admin;
