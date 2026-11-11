@@ -9,18 +9,15 @@
 
 namespace App\Providers;
 
-use Barryvdh\DomPDF\PDF;
-use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    public function register(): void
-    {
-        $this->app->bind(PDF::class, function (Application $app): PDF {
-            return $app->make('dompdf.wrapper');
-        });
-    }
+    public function register(): void {}
 
-    public function boot(): void {}
+    public function boot(): void
+    {
+        Paginator::useBootstrapFive();
+    }
 }

@@ -1,0 +1,44 @@
+/*
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Styles organized by interface responsibility.
+ */
+
+/*
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Shared keyboard focus and skip navigation styles.
+ */
+
+.skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 2000;
+    max-width: calc(100% - 1.5rem);
+    padding: 0.75rem 1rem;
+    color: #ffffff;
+    background: #111827;
+    border: 2px solid #ffffff;
+    border-radius: 0.5rem;
+    font-family: 'Inter', Arial, sans-serif;
+    font-weight: 700;
+    text-decoration: underline;
+    transform: translateY(-200%);
+}
+
+.skip-link:focus {
+    color: #ffffff;
+    transform: translateY(0);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 6px #ffffff;
+}

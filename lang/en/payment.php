@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Author: Alejandro Correa Marin
- * Date: 2026-09-12
- * Description: English localization strings for the simulated payments module.
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Complete en translations for payment.
  */
 
 return [
@@ -11,7 +11,6 @@ return [
     'admin_title_index' => 'Payment management',
     'admin_title_show' => 'Payment detail #:code',
     'manage_payments' => 'Payments',
-
     'heading' => 'Simulated payment',
     'subtitle' => 'Complete a demonstration payment using the approved reservation total.',
     'receipt_label' => 'Rental payment receipt',
@@ -19,7 +18,6 @@ return [
     'download_receipt' => 'Download receipt',
     'currency' => 'COP',
     'receipt_not_paid' => 'A paid receipt is available only after a successful payment.',
-
     'payment_code' => 'Payment code',
     'transaction_code' => 'Transaction reference',
     'method' => 'Payment method',
@@ -36,12 +34,10 @@ return [
     'vehicle' => 'Vehicle',
     'customer' => 'Customer',
     'actions' => 'Actions',
-
     'status_completed' => 'Completed',
     'status_pending' => 'Pending',
     'status_failed' => 'Failed',
     'status_refunded' => 'Refunded',
-
     'simulated_result' => 'Simulation result',
     'simulate_success' => 'Simulate successful payment',
     'simulate_failure' => 'Simulate failed payment',
@@ -55,7 +51,6 @@ return [
     'no_payments' => 'No payment records found.',
     'unpaid' => 'Unpaid',
     'paid' => 'Paid',
-
     'completed_success' => 'The simulated payment was recorded successfully.',
     'failed_reported' => 'The simulated payment failed. The reservation was not marked as paid.',
     'refunded_success' => 'The refund was applied according to the approved policy.',

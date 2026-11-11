@@ -1,0 +1,17 @@
+/*
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Styles organized by interface responsibility.
+ */
+
+.welcome-hero { padding: 4.5rem 0; background: linear-gradient(120deg, #f3f9fd, #d7edf6); }
+.welcome-hero::before, .welcome-hero::after { display: none; }
+.welcome-hero .welcome-eyebrow { color: #014f86; }
+.welcome-hero .welcome-title { color: #10244a; font-family: 'Manrope', Arial, sans-serif; font-weight: 800; letter-spacing: -0.05em; }
+.welcome-hero .welcome-subtitle { color: #496779; }
+.welcome-hero .welcome-actions .btn-pill-solid { color: #ffffff !important; background: #014f86; border: 1px solid #014f86; }
+.welcome-hero .welcome-actions .btn-pill-solid:hover { background: #10244a; border-color: #10244a; }
+.welcome-hero .welcome-actions .btn-pill-ghost { color: #014f86; background: #ffffff; border: 1px solid #014f86; }
+.welcome-hero .welcome-actions .btn-pill-ghost:hover { color: #10244a; background: #e4effa; }
+.welcome-hero .welcome-actions a:focus-visible { outline: 3px solid #2a6f97; outline-offset: 4px; }
+@media (max-width: 576px) { .welcome-hero { padding: 3rem 0; } }

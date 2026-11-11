@@ -9,42 +9,10 @@
 @section('title', $viewData['title'])
 
 @push('styles')
-    <style>
-        body {
-            font-family: DejaVu Sans, sans-serif;
-            color: #111827;
-            font-size: 13px;
-            margin: 32px;
-        }
-
-        h1 {
-            font-size: 22px;
-            margin-bottom: 4px;
-        }
-
-        .disclaimer {
-            margin: 0 0 24px;
-            color: #6b7280;
-            font-size: 11px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            text-align: left;
-            padding: 8px 0;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        th {
-            width: 40%;
-            color: #6b7280;
-            font-weight: 600;
-        }
-    </style>
+    <link
+        rel="stylesheet"
+        href="{{ public_path('css/user/receipt.css') }}"
+    >
 @endpush
 
 @section('content')
@@ -70,7 +38,7 @@
         </tr>
         <tr>
             <th>{{ __('payment.amount') }}</th>
-            <td>${{ number_format($viewData['amount'], 0, ',', '.') }}</td>
+            <td>${{ number_format($viewData['amount'], 0, app()->getLocale() === 'es' ? ',' : '.', app()->getLocale() === 'es' ? '.' : ',') }}</td>
         </tr>
         <tr>
             <th>{{ __('payment.currency') }}</th>

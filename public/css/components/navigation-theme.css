@@ -1,0 +1,198 @@
+/*
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Styles organized by interface responsibility.
+ */
+
+.safety-navbar,
+.safety-navigation {
+    position: sticky !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 1030 !important;
+    width: 100%;
+    padding: 0.85rem 0;
+    background: var(--sr-navy) !important;
+    border-bottom: 1px solid #284574 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.safety-navbar .container,
+.safety-navigation-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.safety-navbar .navbar-brand,
+.safety-navbar .navbar-brand:hover,
+.safety-navigation-brand,
+.safety-navigation-brand:link,
+.safety-navigation-brand:visited,
+.safety-navigation-brand:hover {
+    margin-right: 0;
+    color: #ffffff;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.safety-navbar .brand-mark,
+.safety-navigation-logo {
+    color: #bfdbfe;
+}
+
+.nav-authenticated,
+.nav-guest,
+.safety-navigation-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem !important;
+}
+
+.safety-navbar .nav-guest > a:not(.btn-pill-solid),
+.safety-navigation-login,
+.safety-navigation-login:link,
+.safety-navigation-login:visited {
+    color: #d5e4fc;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.safety-navbar .nav-guest > a:not(.btn-pill-solid):hover,
+.safety-navigation-login:hover {
+    color: #ffffff;
+}
+
+.safety-navbar .btn-pill-ghost,
+.safety-navigation-home,
+.safety-navigation-home:link,
+.safety-navigation-home:visited {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem 0.85rem;
+    color: #d5e4fc;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.safety-navbar a[aria-current='page'],
+.safety-navbar .btn-pill-ghost:hover,
+.safety-navigation-home:hover {
+    color: #ffffff;
+    background: #24497e;
+    border-color: transparent;
+    transform: none;
+}
+
+.safety-navbar .nav-guest .btn-pill-solid,
+.safety-navbar .btn-pill-solid,
+.safety-navbar .btn-logout,
+.safety-navigation-logout,
+.safety-navigation-register {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem 1rem;
+    color: #10244a !important;
+    background: #ffffff !important;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    font-family: 'Manrope', Arial, sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: none;
+}
+
+.safety-navbar .nav-guest .btn-pill-solid:hover,
+.safety-navbar .btn-pill-solid:hover,
+.safety-navbar .btn-logout:hover,
+.safety-navigation-logout:hover,
+.safety-navigation-register:hover {
+    color: #10244a !important;
+    background: #e8f0ff !important;
+    border-color: #e8f0ff;
+    box-shadow: none;
+    transform: none;
+}
+
+.safety-navbar .btn-lang-toggle {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 0.8rem;
+    color: #ffffff !important;
+    background: transparent !important;
+    border: 1px solid #6680a6 !important;
+    border-radius: 10px;
+    font-family: 'Manrope', Arial, sans-serif;
+    box-shadow: none;
+}
+
+.safety-navbar .btn-lang-toggle:hover {
+    color: #ffffff !important;
+    background: #24497e !important;
+    border-color: #93c5fd !important;
+    box-shadow: none;
+    transform: none;
+}
+
+.logout-form,
+.safety-navigation-logout-form {
+    margin: 0;
+}
+
+@media (max-width: 991px) {
+.nav-authenticated,
+.safety-navigation-actions {
+        width: 100%;
+    }
+
+}
+
+.safety-navbar .nav-guest .guest-navigation-link {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1.1rem;
+    color: #d5e4fc;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.safety-navbar .nav-guest .guest-navigation-link:hover {
+    color: #ffffff;
+    background: #24497e;
+}
+
+.safety-navbar .nav-guest .guest-navigation-link[aria-current='page'],
+.safety-navbar .nav-guest .guest-navigation-link[aria-current='page']:hover {
+    color: #10244a;
+    background: #ffffff;
+    border-color: #ffffff;
+    font-weight: 700;
+}
+
+.safety-navbar .btn-pill-ghost[aria-current='page'],
+.safety-navbar .btn-pill-ghost[aria-current='page']:hover {
+    color: #10244a;
+    background: #ffffff;
+    border-color: #ffffff;
+}
+
+
+.language-selector { gap: 0.4rem; flex-wrap: wrap; }
+.safety-navbar .language-selector .btn-lang-toggle[aria-current='true'] { color: #10244a !important; background: #ffffff !important; border-color: #ffffff !important; }

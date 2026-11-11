@@ -1,0 +1,120 @@
+/*
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Compact language dropdown matching the navy navigation.
+ */
+
+.safety-navbar .language-selector {
+    display: block;
+    flex-shrink: 0;
+}
+
+.language-dropdown {
+    position: relative;
+}
+
+.language-dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 10px 14px;
+    border: 1px solid #6680a6;
+    border-radius: 12px;
+    background: transparent;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 800;
+    line-height: 1.4;
+    list-style: none;
+    cursor: pointer;
+}
+
+.language-dropdown-toggle::-webkit-details-marker {
+    display: none;
+}
+
+.language-dropdown-toggle:hover,
+.language-dropdown[open] > .language-dropdown-toggle {
+    border-color: #a9c8e1;
+    background: #24497e;
+}
+
+.language-flag {
+    font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+    font-size: 1.15rem;
+    line-height: 1;
+}
+
+.language-dropdown-arrow {
+    font-size: 0.75rem;
+}
+
+.language-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    z-index: 1050;
+    width: 210px;
+    max-width: calc(100vw - 32px);
+    padding: 8px;
+    border: 1px solid #d7e4f2;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow: 0 12px 30px rgba(16, 36, 74, 0.16);
+}
+
+.language-dropdown-heading {
+    margin: 0;
+    padding: 7px 12px 10px;
+    color: #60748d;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.language-dropdown-menu form {
+    margin: 0;
+}
+
+.language-dropdown-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 0;
+    border-radius: 9px;
+    background: transparent;
+    color: #243b5a;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+}
+
+.language-option-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.language-dropdown-option:hover {
+    background: #f0f6fd;
+}
+
+.language-dropdown-option[aria-current='true'] {
+    background: #e4f1fb;
+    color: #014f86;
+    font-weight: 800;
+}
+
+.language-dropdown-toggle:focus-visible,
+.language-dropdown-option:focus-visible {
+    outline: 3px solid #61a5c2;
+    outline-offset: 3px;
+}

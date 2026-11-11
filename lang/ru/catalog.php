@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * Author: Wendy Atehortua
+ * Date: 2026-11-06
+ * Description: Complete ru translations for catalog.
+ */
+
+return [
+    'title_index' => 'Каталог автомобилей - Safety Rental',
+    'title_show' => 'Информация об автомобиле - Safety Rental',
+    'title' => 'Каталог',
+    'subtitle' => 'Ознакомьтесь с нашим автопарком для безопасной и качественной аренды.',
+    'no_image' => 'Изображение недоступно',
+    'brand_label' => 'Марка:',
+    'model_label' => 'Модель:',
+    'year' => 'Год',
+    'mileage' => 'Пробег',
+    'price' => 'Цена аренды',
+    'per_day' => '/ день',
+    'view_details' => 'Посмотреть детали',
+    'empty' => 'На данный момент автомобили недоступны.',
+    'available' => 'Доступен',
+    'security_info' => 'Информация о безопасности и гарантии',
+    'security_desc' => 'Этот автомобиль прошёл утверждённые технические проверки, имеет дорожную помощь и активную страховку.',
+    'back' => 'Назад к каталогу',
+    'rent_now' => 'Арендовать',
+    'unknown_vehicle' => 'Автомобиль',
+    'km_unit' => 'км',
+    'passengers_label' => 'Пассажиры',
+    'luggage_label' => 'Багаж',
+    'units' => 'единицы',
+    'description_label' => 'Описание',
+    'no_description' => 'Дополнительных примечаний нет.',
+    'status_deactivated' => 'Деактивирован',
+    'plate_label' => 'Номерной знак',
+    'search_label' => 'Поиск',
+    'search_placeholder' => 'Поиск по марке, модели, описанию...',
+    'all_categories' => 'Все категории',
+    'all_locations' => 'Все локации',
+    'category_filter' => 'Категория',
+    'location_filter' => 'Место получения',
+    'start_date' => 'Дата получения',
+    'end_date' => 'Дата возврата',
+    'filter_button' => 'Фильтр автомобилей',
+    'clear_filters' => 'Сбросить фильтры',
+    'active_filters' => 'Активные фильтры',
+    'no_results_title' => 'Автомобили, соответствующие критериям, не найдены',
+    'no_results_subtitle' => 'Измените критерии поиска, даты или сбросьте фильтры для просмотра всех доступных автомобилей.',
+    'results_count' => 'Найдено автомобилей: :count',
+    'validation_end_date_after' => 'Дата возврата должна быть позже даты получения.',
+    'validation_start_date_after_or_equal' => 'Дата получения должна быть сегодняшней или будущей.',
+    'validation_category_not_found' => 'Выбранная категория не существует.',
+    'validation_location_not_found' => 'Выбранный филиал не существует.',
+];

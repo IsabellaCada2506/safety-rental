@@ -2,8 +2,8 @@
 
 /**
  * Author: Isabella Cadavid Posada
- * Date: 2026-09-06
- * Description: Spanish language strings for password reset functionality.
+ * Date: 2026-11-04
+ * Description: Complete es translations for passwords.
  */
 
 return [

@@ -1,7 +1,8 @@
 {{--
     Author: Isabella Ocampo
-    Date: 2026-09-11
-    Description: Customer view listing all physical rental locations and branches.
+    Author: Isabella Cadavid Posada
+    Date: 2026-11-04
+    Description: User location cards with branch information, contact details and fleet access.
 --}}
 
 @extends('layouts.app')
@@ -9,63 +10,68 @@
 @section('title', $viewData['title'])
 
 @section('content')
-<div class="container py-5 catalog-page">
-    <div class="row mb-5 text-center">
-        <div class="col-lg-8 mx-auto">
-            <span class="badge bg-light text-dark border rounded-pill px-3 py-2 fw-semibold mb-3">
-                <i class="bi bi-geo-alt-fill text-danger me-1"></i> {{ __('location.registered_locations') }}
-            </span>
-            <h1 class="fw-bold text-dark display-5 mb-3">{{ __('location.user_title_index') }}</h1>
-            <p class="text-muted fs-6 mb-0">{{ __('location.branches_subtitle') }}</p>
-        </div>
-    </div>
+<section class="container catalog-page locations-page">
+    <header class="locations-heading">
+        <span class="locations-eyebrow">
+            {{ __('location.registered_locations') }}
+        </span>
 
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <h1>{{ __('general.nav_locations') }}</h1>
+
+        <p>{{ __('location.branches_subtitle') }}</p>
+    </header>
+
+    <div class="locations-grid">
         @forelse ($viewData['locations'] as $location)
-            <div class="col">
-                <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden bg-white p-4 d-flex flex-column justify-content-between">
-                    <div>
-                        <div class="d-flex justify-content-between align-items-start mb-3">
-                            <span class="badge bg-dark-subtle text-dark rounded-pill px-3 py-1 fw-semibold">
-                                <i class="bi bi-building me-1"></i>{{ $location->getCity() }}
-                            </span>
-                            <span class="badge bg-light text-muted border rounded-pill px-3 py-1 small">
-                                {{ $location->getCarsCount() }} {{ __('location.cars_count') }}
-                            </span>
-                        </div>
+            <article class="locations-card">
+                <header class="locations-card-banner">
+                    <div class="locations-city">
+                        <span class="locations-marker" aria-hidden="true">
+                            ⌖
+                        </span>
 
-                        <h3 class="fw-bold text-dark fs-5 mb-2">{{ $location->getName() }}</h3>
-                        <p class="text-muted small mb-3">
-                            <i class="bi bi-geo-alt text-danger me-1"></i>{{ $location->getAddress() }}
-                        </p>
-
-                        <div class="p-3 bg-light rounded-3 mb-4">
-                            <p class="small text-muted mb-1">
-                                <strong>{{ __('location.headquarters_label') }}:</strong>
-                                <span class="text-dark">{{ $location->getHeadquarters() }}</span>
-                            </p>
-                            <p class="small text-muted mb-0">
-                                <strong>{{ __('location.telephone_label') }}:</strong>
-                                <span class="text-dark">{{ $location->getTelephone() }}</span>
-                            </p>
-                        </div>
+                        <span>{{ $location->getCity() }}</span>
                     </div>
 
-                    <div>
-                        <a
-                            href="{{ route('locations.show', ['id' => $location->getId()]) }}"
-                            class="btn btn-dark w-100 fw-semibold rounded-pill py-2 shadow-sm"
-                        >
-                            {{ __('location.explore_fleet') }} &rarr;
-                        </a>
-                    </div>
+                    <span class="locations-count">
+                        {{ $location->getCarsCount() }}
+                        {{ __('location.cars_count') }}
+                    </span>
+                </header>
+
+                <div class="locations-card-body">
+                    <span class="locations-unit">
+                        {{ $location->getHeadquarters() }}
+                    </span>
+
+                    <h2>{{ $location->getName() }}</h2>
+
+                    <dl class="locations-contact">
+                        <div>
+                            <dt>{{ __('location.address') }}</dt>
+                            <dd>{{ $location->getAddress() }}</dd>
+                        </div>
+
+                        <div>
+                            <dt>{{ __('location.telephone_label') }}</dt>
+                            <dd>{{ $location->getTelephone() }}</dd>
+                        </div>
+                    </dl>
+
+                    <a
+                        href="{{ route('locations.show', ['id' => $location->getId()]) }}"
+                        class="locations-button locations-button-primary locations-card-link"
+                    >
+                        {{ __('location.explore_fleet') }}
+                        <span aria-hidden="true">→</span>
+                    </a>
                 </div>
-            </div>
+            </article>
         @empty
-            <div class="col-12 text-center py-5">
-                <p class="text-muted fs-5">{{ __('location.no_locations_found') }}</p>
+            <div class="locations-empty" role="status">
+                <p>{{ __('location.no_locations_found') }}</p>
             </div>
         @endforelse
     </div>
-</div>
+</section>
 @endsection

@@ -1,0 +1,181 @@
+/*
+ * Author: Isabella Cadavid Posada
+ * Date: 2026-11-04
+ * Description: Styles organized by interface responsibility.
+ */
+
+.profile-page,
+.profile-edit-page {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    background: var(--sr-background);
+}
+
+.profile-background-shape,
+.profile-edit-page::before {
+    display: none;
+}
+
+.profile-information-card {
+    background: #ffffff;
+    border: 1px solid var(--sr-border);
+    border-radius: var(--sr-radius-lg);
+    box-shadow: none;
+}
+
+.profile-information-card h2 {
+    color: var(--sr-text);
+    font-weight: 800;
+}
+
+.profile-topbar,
+.profile-edit-header {
+    background: var(--sr-mesh);
+    border: 1px solid var(--sr-border);
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.profile-topbar h1,
+.profile-edit-header h1 {
+    color: #012a4a;
+    font-weight: 800;
+}
+
+.profile-topbar p,
+.profile-edit-header p {
+    color: #496779;
+}
+
+.profile-eyebrow {
+    color: #014f86;
+}
+
+.profile-avatar {
+    color: #ffffff;
+    background: #2a6f97;
+}
+
+.profile-section-icon,
+.profile-section-icon-orange {
+    color: #014f86;
+    background: #edf7fb;
+}
+
+.profile-section-icon-gold,
+.profile-edit-button,
+.profile-edit-button:hover {
+    color: #014f86;
+    background: #dceff6;
+}
+
+.profile-page,
+.profile-edit-page {
+    background: #f3f7fd;
+}
+
+.profile-page::before,
+.profile-edit-page::before {
+    background: linear-gradient(
+        120deg,
+        #10244a 0%,
+        #014f86 55%,
+        #468faf 100%
+    );
+}
+
+.profile-page .profile-background-shape-left,
+.profile-edit-page .profile-edit-orb-left {
+    background: rgba(137, 194, 217, 0.16);
+}
+
+.profile-page .profile-background-shape-right,
+.profile-edit-page .profile-edit-orb-right {
+    background: rgba(169, 214, 229, 0.18);
+}
+
+.profile-page .profile-summary-card,
+.profile-page .profile-information-card {
+    border-color: #d7e4f2;
+    box-shadow: 0 16px 38px rgba(16, 36, 74, 0.06);
+}
+
+.profile-page .profile-data-grid > div,
+.profile-page .profile-data-list > div {
+    border-color: #dce7f3;
+}
+
+.profile-page .profile-summary-divider {
+    background: #dce7f3;
+    border-color: #dce7f3;
+}
+
+.profile-page .profile-avatar {
+    color: #ffffff;
+    background: #2a6f97;
+    border-color: #e6f3fb;
+    box-shadow: 0 12px 28px rgba(42, 111, 151, 0.16);
+}
+
+.profile-page .profile-section-icon,
+.profile-page .profile-section-icon-orange,
+.profile-page .profile-section-icon-gold {
+    color: #014f86;
+    background: #edf7fb;
+}
+
+.profile-edit-page .profile-edit-card-number,
+.profile-edit-page .profile-edit-card-number-orange,
+.profile-edit-page .profile-edit-card-number-gold {
+    color: #014f86;
+    background: #e4f1fb;
+}
+
+.profile-edit-page .profile-edit-card {
+    border-color: #d7e4f2;
+    box-shadow: 0 16px 38px rgba(16, 36, 74, 0.06);
+}
+
+.profile-edit-page .profile-edit-card-header {
+    border-bottom-color: #dce7f3;
+}
+
+.profile-edit-page .profile-edit-avatar {
+    color: #ffffff;
+    background: linear-gradient(145deg, #2a6f97, #014f86);
+    border-color: #dceff6;
+    box-shadow: 0 14px 30px rgba(42, 111, 151, 0.16);
+}
+
+.profile-edit-page .profile-edit-eyebrow {
+    color: #89c2d9;
+}
+
+.profile-edit-page .profile-edit-back:hover {
+    color: #90e0ef;
+}
+
+.profile-edit-page .profile-edit-field input {
+    background: #f7faff;
+    border-color: #d5e3f1;
+}
+
+.profile-edit-page .profile-edit-field input:hover {
+    border-color: #a9c8e1;
+}
+
+.profile-edit-page .profile-edit-field input:focus {
+    background: #ffffff;
+    border-color: #2a6f97;
+    box-shadow: 0 0 0 0.22rem rgba(42, 111, 151, 0.14);
+}
+
+.profile-edit-page .profile-edit-field input.is-invalid {
+    border-color: #dc3545;
+}
+
+.profile-edit-page .profile-edit-field input.is-invalid:focus {
+    box-shadow: 0 0 0 0.22rem rgba(220, 53, 69, 0.12);
+}
+

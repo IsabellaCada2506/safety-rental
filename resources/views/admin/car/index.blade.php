@@ -1,7 +1,8 @@
 {{--
     Author: Wendy Atehortua
-    Date: 2026-09-13
-    Description: Admin view for listing, managing, and toggling status of vehicles in the inventory with branch location.
+    Author: Isabella Cadavid Posada
+    Date: 2026-11-04
+    Description: Administrative card listing with translated actions and confirmation.
 --}}
 
 @extends('layouts.app')
@@ -36,13 +37,22 @@
                 </p>
             </div>
 
-            <a
-                class="admin-index-create-btn"
-                href="{{ route('admin.car.create') }}"
-            >
-                <span class="admin-index-create-icon" aria-hidden="true">+</span>
-                <span>{{ __('car.btn_create') }}</span>
-            </a>
+            <div class="d-flex align-items-center gap-2">
+                <a
+                    href="{{ route('admin.ranking.index') }}"
+                    class="record-button record-button-secondary"
+                >
+                    {{ __('car.btn_ranking') }}
+                </a>
+
+                <a
+                    class="admin-index-create-btn"
+                    href="{{ route('admin.car.create') }}"
+                >
+                    <span class="admin-index-create-icon" aria-hidden="true">+</span>
+                    <span>{{ __('car.btn_create') }}</span>
+                </a>
+            </div>
         </header>
 
         @if (session('success'))
@@ -54,78 +64,40 @@
             </div>
         @endif
 
-        <div class="admin-index-table-wrapper">
-            <table class="admin-index-table">
-                <thead>
-                    <tr>
-                        <th>{{ __('car.id') }}</th>
-                        <th>{{ __('car.plate') }}</th>
-                        <th>{{ __('car.color') }}</th>
-                        <th>{{ __('car.soat') }}</th>
-                        <th>{{ __('car.price') }}</th>
-                        <th>{{ __('car.mileage') }}</th>
-                        <th>{{ __('car.branch') }}</th>
-                        <th>{{ __('car.status') }}</th>
-                        <th class="text-center">{{ __('car.actions') }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($viewData['cars'] as $car)
-                        <tr>
-                            <td class="admin-index-id">#{{ $car->getId() }}</td>
-                            <td>{{ $car->getPlate() }}</td>
-                            <td>{{ $car->getColor() }}</td>
-                            <td>{{ $car->getSoat() }}</td>
-                            <td>${{ number_format($car->getPrice(), 0, ',', '.') }}</td>
-                            <td>{{ number_format($car->getMileage(), 0, ',', '.') }} km</td>
-                            <td>{{ $car->getLocation() ? $car->getLocation()->getName() : '-' }}</td>
-                            <td>
-                                <span class="admin-index-status-badge">{{ $car->isActive() ? __('car.status_active') : __('car.status_deactivated') }}</span>
-                            </td>
-                            <td class="text-center">
-                                <a
-                                    href="{{ route('admin.car.edit', ['id' => $car->getId()]) }}"
-                                    class="admin-index-btn admin-index-btn-edit"
-                                >
-                                    {{ __('car.btn_edit') }}
-                                </a>
-                                <form
-                                    action="{{ route('admin.car.deactivate', ['id' => $car->getId()]) }}"
-                                    method="POST"
-                                    class="d-inline"
-                                >
-                                    @csrf
-                                    @method('PATCH')
-                                    @if ($car->isActive())
-                                        <button
-                                            type="submit"
-                                            class="admin-index-btn admin-index-btn-danger"
-                                            onclick="return confirm('{{ __('car.confirm_status_change') }}')"
-                                        >
-                                            {{ __('car.btn_deactivate') }}
-                                        </button>
-                                    @else
-                                        <button
-                                            type="submit"
-                                            class="admin-index-btn admin-index-btn-success"
-                                            onclick="return confirm('{{ __('car.confirm_status_change') }}')"
-                                        >
-                                            {{ __('car.btn_activate') }}
-                                        </button>
-                                    @endif
-                                </form>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="8" class="admin-index-empty">
-                                {{ __('car.no_cars_found') }}
-                            </td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
+        <div class="collection-grid">
+            @forelse ($viewData['cars'] as $car)
+<article class="collection-card vehicle-card">
+    <div class="vehicle-card-media">
+        <x-responsive-image :src="$car->getImage()" :alt="($car->getCategory()?->getName() ?? __('general.image_alt')).' · '.$car->getPlate()" class="vehicle-card-image" loading="lazy" />
+        <span class="collection-status {{ $car->isActive() ? 'collection-status-active' : 'collection-status-inactive' }}">{{ $car->isActive() ? __('car.status_active') : __('car.status_deactivated') }}</span>
+    </div>
+    <div class="collection-card-body">
+        <span class="collection-eyebrow">{{ $car->getCategory()?->getType() ?? __('catalog.title') }}</span>
+        <h2 class="collection-card-title">{{ $car->getCategory()?->getName() ?? $car->getPlate() }}</h2>
+        <p class="vehicle-card-price">${{ number_format($car->getPrice(), 0, app()->getLocale() === 'es' ? ',' : '.', app()->getLocale() === 'es' ? '.' : ',') }} <span>{{ __('catalog.per_day') }}</span></p>
+        <dl class="collection-facts">
+            <div><dt>{{ __('car.plate') }}</dt><dd>{{ $car->getPlate() }}</dd></div>
+            <div><dt>{{ __('car.color') }}</dt><dd>{{ $car->getColor() }}</dd></div>
+            <div><dt>{{ __('car.mileage') }}</dt><dd>{{ number_format($car->getMileage(), 0, app()->getLocale() === 'es' ? ',' : '.', app()->getLocale() === 'es' ? '.' : ',') }} {{ __('catalog.km_unit') }}</dd></div>
+            <div><dt>{{ __('car.branch') }}</dt><dd>{{ $car->getLocation()?->getName() ?? '—' }}</dd></div>
+            <div><dt>{{ __('car.soat') }}</dt><dd>{{ $car->getSoat() }}</dd></div>
+        </dl>
+        <div class="collection-actions"><a class="collection-button collection-button-edit" href="{{ route('admin.car.edit', ['id' => $car->getId()]) }}">{{ __('car.btn_edit') }}</a>
+<form method="POST" action="{{ route('admin.car.deactivate', ['id' => $car->getId()]) }}" data-confirm-message="{{ __('car.confirm_status_change') }}">
+    @csrf
+    @method('PATCH')
+    <button type="submit" class="collection-button {{ $car->isActive() ? 'collection-button-danger' : 'collection-button-success' }}">{{ $car->isActive() ? __('car.btn_deactivate') : __('car.btn_activate') }}</button>
+</form></div>
+    </div>
+</article>
+            @empty
+                <div class="collection-empty" role="status">{{ __('car.no_cars_found') }}</div>
+            @endforelse
         </div>
     </div>
 </section>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/admin/card-actions.js') }}?v=1" defer></script>
+@endpush
